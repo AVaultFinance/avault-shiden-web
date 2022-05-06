@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextProps } from '@my/ui';
+import { Text, TextProps } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { TranslatableText as AchievementDescriptionType } from 'state/types';
 import styled from 'styled-components';

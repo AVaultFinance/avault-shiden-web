@@ -1,4 +1,4 @@
-import { ChainId } from '@my/sdk';
+import { ChainId } from '@avault/sdk';
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   masterChef: {

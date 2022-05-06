@@ -1,10 +1,10 @@
-import { ChainId } from '@my/sdk';
+import { ChainId } from '@avault/sdk';
 import PancakeNftAbi from '../abi/pancake-nft.json';
 import AvaultNftAbi from '../abi/kaco-nft.json';
-import AvaultLogo from 'components/svg/KKac.svg';
-import PancakeLogo from 'components/svg/KCake.svg';
-import AlpacaLogo from 'components/svg/KAlpaca.svg';
-import AlpiesLogo from 'components/svg/KAlpies.svg';
+import AvaultLogo from '../../components/svg/KKac.svg';
+import PancakeLogo from '../../components/svg/KCake.svg';
+import AlpacaLogo from '../../components/svg/KAlpaca.svg';
+import AlpiesLogo from '../../components/svg/KAlpies.svg';
 
 export enum NFT_TYPE {
   NFT721 = 721,

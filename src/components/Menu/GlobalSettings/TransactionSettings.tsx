@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Button, Input, Flex, Box } from '@my/ui';
+import { Text, Button, Input, Flex, Box } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks';
 import QuestionHelper from '../../QuestionHelper';

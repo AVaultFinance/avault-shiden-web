@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Text, Input, Button, Flex } from '@my/ui';
+import { Text, Input, Button, Flex } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { BigNumber } from 'bignumber.js';
 import CellLayout from 'views/Farms/components/FarmTable/CellLayout';

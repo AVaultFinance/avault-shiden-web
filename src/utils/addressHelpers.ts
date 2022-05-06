@@ -1,4 +1,4 @@
-import { ChainId } from '@my/sdk';
+import { ChainId } from '@avault/sdk';
 import { chainKey } from 'config';
 import addresses from 'config/constants/contracts';
 import tokens, { chainId, DEFAULT_Token } from 'config/constants/tokens';

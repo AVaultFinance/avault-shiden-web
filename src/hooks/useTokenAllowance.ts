@@ -1,4 +1,4 @@
-import { Token, TokenAmount } from '@my/sdk';
+import { Token, TokenAmount } from '@avault/sdk';
 import { useMemo } from 'react';
 
 import { useTokenContract } from './useContract';

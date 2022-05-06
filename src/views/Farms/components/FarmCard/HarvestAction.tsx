@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { Button, Flex, Heading } from '@my/ui';
+import { Button, Flex, Heading } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { useAppDispatch } from 'state';
 import { fetchFarmUserDataAsync } from 'state/farms';
@@ -10,7 +10,7 @@ import { BIG_ZERO } from 'utils/bigNumber';
 import { useWeb3React } from '@web3-react/core';
 import { usePriceCakeBusd } from 'state/farms/hooks';
 import Balance from 'components/Balance';
-import useHarvestFarm from 'views/Farms/hooks/useHarvestFarm';
+import useHarvestFarm from '../../hooks/useHarvestFarm';
 
 interface FarmCardActionsProps {
   earnings?: BigNumber;

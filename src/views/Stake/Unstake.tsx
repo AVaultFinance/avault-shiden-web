@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from '@my/ui';
+import { Button } from '@avault/ui';
 import BigNumber from 'bignumber.js';
-import { InputWrap, StyledTokenInputTop, StyledInput } from './style/DappstakeStyle';
+import { InputWrap, StyledTokenInputTop, StyledInput, PageContainerWrap } from './style/DappstakeStyle';
 import Balance from './components/StakeTableBalance';
 import DappstakePage from './components/DappstakePage';
 import { useDAppStackingContract } from 'hooks/useContract';
@@ -11,8 +11,6 @@ import PageLayout from 'components/Layout/Page';
 import TokenIconItem from './components/TokenIconItem';
 import ArrowDown from './components/svg/arrow_down';
 import StakeFr from './components/StakeFr';
-import { BgGlobalStyle } from 'style/Global';
-import { PageContainerWrap } from 'style/SmallBorderPageLayout';
 const Unstake = () => {
   const contract = useDAppStackingContract();
   const pool = GetPoolUpdate(contract);
@@ -44,19 +42,18 @@ const Unstake = () => {
 
   return (
     <PageLayout>
-      <BgGlobalStyle />
       <PageContainerWrap>
         <DappstakePage contract={contract} pool={pool}>
           <Balance
             balance={balance}
             decimals={decimals}
-            symbol="aAVAT"
+            symbol="aAVA"
             isBalanceZero={isBalanceZero}
             handleSelectMax={handleSelectMax}
           />
           <InputWrap>
             <StyledTokenInputTop isWarning={isBalanceZero}>
-              <TokenIconItem symbol="aAVAT" tokenAddress="aavat" />
+              <TokenIconItem symbol="aAVA" tokenAddress="aava" />
               <StyledInput
                 pattern={`^[0-9]*[.,]?[0-9]{0,${decimals}}$`}
                 inputMode="decimal"
@@ -69,7 +66,7 @@ const Unstake = () => {
             </StyledTokenInputTop>
 
             <StyledTokenInputTop isWarning={isBalanceZero}>
-              <TokenIconItem symbol="AVAT" tokenAddress="0x0a3A21356793B49154Fd3BbE91CBc2A16c0457f5" />
+              <TokenIconItem symbol="AVA" tokenAddress="0x0a3A21356793B49154Fd3BbE91CBc2A16c0457f5" />
               <StyledInput
                 pattern={`^[0-9]*[.,]?[0-9]{0,${decimals}}$`}
                 inputMode="decimal"

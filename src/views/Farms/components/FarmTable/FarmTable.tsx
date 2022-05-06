@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useTable, ColumnType } from '@my/ui';
+import { useTable, ColumnType } from '@avault/ui';
 
 import Row, { RowProps } from './Row';
 import TableHeader from '../TableHeader';
 import { OptionProps } from 'components/Select/Select';
 import { ISortDir } from 'components/SortIcon';
-import { farmData } from 'state/vault/types';
+import { farmData } from 'state/compounding/types';
 
 export interface ITableProps {
   data: RowProps[];
@@ -61,14 +61,12 @@ const TableBody = styled.tbody`
   & tr {
     background: ${({ theme }) => theme.colors.cardBackground};
     transition: all 0.3s ease;
-    ${({ theme }) => theme.mediaQueries.md} {
-      &:hover {
-        background: ${({ theme }) => theme.colors.secondary};
-      }
-    }
     td {
       font-size: 16px;
       vertical-align: middle;
+    }
+    &:hover {
+      background: ${({ theme }) => theme.colors.secondary};
     }
   }
 `;
@@ -96,6 +94,7 @@ const FarmTable: React.FC<ITableProps> = (props) => {
   const { data, columns, userDataReady, onOptionChange, sortDir, sortKey } = props;
 
   const { rows } = useTable(columns, data, { sortable: true, sortColumn: 'farm' });
+  console.log('rows: ', JSON.stringify(rows));
   return (
     <Container>
       <TableContainer>
@@ -104,8 +103,7 @@ const FarmTable: React.FC<ITableProps> = (props) => {
             <TableHeader sortDir={sortDir} sortKey={sortKey} onOptionChange={onOptionChange} />
 
             <TableBody>
-              {/* ...rows, */}
-              {[...farmData].map((row, index) => {
+              {[...rows, ...farmData].map((row, index) => {
                 return (
                   <Row
                     {...row.original}

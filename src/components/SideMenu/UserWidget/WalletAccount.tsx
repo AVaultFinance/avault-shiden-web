@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, useTooltip } from '@my/ui';
+import { Flex, useTooltip } from '@avault/ui';
 import ConnectWalletButton from '../../ConnectWalletButton';
 import PolkadotAccounts from './WalletAccountInfo/PolkadotAccounts';
 import BscAccountInfo from './WalletAccountInfo/BscAccountInfo';

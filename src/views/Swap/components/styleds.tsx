@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ErrorIcon } from '@my/ui';
+import { Text, ErrorIcon } from '@avault/ui';
 import styled, { css } from 'styled-components';
 import { AutoColumn } from 'components/Layout/Column';
 

@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 // import { useFarmUser } from 'state/farms/hooks';
 // import { useTranslation } from 'contexts/Localization';
-// import { Text } from '@my/ui';
+// import { Text } from '@avault/ui';
 // import { getBalanceNumber } from 'utils/formatBalance';
 import { Token } from 'config/constants/types';
-import { chainId } from 'config/constants/tokens';
-import { TokenPairImage } from 'components/TokenImage';
+import { getImageUrlFromToken } from 'utils';
 
 export interface FarmProps {
   label?: string;
@@ -36,27 +35,14 @@ const Container = styled.div`
 `;
 
 const TokenWrapper = styled.div`
-  margin-right: 8px;
+  padding-right: 8px;
 
-  width: 47px;
-  height: 47px;
+  width: 44px;
+  height: 34px;
   text-align: center;
-
-  background-image: url('./images/farm_img_bg.svg');
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 4px;
-  margin-bottom: 20px;
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 0;
-  }
   ${({ theme }) => theme.mediaQueries.sm} {
-    margin-right: 20px;
-    margin-bottom: 0;
-    // width: 70px;
+    padding-right: 20px;
+    width: 70px;
   }
   img {
     display: inline-block;
@@ -82,10 +68,10 @@ const Farm: React.FunctionComponent<FarmProps> = ({ token, quoteToken, label, pi
   // };
   return (
     <Container>
-      {/* <TokenWrapper>
-        <img src={getImageUrlFromToken(label)} alt="" />
-      </TokenWrapper> */}
       <TokenWrapper>
+        <img src={getImageUrlFromToken(label)} alt="" />
+      </TokenWrapper>
+      {/* <TokenWrapper>
         <TokenPairImage
           variant="inverted"
           primaryToken={token.address[chainId]}
@@ -93,21 +79,13 @@ const Farm: React.FunctionComponent<FarmProps> = ({ token, quoteToken, label, pi
           width={48}
           height={48}
         />
-      </TokenWrapper>
-      <DivStyled>
+      </TokenWrapper> */}
+      <div>
         <div className="label">{label}</div>
         {/* <div className="ratio"><span>kacoSwap</span></div> */}
-      </DivStyled>
+      </div>
     </Container>
   );
 };
-const DivStyled = styled.div`
-  margin-bottom: 20px;
-  ${({ theme }) => theme.mediaQueries.md} {
-    margin-bottom: 0;
-  }
-  ${({ theme }) => theme.mediaQueries.sm} {
-    margin-bottom: 0;
-  }
-`;
+
 export default Farm;

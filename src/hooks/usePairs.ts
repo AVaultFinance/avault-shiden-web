@@ -1,4 +1,4 @@
-import { TokenAmount, Pair, Currency } from '@my/sdk';
+import { TokenAmount, Pair, Currency } from '@avault/sdk';
 import { useMemo } from 'react';
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json';
 import { Interface } from '@ethersproject/abi';
@@ -38,9 +38,11 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
         const { result: reserves, loading } = result;
         const tokenA = tokens[i][0];
         const tokenB = tokens[i][1];
+
         if (loading) return [PairState.LOADING, null];
         if (!tokenA || !tokenB || tokenA.equals(tokenB)) return [PairState.INVALID, null];
         if (!reserves) return [PairState.NOT_EXISTS, null];
+
         const { reserve0, reserve1 } = reserves;
         const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA];
         return [

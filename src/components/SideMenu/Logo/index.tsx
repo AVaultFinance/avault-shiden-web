@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Logo: FC<{ collapsed: boolean }> = ({ collapsed }) => {
   return (
     <LogoStyle href="/">
-      <img src={collapsed ? '/images/logo_small_beta.svg' : '/images/logo_beta.svg'} alt="" />
+      <img src={collapsed ? '/images/logo_small.svg' : '/images/logo.svg'} alt="" />
     </LogoStyle>
   );
 };

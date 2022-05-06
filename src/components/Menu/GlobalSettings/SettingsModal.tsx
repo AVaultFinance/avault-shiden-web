@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Flex, Modal, InjectedModalProps } from '@my/ui';
+import { Text, Flex, Modal, InjectedModalProps } from '@avault/ui';
 import { useExpertModeManager, useUserSingleHopOnly } from 'state/user/hooks';
 import { useTranslation } from 'contexts/Localization';
 import { useSwapActionHandlers } from 'state/swap/hooks';

@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Text, Flex } from '@my/ui';
+import { Text, Flex, Link } from '@avault/ui';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
+import { getBscScanLink } from 'utils';
 import useToast from 'hooks/useToast';
 import { useBlockNumber } from '../application/hooks';
 import { AppDispatch, AppState } from '../index';
@@ -72,11 +73,11 @@ export default function Updater(): null {
                 'Transaction receipt',
                 <Flex flexDirection="column">
                   <Text>{transactions[hash]?.summary ?? `Hash: ${hash.slice(0, 8)}...${hash.slice(58, 65)}`}</Text>
-                  {/* {chainId && (
+                  {chainId && (
                     <Link external href={getBscScanLink(hash, 'transaction', chainId)}>
-                      View on Block browser
+                      View on BscScan
                     </Link>
-                  )} */}
+                  )}
                 </Flex>,
               );
             } else {

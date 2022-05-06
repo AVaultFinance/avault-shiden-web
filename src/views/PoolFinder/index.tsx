@@ -1,22 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Currency, ETHER, JSBI, TokenAmount } from '@my/sdk';
-import { Button, ChevronDownIcon, Text, useModal } from '@my/ui';
+import { Currency, ETHER, JSBI, TokenAmount } from '@avault/sdk';
+import { Button, ChevronDownIcon, Text, useModal } from '@avault/ui';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
-import { LightCard } from 'components/Card';
-import { AutoColumn, ColumnCenter } from 'components/Layout/Column';
-import { CurrencyLogo } from 'components/Logo';
-import { MinimalPositionCard } from 'components/PositionCard';
-import Row from 'components/Layout/Row';
-import CurrencySearchModal from 'components/SearchModal/CurrencySearchModal';
-import { PairState, usePair } from 'hooks/usePairs';
-import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { usePairAdder } from 'state/user/hooks';
-import { useTokenBalance } from 'state/wallet/hooks';
-import StyledInternalLink from 'components/Links';
-import { currencyId } from 'utils/currencyId';
-import Dots from 'components/Loader/Dots';
-import { AppHeader, AppBody } from 'components/App';
+import { LightCard } from '../../components/Card';
+import { AutoColumn, ColumnCenter } from '../../components/Layout/Column';
+import { CurrencyLogo } from '../../components/Logo';
+import { MinimalPositionCard } from '../../components/PositionCard';
+import Row from '../../components/Layout/Row';
+import CurrencySearchModal from '../../components/SearchModal/CurrencySearchModal';
+import { PairState, usePair } from '../../hooks/usePairs';
+import useActiveWeb3React from '../../hooks/useActiveWeb3React';
+import { usePairAdder } from '../../state/user/hooks';
+import { useTokenBalance } from '../../state/wallet/hooks';
+import StyledInternalLink from '../../components/Links';
+import { currencyId } from '../../utils/currencyId';
+import Dots from '../../components/Loader/Dots';
+import { AppHeader, AppBody } from '../../components/App';
 import Page from '../Page';
 import { chainId } from 'config/constants/tokens';
 import useTheme from 'hooks/useTheme';
@@ -30,6 +30,7 @@ const StyledButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.input};
   color: ${({ theme }) => theme.colors.text};
   box-shadow: none;
+  border-radius: 16px;
 `;
 
 export default function PoolFinder() {

@@ -1,4 +1,4 @@
-import { Toast } from '@my/ui';
+import { Toast } from '@avault/ui';
 
 type ToastSignature = (title: Toast['title'], description?: Toast['description']) => void;
 

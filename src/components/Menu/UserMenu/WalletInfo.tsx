@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Flex, InjectedModalProps, LinkExternal, Message, Text } from '@my/ui';
+import { Box, Button, Flex, InjectedModalProps, LinkExternal, Message, Text } from '@avault/ui';
 import { useWeb3React } from '@web3-react/core';
 import useTokenBalance, { useGetBnbBalance } from 'hooks/useTokenBalance';
 import { getCakeAddress } from 'utils/addressHelpers';
@@ -49,7 +49,7 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowBnbBalance, onDismiss }) 
         <Text>{getFullDisplayBalance(cakeBalance, 18, 3)}</Text>
       </Flex>
       <Flex alignItems="center" justifyContent="end" mb="24px">
-        <LinkExternal href={getBscScanLink(account, 'address')}>View on Block browser</LinkExternal>
+        <LinkExternal href={getBscScanLink(account, 'address')}>{t('View on BscScan')}</LinkExternal>
       </Flex>
       <Button variant="secondary" width="100%" onClick={handleLogout}>
         {t('Disconnect Wallet')}

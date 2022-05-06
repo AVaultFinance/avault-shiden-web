@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useModal } from '@my/ui';
+import { useModal } from '@avault/ui';
 import EditProfileModal from './EditProfileModal';
 import ProfileAvatar, { ProfileAvatarProps } from './ProfileAvatar';
 

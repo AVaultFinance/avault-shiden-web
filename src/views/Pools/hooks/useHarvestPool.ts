@@ -5,11 +5,10 @@ import { updateUserBalance, updateUserPendingReward } from 'state/actions';
 import { harvestFarm } from 'utils/calls';
 import { BIG_ZERO } from 'utils/bigNumber';
 import { useMasterchef, useSousChef } from 'hooks/useContract';
-import { DEFAULT_GAS_LIMIT, DEFAULT_GAS_PRICE } from 'config';
+import { DEFAULT_GAS_LIMIT } from 'config';
 
 const options = {
   gasLimit: DEFAULT_GAS_LIMIT,
-  gasPrice: DEFAULT_GAS_PRICE,
 };
 
 const harvestPool = async (sousChefContract) => {

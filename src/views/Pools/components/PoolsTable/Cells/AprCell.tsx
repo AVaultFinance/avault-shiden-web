@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMatchBreakpoints } from '@my/ui';
+import { useMatchBreakpoints } from '@avault/ui';
 import { Pool } from 'state/types';
 import { useTranslation } from 'contexts/Localization';
 import Apr from '../Apr';

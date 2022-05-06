@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Text } from '@my/ui';
+import { Text } from '@avault/ui';
 import NoHavePng from '../../NftWallet/img/nohave.png';
 
 const NoBalance: FC<{ className?: string }> = ({ className }) => {

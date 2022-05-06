@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastContainer } from '@my/ui';
+import { ToastContainer } from '@avault/ui';
 import useToast from 'hooks/useToast';
 
 const ToastListener = () => {

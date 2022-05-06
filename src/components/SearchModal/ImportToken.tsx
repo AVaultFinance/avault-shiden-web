@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Token, Currency } from '@my/sdk';
-import { Button, Text, ErrorIcon, Flex, Message, Checkbox, Link, Tag, Grid } from '@my/ui';
+import { Token, Currency } from '@avault/sdk';
+import { Button, Text, ErrorIcon, Flex, Message, Checkbox, Link, Tag, Grid } from '@avault/ui';
 import { AutoColumn } from 'components/Layout/Column';
 import { useAddUserToken } from 'state/user/hooks';
 import { getBscScanLink } from 'utils';
@@ -68,7 +68,7 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
               <Flex justifyContent="space-between" width="100%">
                 <Text mr="4px">{address}</Text>
                 <Link href={getBscScanLink(token.address, 'address', chainId)} external>
-                  (View on Block browser)
+                  ({t('View on BscScan')})
                 </Link>
               </Flex>
             )}

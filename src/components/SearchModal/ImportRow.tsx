@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
-import { Token } from '@my/sdk';
-import { Button, Text, CheckmarkCircleIcon } from '@my/ui';
+import { Token } from '@avault/sdk';
+import { Button, Text, CheckmarkCircleIcon } from '@avault/ui';
 import { AutoRow, RowFixed } from 'components/Layout/Row';
 import { AutoColumn } from 'components/Layout/Column';
 import CurrencyLogo from 'components/Logo/CurrencyLogo';
@@ -85,7 +85,7 @@ export default function ImportRow({
       </AutoColumn>
       {!isActive && !isAdded ? (
         <Button
-          style={{ background: '#1476FF', fontSize: '14px' }}
+          style={{ background: '#238485', fontSize: '14px' }}
           width="fit-content"
           onClick={() => {
             if (setImportToken) {

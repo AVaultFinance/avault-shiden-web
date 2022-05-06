@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Text, Flex, Button, BalanceInput, AutoRenewIcon, Link } from '@my/ui';
+import { Text, Flex, Button, BalanceInput, AutoRenewIcon, Link } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';
 import BigNumber from 'bignumber.js';
@@ -40,7 +40,7 @@ const StyledRadio = styled.div`
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: #1476ff;
+  background: #1bd3d5;
   border-radius: 50%;
 `;
 const StakeModal: React.FC<StakeModalProps> = ({

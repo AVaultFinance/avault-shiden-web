@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { Trade, TradeType } from '@my/sdk';
-import { Button, Text, AutoRenewIcon } from '@my/ui';
+import { Trade, TradeType } from '@avault/sdk';
+import { Button, Text, AutoRenewIcon } from '@avault/ui';
 import { Field } from 'state/swap/actions';
 import {
   computeSlippageAdjustedAmounts,
@@ -19,7 +19,7 @@ const SwapModalFooterContainer = styled(AutoColumn)`
   margin-bottom: 12px;
   padding: 16px;
   background: ${({ theme }) => theme.colors.background02};
-  border: 1px dashed #1476ff;
+  border: 1px dashed #238485;
   border-radius: 12px;
 `;
 

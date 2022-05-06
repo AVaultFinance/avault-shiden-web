@@ -4,8 +4,8 @@ import { AddressZero } from '@ethersproject/constants';
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers';
 import { BigNumber } from '@ethersproject/bignumber';
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json';
-import { JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@my/sdk';
-import { ChainId } from '@my/sdk';
+import { JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@avault/sdk';
+import { ChainId } from '@avault/sdk';
 import { ROUTER_ADDRESS } from '../config/constants';
 import { BASE_BSC_SCAN_URL, chainKey } from '../config';
 import { TokenAddressMap } from '../state/lists/hooks';
@@ -120,7 +120,3 @@ export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currenc
   if (currency === ETHER[myChainId]) return true;
   return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address]);
 }
-
-export const haveNumber = (num: number) => {
-  return num || num === 0;
-};

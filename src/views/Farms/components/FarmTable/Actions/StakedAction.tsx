@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useModal, Text, Flex, connectorLocalStorageKey, ConnectorNames, MinusBtnIcon, AddBtnIcon } from '@my/ui';
+import { useModal, Text, Flex, connectorLocalStorageKey, ConnectorNames, MinusBtnIcon, AddBtnIcon } from '@avault/ui';
 import { useLocation } from 'react-router-dom';
 import { BigNumber } from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
@@ -18,9 +18,8 @@ import DepositModal from '../../DepositModal';
 import WithdrawModal from '../../WithdrawModal';
 import useStakeFarms from '../../../hooks/useStakeFarms';
 import useApproveFarm from '../../../hooks/useApproveFarm';
-import { LongButton } from './styles';
+import { ActionContainer, LongButton } from './styles';
 import useAuth from 'hooks/useAuth';
-import { ActionContainer } from 'style/TableStyled';
 
 const IconButtonWrapper = styled.div`
   display: flex;
@@ -150,7 +149,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
       <ActionContainer smallBorder={false}>
         <TextTop>
           <Text bold color="text" fontSize="12px" lineHeight="27px">
-            Approve {lpSymbol === 'AVAT' ? 'aAVAT' : 'AVAT'}
+            Approve {lpSymbol}
           </Text>
         </TextTop>
         <LongButton disabled={requestedApproval} onClick={handleApprove} variant="secondary">

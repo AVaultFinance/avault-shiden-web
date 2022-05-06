@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex } from '@my/ui';
+import { Flex } from '@avault/ui';
 
 const Wrapper = styled.div`
   width: 100%;

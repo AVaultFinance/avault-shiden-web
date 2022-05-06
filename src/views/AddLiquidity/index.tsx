@@ -1,39 +1,39 @@
 import React, { useCallback, useState } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
-import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@my/sdk';
-import { Button, Text, Flex, AddIcon, CardBody, useModal, useMatchBreakpoints } from '@my/ui';
+import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@avault/sdk';
+import { Button, Text, Flex, AddIcon, CardBody, useModal, useMatchBreakpoints } from '@avault/ui';
 import { RouteComponentProps } from 'react-router-dom';
 import { useIsTransactionUnsupported } from 'hooks/Trades';
 import { useTranslation } from 'contexts/Localization';
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { LightCard } from 'components/Card';
-import { AutoColumn, ColumnCenter } from 'components/Layout/Column';
-import TransactionConfirmationModal, { ConfirmationModalContent } from 'components/TransactionConfirmationModal';
-import CurrencyInputPanel from 'components/CurrencyInputPanel';
-import { DoubleCurrencyLogo } from 'components/Logo';
-import { AppHeader, AppBody } from 'components/App';
-import { MinimalPositionCard } from 'components/PositionCard';
-import Row, { RowBetween } from 'components/Layout/Row';
-import ConnectWalletButton from 'components/ConnectWalletButton';
+import { LightCard } from '../../components/Card';
+import { AutoColumn, ColumnCenter } from '../../components/Layout/Column';
+import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal';
+import CurrencyInputPanel from '../../components/CurrencyInputPanel';
+import { DoubleCurrencyLogo } from '../../components/Logo';
+import { AppHeader, AppBody } from '../../components/App';
+import { MinimalPositionCard } from '../../components/PositionCard';
+import Row, { RowBetween } from '../../components/Layout/Row';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
 
-import { ROUTER_ADDRESS } from 'config/constants';
-import { PairState } from 'hooks/usePairs';
-import { useCurrency } from 'hooks/Tokens';
-import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback';
-import useTransactionDeadline from 'hooks/useTransactionDeadline';
-import { Field } from 'state/mint/actions';
-import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks';
+import { ROUTER_ADDRESS } from '../../config/constants';
+import { PairState } from '../../hooks/usePairs';
+import { useCurrency } from '../../hooks/Tokens';
+import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback';
+import useTransactionDeadline from '../../hooks/useTransactionDeadline';
+import { Field } from '../../state/mint/actions';
+import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../state/mint/hooks';
 
-import { useTransactionAdder } from 'state/transactions/hooks';
-import { useIsExpertMode, useUserSlippageTolerance } from 'state/user/hooks';
-import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from 'utils';
-import { maxAmountSpend } from 'utils/maxAmountSpend';
-import { wrappedCurrency } from 'utils/wrappedCurrency';
-import Dots from 'components/Loader/Dots';
+import { useTransactionAdder } from '../../state/transactions/hooks';
+import { useIsExpertMode, useUserSlippageTolerance } from '../../state/user/hooks';
+import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils';
+import { maxAmountSpend } from '../../utils/maxAmountSpend';
+import { wrappedCurrency } from '../../utils/wrappedCurrency';
+import Dots from '../../components/Loader/Dots';
 import ConfirmAddModalBottom from './ConfirmAddModalBottom';
-import { currencyId } from 'utils/currencyId';
+import { currencyId } from '../../utils/currencyId';
 import PoolPriceBar from './PoolPriceBar';
 import Page from '../Page';
 import WarningSvg from './imgs/warning.svg';
@@ -213,7 +213,7 @@ export default function AddLiquidity({
   const modalHeader = () => {
     return noLiquidity ? (
       <Flex alignItems="center">
-        <Text fontSize="32px" color="#1476FF" marginRight="16px">
+        <Text fontSize="32px" color="#1BD3D5" marginRight="16px">
           {`${currencies[Field.CURRENCY_A]?.symbol}/${currencies[Field.CURRENCY_B]?.symbol}`}
         </Text>
         <DoubleCurrencyLogo
@@ -225,7 +225,7 @@ export default function AddLiquidity({
     ) : (
       <AutoColumn>
         <Flex alignItems="center">
-          <Text fontSize="32px" color="#1476FF" marginRight="16px">
+          <Text fontSize="32px" color="#1BD3D5" marginRight="16px">
             {liquidityMinted?.toSignificant(6)}
           </Text>
           <DoubleCurrencyLogo
@@ -361,7 +361,7 @@ export default function AddLiquidity({
               showCommonBases
             />
             <ColumnCenter>
-              <AddIcon color="#1476FF" width="16px" />
+              <AddIcon color="#1BD3D5" width="16px" />
             </ColumnCenter>
             <CurrencyInputPanel
               value={formattedAmounts[Field.CURRENCY_B]}

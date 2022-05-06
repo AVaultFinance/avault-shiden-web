@@ -1,10 +1,10 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@my/sdk';
+import { Currency, CurrencyAmount, Fraction, Percent } from '@avault/sdk';
 import React from 'react';
-import { Button, Text } from '@my/ui';
+import { Button, Text } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
-import { RowBetween, RowFixed } from 'components/Layout/Row';
-import { CurrencyLogo } from 'components/Logo';
-import { Field } from 'state/mint/actions';
+import { RowBetween, RowFixed } from '../../components/Layout/Row';
+import { CurrencyLogo } from '../../components/Logo';
+import { Field } from '../../state/mint/actions';
 
 function ConfirmAddModalBottom({
   noLiquidity,
@@ -27,7 +27,7 @@ function ConfirmAddModalBottom({
       <div
         style={{
           background: '#272E32',
-          border: '1px dashed #1476FF',
+          border: '1px dashed #238485',
           borderRadius: '12px',
           padding: '24px 21px',
         }}
@@ -52,14 +52,14 @@ function ConfirmAddModalBottom({
         </RowBetween>
         <RowBetween mb="16px">
           <Text fontSize="12px">{t('Rates')}</Text>
-          <Text fontSize="12px">
+          <Text fontSize="12px" color="#181733">
             {`1 ${currencies[Field.CURRENCY_A]?.symbol} = ${price?.toSignificant(4)} ${
               currencies[Field.CURRENCY_B]?.symbol
             }`}
           </Text>
         </RowBetween>
         <RowBetween style={{ justifyContent: 'flex-end' }} mb="23px">
-          <Text fontSize="12px">
+          <Text fontSize="12px" color="#181733">
             {`1 ${currencies[Field.CURRENCY_B]?.symbol} = ${price?.invert().toSignificant(4)} ${
               currencies[Field.CURRENCY_A]?.symbol
             }`}
@@ -67,7 +67,9 @@ function ConfirmAddModalBottom({
         </RowBetween>
         <RowBetween>
           <Text fontSize="12px">{t('Share of Pool')}:</Text>
-          <Text fontSize="12px">{noLiquidity ? '100' : poolTokenPercentage?.toSignificant(4)}%</Text>
+          <Text fontSize="12px" color="#181733">
+            {noLiquidity ? '100' : poolTokenPercentage?.toSignificant(4)}%
+          </Text>
         </RowBetween>
       </div>
       <Button onClick={onAdd} mt="30px" width="100%">

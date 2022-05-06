@@ -1,11 +1,11 @@
-import { Currency, Percent, Price } from '@my/sdk';
+import { Currency, Percent, Price } from '@avault/sdk';
 import React from 'react';
-import { Text } from '@my/ui';
+import { Text } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
-import { AutoColumn } from 'components/Layout/Column';
-import { AutoRow } from 'components/Layout/Row';
-import { ONE_BIPS } from 'config/constants';
-import { Field } from 'state/mint/actions';
+import { AutoColumn } from '../../components/Layout/Column';
+import { AutoRow } from '../../components/Layout/Row';
+import { ONE_BIPS } from '../../config/constants';
+import { Field } from '../../state/mint/actions';
 
 function PoolPriceBar({
   currencies,
@@ -23,7 +23,7 @@ function PoolPriceBar({
     <AutoColumn gap="md">
       <AutoRow justify="space-around" gap="4px">
         <AutoColumn justify="center">
-          <Text>{price?.toSignificant(6) ?? '-'}</Text>
+          <Text color="#181733">{price?.toSignificant(6) ?? '-'}</Text>
           <Text fontSize="12px" pt={1}>
             {t('%assetA% per %assetB%', {
               assetA: currencies[Field.CURRENCY_B]?.symbol ?? '',
@@ -32,7 +32,7 @@ function PoolPriceBar({
           </Text>
         </AutoColumn>
         <AutoColumn justify="center">
-          <Text>{price?.invert()?.toSignificant(6) ?? '-'}</Text>
+          <Text color="#181733">{price?.invert()?.toSignificant(6) ?? '-'}</Text>
           <Text fontSize="12px" pt={1}>
             {t('%assetA% per %assetB%', {
               assetA: currencies[Field.CURRENCY_A]?.symbol ?? '',
@@ -41,7 +41,7 @@ function PoolPriceBar({
           </Text>
         </AutoColumn>
         <AutoColumn justify="center">
-          <Text>
+          <Text color="#181733">
             {noLiquidity && price
               ? '100'
               : (poolTokenPercentage?.lessThan(ONE_BIPS) ? '<0.01' : poolTokenPercentage?.toFixed(2)) ?? '0'}

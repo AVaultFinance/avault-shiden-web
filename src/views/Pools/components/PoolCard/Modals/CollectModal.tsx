@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Text, Button, Heading, Flex, AutoRenewIcon, ButtonMenu, ButtonMenuItem, HelpIcon, useTooltip } from '@my/ui';
+import {
+  Text,
+  Button,
+  Heading,
+  Flex,
+  AutoRenewIcon,
+  ButtonMenu,
+  ButtonMenuItem,
+  HelpIcon,
+  useTooltip,
+} from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';
 import { Token } from 'config/constants/types';
@@ -45,7 +55,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
 
   const handleHarvestConfirm = async () => {
     setPendingTx(true);
-    // vault
+    // compounding
     if (shouldCompound) {
       try {
         await onStake(fullBalance, earningToken.decimals);
@@ -99,7 +109,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
       )}
 
       <Flex justifyContent="space-between" alignItems="center" mb="24px">
-        <Text>{shouldCompound ? t('Vault') : t('Harvesting')}</Text>
+        <Text>{shouldCompound ? t('Compounding') : t('Harvesting')}</Text>
         <Flex flexDirection="column">
           <Heading>
             {formattedBalance} {earningToken.symbol}

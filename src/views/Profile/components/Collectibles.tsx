@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Text, Flex, ChevronRightIcon } from '@my/ui';
+import { Heading, Text, Flex, ChevronRightIcon } from '@avault/ui';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'contexts/Localization';
 import { useGetCollectibles } from 'state/collectibles/hooks';

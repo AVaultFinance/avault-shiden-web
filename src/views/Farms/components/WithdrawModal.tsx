@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Modal, useMatchBreakpoints } from '@my/ui';
+import { Button, Modal, useMatchBreakpoints } from '@avault/ui';
 import { FarmModalInput } from 'components/Modal';
 import { useTranslation } from 'contexts/Localization';
 import { getFullDisplayBalance } from 'utils/formatBalance';
@@ -44,7 +44,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
 
   return (
     <Modal
-      title={t('Stake LP tokens')}
+      title={t('Unstake LP tokens')}
       minWidth={isMobile ? '280px' : '520px'}
       bodyPadding="0 24px 34px"
       onDismiss={onDismiss}

@@ -10,7 +10,7 @@ import {
   ModalContainer,
   ModalHeader as UIKitModalHeader,
   ModalTitle,
-} from '@my/ui';
+} from '@avault/ui';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'contexts/Localization';
 import styled from 'styled-components';
@@ -50,7 +50,7 @@ const WalletModal: React.FC<WalletModalProps> = ({ initialView = WalletView.WALL
   };
 
   return (
-    <ModalContainer title={t('Welcome!')} minWidth="343px">
+    <ModalContainer title={t('Welcome!')} minWidth="320px">
       <ModalHeader>
         <ModalTitle>
           <Heading>{t('Your Wallet')}</Heading>

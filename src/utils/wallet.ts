@@ -1,6 +1,6 @@
 // Set of helper functions to facilitate wallet setup
 
-import { ChainId } from '@my/sdk';
+import { ChainId } from '@avault/sdk';
 import { BASE_BSC_SCAN_URL, BASE_URL, chainKey } from 'config';
 import { chainId } from 'config/constants/tokens';
 
@@ -17,7 +17,7 @@ const wallet_config = {
       symbol: 'ASTR',
       decimals: 18,
     },
-    rpcUrls: ['https://astar.api.onfinality.io/public'],
+    rpcUrls: ['https://rpc.astar.network:8545'],
     blockExplorerUrls: [`${BASE_BSC_SCAN_URL}/`],
   },
   [ChainId.ASTR_TESTNET]: {
@@ -39,8 +39,7 @@ const wallet_config = {
       symbol: 'SDN',
       decimals: 18,
     },
-    rpcUrls: ['https://evm.shiden.astar.network'],
-    // rpcUrls: ['https://shiden.api.onfinality.io/public'],
+    rpcUrls: ['https://rpc.shiden.astar.network:8545'],
     blockExplorerUrls: [`${BASE_BSC_SCAN_URL}/`],
   },
   [ChainId.SDN_TESTNET]: {
@@ -115,7 +114,7 @@ export const registerToken = async (tokenAddress: string, tokenSymbol: string, t
         address: tokenAddress,
         symbol: tokenSymbol,
         decimals: tokenDecimals,
-        image: `${BASE_URL[chainKey]}/images/tokens/${chainKey}/${tokenAddress}.svg`,
+        image: `${BASE_URL[chainKey]}/images/tokens/${chainKey}/${tokenAddress}.png`,
       },
     },
   });

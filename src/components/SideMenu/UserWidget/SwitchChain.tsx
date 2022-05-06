@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, Flex, useTooltip, Heading } from '@my/ui';
+import { Text, Flex, useTooltip, Heading } from '@avault/ui';
 import BscSvg from '../imgs/icon_bsc.svg';
 import SelectedSvg from '../imgs/icon_select.svg';
 import SdnSvg from '../imgs/icon_sd.png';
 import SlSvg from '../imgs/icon_sl.svg';
 import { chainKey } from 'config';
 import styled from 'styled-components';
-import { CHAINKEY } from '@my/sdk';
+import { CHAINKEY } from '@avault/sdk';
 
 const FlexStyled = styled(Flex)`
   cursor: pointer;

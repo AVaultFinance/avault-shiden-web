@@ -1,7 +1,7 @@
 import { BASE_URL } from 'config';
 import React from 'react';
 import styled from 'styled-components';
-import useHttpLocations from 'hooks/useHttpLocations';
+import useHttpLocations from '../../hooks/useHttpLocations';
 import Logo from './Logo';
 
 const StyledListLogo = styled(Logo)<{ size: string }>`

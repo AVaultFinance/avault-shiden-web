@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, PrizeIcon, Text } from '@my/ui';
+import { Flex, PrizeIcon, Text } from '@avault/ui';
 import { Achievement } from 'state/types';
 import AchievementAvatar from './AchievementAvatar';
 import AchievementTitle from './AchievementTitle';

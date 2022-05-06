@@ -47,10 +47,6 @@ const avaultMenuItems: IMenu[] = [
     link: '/vault',
   },
   {
-    text: 'Zap',
-    link: '/zap',
-  },
-  {
     text: 'Farm',
     link: '/farms',
   },

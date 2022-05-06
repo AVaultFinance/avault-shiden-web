@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Currency, Token } from '@my/sdk';
+import { Currency, Token } from '@avault/sdk';
 import {
   ModalContainer,
   ModalHeader,
@@ -10,7 +10,7 @@ import {
   InjectedModalProps,
   Heading,
   Button,
-} from '@my/ui';
+} from '@avault/ui';
 import styled from 'styled-components';
 import usePrevious from 'hooks/usePreviousValue';
 import { TokenList } from '@uniswap/token-lists';
@@ -97,7 +97,7 @@ export default function CurrencySearchModal({
   };
 
   return (
-    <StyledModalContainer minWidth="343px">
+    <StyledModalContainer minWidth="320px">
       <ModalHeader className="header">
         <ModalTitle>
           {config[modalView].onBack && <ModalBackButton onBack={config[modalView].onBack} />}

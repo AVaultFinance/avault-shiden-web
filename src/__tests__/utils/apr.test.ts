@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import { getPoolApr, getFarmApr } from 'utils/apr';
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber';
 
-jest.mock('config/constants/lpAprs.json', () => ({
+jest.mock('../../config/constants/lpAprs.json', () => ({
   '0x0ed7e52944161450477ee417de9cd3a859b14fd0': 10.5,
 }));
 

@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo, useState, useEffect } from 'react';
-import { Button, Text, CheckmarkIcon, CogIcon, Input, LinkExternal, useTooltip } from '@my/ui';
+import { Button, Text, CheckmarkIcon, CogIcon, Input, LinkExternal, useTooltip } from '@avault/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { useTheme } from 'styled-components';
 import { TokenList, Version } from '@uniswap/token-lists';
@@ -7,12 +7,12 @@ import Card from 'components/Card';
 import { UNSUPPORTED_LIST_URLS } from 'config/constants/lists';
 import { parseENSAddress } from 'utils/ENS/parseENSAddress';
 import { useTranslation } from 'contexts/Localization';
-import useFetchListCallback from 'hooks/useFetchListCallback';
+import useFetchListCallback from '../../hooks/useFetchListCallback';
 
 import { AppDispatch, AppState } from '../../state';
-import { acceptListUpdate, removeList, disableList, enableList } from 'state/lists/actions';
-import { useIsListActive, useAllLists, useActiveListUrls } from 'state/lists/hooks';
-import uriToHttp from 'utils/uriToHttp';
+import { acceptListUpdate, removeList, disableList, enableList } from '../../state/lists/actions';
+import { useIsListActive, useAllLists, useActiveListUrls } from '../../state/lists/hooks';
+import uriToHttp from '../../utils/uriToHttp';
 
 import Column, { AutoColumn } from '../Layout/Column';
 import { ListLogo } from '../Logo';
@@ -32,7 +32,7 @@ const Wrapper = styled(Column)`
 const RowWrapper = styled(Row)<{ active: boolean }>`
   background-color: ${({ active, theme }) => (active ? theme.colors.cardBackground : 'transparent')};
   border: solid 2px;
-  border-color: ${({ active, theme }) => (active ? '#1476FF' : '#272E32')};
+  border-color: ${({ active, theme }) => (active ? '#238485' : '#272E32')};
   transition: 200ms;
   align-items: center;
   padding: 1.2rem 1.2rem;

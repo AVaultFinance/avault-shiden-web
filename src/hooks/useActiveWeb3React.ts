@@ -14,6 +14,7 @@ const useActiveWeb3React = (): Web3ReactContextInterface<Web3Provider> => {
   const { library, chainId, ...web3React } = useWeb3React();
   const refEth = useRef(library);
   const [provider, setprovider] = useState(library || simpleRpcProvider);
+
   useEffect(() => {
     if (library !== refEth.current) {
       setprovider(library || simpleRpcProvider);

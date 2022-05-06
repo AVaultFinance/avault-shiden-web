@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserWidget from './UserWidget';
 import Logo from './Logo';
 import Nav from './Nav';
-import { Flex } from '@my/ui';
+import { Flex } from '@avault/ui';
 const Header: FC<{ className?: string; setCollapsed: (collapsed: boolean) => void; collapsed: boolean }> = ({
   className,
   setCollapsed,
@@ -31,9 +31,9 @@ export default styled(Header)`
   // position: fixed;
   // top: 0px;
   // width: 100%;
-  position: relative;
-  z-index: 98;
-  // background-color: ${({ theme }) => theme.colors.background};
+
+  // z-index: ${({ theme }) => theme.zIndices.header};
+  background-color: ${({ theme }) => theme.colors.background};
   .inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -43,7 +43,7 @@ export default styled(Header)`
     align-items: center;
     justify-content: space-between;
     height: 72px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.tooltipColors.borderColor};
     ${({ theme }) => theme.mediaQueries.md} {
       height: 82px;
       padding-left: 0;

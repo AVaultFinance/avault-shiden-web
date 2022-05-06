@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { Breadcrumbs, Heading, Text } from '@my/ui';
+import { Breadcrumbs, Heading, Text } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { ProfileCreationContext } from './contexts/ProfileCreationProvider';
 

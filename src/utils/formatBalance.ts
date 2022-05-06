@@ -21,20 +21,9 @@ export const getBalanceAmount = (amount: BigNumber, decimals = 18) => {
 export const getBalanceNumber = (balance: BigNumber, decimals = 18) => {
   return getBalanceAmount(balance, decimals).toNumber();
 };
+
 export const getFullDisplayBalance = (balance: BigNumber, decimals = 18, displayDecimals?: number) => {
   return getBalanceAmount(balance, decimals).toFixed(displayDecimals, BigNumber.ROUND_DOWN);
-};
-
-export const getFullLocalDisplayBalance = (balance: BigNumber, decimals = 18, displayDecimals?: number) => {
-  //  ).toLocaleString('en-US', {
-  //   maximumFractionDigits: displayDecimals,
-  // })
-  return Number(getBalanceAmount(balance, decimals).toFixed(displayDecimals, BigNumber.ROUND_DOWN)).toLocaleString(
-    'en-US',
-    {
-      maximumFractionDigits: displayDecimals,
-    },
-  );
 };
 
 export const formatNumber = (number: number, minPrecision = 2, maxPrecision = 2) => {

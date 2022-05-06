@@ -1,6 +1,6 @@
 import React, { FC, useContext, useMemo } from 'react';
 import styled from 'styled-components';
-import { Button, Text } from '@my/ui';
+import { Button, Text } from '@avault/ui';
 import { NftContext } from '../providers/nft.provider';
 import LockSvg from '../img/lock.svg';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
@@ -87,7 +87,7 @@ export default styled(Nft)`
   z-index: 1;
 
   &:hover {
-    border-color: #1476ff;
+    border-color: #238485;
     z-index: 9;
     .attri {
       visibility: visible;
@@ -105,7 +105,7 @@ export default styled(Nft)`
     width: 90%;
     background-color: ${({ theme }) => theme.colors.cardBackground};
     color: #9da6a6;
-    border: 2px solid #1476ff;
+    border: 2px solid #238485;
     border-radius: 16px;
     line-height: 28px;
     padding: 10px 18px;

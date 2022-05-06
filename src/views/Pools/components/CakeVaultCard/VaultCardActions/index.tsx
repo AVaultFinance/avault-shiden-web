@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text, Box } from '@my/ui';
+import { Flex, Text, Box } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { Pool } from 'state/types';
 import { BIG_ZERO } from 'utils/bigNumber';
@@ -42,7 +42,7 @@ const CakeVaultCardActions: React.FC<{
             bold
             fontSize="12px"
           >
-            {accountHasSharesStaked ? t('Staked (vault)') : `${stakingToken.symbol}`}
+            {accountHasSharesStaked ? t('Staked (compounding)') : `${stakingToken.symbol}`}
           </InlineText>
         </Box>
         {isVaultApproved ? (

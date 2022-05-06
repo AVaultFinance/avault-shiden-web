@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { JSBI, Pair, Percent } from '@my/sdk';
-import { Button, Text, Flex, CardProps } from '@my/ui';
+import { JSBI, Pair, Percent } from '@avault/sdk';
+import { Button, Text, Flex, CardProps } from '@avault/ui';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import useTotalSupply from 'hooks/useTotalSupply';
+import useTotalSupply from '../../hooks/useTotalSupply';
 
-import { useTokenBalance } from 'state/wallet/hooks';
-import { currencyId } from 'utils/currencyId';
-import { unwrappedToken } from 'utils/wrappedCurrency';
+import { useTokenBalance } from '../../state/wallet/hooks';
+import { currencyId } from '../../utils/currencyId';
+import { unwrappedToken } from '../../utils/wrappedCurrency';
 
 import { SolidCard } from '../Card';
 import { AutoColumn } from '../Layout/Column';
 import CurrencyLogo from '../Logo/CurrencyLogo';
 import { DoubleCurrencyLogo } from '../Logo';
 import { RowBetween, RowFixed } from '../Layout/Row';
-import { BIG_INT_ZERO } from 'config/constants';
+import { BIG_INT_ZERO } from '../../config/constants';
 import Dots from '../Loader/Dots';
 import DropdownSvg from './imgs/dropdown.png';
 import AddIconWhite from 'components/svg/addIconWhite';
@@ -86,7 +86,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
             </FixedHeightRow>
             <AutoColumn gap="4px">
               <FixedHeightRow>
-                <Text fontSize="12px" color="textSubtle" small>
+                <Text fontSize="12px" color="secondary" small>
                   {t('Share of Pool')}:
                 </Text>
                 <Text fontSize="12px" color="text">
@@ -94,7 +94,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
                 </Text>
               </FixedHeightRow>
               <FixedHeightRow>
-                <Text fontSize="12px" color="textSubtle" small>
+                <Text fontSize="12px" color="secondary" small>
                   {t('Pooled %asset%', { asset: currency0.symbol })}:
                 </Text>
                 {token0Deposited ? (
@@ -108,7 +108,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false }: PositionCar
                 )}
               </FixedHeightRow>
               <FixedHeightRow>
-                <Text fontSize="12px" color="textSubtle" small>
+                <Text fontSize="12px" color="secondary" small>
                   {t('Pooled %asset%', { asset: currency1.symbol })}:
                 </Text>
                 {token1Deposited ? (

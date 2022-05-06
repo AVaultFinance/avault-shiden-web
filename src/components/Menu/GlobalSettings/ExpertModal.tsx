@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, Flex, Message, Modal, InjectedModalProps, Checkbox } from '@my/ui';
+import { Button, Text, Flex, Message, Modal, InjectedModalProps, Checkbox } from '@avault/ui';
 import { useExpertModeManager } from 'state/user/hooks';
 import { useTranslation } from 'contexts/Localization';
 

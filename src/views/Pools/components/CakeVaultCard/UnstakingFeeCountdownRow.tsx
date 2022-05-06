@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Text, TooltipText, useTooltip } from '@my/ui';
+import { Flex, Text, TooltipText, useTooltip } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { useWeb3React } from '@web3-react/core';
 import useWithdrawalFeeTimer from 'views/Pools/hooks/useWithdrawalFeeTimer';

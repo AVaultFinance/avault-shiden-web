@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { ArrowDropDownIcon, Text } from '@my/ui';
+import { ArrowDropDownIcon, Text } from '@avault/ui';
 import { ISortDir } from 'components/SortIcon';
 
 const DropDownHeader = styled.div`

@@ -3,39 +3,39 @@ import styled from 'styled-components';
 import { splitSignature } from '@ethersproject/bytes';
 import { Contract } from '@ethersproject/contracts';
 import { TransactionResponse } from '@ethersproject/providers';
-import { Currency, currencyEquals, ETHER, Percent, WETH } from '@my/sdk';
-import { Button, Text, AddIcon, ArrowDownIcon, CardBody, Slider, Box, Flex, useModal } from '@my/ui';
+import { Currency, currencyEquals, ETHER, Percent, WETH } from '@avault/sdk';
+import { Button, Text, AddIcon, ArrowDownIcon, CardBody, Slider, Box, Flex, useModal } from '@avault/ui';
 import { RouteComponentProps } from 'react-router';
 import { BigNumber } from '@ethersproject/bignumber';
 import { useTranslation } from 'contexts/Localization';
-import { AutoColumn, ColumnCenter } from 'components/Layout/Column';
-import TransactionConfirmationModal, { ConfirmationModalContent } from 'components/TransactionConfirmationModal';
-import CurrencyInputPanel from 'components/CurrencyInputPanel';
-import { MinimalPositionCard } from 'components/PositionCard';
-import { AppHeader, AppBody } from 'components/App';
-import { RowBetween, RowFixed } from 'components/Layout/Row';
-import ConnectWalletButton from 'components/ConnectWalletButton';
-import { SolidCard, PlainCard } from 'components/Card';
+import { AutoColumn, ColumnCenter } from '../../components/Layout/Column';
+import TransactionConfirmationModal, { ConfirmationModalContent } from '../../components/TransactionConfirmationModal';
+import CurrencyInputPanel from '../../components/CurrencyInputPanel';
+import { MinimalPositionCard } from '../../components/PositionCard';
+import { AppHeader, AppBody } from '../../components/App';
+import { RowBetween, RowFixed } from '../../components/Layout/Row';
+import ConnectWalletButton from '../../components/ConnectWalletButton';
+import { SolidCard, PlainCard } from '../../components/Card';
 
-import { CurrencyLogo } from 'components/Logo';
-import { ROUTER_ADDRESS } from 'config/constants';
-import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { useCurrency } from 'hooks/Tokens';
-import { usePairContract } from 'hooks/useContract';
-import useTransactionDeadline from 'hooks/useTransactionDeadline';
+import { CurrencyLogo } from '../../components/Logo';
+import { ROUTER_ADDRESS } from '../../config/constants';
+import useActiveWeb3React from '../../hooks/useActiveWeb3React';
+import { useCurrency } from '../../hooks/Tokens';
+import { usePairContract } from '../../hooks/useContract';
+import useTransactionDeadline from '../../hooks/useTransactionDeadline';
 
-import { useTransactionAdder } from 'state/transactions/hooks';
-import StyledInternalLink from 'components/Links';
-import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from 'utils';
-import { currencyId } from 'utils/currencyId';
-import useDebouncedChangeHandler from 'hooks/useDebouncedChangeHandler';
-import { wrappedCurrency } from 'utils/wrappedCurrency';
-import { useApproveCallback, ApprovalState } from 'hooks/useApproveCallback';
-import Dots from 'components/Loader/Dots';
-import { useBurnActionHandlers, useDerivedBurnInfo, useBurnState } from 'state/burn/hooks';
+import { useTransactionAdder } from '../../state/transactions/hooks';
+import StyledInternalLink from '../../components/Links';
+import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils';
+import { currencyId } from '../../utils/currencyId';
+import useDebouncedChangeHandler from '../../hooks/useDebouncedChangeHandler';
+import { wrappedCurrency } from '../../utils/wrappedCurrency';
+import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback';
+import Dots from '../../components/Loader/Dots';
+import { useBurnActionHandlers, useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks';
 
-import { Field } from 'state/burn/actions';
-import { useUserSlippageTolerance } from 'state/user/hooks';
+import { Field } from '../../state/burn/actions';
+import { useUserSlippageTolerance } from '../../state/user/hooks';
 import Page from '../Page';
 import ArrowSvg from './imgs/arrow.svg';
 import { DashedPrimayCard } from 'components/Card';
@@ -130,7 +130,7 @@ export default function RemoveLiquidity({
     ];
     const message = {
       owner: account,
-      spender: ROUTER_ADDRESS[chainId],
+      spender: ROUTER_ADDRESS,
       value: liquidityAmount.raw.toString(),
       nonce: nonce.toHexString(),
       deadline: deadline.toNumber(),
@@ -327,7 +327,7 @@ export default function RemoveLiquidity({
                 {currencyA?.symbol}
               </Text>
             </RowFixed>
-            <Text fontSize="32px" color="#1476FF">
+            <Text fontSize="32px" color="#1BD3D5">
               {parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}
             </Text>
           </RowBetween>
@@ -338,7 +338,7 @@ export default function RemoveLiquidity({
                 {currencyB?.symbol}
               </Text>
             </RowFixed>
-            <Text fontSize="32px" color="#1476FF">
+            <Text fontSize="32px" color="#1BD3D5">
               {parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}
             </Text>
           </RowBetween>
@@ -493,10 +493,10 @@ export default function RemoveLiquidity({
             {!showDetailed && (
               <BorderCard>
                 <Flex mb="26px" alignItems="flex-end">
-                  <Text fontSize="32px" color="#1476FF" bold style={{ lineHeight: 1 }}>
+                  <Text fontSize="32px" color="#1BD3D5" bold style={{ lineHeight: 1 }}>
                     {formattedAmounts[Field.LIQUIDITY_PERCENT]}%
                   </Text>
-                  <Text color="#1476FF" fontSize="12px" marginLeft="10px">
+                  <Text color="#1BD3D5" fontSize="12px" marginLeft="10px">
                     {t('Amount')}
                   </Text>
                 </Flex>
@@ -512,8 +512,8 @@ export default function RemoveLiquidity({
                   <Button
                     style={{
                       marginTop: '16px',
-                      color: innerLiquidityPercentage === 25 ? 'white' : '#1476FF',
-                      background: innerLiquidityPercentage === 25 ? '#1476FF' : '#1F252A',
+                      color: innerLiquidityPercentage === 25 ? 'white' : '#1BD3D5',
+                      background: innerLiquidityPercentage === 25 ? '#1BD3D5' : '#1F252A',
                       borderRadius: '12px',
                     }}
                     variant="tertiary"
@@ -525,8 +525,8 @@ export default function RemoveLiquidity({
                   <Button
                     style={{
                       marginTop: '16px',
-                      color: innerLiquidityPercentage === 50 ? 'white' : '#1476FF',
-                      background: innerLiquidityPercentage === 50 ? '#1476FF' : '#1F252A',
+                      color: innerLiquidityPercentage === 50 ? 'white' : '#1BD3D5',
+                      background: innerLiquidityPercentage === 50 ? '#1BD3D5' : '#1F252A',
                       borderRadius: '12px',
                     }}
                     variant="tertiary"
@@ -538,8 +538,8 @@ export default function RemoveLiquidity({
                   <Button
                     style={{
                       marginTop: '16px',
-                      color: innerLiquidityPercentage === 75 ? 'white' : '#1476FF',
-                      background: innerLiquidityPercentage === 75 ? '#1476FF' : '#1F252A',
+                      color: innerLiquidityPercentage === 75 ? 'white' : '#1BD3D5',
+                      background: innerLiquidityPercentage === 75 ? '#1BD3D5' : '#1F252A',
                       borderRadius: '12px',
                     }}
                     variant="tertiary"
@@ -551,8 +551,8 @@ export default function RemoveLiquidity({
                   <Button
                     style={{
                       marginTop: '16px',
-                      color: innerLiquidityPercentage === 100 ? 'white' : '#1476FF',
-                      background: innerLiquidityPercentage === 100 ? '#1476FF' : '#1F252A',
+                      color: innerLiquidityPercentage === 100 ? 'white' : '#1BD3D5',
+                      background: innerLiquidityPercentage === 100 ? '#1BD3D5' : '#1F252A',
                       borderRadius: '12px',
                     }}
                     variant="tertiary"

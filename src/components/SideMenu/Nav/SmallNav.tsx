@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { useTooltip, Flex, CloseIcon } from '@my/ui';
+import { useTooltip, Flex, CloseIcon } from '@avault/ui';
 import { IMenu } from '../config';
 import CollapseSvg from '../imgs/collapse';
 import IconMenu from '../imgs/iconMenu';
@@ -15,18 +15,10 @@ const SmallNavTooltip: FC<{
   const [menuItems, setMenuItems] = useState(_menuItems);
 
   return (
-    <NavWrap
-      onClick={() => {
-        setTooltipVisible(false);
-      }}
-    >
-      <NavWrapInner
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
+    <NavWrap>
+      <NavWrapInner>
         <HeaderFlex>
-          <img src="/images/logo_beta.svg" alt="" className="logo" />
+          <img src="/images/logo.svg" alt="" className="logo" />
           <CloseIconStyled
             onClick={() => {
               setTooltipVisible(false);
@@ -36,7 +28,19 @@ const SmallNavTooltip: FC<{
         {menuItems.map((item, index) => (
           <div key={index}>
             <NavLink
-              active={pathname.startsWith(item.link) ? 't' : 'f'}
+              active={
+                (
+                  item.link === '/'
+                    ? pathname === item.link
+                    : ['/add', '/remove', '/liquidity'].find((p) => pathname.startsWith(p))
+                    ? item.link === '/swap'
+                    : ['/nft/pools', '/nft/wallet/mint', '/nft/wallet/burn'].find((p) => pathname.startsWith(p))
+                    ? item.link === '/nft/pools/'
+                    : pathname.startsWith(item.link)
+                )
+                  ? 't'
+                  : 'f'
+              }
               to={item.link}
               key={item.link}
               onClick={() => {
@@ -176,10 +180,10 @@ const expandAnimation = keyframes`
 const NavWrapInner = styled.div`
   position: absolute;
   width: 100vw;
-  padding: 40px 30px 40px;
+  padding: 20px 30px 40px;
   border-radius: 24px 24px 0 0;
   bottom: 0;
-  background: ${({ theme }) => theme.colors.backgroundAlt};
+  background: ${({ theme }) => theme.colors.background};
   animation: ${() =>
     css`
       ${expandAnimation} 300ms linear forwards
@@ -195,11 +199,6 @@ const HeaderFlex = styled(Flex)`
 `;
 const CloseIconStyled = styled(CloseIcon)`
   width: 30px;
-  fill: ${({ theme }) => theme.colors.textSubtle};
-  transition: all 0.3s ease;
-  &:hover {
-    fill: ${({ theme }) => theme.colors.text};
-  }
 `;
 const NavLink = styled(Link)<{ active: 't' | 'f' }>`
   font-size: 16px;
@@ -212,7 +211,7 @@ const NavLink = styled(Link)<{ active: 't' | 'f' }>`
   width: 100%;
   display: block;
   padding-left: 20px;
-  background-color: ${({ theme, active }) => (active === 't' ? theme.colors.background : 'transparent')};
+  background-color: ${({ theme, active }) => (active === 't' ? '#030222' : '#181733')};
   border-radius: 8px;
   margin-bottom: 4px;
   svg {

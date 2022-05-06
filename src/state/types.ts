@@ -3,7 +3,7 @@ import { AnyAction } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import { CampaignType, FarmConfig, LotteryStatus, LotteryTicket, Nft, PoolConfig, Team } from 'config/constants/types';
-import { IVault } from './vault/types';
+import { ICompounding } from './compounding/types';
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>;
 
@@ -78,10 +78,9 @@ export interface FarmsState {
   userDataLoaded: boolean;
 }
 
-export interface VaultState {
-  data: IVault[];
+export interface CompoundingState {
+  data: ICompounding[];
   allLiquidity: string;
-  isUserLoaded: boolean;
   userDataLoaded: boolean;
 }
 
@@ -485,7 +484,7 @@ export interface State {
   block: BlockState;
   price: PriceState;
   farms: FarmsState;
-  vault: VaultState;
+  compounding: CompoundingState;
   pools: PoolsState;
   predictions: PredictionsState;
   profile: ProfileState;

@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount } from '@my/sdk';
+import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount } from '@avault/sdk';
 import { useMemo } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import ERC20_INTERFACE from 'config/abi/erc20';
@@ -57,6 +57,7 @@ export function useTokenBalancesWithLoadingIndicator(
   );
 
   const validatedTokenAddresses = useMemo(() => validatedTokens.map((vt) => vt.address), [validatedTokens]);
+
   const balances = useMultipleContractSingleData(validatedTokenAddresses, ERC20_INTERFACE, 'balanceOf', [address]);
 
   const anyLoading: boolean = useMemo(() => balances.some((callState) => callState.loading), [balances]);

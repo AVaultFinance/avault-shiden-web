@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
-import { Flex, CardFooter, ExpandableLabel, HelpIcon, useTooltip } from '@my/ui';
+import { Flex, CardFooter, ExpandableLabel, HelpIcon, useTooltip } from '@avault/ui';
 import { Pool } from 'state/types';
-import { VaultPoolTag, ManualPoolTag } from 'components/Tags';
+import { CompoundingPoolTag, ManualPoolTag } from 'components/Tags';
 import ExpandedFooter from './ExpandedFooter';
 
 interface FooterProps {
@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({ pool, account }) => {
     <CardFooter>
       <ExpandableButtonWrapper>
         <Flex alignItems="center">
-          {isAutoVault ? <VaultPoolTag /> : <ManualPoolTag />}
+          {isAutoVault ? <CompoundingPoolTag /> : <ManualPoolTag />}
           {tooltipVisible && tooltip}
           <Flex ref={targetRef}>
             <HelpIcon ml="4px" width="20px" height="20px" color="textSubtle" />

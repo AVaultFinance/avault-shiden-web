@@ -1,6 +1,9 @@
-import { Text } from '@my/ui';
+import React from 'react';
+import BigNumber from 'bignumber.js';
+import { getFullDisplayBalance } from 'utils/formatBalance';
+import { Text } from '@avault/ui';
 import styled from 'styled-components';
-import { MaxButton } from 'style/SmallBorderPageLayout';
+import { MaxButton } from '../style/DappstakeStyle';
 const TextStyle = styled(Text)`
   font-size: 12px;
   text-align: center;
@@ -10,8 +13,12 @@ const TextStyle = styled(Text)`
 `;
 const Balance = (props) => {
   const {
+    balance = new BigNumber(0),
+    decimals,
     symbol,
   }: {
+    balance: BigNumber;
+    decimals: number;
     symbol: string;
   } = props;
   // const displayBalance = (balance: string) => {
@@ -25,7 +32,7 @@ const Balance = (props) => {
   return (
     <>
       <TextStyle>
-        LP Balance: &nbsp;0 {symbol}
+        LP Balance: {getFullDisplayBalance(new BigNumber(balance), decimals, 4)} {symbol}
         <MaxButton variant="text">Max</MaxButton>
       </TextStyle>
     </>

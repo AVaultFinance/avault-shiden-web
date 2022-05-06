@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import styled from 'styled-components';
 import BigNumber from 'bignumber.js';
-import { Button, Flex, Heading, IconButton, useModal } from '@my/ui';
+import { Button, Flex, Heading, IconButton, useModal } from '@avault/ui';
 import { useLocation } from 'react-router-dom';
 import Balance from 'components/Balance';
 import { useTranslation } from 'contexts/Localization';
@@ -12,11 +12,11 @@ import { useLpTokenPrice } from 'state/farms/hooks';
 import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance';
 import DepositModal from '../DepositModal';
 import WithdrawModal from '../WithdrawModal';
+import useUnstakeFarms from '../../hooks/useUnstakeFarms';
+import useStakeFarms from '../../hooks/useStakeFarms';
 import MinusIconPrimary from 'components/svg/minusIconPrimary';
 import AddIconPrimary from 'components/svg/addIconPrimary';
 import { FarmWithStakedValue } from './CardActionsContainer';
-import useStakeFarms from 'views/Farms/hooks/useStakeFarms';
-import useUnstakeFarms from 'views/Farms/hooks/useUnstakeFarms';
 
 interface FarmCardActionsProps {
   stakedBalance?: BigNumber;

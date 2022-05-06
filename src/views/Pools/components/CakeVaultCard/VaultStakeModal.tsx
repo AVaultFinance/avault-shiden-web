@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Flex, Button, BalanceInput, AutoRenewIcon } from '@my/ui';
+import { Text, Flex, Button, BalanceInput, AutoRenewIcon } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { useWeb3React } from '@web3-react/core';
 import { useAppDispatch } from 'state';
@@ -138,7 +138,7 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
           <Text mt="8px" ml="auto" color="textSubtle" fontSize="12px" mb="8px">
             {t('Balance: %balance%', { balance: getFullDisplayBalance(stakingMax, stakingToken.decimals) })}
           </Text>
-          <Text color="#1476FF" onClick={() => handleChangePercent(100)}>
+          <Text color="#1BD3D5" onClick={() => handleChangePercent(100)}>
             {t('Max')}
           </Text>
         </div>

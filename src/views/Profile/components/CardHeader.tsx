@@ -1,5 +1,5 @@
 import styled, { DefaultTheme } from 'styled-components';
-import { CardHeader as UIKitCardHeader } from '@my/ui';
+import { CardHeader as UIKitCardHeader } from '@avault/ui';
 
 const getBackground = (theme: DefaultTheme) => {
   if (theme.isDark) {

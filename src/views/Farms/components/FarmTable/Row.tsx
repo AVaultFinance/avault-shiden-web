@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
-import { useMatchBreakpoints } from '@my/ui';
+import { useMatchBreakpoints } from '@avault/ui';
 import useDelayedUnmount from 'hooks/useDelayedUnmount';
-// import { useFarmUser } from 'state/farms/hooks';
+import { useFarmUser } from 'state/farms/hooks';
 
 import Apr, { AprProps } from './Apr';
 import Farm, { FarmProps } from './Farm';
@@ -91,18 +91,18 @@ const StyledTr = styled.tr<{ isLast: boolean }>`
 `;
 
 const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
-  const { userDataReady } = props;
-  // const hasStakedAmount = !!useFarmUser(details.pid).stakedBalance.toNumber();
-  const [actionPanelExpanded, setActionPanelExpanded] = useState(false);
+  const { details, userDataReady } = props;
+  const hasStakedAmount = !!useFarmUser(details.pid).stakedBalance.toNumber();
+  const [actionPanelExpanded, setActionPanelExpanded] = useState(hasStakedAmount);
   const shouldRenderChild = useDelayedUnmount(actionPanelExpanded, 300);
 
   const toggleActionPanel = () => {
     setActionPanelExpanded(!actionPanelExpanded);
   };
 
-  // useEffect(() => {
-  //   setActionPanelExpanded(hasStakedAmount);
-  // }, [hasStakedAmount]);
+  useEffect(() => {
+    setActionPanelExpanded(hasStakedAmount);
+  }, [hasStakedAmount]);
 
   const { isMd, isXl, isLg } = useMatchBreakpoints();
 

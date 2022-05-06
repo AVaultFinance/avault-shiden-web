@@ -1,7 +1,7 @@
 import tokens from './tokens';
 import farms from './farms';
 import { Ifo, Token } from './types';
-import { CHAINKEY } from '@my/sdk';
+import { CHAINKEY } from '@avault/sdk';
 import { chainKey } from 'config';
 
 const cakeBnbLpToken: Token =

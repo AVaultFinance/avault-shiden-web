@@ -1,5 +1,5 @@
 import { ReactText } from 'react';
-import { Language } from '@my/ui';
+import { Language } from '@avault/ui';
 
 export type ContextData = {
   [key: string]: ReactText;

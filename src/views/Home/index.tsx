@@ -1,11 +1,10 @@
-import { Button } from '@my/ui';
+// import { Button } from '@avault/ui';
 import styled, { keyframes } from 'styled-components';
 const _Link = [
   { name: 'Discord', link: 'https://discord.gg/WcARFMy2t8' },
   { name: 'Twitter', link: 'https://twitter.com/Avault_Astar ' },
   { name: 'Medium', link: 'https://medium.com/@avault ' },
   { name: 'Github', link: 'https://github.com/AVaultFinance ' },
-  { name: 'doc', link: 'https://co-go.gitbook.io/avault/ ' },
 ];
 const Home = () => {
   return (
@@ -19,29 +18,29 @@ const Home = () => {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" className="small">
               <defs>
                 <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="89188piuaa">
-                  <stop stopColor="#8C1AB5" offset="0%" />
-                  <stop stopColor="#17B38D" offset="100%" />
+                  <stop stop-color="#8C1AB5" offset="0%" />
+                  <stop stop-color="#17B38D" offset="100%" />
                 </linearGradient>
               </defs>
-              <path fill="url(#89188piuaa)" transform="rotate(180 6 6)" d="M6 0L12 12 0 12z" fillRule="evenodd" />
+              <path fill="url(#89188piuaa)" transform="rotate(180 6 6)" d="M6 0L12 12 0 12z" fill-rule="evenodd" />
             </svg>
           </div>
           <div className="svg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" className="big">
               <defs>
                 <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="89188piuaa">
-                  <stop stopColor="#8C1AB5" offset="0%" />
-                  <stop stopColor="#17B38D" offset="100%" />
+                  <stop stop-color="#8C1AB5" offset="0%" />
+                  <stop stop-color="#17B38D" offset="100%" />
                 </linearGradient>
               </defs>
-              <path fill="url(#89188piuaa)" transform="rotate(180 6 6)" d="M6 0L12 12 0 12z" fillRule="evenodd" />
+              <path fill="url(#89188piuaa)" transform="rotate(180 6 6)" d="M6 0L12 12 0 12z" fill-rule="evenodd" />
             </svg>
           </div>
         </div>
-        {/* <h2>Coming&nbsp;&nbsp;Soon</h2> */}
-        <ButtonStyled>
+        <h2>Coming&nbsp;&nbsp;Soon</h2>
+        {/* <ButtonStyled>
           <a href="/vault">Launch Dapp</a>
-        </ButtonStyled>
+        </ButtonStyled> */}
         <UlStyled>
           {_Link.map((v, index) => (
             <li key={index}>
@@ -55,37 +54,32 @@ const Home = () => {
     </HomeInner>
   );
 };
-const ButtonStyled = styled(Button)`
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-  height: 44px;
-  background-image: linear-gradient(90deg, #8c1ab5 0%, #17b38d 100%);
-  width: 200px;
-  padding: 0;
-  cursor: pointer;
-  margin-top: 50px;
-  a {
-    display: block;
-    height: 44px;
-    width: 200px;
-    line-height: 44px;
-  }
-`;
-
+// const ButtonStyled = styled(Button)`
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 16px;
+//   font-weight: 600;
+//   color: #fff;
+//   height: 44px;
+//   background-image: linear-gradient(90deg, #8c1ab5 0%, #17b38d 100%);
+//   border-radius: 8px;
+//   width: 200px;
+//   padding: 0;
+//   cursor: pointer;
+//   margin-top: 50px;
+//   a {
+//     display: block;
+//     height: 44px;
+//     width: 200px;
+//     line-height: 44px;
+//   }
+// `;
 const UlStyled = styled.ul`
   list-style: none;
   margin-top: 24px;
   li {
     margin: 0 10px;
     display: inline-block;
-    &:last-child {
-      img {
-        width: 34px;
-      }
-    }
     a {
       display: block;
       cursor: pointer;

@@ -1,5 +1,5 @@
 import Flex from 'components/Layout/Flex';
-import PageLoading from 'components/TransactionConfirmationModal/PageLoading';
+import Spinner from 'components/TransactionConfirmationModal/Spinner';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,14 +9,14 @@ const Wrapper = styled(Flex)`
   justify-content: center;
   align-items: center;
   > div {
-    height: 120px;
+    height: 160px;
   }
 `;
 
 const PageLoader: React.FC = () => {
   return (
     <Wrapper>
-      <PageLoading />
+      <Spinner />
     </Wrapper>
   );
 };

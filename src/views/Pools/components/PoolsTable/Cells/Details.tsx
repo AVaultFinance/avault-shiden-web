@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMatchBreakpoints } from '@my/ui';
+import { ChevronDownIcon, useMatchBreakpoints } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
-import { ArrowIcon } from 'style/SmallBorderPageLayout';
+import { ArrowIcon } from 'views/Compounding/components/CompoundingTable/Details';
 
 interface DetailsProps {
   actionPanelToggled: boolean;

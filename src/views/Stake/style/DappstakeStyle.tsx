@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Input, InputProps, Flex } from '@my/ui';
-
+import { Input, InputProps, Button, Flex } from '@avault/ui';
 export const InnerWrapper = styled.div`
   width: 90%;
   max-width: 500px;
@@ -44,10 +43,17 @@ export const StyledInput = styled(Input)`
   background-color: rgba(0, 0, 0, 0);
   width: 80%;
   text-align: right;
-  font-size: 18px;
 `;
-// fontSize="12px" style={{ cursor: 'pointer' }} color="#1476FF" ml="8px"
-
+// fontSize="12px" style={{ cursor: 'pointer' }} color="#1BD3D5" ml="8px"
+export const MaxButton = styled(Button)`
+  text-align: right;
+  padding: 0 0 0 12px;
+  margin: 0;
+  align-items: center;
+  justify-content: right;
+  line-height: 40px;
+  height: 40px;
+`;
 export const InputWrap = styled.div`
   background: ${({ theme }) => theme.colors.background02};
   border-radius: 12px;
@@ -60,7 +66,15 @@ export const PageContainer = styled(Flex)`
   justify-content: center;
   aligncontent: center;
   padding-top: 20px;
-
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-top: 80px;
+  }
+`;
+export const PageContainerWrap = styled(Flex)`
+  justify-content: center;
+  aligncontent: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
   ${({ theme }) => theme.mediaQueries.md} {
     padding-top: 80px;
   }

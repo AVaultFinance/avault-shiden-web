@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BigNumber from 'bignumber.js';
-import { Button, useModal, IconButton, Skeleton, useTooltip, Text } from '@my/ui';
+import { Button, useModal, IconButton, Skeleton, useTooltip, Text } from '@avault/ui';
 import MinusIcon from './iocn_jianhao.png';
 import AddIcon from './icon_jiahao.png';
 import ConnectWalletButton from 'components/ConnectWalletButton';
@@ -197,7 +197,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataRea
             {stakingToken.symbol}{' '}
           </Text>
           <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
-            {isAutoVault ? t('Staked (vault)') : t('Staked')}
+            {isAutoVault ? t('Staked (compounding)') : t('Staked')}
           </Text>
           <Balance
             mt="16px"

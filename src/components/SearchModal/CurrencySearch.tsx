@@ -1,13 +1,13 @@
 import React, { KeyboardEvent, RefObject, useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { Currency, ETHER, Token } from '@my/sdk';
-import { Text, Input, Box } from '@my/ui';
+import { Currency, ETHER, Token } from '@avault/sdk';
+import { Text, Input, Box } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { FixedSizeList } from 'react-window';
 import { useAudioModeManager } from 'state/user/hooks';
 import useDebounce from 'hooks/useDebounce';
 // import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { useAllTokens, useToken, useIsUserAddedToken, useFoundOnInactiveList } from 'hooks/Tokens';
-import { isAddress } from 'utils';
+import { useAllTokens, useToken, useIsUserAddedToken, useFoundOnInactiveList } from '../../hooks/Tokens';
+import { isAddress } from '../../utils';
 import Column from '../Layout/Column';
 import Row from '../Layout/Row';
 // import CommonBases from './CommonBases';

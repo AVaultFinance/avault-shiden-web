@@ -1,4 +1,4 @@
-import { Text, Flex } from '@my/ui';
+import { Text, Flex } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import React from 'react';
 import styled from 'styled-components';
@@ -20,10 +20,10 @@ const PoolHeader: React.FC<{
     <Flex className={className} justifyContent="space-between ">
       <div className="left">
         <img src={LogoPng} alt="LogoPng" />
-        <Text color="#1476FF" fontSize="20px">
+        <Text color="#1BD3D5" fontSize="20px">
           {t('Just stake some tokens to earn.')}
         </Text>
-        <Text color="#1476FF" fontSize="20px">
+        <Text color="#1BD3D5" fontSize="20px">
           {t('High APR, low risk')}
         </Text>
       </div>
@@ -51,7 +51,7 @@ export default styled(PoolHeader)`
       line-height: 40px;
       font-family: Microsoft YaHei;
       font-weight: 900;
-      color: #1476ff;
+      color: #1bd3d5;
     }
     > img {
       height: 55px;

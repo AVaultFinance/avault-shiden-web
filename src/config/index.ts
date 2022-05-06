@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js/bignumber';
 import { BIG_TEN } from 'utils/bigNumber';
-import { CHAINKEY, ChainId } from '@my/sdk';
+import { CHAINKEY, ChainId } from '@avault/sdk';
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -40,14 +40,12 @@ export const LOTTERY_MAX_NUMBER_OF_TICKETS = 50;
 export const LOTTERY_TICKET_PRICE = 1;
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18);
 export const DEFAULT_GAS_LIMIT = 800000;
-// 900000
-export const DEFAULT_GAS_LIMIT_40w = 400000;
 // 15000000
 // 116020
 // 1000000
 // 400000
 // 200000
-export const DEFAULT_GAS_PRICE = 1000000000; // 2gwei
+export const DEFAULT_GAS_PRICE = 5;
 export const AUCTION_BIDDERS_TO_FETCH = 500;
 export const RECLAIM_AUCTIONS_TO_FETCH = 500;
 export const AUCTION_WHITELISTED_BIDDERS_TO_FETCH = 500;

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import styled from 'styled-components';
-import { Card, CardBody, Text, Flex, HelpIcon, Button, Heading, Skeleton, useModal, Box, useTooltip } from '@my/ui';
+import { Card, CardBody, Text, Flex, HelpIcon, Button, Heading, Skeleton, useModal, Box, useTooltip } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import { getBalanceNumber } from 'utils/formatBalance';
 import { usePriceCakeBusd } from 'state/farms/hooks';
@@ -39,7 +39,7 @@ const BountyCard = () => {
       <Text mb="16px">{t('This bounty is given as a reward for providing a service to other users.')}</Text>
       <Text mb="16px">
         {t(
-          'Whenever you successfully claim the bounty, you’re also helping out by activating the Auto KAC Pool’s vault function for everyone.',
+          'Whenever you successfully claim the bounty, you’re also helping out by activating the Auto KAC Pool’s compounding function for everyone.',
         )}
       </Text>
       <Text style={{ fontWeight: 'bold' }}>

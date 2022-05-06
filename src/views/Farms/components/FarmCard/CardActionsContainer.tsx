@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import BigNumber from 'bignumber.js';
-import { Button, Flex, Text } from '@my/ui';
+import { Button, Flex, Text } from '@avault/ui';
 import { getAddress } from 'utils/addressHelpers';
 import { useAppDispatch } from 'state';
 import { fetchFarmUserDataAsync } from 'state/farms';
@@ -11,7 +11,7 @@ import { useERC20 } from 'hooks/useContract';
 import ConnectWalletButton from 'components/ConnectWalletButton';
 import StakeAction from './StakeAction';
 import HarvestAction from './HarvestAction';
-import useApproveFarm from 'views/Farms/hooks/useApproveFarm';
+import useApproveFarm from '../../hooks/useApproveFarm';
 
 const Action = styled.div`
   padding-top: 16px;

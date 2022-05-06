@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card } from '@my/ui';
+import { Card } from '@avault/ui';
 
 export const BodyWrapper = styled(Card)`
+  border-radius: 24px;
   max-width: 486px;
   width: 100%;
   z-index: 1;

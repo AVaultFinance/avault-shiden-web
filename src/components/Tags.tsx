@@ -9,7 +9,7 @@ import {
   TimerIcon,
   BlockIcon,
   VoteIcon,
-} from '@my/ui';
+} from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 
 const CoreTag: React.FC<TagProps> = (props) => {
@@ -48,7 +48,7 @@ const ManualPoolTag: React.FC<TagProps> = (props) => {
   );
 };
 
-const VaultPoolTag: React.FC<TagProps> = (props) => {
+const CompoundingPoolTag: React.FC<TagProps> = (props) => {
   const { t } = useTranslation();
   return (
     <Tag variant="success" outline startIcon={<AutoRenewIcon width="18px" color="success" mr="4px" />} {...props}>
@@ -84,4 +84,4 @@ const ClosedTag: React.FC<TagProps> = (props) => {
   );
 };
 
-export { CoreTag, CommunityTag, DualTag, ManualPoolTag, VaultPoolTag, VoteNowTag, SoonTag, ClosedTag };
+export { CoreTag, CommunityTag, DualTag, ManualPoolTag, CompoundingPoolTag, VoteNowTag, SoonTag, ClosedTag };

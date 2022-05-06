@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@my/ui';
+import { Text } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 
 const BondlyWarning = () => {

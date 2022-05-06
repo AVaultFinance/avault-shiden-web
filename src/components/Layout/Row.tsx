@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Box } from '@my/ui';
+import { Box } from '@avault/ui';
 
 const Row = styled(Box)<{
   width?: string;

@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { save, load } from 'redux-localstorage-simple';
 import { useDispatch } from 'react-redux';
 import farmsReducer from './farms';
-import vault from './vault';
+import compoundingReducer from './compounding';
 import poolsReducer from './pools';
 import predictionsReducer from './predictions';
 import profileReducer from './profile';
@@ -23,8 +23,7 @@ import lists from './lists/reducer';
 import burn from './burn/reducer';
 import multicall from './multicall/reducer';
 
-const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists', 'vault'];
-// const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];
+const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];
 
 const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
@@ -33,7 +32,7 @@ const store = configureStore({
     block: blockReducer,
     price: priceReducer,
     farms: farmsReducer,
-    vault: vault,
+    compounding: compoundingReducer,
     pools: poolsReducer,
     predictions: predictionsReducer,
     profile: profileReducer,

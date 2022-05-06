@@ -1,4 +1,4 @@
-import { Svg, SvgProps } from '@my/ui';
+import { Svg, SvgProps } from '@avault/ui';
 import React, { FC } from 'react';
 export enum ISortDir {
   'default',

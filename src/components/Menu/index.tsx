@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu as UikitMenu } from '@my/ui';
+import { Menu as UikitMenu } from '@avault/ui';
 import { languageList } from 'config/localization/languages';
 import { useTranslation } from 'contexts/Localization';
 import useTheme from 'hooks/useTheme';

@@ -1,14 +1,14 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
-import { LinkExternal } from '@my/ui';
+import { LinkExternal } from '@avault/ui';
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
 import { getAddress } from 'utils/addressHelpers';
 import { getBscScanLink } from 'utils';
 // import { CommunityTag, CoreTag, DualTag } from 'components/Tags';
 
-import HarvestAction from './HarvestAction_v2';
-import StakedAction from './StakedAction_v2';
+import HarvestAction from './HarvestAction';
+import StakedAction from './StakedAction';
 import { AprProps } from '../Apr';
 import { MultiplierProps } from '../Multiplier';
 import { LiquidityProps } from '../Liquidity';
@@ -16,7 +16,6 @@ import BigNumber from 'bignumber.js';
 import { BIG_ZERO } from 'utils/bigNumber';
 import { getBalanceAmount } from 'utils/formatBalance';
 import { getDisplayApr } from 'views/Farms/Farms';
-import { InfoContainer } from 'style/TableStyled';
 
 export interface ActionPanelProps {
   apr: AprProps;
@@ -95,12 +94,26 @@ const ActionContainer = styled.div`
   }
 `;
 
+const InfoContainer = styled.div`
+  display: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: end;
+  ${({ theme }) => theme.mediaQueries.md} {
+    align-items: start;
+    max-width: 300px;
+    min-width: 120px;
+    margin-right: 10%;
+  }
+`;
+
 const DetailContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   border-radius: ${({ theme }) => theme.radii.card};
   padding: 8px 16px;
-  margin-top: 12px;
+  margin-top: 14px;
   p {
     display: flex;
     justify-content: space-between;
@@ -114,8 +127,6 @@ const DetailContainer = styled.div`
     font-style: normal;
     color: ${({ theme }) => theme.colors.text};
     &.green {
-      font-size: 14px;
-      font-weight: 600;
       color: ${({ theme }) => theme.colors.success};
     }
   }

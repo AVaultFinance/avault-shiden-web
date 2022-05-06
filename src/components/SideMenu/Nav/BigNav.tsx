@@ -2,11 +2,10 @@ import React, { FC, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { IMenu } from '../config';
-import { Flex, useTooltip } from '@my/ui';
+import { Flex, useTooltip } from '@avault/ui';
 import CollapseSvg from '../imgs/collapse';
 import NftContent from './NftContent';
 import MoreContent from './MoreContent';
-import IconLink from 'components/svg/IconLink';
 const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
   const { pathname } = useLocation();
   const {
@@ -79,8 +78,6 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
                   ? item.link === '/swap'
                   : ['/nft/pools', '/nft/wallet/mint', '/nft/wallet/burn'].find((p) => pathname.startsWith(p))
                   ? item.link === '/nft/pools/'
-                  : ['/stake', '/unbind', '/unstake'].find((p) => pathname.startsWith(p))
-                  ? item.link === '/stake'
                   : pathname.startsWith(item.link)
               )
                 ? 't'
@@ -94,18 +91,7 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
         {/* <IconMoreStyle ref={MoreTargetRef}>
           <IconMore />
         </IconMoreStyle> */}
-        {/* <NavLinkA href="https://cbridge.celer.network/#/transfer" target="_blank" rel="noreferrer" title="">
-          Bridge
-          <IconLink />
-        </NavLinkA> */}
-        <NavLinkA href="https://portal.astar.network/#/balance/wallet" target="_blank" rel="noreferrer" title="">
-          Faucet
-          <IconLink />
-        </NavLinkA>
-        <NavLinkA href="https://co-go.gitbook.io/avault/" target="_blank" rel="noreferrer" title="">
-          Doc
-          <IconLink />
-        </NavLinkA>
+        {/* <NavLinkP ref={BorrowTargetRef}>Borrow</NavLinkP> */}
       </NavWrap>
     </>
   );
@@ -116,10 +102,10 @@ const NavWrap = styled(Flex)`
   justify-content: flex-start;
   a:hover {
     color: ${({ theme }) => theme.colors.text};
-    // svg {
-    //   fill: ${({ theme }) => theme.colors.text};
-    //   transform: scaleY(-1);
-    // }
+    svg {
+      fill: ${({ theme }) => theme.colors.text};
+      transform: scaleY(-1);
+    }
   }
 `;
 const NavLink = styled(Link)<{ active: 't' | 'f' }>`
@@ -135,31 +121,6 @@ const NavLink = styled(Link)<{ active: 't' | 'f' }>`
     width: 20px;
     fill: ${({ theme, active }) => (active === 't' ? theme.colors.text : theme.colors.textSubtle)};
     transform: ${({ active }) => (active === 't' ? '' : 'scaleY(-1)')};
-  }
-`;
-
-const NavLinkA = styled.a`
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.textSubtle};
-  height: 40px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  margin-right: 34px;
-  img {
-    width: 20px;
-  }
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.text};
-    svg {
-      fill: ${({ theme }) => theme.colors.text};
-      transform: scaleY(1);
-      path {
-        stroke: #fff;
-      }
-    }
   }
 `;
 

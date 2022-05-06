@@ -31,7 +31,7 @@
   "Coming Soon": "Coming Soon",
   "APY": "APY",
   "Total Liquidity": "Total Liquidity",
-  "View on Block browser": "View on Block browser",
+  "View on BscScan": "View on BscScan",
   "Kac price": "Kac price",
   "%asset% Tokens Earned": "%asset% Tokens Earned",
   "%num% blocks until farming ends": "%num% blocks until farming ends",
@@ -1049,6 +1049,7 @@
   "Auction duration": "Auction duration",
   "Terms & Conditions": "Terms & Conditions",
   "in Prizes!": "in Prizes!",
+
   "Output is estimated. If the price changes by more than %slippage%% your transaction will revert.": "Output is estimated. If the price changes by more than %slippage%% your transaction will revert.",
   "Supplying %amountA% %symbolA% and %amountB% %symbolB%": "Supplying %amountA% %symbolA% and %amountB% %symbolB%",
   "Removing %amountA% %symbolA% and %amountB% %symbolB%": "Removing %amountA% %symbolA% and %amountB% %symbolB%",

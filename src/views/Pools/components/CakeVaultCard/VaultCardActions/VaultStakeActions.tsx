@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Button, useModal, Skeleton } from '@my/ui';
+import { Flex, Button, useModal, Skeleton } from '@avault/ui';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'contexts/Localization';
 import { Pool } from 'state/types';

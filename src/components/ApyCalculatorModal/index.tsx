@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Modal, Text, LinkExternal, Flex, Box } from '@my/ui';
+import { Modal, Text, LinkExternal, Flex, Box } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
-import { tokenEarnedPerThousandDollarsVault, getRoi } from 'utils/compoundApyHelpers';
+import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers';
 
 interface ApyCalculatorModalProps {
   onDismiss?: () => void;
@@ -68,7 +68,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   const { t } = useTranslation();
   const oneThousandDollarsWorthOfToken = 1000 / tokenPrice;
 
-  const tokenEarnedPerThousand1D = tokenEarnedPerThousandDollarsVault({
+  const tokenEarnedPerThousand1D = tokenEarnedPerThousandDollarsCompounding({
     numberOfDays: 1,
     farmApr: apr,
     tokenPrice,
@@ -76,7 +76,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
     compoundFrequency,
     performanceFee,
   });
-  const tokenEarnedPerThousand7D = tokenEarnedPerThousandDollarsVault({
+  const tokenEarnedPerThousand7D = tokenEarnedPerThousandDollarsCompounding({
     numberOfDays: 7,
     farmApr: apr,
     tokenPrice,
@@ -84,7 +84,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
     compoundFrequency,
     performanceFee,
   });
-  const tokenEarnedPerThousand30D = tokenEarnedPerThousandDollarsVault({
+  const tokenEarnedPerThousand30D = tokenEarnedPerThousandDollarsCompounding({
     numberOfDays: 30,
     farmApr: apr,
     tokenPrice,
@@ -92,7 +92,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
     compoundFrequency,
     performanceFee,
   });
-  const tokenEarnedPerThousand365D = tokenEarnedPerThousandDollarsVault({
+  const tokenEarnedPerThousand365D = tokenEarnedPerThousandDollarsCompounding({
     numberOfDays: 365,
     farmApr: apr,
     tokenPrice,
@@ -217,7 +217,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
             </li>
             <li>
               <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline">
-                {t('Vault %freq%x daily.', { freq: compoundFrequency.toLocaleString() })}
+                {t('Compounding %freq%x daily.', { freq: compoundFrequency.toLocaleString() })}
               </Text>
             </li>
             {isFarm && (

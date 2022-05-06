@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, ETHER, JSBI, Pair, Percent, Price, TokenAmount } from '@my/sdk';
+import { Currency, CurrencyAmount, ETHER, JSBI, Pair, Percent, Price, TokenAmount } from '@avault/sdk';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
@@ -151,16 +151,14 @@ export function useDerivedMintInfo(
 
   // liquidity minted
   const liquidityMinted = useMemo(() => {
-    try {
-      const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts;
-      const [tokenAmountA, tokenAmountB] = [
-        wrappedCurrencyAmount(currencyAAmount, chainId),
-        wrappedCurrencyAmount(currencyBAmount, chainId),
-      ];
-      if (pair && totalSupply && tokenAmountA && tokenAmountB) {
-        return pair.getLiquidityMinted(totalSupply, tokenAmountA, tokenAmountB);
-      }
-    } catch (e) {}
+    const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts;
+    const [tokenAmountA, tokenAmountB] = [
+      wrappedCurrencyAmount(currencyAAmount, chainId),
+      wrappedCurrencyAmount(currencyBAmount, chainId),
+    ];
+    if (pair && totalSupply && tokenAmountA && tokenAmountB) {
+      return pair.getLiquidityMinted(totalSupply, tokenAmountA, tokenAmountB);
+    }
     return undefined;
   }, [parsedAmounts, chainId, pair, totalSupply]);
 

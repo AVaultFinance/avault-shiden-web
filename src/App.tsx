@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import { ResetCSS } from '@my/ui';
+import { ResetCSS } from '@avault/ui';
 import BigNumber from 'bignumber.js';
 // import { usePollBlockNumber } from 'state/block/hooks';
 // import { useFetchProfile } from 'state/profile/hooks';
@@ -11,20 +11,16 @@ import history from './routerHistory';
 import { PriceProvider } from './contexts/PriceProvider';
 import SideMenu from './components/SideMenu';
 import { usePollCoreFarmData } from 'state/farms/hooks';
-// import { usePollVaultData } from 'state/vault/hooks';
+import { usePollCompoundingData } from 'state/compounding/hooks';
 import { usePollBlockNumber } from 'state/block/hooks';
 import PageLoader from 'components/Loader/PageLoader';
 import Unbind from 'views/Stake/Unbind';
-import useEagerConnect from 'hooks/useEagerConnect';
-import { usePollVaultData } from 'state/vault/hooks';
 // import { useFetchProfile } from 'state/profile/hooks';
 // import { usePollCoreFarmData } from './state/farms/hooks';
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
-const Vault = lazy(() => import('./views/Vault/index'));
-const Zap = lazy(() => import('./views/Zap/index'));
-const Swap = lazy(() => import('./views/Swap'));
+const Compounding = lazy(() => import('./views/Compounding/index'));
 
 const Home = lazy(() => import('./views/Home'));
 const Farms = lazy(() => import('./views/Farms'));
@@ -40,10 +36,10 @@ BigNumber.config({
 
 const App: React.FC = () => {
   usePollBlockNumber();
-  useEagerConnect();
   // useFetchProfile();
   usePollCoreFarmData();
-  usePollVaultData();
+  // pool
+  usePollCompoundingData();
   return (
     <Router history={history}>
       <ResetCSS />
@@ -56,10 +52,7 @@ const App: React.FC = () => {
               <Home />
             </Route>
             <Route path="/vault">
-              <Vault />
-            </Route>
-            <Route path="/zap">
-              <Zap />
+              <Compounding />
             </Route>
             <Route path="/stake">
               <Stake />
@@ -73,7 +66,6 @@ const App: React.FC = () => {
             <Route path="/farms">
               <Farms />
             </Route>
-            <Route path="/swap" component={Swap} />
 
             {/* 404 */}
             <Route component={NotFound} />

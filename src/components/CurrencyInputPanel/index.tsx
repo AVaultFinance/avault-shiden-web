@@ -1,10 +1,10 @@
 import React from 'react';
-import { Currency, Pair } from '@my/sdk';
-import { Button, useModal, Flex } from '@my/ui';
+import { Currency, Pair } from '@avault/sdk';
+import { Button, useModal, Flex } from '@avault/ui';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { useCurrencyBalance } from 'state/wallet/hooks';
+import { useCurrencyBalance } from '../../state/wallet/hooks';
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal';
 import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo';
 import DropdownSvg from './dropdown.svg';
@@ -45,7 +45,7 @@ const InputPanel = styled.div<{ hideInput?: boolean; focused: boolean }>`
   color: ${({ theme }) => theme.colors.text};
   /* &:active {
     > .currency {
-      border: 2px solid #1476FF;
+      border: 2px solid #238485;
     }
   }
   &:focus {
@@ -56,7 +56,7 @@ const InputPanel = styled.div<{ hideInput?: boolean; focused: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    // border: ${(props) => (props.focused ? '2px solid #1476FF' : '')};
+    // border: ${(props) => (props.focused ? '2px solid #238485' : '')};
     height: 72px;
     padding: 8px;
     ${({ theme }) => theme.mediaQueries.sm} {
@@ -107,6 +107,7 @@ const InputPanel = styled.div<{ hideInput?: boolean; focused: boolean }>`
       }
       > button {
         font-size: 12px;
+        color: #00dbde;
       }
     }
     .token-amount-input {

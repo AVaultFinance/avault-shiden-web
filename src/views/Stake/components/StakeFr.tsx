@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading, Text } from '@my/ui';
+import { Heading, Text } from '@avault/ui';
 
 const StakeFr = () => {
   return (
@@ -9,7 +9,7 @@ const StakeFr = () => {
 
       <TextStyle>APR</TextStyle>
       <HeadingStyled>89%</HeadingStyled>
-      <TextBgStyled>1 AVAT=1.001256 aAVAT</TextBgStyled>
+      <TextBgStyled>1 AVA=1.001256 aAVA</TextBgStyled>
     </UnbindListStyled>
   );
 };
@@ -27,18 +27,14 @@ const UnbindListStyled = styled.div`
   margin-top: 12px;
   border: 1px solid #2e2d5b;
   overflow: hidden;
+  padding: 30px;
   width: 480px;
-  padding: 30px 30px 80px;
-  background-size: 150% 200%;
-  position: relative;
   ${({ theme }) => theme.mediaQueries.md} {
-    background-size: 150%;
     margin-left: 12px;
     margin-top: 0;
     width: 240px;
     background-size: 160%;
     background-position: -51px 173px;
-    padding: 30px;
   }
 `;
 const TextBgStyled = styled(Text)`
@@ -50,10 +46,8 @@ const TextBgStyled = styled(Text)`
   padding: 0 24px;
   height: 36px;
   line-height: 36px;
-  // margin-top: 120px;
+  margin-top: 120px;
   white-space: nowrap;
-  position: absolute;
-  bottom: 35px;
 `;
 const TextStyle = styled(Text)`
   color: ${({ theme }) => theme.colors.textSubtle};

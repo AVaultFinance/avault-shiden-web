@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js';
-import { DEFAULT_GAS_LIMIT, DEFAULT_GAS_PRICE, DEFAULT_TOKEN_DECIMAL } from 'config';
+import { DEFAULT_GAS_LIMIT, DEFAULT_TOKEN_DECIMAL } from 'config';
 
 const options = {
   gasLimit: DEFAULT_GAS_LIMIT,
-  gasPrice: DEFAULT_GAS_PRICE,
 };
 
 export const stakeFarm = async (masterChefContract, pid, amount) => {

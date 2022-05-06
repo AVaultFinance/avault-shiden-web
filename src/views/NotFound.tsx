@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '@my/ui';
+import { Button } from '@avault/ui';
 import Page from 'components/Layout/Page';
 import { useTranslation } from 'contexts/Localization';
 // import LogoMainSvg from 'components/svg/logo-main.svg';

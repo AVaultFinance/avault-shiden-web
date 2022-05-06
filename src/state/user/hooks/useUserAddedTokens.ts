@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Token } from '@my/sdk';
-import { ChainId } from '@my/sdk';
+import { Token } from '@avault/sdk';
+import { ChainId } from '@avault/sdk';
 import { useSelector } from 'react-redux';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import { AppState } from '../../index';

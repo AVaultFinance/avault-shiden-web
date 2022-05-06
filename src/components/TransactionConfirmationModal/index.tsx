@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
-import { Currency, Token, ChainId } from '@my/sdk';
+import { Currency, Token, ChainId } from '@avault/sdk';
 import styled from 'styled-components';
-import { Button, Text, ErrorIcon, Flex, Box, Modal, InjectedModalProps, MetamaskIcon } from '@my/ui';
+import { Button, Text, ErrorIcon, Flex, Box, Link, Modal, InjectedModalProps, MetamaskIcon } from '@avault/ui';
 import { registerToken } from 'utils/wallet';
 import { useTranslation } from 'contexts/Localization';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import { AutoColumn, ColumnCenter } from '../Layout/Column';
 import { RowFixed } from '../Layout/Row';
-import PageLoading from './PageLoading';
+import { getBscScanLink } from '../../utils';
+import Spinner from './Spinner';
 import IconSvg from '../svg/icon.svg';
 import { wrappedCurrency } from 'utils/wrappedCurrency';
 
@@ -23,7 +24,7 @@ function ConfirmationPendingContent({ pendingText }: { pendingText: string }) {
   return (
     <Wrapper>
       <ConfirmedIcon style={{ padding: '0px 0px 24px 0px' }}>
-        <PageLoading />
+        <Spinner />
       </ConfirmedIcon>
       <AutoColumn gap="12px" justify="center">
         <Text fontSize="12px" color="secondary">
@@ -77,11 +78,11 @@ function TransactionSubmittedContent({
       </ConfirmedIcon>
       <AutoColumn gap="12px" justify="center">
         <Text fontSize="14px">{t('Transaction Submitted')}</Text>
-        {/* {chainId && hash && (
+        {chainId && hash && (
           <Link external small href={getBscScanLink(hash, 'transaction', chainId)}>
-            View on Block browser
+            {t('View on BscScan')}
           </Link>
-        )} */}
+        )}
         {currencyToAdd && library?.provider?.isMetaMask && (
           <Button
             variant="tertiary"

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '@my/ui';
+import { Button } from '@avault/ui';
 
 interface PercentageButtonProps {
   onClick: () => void;

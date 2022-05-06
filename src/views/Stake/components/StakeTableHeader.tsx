@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Flex } from '@my/ui';
+import { Flex } from '@avault/ui';
 import { GetDAppApr } from '../hooks/getApr';
 import { IDappStakingInterface } from 'utils/types';
 import { IDappPoolDataInterface } from '../hooks/getPoolUpdate';
@@ -45,13 +45,13 @@ const StakeTableHeader: FC<Iprops> = ({ contract, pool }) => {
   const _apr = GetDAppApr(contract);
   return (
     <Header>
-      <Title>1 AVAT=1.001256 aAVAT</Title>
+      <Title>1 AVA=1.001256 aAVA</Title>
       <HeaderUl>
         <HeaderLi>
           <HeaderTitleH3>APR: {_apr}%</HeaderTitleH3>
         </HeaderLi>
         <HeaderLi>
-          <HeaderTitleH3>Staked: {pool.totalSupply} aAVAT</HeaderTitleH3>
+          <HeaderTitleH3>Staked: {pool.totalSupply} aAVA</HeaderTitleH3>
         </HeaderLi>
       </HeaderUl>
     </Header>

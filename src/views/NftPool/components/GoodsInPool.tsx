@@ -1,5 +1,5 @@
 import React, { KeyboardEvent, FC, useEffect, useMemo, useRef, useState } from 'react';
-import { Grid } from '@my/ui';
+import { Grid } from '@avault/ui';
 import styled from 'styled-components';
 import NftItem from './Nft';
 import { NftPairConfig, NftItemConfig } from 'config/constants/nft';
@@ -316,7 +316,7 @@ export const GoodsInPool = styled(Pools_)`
       min-width: 200px;
       list-style: none;
       color: #9da6a6;
-      border: 2px solid #1476ff;
+      border: 2px solid #238485;
       border-radius: 16px;
       line-height: 32px;
       font-size: 14px;
@@ -345,7 +345,7 @@ export const GoodsInPool = styled(Pools_)`
       width: 100%;
       list-style: none;
       color: #9da6a6;
-      border: 2px solid #1476ff;
+      border: 2px solid #238485;
       border-radius: 16px;
       line-height: 32px;
       font-size: 14px;

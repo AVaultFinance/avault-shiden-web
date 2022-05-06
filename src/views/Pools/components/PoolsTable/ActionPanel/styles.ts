@@ -4,6 +4,7 @@ export const ActionContainer = styled.div`
   padding: 13px 10px;
   // padding-left: 20px;
   border: 2px solid ${({ theme }) => theme.colors.input};
+  border-radius: 16px;
   flex-grow: 1;
   flex-basis: 0;
   margin-bottom: 16px;
@@ -34,7 +35,7 @@ export const ActionTitles = styled.div`
     line-height: 20px;
     margin-bottom: 6px;
     > span:first-child {
-      color: #1476ff;
+      color: #1bd3d5;
       margin-right: 6px;
     }
     > span:last-child {
@@ -43,7 +44,7 @@ export const ActionTitles = styled.div`
   }
   > .balance {
     font-weight: bold;
-    color: #1476ff;
+    color: #1bd3d5;
     display: flex;
     align-items: center;
   }

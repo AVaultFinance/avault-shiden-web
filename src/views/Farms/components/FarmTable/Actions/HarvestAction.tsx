@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex } from '@my/ui';
+import { Flex } from '@avault/ui';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
@@ -10,9 +10,8 @@ import { fetchFarmUserDataAsync } from 'state/farms';
 import useToast from 'hooks/useToast';
 import { useTranslation } from 'contexts/Localization';
 import useHarvestFarm from '../../../hooks/useHarvestFarm';
-import { ActionTitlesTitle, ActionTitlesBalance, LongButton, ActionContent } from './styles';
+import { ActionContainer, ActionContent, ActionTitlesTitle, ActionTitlesBalance, LongButton } from './styles';
 import styled from 'styled-components';
-import { ActionContainer } from 'style/TableStyled';
 
 interface HarvestActionProps extends FarmWithStakedValue {
   userDataReady: boolean;
@@ -62,7 +61,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
     <ActionContainer smallBorder={disabled ? false : true}>
       <FlexStyled>
         <RewardsTitleStyled disabled={disabled}>
-          <ActionTitlesTitle>{lpSymbol === 'AVAT' ? 'AVAT-ASTR LP' : 'AVAT'} Rewards</ActionTitlesTitle>
+          <ActionTitlesTitle>{lpSymbol === 'AVA' ? 'AVA-ASTR LP' : 'AVA'} Rewards</ActionTitlesTitle>
           <ActionTitlesBalance balance={(earnings || BIG_ZERO).toNumber()}>{displayBalance}</ActionTitlesBalance>
         </RewardsTitleStyled>
         <ActionContentStyled disabled={disabled}>

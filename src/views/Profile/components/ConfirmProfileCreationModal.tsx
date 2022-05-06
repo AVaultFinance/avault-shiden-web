@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Flex, Text } from '@my/ui';
+import { Modal, Flex, Text } from '@avault/ui';
 import { useAppDispatch } from 'state';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'contexts/Localization';

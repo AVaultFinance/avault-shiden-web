@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Text } from '@my/ui';
+import { Heading, Text } from '@avault/ui';
 import { useTranslation } from 'contexts/Localization';
 import ConnectWalletButton from 'components/ConnectWalletButton';
 
