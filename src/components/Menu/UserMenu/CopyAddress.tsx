@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, CopyIcon, Flex, FlexProps, IconButton } from '@avault/ui';
+import { Box, CopyIcon, Flex, FlexProps, IconButton } from '@my/ui';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
 

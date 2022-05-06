@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '@avault/ui';
+import { Text } from '@my/ui';
 import getTimePeriods from 'utils/getTimePeriods';
 import { useTranslation } from 'contexts/Localization';
 

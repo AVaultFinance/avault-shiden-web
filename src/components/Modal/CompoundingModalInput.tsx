@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button, Flex } from '@avault/ui';
+import { Input, Button, Flex } from '@my/ui';
 
 interface ModalInputProps {
   onSelectMax?: () => void;

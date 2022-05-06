@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, Flex, Button, BalanceInput, AutoRenewIcon } from '@avault/ui';
+import { Text, Flex, Button, BalanceInput, AutoRenewIcon } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import { useWeb3React } from '@web3-react/core';
 import { useAppDispatch } from 'state';

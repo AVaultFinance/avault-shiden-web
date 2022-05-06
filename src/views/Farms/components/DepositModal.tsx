@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Modal, useMatchBreakpoints } from '@avault/ui';
+import { Button, Modal, useMatchBreakpoints } from '@my/ui';
 import { FarmModalInput } from 'components/Modal';
 import { useTranslation } from 'contexts/Localization';
 import { getFullDisplayBalance } from 'utils/formatBalance';

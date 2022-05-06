@@ -1,4 +1,4 @@
-import { Flex, Text } from '@avault/ui';
+import { Flex, Text } from '@my/ui';
 import styled from 'styled-components';
 
 const BaseCell = styled.div`

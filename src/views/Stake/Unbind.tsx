@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from '@avault/ui';
+import { Button } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import useToast from 'hooks/useToast';
 import { InputWrap, StyledTokenInputTop, StyledInput, PageContainerWrap } from './style/DappstakeStyle';

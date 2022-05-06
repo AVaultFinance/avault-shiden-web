@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Radio } from '@avault/ui';
+import { Card, Radio } from '@my/ui';
 
 interface SelectionCardProps {
   name: string;

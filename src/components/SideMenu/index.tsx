@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useMatchBreakpoints } from '@avault/ui';
+import { useMatchBreakpoints } from '@my/ui';
 import Header from './Header';
 const Wrapper = styled.div<{ collapsed: boolean }>`
   flex: 1;

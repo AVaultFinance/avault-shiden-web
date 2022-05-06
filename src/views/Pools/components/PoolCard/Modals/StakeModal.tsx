@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Text, Flex, Button, BalanceInput, AutoRenewIcon, Link } from '@avault/ui';
+import { Text, Flex, Button, BalanceInput, AutoRenewIcon, Link } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';
 import BigNumber from 'bignumber.js';

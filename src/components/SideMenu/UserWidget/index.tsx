@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text, useMatchBreakpoints } from '@avault/ui';
+import { Flex, Text, useMatchBreakpoints } from '@my/ui';
 import WalletAccountInfo from './WalletAccount';
 import { useCompoundingAllTotal } from 'state/compounding/hooks';
 const TextLinerStyle = styled(Text)`

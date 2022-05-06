@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // import { useTranslation } from 'contexts/Localization';
-// import { Text } from '@avault/ui';
+// import { Text } from '@my/ui';
 // import { getBalanceNumber } from 'utils/formatBalance';
 import { TokenPairImage } from 'components/TokenImage';
 import { getImageUrlFromToken } from 'utils';

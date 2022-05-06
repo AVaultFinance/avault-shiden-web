@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BigNumber from 'bignumber.js';
-import { Text, useMatchBreakpoints } from '@avault/ui';
+import { Text, useMatchBreakpoints } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import { useCakeVault } from 'state/pools/hooks';
 import { Pool } from 'state/types';

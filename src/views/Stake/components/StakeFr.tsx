@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading, Text } from '@avault/ui';
+import { Heading, Text } from '@my/ui';
 
 const StakeFr = () => {
   return (

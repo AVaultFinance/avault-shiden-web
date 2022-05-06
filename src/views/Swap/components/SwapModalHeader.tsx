@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { Trade, TradeType } from '@avault/sdk';
-import { Button, Text, ErrorIcon } from '@avault/ui';
+import { Trade, TradeType } from '@my/sdk';
+import { Button, Text, ErrorIcon } from '@my/ui';
 import { Field } from 'state/swap/actions';
 import { isAddress, shortenAddress } from 'utils';
 import { computeSlippageAdjustedAmounts } from 'utils/prices';

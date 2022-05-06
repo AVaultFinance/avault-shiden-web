@@ -1,6 +1,6 @@
 import React, { FC, useContext, useMemo } from 'react';
 import styled from 'styled-components';
-import { Button, Text } from '@avault/ui';
+import { Button, Text } from '@my/ui';
 import { NftContext } from '../providers/nft.provider';
 import LockSvg from '../img/lock.svg';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';

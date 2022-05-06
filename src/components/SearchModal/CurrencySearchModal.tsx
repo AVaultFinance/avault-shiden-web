@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Currency, Token } from '@avault/sdk';
+import { Currency, Token } from '@my/sdk';
 import {
   ModalContainer,
   ModalHeader,
@@ -10,7 +10,7 @@ import {
   InjectedModalProps,
   Heading,
   Button,
-} from '@avault/ui';
+} from '@my/ui';
 import styled from 'styled-components';
 import usePrevious from 'hooks/usePreviousValue';
 import { TokenList } from '@uniswap/token-lists';

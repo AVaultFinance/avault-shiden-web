@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { Text, Flex } from '@avault/ui';
+import { Text, Flex } from '@my/ui';
 
 // import LogoSvg from '../svg/demo.svg';
 import { RowBetween } from '../../../components/Layout/Row';

@@ -10,7 +10,7 @@ import masterchefSdnABI from 'config/abi/masterchef_Shiden.json';
 
 import { useEffect, useState } from 'react';
 import { chainKey } from 'config';
-import { CHAINKEY } from '@avault/sdk';
+import { CHAINKEY } from '@my/sdk';
 
 const base = BIG_TEN.pow(new RealBigNumber(18));
 

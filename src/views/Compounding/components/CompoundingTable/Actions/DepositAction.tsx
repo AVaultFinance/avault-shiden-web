@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Flex, Text } from '@avault/ui';
+import { Flex, Text } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { BIG_ZERO } from 'utils/bigNumber';

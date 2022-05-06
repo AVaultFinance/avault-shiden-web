@@ -1,4 +1,4 @@
-import { ChainId, CHAINKEY, Token } from '@avault/sdk';
+import { ChainId, CHAINKEY, Token } from '@my/sdk';
 import { BASE_BSC_SCAN_URL, chainKey } from 'config';
 
 export const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10);

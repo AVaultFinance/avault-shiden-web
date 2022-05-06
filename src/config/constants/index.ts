@@ -1,4 +1,4 @@
-import { JSBI, Percent, Token, ChainId } from '@avault/sdk';
+import { JSBI, Percent, Token, ChainId } from '@my/sdk';
 import {
   BUSD,
   DAI,

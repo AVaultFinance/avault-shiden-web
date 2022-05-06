@@ -1,5 +1,5 @@
-import { Currency, ETHER, Token } from '@avault/sdk';
-import { BinanceIcon } from '@avault/ui';
+import { Currency, ETHER, Token } from '@my/sdk';
+import { BinanceIcon } from '@my/ui';
 import { BASE_URL } from 'config';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';

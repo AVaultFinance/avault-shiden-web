@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { useTooltip, Flex, CloseIcon } from '@avault/ui';
+import { useTooltip, Flex, CloseIcon } from '@my/ui';
 import { IMenu } from '../config';
 import CollapseSvg from '../imgs/collapse';
 import IconMenu from '../imgs/iconMenu';

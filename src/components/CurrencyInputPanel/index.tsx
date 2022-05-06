@@ -1,6 +1,6 @@
 import React from 'react';
-import { Currency, Pair } from '@avault/sdk';
-import { Button, useModal, Flex } from '@avault/ui';
+import { Currency, Pair } from '@my/sdk';
+import { Button, useModal, Flex } from '@my/ui';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';

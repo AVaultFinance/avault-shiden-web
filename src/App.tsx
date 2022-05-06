@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import { ResetCSS } from '@avault/ui';
+import { ResetCSS } from '@my/ui';
 import BigNumber from 'bignumber.js';
 // import { usePollBlockNumber } from 'state/block/hooks';
 // import { useFetchProfile } from 'state/profile/hooks';

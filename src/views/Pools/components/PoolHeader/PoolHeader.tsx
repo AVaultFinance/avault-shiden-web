@@ -1,4 +1,4 @@
-import { Text, Flex } from '@avault/ui';
+import { Text, Flex } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import React from 'react';
 import styled from 'styled-components';

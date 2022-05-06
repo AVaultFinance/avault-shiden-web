@@ -1,7 +1,7 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
 import { getFullDisplayBalance } from 'utils/formatBalance';
-import { Text } from '@avault/ui';
+import { Text } from '@my/ui';
 import styled from 'styled-components';
 import { MaxButton } from '../style/DappstakeStyle';
 const TextStyle = styled(Text)`

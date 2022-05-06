@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
-import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@avault/sdk';
-import { Button, Text, Flex, AddIcon, CardBody, useModal, useMatchBreakpoints } from '@avault/ui';
+import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@my/sdk';
+import { Button, Text, Flex, AddIcon, CardBody, useModal, useMatchBreakpoints } from '@my/ui';
 import { RouteComponentProps } from 'react-router-dom';
 import { useIsTransactionUnsupported } from 'hooks/Trades';
 import { useTranslation } from 'contexts/Localization';

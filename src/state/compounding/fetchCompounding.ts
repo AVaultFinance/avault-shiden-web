@@ -8,7 +8,7 @@ import AVaultPCS_ABI from 'config/abi/AVaultPCS_ABI.json';
 import erc20 from 'config/abi/erc20.json';
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber';
 import { chainKey } from 'config';
-import { CHAINKEY } from '@avault/sdk';
+import { CHAINKEY } from '@my/sdk';
 import BigNumber from 'bignumber.js';
 import { getBalanceAmount } from 'utils/formatBalance';
 

@@ -1,6 +1,6 @@
-import { Currency, Percent, Price } from '@avault/sdk';
+import { Currency, Percent, Price } from '@my/sdk';
 import React from 'react';
-import { Text } from '@avault/ui';
+import { Text } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import { AutoColumn } from '../../components/Layout/Column';
 import { AutoRow } from '../../components/Layout/Row';

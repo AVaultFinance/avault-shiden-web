@@ -1,5 +1,5 @@
 import React, { KeyboardEvent, FC, useEffect, useMemo, useRef, useState } from 'react';
-import { Grid } from '@avault/ui';
+import { Grid } from '@my/ui';
 import styled from 'styled-components';
 import NftItem from './Nft';
 import { NftPairConfig, NftItemConfig } from 'config/constants/nft';

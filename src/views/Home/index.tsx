@@ -1,4 +1,4 @@
-// import { Button } from '@avault/ui';
+// import { Button } from '@my/ui';
 import styled, { keyframes } from 'styled-components';
 const _Link = [
   { name: 'Discord', link: 'https://discord.gg/WcARFMy2t8' },

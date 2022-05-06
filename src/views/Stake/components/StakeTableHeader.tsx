@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Flex } from '@avault/ui';
+import { Flex } from '@my/ui';
 import { GetDAppApr } from '../hooks/getApr';
 import { IDappStakingInterface } from 'utils/types';
 import { IDappPoolDataInterface } from '../hooks/getPoolUpdate';

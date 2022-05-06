@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { ButtonMenu, ButtonMenuItem } from '@avault/ui';
+import { ButtonMenu, ButtonMenuItem } from '@my/ui';
 import useTheme from 'hooks/useTheme';
 
 const StyledNav = styled.nav`

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserWidget from './UserWidget';
 import Logo from './Logo';
 import Nav from './Nav';
-import { Flex } from '@avault/ui';
+import { Flex } from '@my/ui';
 const Header: FC<{ className?: string; setCollapsed: (collapsed: boolean) => void; collapsed: boolean }> = ({
   className,
   setCollapsed,

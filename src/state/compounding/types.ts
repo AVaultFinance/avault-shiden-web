@@ -1,4 +1,4 @@
-import { ChainId } from '@avault/sdk';
+import { ChainId } from '@my/sdk';
 import BigNumber from 'bignumber.js';
 export enum IFarmProject {
   kaco = 'Kacoswap',

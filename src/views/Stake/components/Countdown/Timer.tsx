@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Heading } from '@avault/ui';
+import { Flex, Heading } from '@my/ui';
 
 export interface TimerProps {
   minutes?: number;

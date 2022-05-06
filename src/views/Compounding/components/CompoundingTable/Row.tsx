@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Text, useMatchBreakpoints } from '@avault/ui';
+import { Text, useMatchBreakpoints } from '@my/ui';
 import useDelayedUnmount from 'hooks/useDelayedUnmount';
 import Apr, { AprProps } from './Apr';
 import Earned, { EarnedProps } from './Earned';

@@ -3,7 +3,7 @@ import { setPrice } from '.';
 import { State } from '../types';
 import { useCurrency } from 'hooks/Tokens';
 import { tryParseAmount } from 'state/swap/hooks';
-import { Currency, CurrencyAmount } from '@avault/sdk';
+import { Currency, CurrencyAmount } from '@my/sdk';
 import { BUSD, chainId } from 'config/constants/tokens';
 
 import { useAppDispatch } from 'state';

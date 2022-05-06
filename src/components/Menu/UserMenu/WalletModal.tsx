@@ -10,7 +10,7 @@ import {
   ModalContainer,
   ModalHeader as UIKitModalHeader,
   ModalTitle,
-} from '@avault/ui';
+} from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'contexts/Localization';
 import styled from 'styled-components';

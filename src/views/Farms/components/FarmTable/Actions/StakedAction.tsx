@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useModal, Text, Flex, connectorLocalStorageKey, ConnectorNames, MinusBtnIcon, AddBtnIcon } from '@avault/ui';
+import { useModal, Text, Flex, connectorLocalStorageKey, ConnectorNames, MinusBtnIcon, AddBtnIcon } from '@my/ui';
 import { useLocation } from 'react-router-dom';
 import { BigNumber } from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';

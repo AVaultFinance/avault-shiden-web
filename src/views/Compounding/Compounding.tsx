@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useMemo, useRef } from 'react';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
-import { RowType } from '@avault/ui';
+import { RowType } from '@my/ui';
 import Page from 'components/Layout/Page';
 import { usePriceCakeBusd } from 'state/farms/hooks';
 import { getBalanceNumber } from 'utils/formatBalance';

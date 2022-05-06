@@ -5,7 +5,7 @@ import multicall from 'utils/multicall';
 import masterchefABI from 'config/abi/masterchef.json';
 import masterchefSdnABI from 'config/abi/masterchef_Shiden.json';
 import { chainKey } from 'config';
-import { CHAINKEY } from '@avault/sdk';
+import { CHAINKEY } from '@my/sdk';
 import { chainId } from 'config/constants/tokens';
 import AVaultPCS_ABI from 'config/abi/AVaultPCS_ABI.json';
 

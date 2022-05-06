@@ -2,7 +2,7 @@ import React, { FC, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { IMenu } from '../config';
-import { Flex, useTooltip } from '@avault/ui';
+import { Flex, useTooltip } from '@my/ui';
 import CollapseSvg from '../imgs/collapse';
 import NftContent from './NftContent';
 import MoreContent from './MoreContent';

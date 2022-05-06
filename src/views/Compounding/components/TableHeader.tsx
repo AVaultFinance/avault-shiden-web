@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useMatchBreakpoints, Flex } from '@avault/ui';
+import { useMatchBreakpoints, Flex } from '@my/ui';
 import { TableHeaderStyled } from './CompoundingTable/CompoundingTable';
 import styled from 'styled-components';
 import { OptionProps } from 'components/Select/Select';

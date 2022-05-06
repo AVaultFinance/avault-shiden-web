@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoProfileAvatarIcon } from '@avault/ui';
+import { NoProfileAvatarIcon } from '@my/ui';
 import { Profile } from 'state/types';
 import styled from 'styled-components';
 

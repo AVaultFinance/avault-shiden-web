@@ -1,6 +1,6 @@
 {
-  "short_name": "Avault",
-  "name": "Avault",
+  "short_name": "AvaultSwap",
+  "name": "AvaultSwap",
   "description": "Farm avault with Avault LP Tokens",
   "homepage_url": "https://www.avault.finance",
   "start_url": ".",
@@ -10,7 +10,7 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "favicon_beta.svg",
+      "src": "favicon.svg",
       "type": "image/svg",
       "sizes": "32x32"
     },

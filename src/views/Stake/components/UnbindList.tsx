@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Button, Heading, Text } from '@avault/ui';
+import { Button, Heading, Text } from '@my/ui';
 import NoList from './NoList';
 import Countdown from './Countdown';
 import { IWithdrawRecordItem } from 'utils/types';

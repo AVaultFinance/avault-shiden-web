@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card } from '@avault/ui';
+import { Card } from '@my/ui';
 
 export const StyledCard = styled(Card)<{ isFinished?: boolean }>`
   max-width: 352px;

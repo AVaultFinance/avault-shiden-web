@@ -1,5 +1,5 @@
 import React from 'react';
-import { TokenPairImage, ImageProps } from '@avault/ui';
+import { TokenPairImage, ImageProps } from '@my/ui';
 import { Kaco } from 'config/constants/tokens';
 import { getAddress } from 'utils/addressHelpers';
 import { chainKey } from 'config';

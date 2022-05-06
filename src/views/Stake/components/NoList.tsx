@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Text } from '@avault/ui';
+import { Text } from '@my/ui';
 import NoHavePng from './nohave.png';
 
 const NoList: FC<{ className?: string }> = ({ className }) => {

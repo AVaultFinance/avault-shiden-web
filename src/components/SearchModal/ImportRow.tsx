@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
-import { Token } from '@avault/sdk';
-import { Button, Text, CheckmarkCircleIcon } from '@avault/ui';
+import { Token } from '@my/sdk';
+import { Button, Text, CheckmarkCircleIcon } from '@my/ui';
 import { AutoRow, RowFixed } from 'components/Layout/Row';
 import { AutoColumn } from 'components/Layout/Column';
 import CurrencyLogo from 'components/Logo/CurrencyLogo';

@@ -1,4 +1,4 @@
-import { Button, Flex, useModal } from '@avault/ui';
+import { Button, Flex, useModal } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { FC } from 'react';
 import { useAppDispatch } from 'state';

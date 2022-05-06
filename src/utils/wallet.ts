@@ -1,6 +1,6 @@
 // Set of helper functions to facilitate wallet setup
 
-import { ChainId } from '@avault/sdk';
+import { ChainId } from '@my/sdk';
 import { BASE_BSC_SCAN_URL, BASE_URL, chainKey } from 'config';
 import { chainId } from 'config/constants/tokens';
 

@@ -1,6 +1,6 @@
 import React, { KeyboardEvent, RefObject, useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { Currency, ETHER, Token } from '@avault/sdk';
-import { Text, Input, Box } from '@avault/ui';
+import { Currency, ETHER, Token } from '@my/sdk';
+import { Text, Input, Box } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import { FixedSizeList } from 'react-window';
 import { useAudioModeManager } from 'state/user/hooks';

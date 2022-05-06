@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
-import { connectorLocalStorageKey, ConnectorNames, Flex, LinkExternal, useMatchBreakpoints } from '@avault/ui';
+import { connectorLocalStorageKey, ConnectorNames, Flex, LinkExternal, useMatchBreakpoints } from '@my/ui';
 import { getAddress } from 'utils/addressHelpers';
 import DepositAction from './DepositAction';
 import WithdrawAction from './WithdrawAction';

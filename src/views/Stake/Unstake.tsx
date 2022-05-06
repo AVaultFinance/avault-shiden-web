@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from '@avault/ui';
+import { Button } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { InputWrap, StyledTokenInputTop, StyledInput, PageContainerWrap } from './style/DappstakeStyle';
 import Balance from './components/StakeTableBalance';

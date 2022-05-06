@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { Currency, Token, ChainId } from '@avault/sdk';
+import { Currency, Token, ChainId } from '@my/sdk';
 import styled from 'styled-components';
-import { Button, Text, ErrorIcon, Flex, Box, Link, Modal, InjectedModalProps, MetamaskIcon } from '@avault/ui';
+import { Button, Text, ErrorIcon, Flex, Box, Link, Modal, InjectedModalProps, MetamaskIcon } from '@my/ui';
 import { registerToken } from 'utils/wallet';
 import { useTranslation } from 'contexts/Localization';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';

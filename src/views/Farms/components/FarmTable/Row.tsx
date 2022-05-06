@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
-import { useMatchBreakpoints } from '@avault/ui';
+import { useMatchBreakpoints } from '@my/ui';
 import useDelayedUnmount from 'hooks/useDelayedUnmount';
 import { useFarmUser } from 'state/farms/hooks';
 

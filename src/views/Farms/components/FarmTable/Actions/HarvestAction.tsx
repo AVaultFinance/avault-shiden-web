@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex } from '@avault/ui';
+import { Flex } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';

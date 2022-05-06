@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Skeleton } from '@avault/ui';
+import { Skeleton } from '@my/ui';
 
 export interface EarnedProps {
   earnings: number;

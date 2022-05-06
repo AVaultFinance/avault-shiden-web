@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import { currencyEquals, Trade } from '@avault/sdk';
-import { InjectedModalProps } from '@avault/ui';
+import { currencyEquals, Trade } from '@my/sdk';
+import { InjectedModalProps } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import TransactionConfirmationModal, {
   ConfirmationModalContent,

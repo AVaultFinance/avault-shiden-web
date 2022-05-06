@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Button, Text } from '@avault/ui';
+import { Button, Text } from '@my/ui';
 import NoHavePng from '../img/nohave.png';
 import { Link } from 'react-router-dom';
 

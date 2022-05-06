@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
-import { ArrowDropDownIcon, Text } from '@avault/ui';
+import { ArrowDropDownIcon, Text } from '@my/ui';
 
 const DropDownHeader = styled.div`
   width: 100%;

@@ -1,4 +1,4 @@
-import { ChainId, CHAINKEY } from '@avault/sdk';
+import { ChainId, CHAINKEY } from '@my/sdk';
 import { chainKey } from 'config';
 import { IFarmProject, IABIType, ICompoundingConfigItem } from 'state/compounding/types';
 const compounding: ICompoundingConfigItem[] =

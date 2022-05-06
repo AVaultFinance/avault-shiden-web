@@ -1,4 +1,4 @@
-import { ChainId, CHAINKEY } from '@avault/sdk';
+import { ChainId, CHAINKEY } from '@my/sdk';
 import tokens, { chainId, DOT, main_tokens } from './tokens';
 import { chainKey } from 'config';
 import { FarmConfig } from './types';

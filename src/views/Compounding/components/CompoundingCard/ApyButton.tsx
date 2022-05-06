@@ -1,6 +1,6 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
-import { IconButton, useModal, CalculateIcon } from '@avault/ui';
+import { IconButton, useModal, CalculateIcon } from '@my/ui';
 import ApyCalculatorModal from 'components/ApyCalculatorModal';
 import { useTranslation } from 'contexts/Localization';
 

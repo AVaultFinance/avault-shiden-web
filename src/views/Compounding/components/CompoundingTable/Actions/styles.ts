@@ -1,4 +1,4 @@
-import { Button, Text } from '@avault/ui';
+import { Button, Text } from '@my/ui';
 import styled from 'styled-components';
 
 export const ActionContainer = styled.div<{ smallBorder: boolean }>`

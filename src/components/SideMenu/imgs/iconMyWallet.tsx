@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgProps } from '@avault/ui';
+import { SvgProps } from '@my/ui';
 
 const IconMyWallet: React.FC<SvgProps> = () => {
   return (

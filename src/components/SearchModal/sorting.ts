@@ -1,4 +1,4 @@
-import { Token, TokenAmount } from '@avault/sdk';
+import { Token, TokenAmount } from '@my/sdk';
 import { useMemo } from 'react';
 import { useAllTokenBalances } from '../../state/wallet/hooks';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Token, Currency } from '@avault/sdk';
-import { Button, Text, ErrorIcon, Flex, Message, Checkbox, Link, Tag, Grid } from '@avault/ui';
+import { Token, Currency } from '@my/sdk';
+import { Button, Text, ErrorIcon, Flex, Message, Checkbox, Link, Tag, Grid } from '@my/ui';
 import { AutoColumn } from 'components/Layout/Column';
 import { useAddUserToken } from 'state/user/hooks';
 import { getBscScanLink } from 'utils';

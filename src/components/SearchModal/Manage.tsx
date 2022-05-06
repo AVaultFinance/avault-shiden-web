@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Token } from '@avault/sdk';
-import { ButtonMenu, ButtonMenuItem, ModalBody } from '@avault/ui';
+import { Token } from '@my/sdk';
+import { ButtonMenu, ButtonMenuItem, ModalBody } from '@my/ui';
 import styled from 'styled-components';
 import { TokenList } from '@uniswap/token-lists';
 import { useTranslation } from 'contexts/Localization';

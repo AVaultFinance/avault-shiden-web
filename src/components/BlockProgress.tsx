@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress, ProgressProps } from '@avault/ui';
+import { Progress, ProgressProps } from '@my/ui';
 import { useBlock } from 'state/block/hooks';
 
 interface BlockProgressProps extends ProgressProps {

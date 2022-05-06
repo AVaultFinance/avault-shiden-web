@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgProps } from '@avault/ui';
+import { SvgProps } from '@my/ui';
 
 const Collapse: React.FC<SvgProps> = () => {
   return (
