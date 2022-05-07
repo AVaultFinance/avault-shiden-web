@@ -27,6 +27,7 @@ import { InfoContainer } from 'style/TableStyled';
 import { showDecimals } from 'views/Vault/utils';
 import AddLiquidityModal from '../modal/AddLiquidityModal';
 import RemoveLiquidityModal from '../modal/RemoveLiquidityModal';
+import { getBscScanLink } from 'utils';
 // import { registerToken } from 'utils/wallet';
 export interface ActionPanelProps {
   apr: AprProps;
@@ -291,7 +292,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
         >
           Remove Liquidity
         </StyledLinkExternal>
-        <StyledLinkExternal href={`${BASE_BSC_SCAN_URL}/address/${vault.contractAddress[chainId]}`}>
+        <StyledLinkExternal href={`${getBscScanLink(vault.contractAddress[chainId], 'token')}`}>
           {t('View Contract')}
         </StyledLinkExternal>
         {/* 
@@ -346,7 +347,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           <StyledLinkExternal hideIcon={true} onClick={onRemoveLiquidity}>
             Remove Liquidity
           </StyledLinkExternal>
-          <StyledLinkExternal href={`${BASE_BSC_SCAN_URL}/address/${vault.contractAddress[chainId]}`}>
+          <StyledLinkExternal href={`${getBscScanLink(vault.contractAddress[chainId], 'token')}`}>
             View Contract
           </StyledLinkExternal>
         </InfoContainerSmall>

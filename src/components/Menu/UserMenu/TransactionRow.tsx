@@ -52,7 +52,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({ txn }) => {
   }
 
   return (
-    <TxnLink href={getBscScanLink(txn.hash, 'transaction', chainId)} external>
+    <TxnLink href={getBscScanLink(txn.hash, 'transaction')} external>
       <TxnIcon>{renderIcon(txn)}</TxnIcon>
       <Summary>{txn.summary ?? txn.hash}</Summary>
       <TxnIcon>

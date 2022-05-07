@@ -15,7 +15,7 @@ export const BASE_BSC_SCAN_URLS = {
   [ChainId.ASTR_MAINNET]: 'https://blockscout.com/astar',
   [ChainId.ASTR_TESTNET]: 'https://blockscout.com/shibuya',
 
-  [ChainId.SDN_MAINNET]: 'https://blockscout.com/shiden',
+  [ChainId.SDN_MAINNET]: 'https://shiden.subscan.io',
   [ChainId.SDN_TESTNET]: 'https://blockscout.com/shibuya',
 
   [ChainId.BSC_MAINNET]: 'https://bscscan.com',

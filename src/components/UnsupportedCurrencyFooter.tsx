@@ -50,7 +50,7 @@ const UnsupportedModal: React.FC<Props> = ({ currencies, onDismiss }) => {
                   <Text>{token.symbol}</Text>
                 </AutoRow>
                 {chainId && (
-                  <Link external small color="primaryDark" href={getBscScanLink(token.address, 'address', chainId)}>
+                  <Link external small color="primaryDark" href={getBscScanLink(token.address, 'address')}>
                     {token.address}
                   </Link>
                 )}
