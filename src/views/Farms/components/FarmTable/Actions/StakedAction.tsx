@@ -147,7 +147,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
     );
   }
 
-  if (!isApproved && userDataReady) {
+  if (!isApproved && account && userDataReady) {
     return (
       <ActionContainer smallBorder={false}>
         <TextTop>
