@@ -101,14 +101,8 @@ export const farmsSlice = createSlice({
         return { ...farm, ...liveFarmData };
       });
       let _total = BIG_ZERO;
-      const arr = [];
       for (let i = 0; i < state.data.length; i++) {
         const farm = state.data[i];
-        // const liveFarmData = action.payload.find((farmData) => farmData.pid === farm.pid);
-        // arr.push({
-        //   ...farm,
-        //   ...liveFarmData,
-        // });
         if (farm.liquidity && Number(farm.liquidity) !== 0) {
           _total = _total.plus(new BigNumber(farm.liquidity));
         }
