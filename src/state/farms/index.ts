@@ -11,6 +11,8 @@ import {
   fetchFarmUserStakedBalances,
 } from './fetchFarmUser';
 import { FarmsState, Farm } from '../types';
+import { BIG_ZERO } from 'utils/bigNumber';
+import BigNumber from 'bignumber.js';
 
 const noAccountFarmConfig = farmsConfig.map((farm) => ({
   ...farm,
@@ -22,7 +24,12 @@ const noAccountFarmConfig = farmsConfig.map((farm) => ({
   },
 }));
 
-const initialState: FarmsState = { data: noAccountFarmConfig, loadArchivedFarmsData: false, userDataLoaded: false };
+const initialState: FarmsState = {
+  data: noAccountFarmConfig,
+  loadArchivedFarmsData: false,
+  userDataLoaded: false,
+  allLiquidity: '0',
+};
 
 export const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid));
 
@@ -36,17 +43,14 @@ export const fetchFarmsPublicDataAsync = createAsyncThunk<
 
   // Add price helper farms
   const farmsWithPriceHelpers = farmsToFetch.concat([]);
-  // console.log('farmsWithPriceHelpers------------', farmsWithPriceHelpers);
 
-  const farms = await fetchFarms(farmsWithPriceHelpers);
+  const farms = await fetchFarms(farmsWithPriceHelpers, priceVsBusdMap);
   const farmsWithPrices = await fetchFarmsPrices(farms, priceVsBusdMap);
   // Filter out price helper LP config farms
-  // console.log('farmsWithPrices', pids, farmsWithPrices);
 
   const farmsWithoutHelperLps = farmsWithPrices.filter((farm: Farm) => {
     return farm.pid || farm.pid === 0;
   });
-
   return farmsWithoutHelperLps;
 });
 
@@ -93,8 +97,26 @@ export const farmsSlice = createSlice({
     builder.addCase(fetchFarmsPublicDataAsync.fulfilled, (state, action) => {
       state.data = state.data.map((farm) => {
         const liveFarmData = action.payload.find((farmData) => farmData.pid === farm.pid);
+
         return { ...farm, ...liveFarmData };
       });
+      let _total = BIG_ZERO;
+      const arr = [];
+      for (let i = 0; i < state.data.length; i++) {
+        const farm = state.data[i];
+        // const liveFarmData = action.payload.find((farmData) => farmData.pid === farm.pid);
+        // arr.push({
+        //   ...farm,
+        //   ...liveFarmData,
+        // });
+        if (farm.liquidity && Number(farm.liquidity) !== 0) {
+          _total = _total.plus(new BigNumber(farm.liquidity));
+        }
+      }
+      if (_total.toNumber() !== 0) {
+        state.allLiquidity = _total.toFixed(8);
+      }
+      // state.data = arr;
     });
 
     // Update farms with user data

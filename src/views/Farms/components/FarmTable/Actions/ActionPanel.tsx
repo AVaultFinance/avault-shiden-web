@@ -2,13 +2,12 @@ import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
 import { LinkExternal } from '@my/ui';
-import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
 import { getAddress } from 'utils/addressHelpers';
 import { getBscScanLink } from 'utils';
 // import { CommunityTag, CoreTag, DualTag } from 'components/Tags';
 
-import HarvestAction from './HarvestAction_v2';
-import StakedAction from './StakedAction_v2';
+import HarvestAction from './HarvestAction';
+import StakedAction from './StakedAction';
 import { AprProps } from '../Apr';
 import { MultiplierProps } from '../Multiplier';
 import { LiquidityProps } from '../Liquidity';
@@ -17,6 +16,8 @@ import { BIG_ZERO } from 'utils/bigNumber';
 import { getBalanceAmount } from 'utils/formatBalance';
 import { getDisplayApr } from 'views/Farms/Farms';
 import { InfoContainer } from 'style/TableStyled';
+import { FarmWithStakedValue } from '../FarmTable';
+import { chainId } from 'config/constants/tokens';
 
 export interface ActionPanelProps {
   apr: AprProps;
@@ -136,7 +137,6 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
 
   const { t } = useTranslation();
   const lpAddress = getAddress(farm.lpAddresses);
-  const bsc = getBscScanLink(lpAddress, 'address');
 
   const earningsBigNumber = new BigNumber(farm.userData.earnings);
   let earnings = BIG_ZERO;
@@ -153,18 +153,15 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
       maximumFractionDigits: 8,
     });
   }
-
   return (
     <Container expanded={expanded}>
       <InfoContainer>
-        <StyledLinkExternal href={bsc}>{t('View Contract')}</StyledLinkExternal>
+        <StyledLinkExternal href={getBscScanLink(lpAddress, 'address')}>{t('View Contract')}</StyledLinkExternal>
       </InfoContainer>
       <DetailContainer>
         <p>
           TVL
-          <i>
-            {farm?.liquidity ? farm.liquidity.toNumber().toLocaleString('en-US', { maximumFractionDigits: 2 }) : ''}
-          </i>
+          <i>{farm?.liquidity ? Number(farm.liquidity).toLocaleString('en-US', { maximumFractionDigits: 2 }) : ''}</i>
         </p>
         <p>
           APR<i className="green">{farm?.apr ? getDisplayApr(farm.apr) + '%' : ''}</i>
@@ -174,7 +171,13 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
         </p>
       </DetailContainer>
       <ActionContainer style={{ justifyContent: 'end' }}>
-        <HarvestAction {...farm} displayBalance={displayBalance} earnings={earnings} userDataReady={userDataReady} />
+        <HarvestAction
+          {...farm}
+          lpMasterChef={farm.lpMasterChefes[chainId]}
+          displayBalance={displayBalance}
+          earnings={earnings}
+          userDataReady={userDataReady}
+        />
         <div className="w20"></div>
         <StakedAction farm={farm} userDataReady={userDataReady} />
       </ActionContainer>

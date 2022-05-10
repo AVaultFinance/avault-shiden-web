@@ -5,7 +5,8 @@ import { FarmModalInput } from 'components/Modal';
 import { useTranslation } from 'contexts/Localization';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import useToast from 'hooks/useToast';
-import { FarmWithStakedValue } from './FarmCard/FarmCard';
+import Loading from 'components/TransactionConfirmationModal/Loading';
+import { FarmWithStakedValue } from './FarmTable/FarmTable';
 
 interface DepositModalProps {
   max: BigNumber;
@@ -49,7 +50,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
   }, [fullBalance, setVal]);
   const { isMd, isXl, isLg } = useMatchBreakpoints();
   const isMobile = !(isMd || isXl || isLg);
-
+  const disabled = pendingTx || !valNumber.isFinite() || valNumber.eq(0) || valNumber.gt(fullBalanceNumber);
   return (
     <Modal
       title={t('Stake LP tokens')}
@@ -69,25 +70,24 @@ const DepositModal: React.FC<DepositModalProps> = ({
       />
       <Button
         width="100%"
-        disabled={pendingTx || !valNumber.isFinite() || valNumber.eq(0) || valNumber.gt(fullBalanceNumber)}
+        disabled={disabled}
+        isLoading={pendingTx}
         onClick={async () => {
           setPendingTx(true);
           try {
             await onConfirm(val);
             toastSuccess(t('Staked!'), t('Your funds have been staked in the farm'));
             onDismiss();
-          } catch (e) {
-            toastError(
-              t('Error'),
-              t('Please try again. Confirm the transaction and make sure you are paying enough gas!'),
-            );
+          } catch (e: any) {
+            toastError('Error', e.message ? e.message : `Your ${farm.lpSymbol} Staked failed!`);
             console.error(e);
           } finally {
             setPendingTx(false);
           }
         }}
       >
-        {pendingTx ? t('Confirming') : t('Confirm')}
+        Deposit
+        <Loading isLoading={pendingTx} success={true} />
       </Button>
     </Modal>
   );

@@ -6,7 +6,7 @@ import Row, { RowProps } from './Row';
 import TableHeader from '../TableHeader';
 import { OptionProps } from 'components/Select/Select';
 import { ISortDir } from 'components/SortIcon';
-import { farmData } from 'state/vault/types';
+import { Farm } from 'state/types';
 
 export interface ITableProps {
   data: RowProps[];
@@ -16,6 +16,12 @@ export interface ITableProps {
   sortKey: string;
   sortColumn?: string;
   onOptionChange?: (option: OptionProps) => void;
+}
+export interface FarmWithStakedValue extends Farm {
+  apr?: number;
+  apy?: number;
+  lpRewardsApr?: number;
+  // liquidity?: BigNumber;
 }
 
 const Container = styled.div`
@@ -105,7 +111,7 @@ const FarmTable: React.FC<ITableProps> = (props) => {
 
             <TableBody>
               {/* ...rows, */}
-              {[...farmData].map((row, index) => {
+              {rows.map((row, index) => {
                 return (
                   <Row
                     {...row.original}

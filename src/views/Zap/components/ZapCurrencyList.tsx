@@ -129,7 +129,7 @@ const MenuItem = styled(Flex)<{ disabled: boolean; selected: boolean }>`
   transition: all 0.3s ease;
   align-items: center;
   justify-content: space-between;
-  background-image: ${({ disabled }) => (disabled ? ' linear-gradient(90deg, #8c1ab5 0%, #17b38d 100%)' : 'none')};
+  background-image: ${({ disabled }) => (disabled ? ' linear-gradient(90deg, #a428d0 0%, #20d4a9 100%)' : 'none')};
   pointer-events: ${({ disabled }) => disabled && 'none'};
   cursor: ${({ disabled, selected }) => (disabled || selected ? '' : 'pointer')};
   opacity: ${({ selected }) => (selected ? 0.5 : 1)};

@@ -3,6 +3,9 @@ import { Flex, useMatchBreakpoints } from '@my/ui';
 import WalletAccountInfo from './WalletAccount';
 import { useVaultAllTotal } from 'state/vault/hooks';
 import Balance from 'components/Balance';
+import { useFarmsAllTotal } from 'state/farms/hooks';
+import { useEffect, useState } from 'react';
+import BigNumber from 'bignumber.js';
 const TextLinerStyle = styled(Flex)`
   font-size: 18px;
   background: linear-gradient(270deg, #00f4b9 0%, #ff4afb 100%);
@@ -21,15 +24,22 @@ const TextLinerStyle = styled(Flex)`
 const UserWidget = () => {
   const { isMd, isSm, isXs } = useMatchBreakpoints();
   const isMobile = isMd || isSm || isXs;
-  const allTotal = useVaultAllTotal();
-
+  const allVaultTotal = useVaultAllTotal();
+  const allFarmsTotal = useFarmsAllTotal();
+  const [allTotal, setAllTotal] = useState('');
+  useEffect(() => {
+    const _allVaultTotal = new BigNumber(allVaultTotal);
+    const _allFarmsTotal = new BigNumber(allFarmsTotal);
+    setAllTotal(_allVaultTotal.plus(_allFarmsTotal).toFixed(8));
+    // setAllTotal(_allVaultTotal.toFixed(8));
+  }, [allVaultTotal, allFarmsTotal]);
   return (
     <User>
       {/* <SwitchChain /> */}
       {/* <Flex alignItems="center" justifyContent="start"> */}
       <TextLinerStyle>
         <p>TVL: $</p>
-        <Balance color="none" fontSize="18px" fontWeight="600" decimals={2} value={Number(allTotal)} />
+        <Balance color="none" fontSize="18px" fontWeight="600" decimals={6} value={Number(allTotal)} />
       </TextLinerStyle>
       {/* </Flex> */}
       {isMobile ? null : <WalletAccountInfo />}

@@ -122,10 +122,11 @@ export const getMasterchefContract = (signer?: ethers.Signer | ethers.providers.
   return getContract(masterChef, getMasterChefAddress(), signer);
 };
 export const getSpecialMasterchefContract = (
+  abi: any,
   masterChefAddress: string,
   signer?: ethers.Signer | ethers.providers.Provider,
 ) => {
-  return getContract(masterChef, masterChefAddress, signer);
+  return getContract(abi, masterChefAddress, signer);
 };
 export const getClaimRefundContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
   return getContract(claimRefundAbi, getClaimRefundAddress(), signer);

@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { unstakeFarm } from 'utils/calls';
-import { useMasterchef } from 'hooks/useContract';
+import { useSpecialMasterchef } from 'hooks/useContract';
 
-const useUnstakeFarms = (pid: number) => {
-  const masterChefContract = useMasterchef();
+const useUnstakeFarms = (abi: any, masterChefAddress: string, pid: number) => {
+  const masterChefContract = useSpecialMasterchef(abi, masterChefAddress);
 
   const handleUnstake = useCallback(
     async (amount: string) => {

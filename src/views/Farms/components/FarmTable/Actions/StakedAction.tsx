@@ -6,7 +6,6 @@ import { BigNumber } from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { useFarmUser } from 'state/farms/hooks';
 import { fetchFarmUserDataAsync } from 'state/farms';
-import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
 import { useERC20 } from 'hooks/useContract';
 import { BASE_ADD_LIQUIDITY_URL } from 'config';
 import { useAppDispatch } from 'state';
@@ -21,6 +20,8 @@ import useApproveFarm from '../../../hooks/useApproveFarm';
 import { LongButton } from './styles';
 import useAuth from 'hooks/useAuth';
 import { ActionContainer } from 'style/TableStyled';
+import { FarmWithStakedValue } from '../FarmTable';
+import masterChef_aAVT from 'config/abi/masterchef_aavt_shiden.json';
 
 const IconButtonWrapper = styled.div`
   display: flex;
@@ -45,12 +46,13 @@ interface StackedActionProps {
 }
 
 const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataReady }) => {
-  const { pid, lpSymbol, lpAddresses, quoteToken, token } = farm;
+  const { pid, lpSymbol, lpAddresses, quoteToken, lpMasterChefes, token } = farm;
   const { account } = useWeb3React();
   const [requestedApproval, setRequestedApproval] = useState(false);
   const { allowance, tokenBalance, stakedBalance } = useFarmUser(pid);
-  const { onStake } = useStakeFarms(pid);
-  const { onUnstake } = useUnstakeFarms(pid);
+  const lpMasterChef = getAddress(lpMasterChefes);
+  const { onStake } = useStakeFarms(masterChef_aAVT, lpMasterChef, pid);
+  const { onUnstake } = useUnstakeFarms(masterChef_aAVT, lpMasterChef, pid);
   const location = useLocation();
   const isApproved = account && allowance && allowance.isGreaterThan(0);
 
@@ -97,7 +99,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
   );
   const lpContract = useERC20(lpAddress);
   const dispatch = useAppDispatch();
-  const { onApprove } = useApproveFarm(lpContract);
+  const { onApprove } = useApproveFarm(masterChef_aAVT, lpMasterChef, lpContract);
 
   const handleApprove = useCallback(async () => {
     if (!account) {
@@ -145,7 +147,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
     );
   }
 
-  if (!isApproved) {
+  if (!isApproved && userDataReady) {
     return (
       <ActionContainer smallBorder={false}>
         <TextTop>
@@ -177,7 +179,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
             }
           }
         }}
-        disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
+        disabled={!userDataReady || ['history', 'archived'].some((item) => location.pathname.includes(item))}
       >
         Stake
       </LongButton>

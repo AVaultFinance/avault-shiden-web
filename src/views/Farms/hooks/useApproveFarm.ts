@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 import { ethers, Contract } from 'ethers';
-import { useMasterchef } from 'hooks/useContract';
-
-const useApproveFarm = (lpContract: Contract) => {
-  const masterChefContract = useMasterchef();
+import { useSpecialMasterchef } from 'hooks/useContract';
+const useApproveFarm = (abi: any, masterChefAddress: string, lpContract: Contract) => {
+  const masterChefContract = useSpecialMasterchef(abi, masterChefAddress);
   const handleApprove = useCallback(async () => {
     try {
       const tx = await lpContract.approve(masterChefContract.address, ethers.constants.MaxUint256);

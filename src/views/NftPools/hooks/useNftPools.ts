@@ -7,7 +7,7 @@ import multicall, { multicallv2 } from 'utils/multicall';
 import { useContract } from 'hooks/useContract';
 import _ from 'lodash';
 import { chainId } from 'config/constants/tokens';
-import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
+import { FarmWithStakedValue } from 'views/Farms/components/FarmTable/FarmTable';
 
 export interface NftPair {
   pairAddress: string;

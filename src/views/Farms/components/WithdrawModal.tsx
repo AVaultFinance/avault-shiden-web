@@ -5,7 +5,7 @@ import { FarmModalInput } from 'components/Modal';
 import { useTranslation } from 'contexts/Localization';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import useToast from 'hooks/useToast';
-import { FarmWithStakedValue } from './FarmCard/CardActionsContainer';
+import { FarmWithStakedValue } from './FarmTable/FarmTable';
 
 interface WithdrawModalProps {
   max: BigNumber;

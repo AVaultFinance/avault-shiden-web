@@ -22,15 +22,16 @@ export const usePollFarmsData = (includeArchive = false) => {
   useEffect(() => {
     const farmsToFetch = includeArchive ? farmsConfig : nonArchivedFarms;
     const pids = farmsToFetch.map((farmToFetch) => farmToFetch.pid);
-
     dispatch(fetchFarmsPublicDataAsync({ pids: pids, priceVsBusdMap: priceVsBusdMap }));
-
     if (account) {
       dispatch(fetchFarmUserDataAsync({ account, pids }));
     }
   }, [includeArchive, dispatch, slowRefresh, account, priceVsBusdMap]);
 };
-
+export const useFarmsAllTotal = () => {
+  const farms = useSelector((state: State) => state.farms);
+  return farms.allLiquidity;
+};
 /**
  * Fetches the "core" farm data used globally
  * 1 = CAKE-BNB LP

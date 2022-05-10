@@ -40,7 +40,8 @@ const WalletAccount = styled(Flex)`
   font-weight: 600;
   color: #fff;
   height: 36px;
-  background-image: linear-gradient(90deg, #8c1ab5 0%, #17b38d 100%);
+  width: 140px;
+  background-image: linear-gradient(90deg, #a428d0 0%, #20d4a9 100%);
   border-radius: 8px;
   width: 140px;
   padding: 0 12px;

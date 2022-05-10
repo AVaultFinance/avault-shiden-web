@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Flex } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
-import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
 import { BIG_ZERO } from 'utils/bigNumber';
 import { useAppDispatch } from 'state';
 import { fetchFarmUserDataAsync } from 'state/farms';
@@ -13,12 +12,16 @@ import useHarvestFarm from '../../../hooks/useHarvestFarm';
 import { ActionTitlesTitle, ActionTitlesBalance, LongButton, ActionContent } from './styles';
 import styled from 'styled-components';
 import { ActionContainer } from 'style/TableStyled';
+import { FarmWithStakedValue } from '../FarmTable';
+import masterChef_aAVT from 'config/abi/masterchef_aavt_shiden.json';
 
 interface HarvestActionProps extends FarmWithStakedValue {
+  pid: number;
   userDataReady: boolean;
   displayBalance: string | JSX.Element;
   earnings: BigNumber;
   lpSymbol: string;
+  lpMasterChef: string;
 }
 const RewardsTitleStyled = styled(Flex)<{ disabled: boolean }>`
   display: ${({ disabled }) => (disabled ? 'none' : 'block')};
@@ -47,22 +50,22 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
   earnings,
   displayBalance,
   userDataReady,
+  lpMasterChef,
   lpSymbol,
 }) => {
   const { toastSuccess, toastError } = useToast();
 
   const [pendingTx, setPendingTx] = useState(false);
-  const { onReward } = useHarvestFarm(pid);
+  const { onReward } = useHarvestFarm(masterChef_aAVT, lpMasterChef, pid);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { account } = useWeb3React();
   const disabled = earnings.eq(BIG_ZERO) || pendingTx || !userDataReady;
-  console.log(lpSymbol);
   return (
     <ActionContainer smallBorder={disabled ? false : true}>
       <FlexStyled>
         <RewardsTitleStyled disabled={disabled}>
-          <ActionTitlesTitle>{lpSymbol === 'AVAT' ? 'AVAT-ASTR LP' : 'AVAT'} Rewards</ActionTitlesTitle>
+          <ActionTitlesTitle>AVATDummy Rewards</ActionTitlesTitle>
           <ActionTitlesBalance balance={(earnings || BIG_ZERO).toNumber()}>{displayBalance}</ActionTitlesBalance>
         </RewardsTitleStyled>
         <ActionContentStyled disabled={disabled}>

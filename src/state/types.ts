@@ -24,6 +24,7 @@ export type TranslatableText =
 export type SerializedBigNumber = string;
 
 export interface Farm extends FarmConfig {
+  liquidity?: string;
   tokenAmountMc?: SerializedBigNumber;
   quoteTokenAmountMc?: SerializedBigNumber;
   tokenAmountTotal?: SerializedBigNumber;
@@ -76,6 +77,7 @@ export interface FarmsState {
   data: Farm[];
   loadArchivedFarmsData: boolean;
   userDataLoaded: boolean;
+  allLiquidity: string;
 }
 
 export interface VaultState {

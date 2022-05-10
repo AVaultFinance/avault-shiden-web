@@ -1,12 +1,14 @@
 import BigNumber from 'bignumber.js';
-import masterchefABI from 'config/abi/masterchef.json';
 import erc20 from 'config/abi/erc20.json';
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers';
+import { getAddress } from 'utils/addressHelpers';
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber';
 import multicall from 'utils/multicall';
 import { Farm, SerializedBigNumber } from '../types';
 import { chainKey } from 'config';
 import { CHAINKEY } from '@my/sdk';
+import masterchefABI from 'config/abi/masterchef_aavt_shiden.json';
+import { getBalanceAmount } from 'utils/formatBalance';
+import { chainId } from 'config/constants/tokens';
 
 export type PublicFarmData = {
   tokenAmountMc: SerializedBigNumber;
@@ -18,11 +20,13 @@ export type PublicFarmData = {
   tokenPriceVsQuote: SerializedBigNumber;
   poolWeight: SerializedBigNumber;
   multiplier: string;
+  liquidity: string;
 };
 
-const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
-  const { pid, lpAddresses, token, quoteToken } = farm;
+const fetchFarm = async (farm: Farm, priceVsBusdMap: Record<string, string>): Promise<PublicFarmData> => {
+  const { pid, lpAddresses, lpMasterChefes, token, quoteToken, decimals } = farm;
   const lpAddress = getAddress(lpAddresses);
+  const lpMasterChef = getAddress(lpMasterChefes);
   const calls = [
     // Balance of token in the LP contract
     {
@@ -40,7 +44,7 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     {
       address: lpAddress,
       name: 'balanceOf',
-      params: [getMasterChefAddress()],
+      params: [lpMasterChef],
     },
     // Total supply of LP tokens
     {
@@ -58,11 +62,10 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
       name: 'decimals',
     },
   ];
-  // console.log('fetchFarm', calls);
 
   const [tokenBalanceLP, quoteTokenBalanceLP, lpTokenBalanceMC, lpTotalSupply, tokenDecimals, quoteTokenDecimals] =
     await multicall(erc20, calls);
-  // Ratio in % of LP tokens that are staked in the MC, vs the total number in circulation
+
   const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply));
 
   // Raw amount of token in the LP, including those not staked
@@ -72,37 +75,51 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   // Amount of token in the LP that are staked in the MC (i.e amount of token * lp ratio)
   const tokenAmountMc = tokenAmountTotal.times(lpTokenRatio);
   const quoteTokenAmountMc = quoteTokenAmountTotal.times(lpTokenRatio);
-
   // Total staked in LP, in quote token value
-  const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2));
+  // const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2));
 
   // Only make masterchef calls if farm has pid
   const [info, totalAllocPoint] =
     pid || pid === 0
       ? await multicall(masterchefABI, [
           {
-            address: getMasterChefAddress(),
+            address: lpMasterChef,
             name: 'poolInfo',
             params: [pid],
           },
           {
-            address: getMasterChefAddress(),
+            address: lpMasterChef,
             name: 'totalAllocPoint',
           },
         ])
       : [null, null];
   const allocPoint = info ? new BigNumber(info.allocPoint?._hex) : BIG_ZERO;
-
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO;
+
+  let lpTokenPrice = BIG_ZERO;
+  if (lpTotalSupply && priceVsBusdMap[token.address[chainId].toLocaleLowerCase()]) {
+    const farmTokenPriceInUsd = priceVsBusdMap[token.address[chainId].toLocaleLowerCase()];
+    const valueOfBaseTokenInFarm = new BigNumber(farmTokenPriceInUsd).times(tokenAmountTotal);
+    const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
+    const totalLpTokens = getBalanceAmount(new BigNumber(lpTotalSupply));
+    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens);
+  }
+  // 17829525466206354
+  const liquidity = new BigNumber(lpTokenBalanceMC)
+    .div(BIG_TEN.pow(new BigNumber(decimals)))
+    .times(lpTokenPrice)
+    .toFixed(8);
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),
     quoteTokenAmountMc: quoteTokenAmountMc.toJSON(),
     tokenAmountTotal: tokenAmountTotal.toJSON(),
     quoteTokenAmountTotal: quoteTokenAmountTotal.toJSON(),
     lpTotalSupply: new BigNumber(lpTotalSupply).toJSON(),
-    lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
+    // lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
+    lpTotalInQuoteToken: liquidity,
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
+    liquidity: liquidity,
     multiplier: `${allocPoint.div(new BigNumber(chainKey === CHAINKEY.BSC ? 1 : 100)).toString()}X`,
   };
 };

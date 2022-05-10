@@ -1,15 +1,15 @@
 import BigNumber from 'bignumber.js';
 import erc20ABI from 'config/abi/erc20.json';
-import masterchefABI from 'config/abi/masterchef.json';
+import masterchefABI from 'config/abi/masterchef_aavt_shiden.json';
 import multicall from 'utils/multicall';
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers';
+import { getAddress } from 'utils/addressHelpers';
 import { FarmConfig } from 'config/constants/types';
+import { chainId } from 'config/constants/tokens';
 
 export const fetchFarmUserAllowances = async (account: string, farmsToFetch: FarmConfig[]) => {
-  const masterChefAddress = getMasterChefAddress();
-
   const calls = farmsToFetch.map((farm) => {
     const lpContractAddress = getAddress(farm.lpAddresses);
+    const masterChefAddress = getAddress(farm.lpMasterChefes);
     return { address: lpContractAddress, name: 'allowance', params: [account, masterChefAddress] };
   });
 
@@ -38,11 +38,9 @@ export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: 
 };
 
 export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch: FarmConfig[]) => {
-  const masterChefAddress = getMasterChefAddress();
-
   const calls = farmsToFetch.map((farm) => {
     return {
-      address: masterChefAddress,
+      address: farm.lpMasterChefes[chainId],
       name: 'userInfo',
       params: [farm.pid, account],
     };
@@ -56,12 +54,10 @@ export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch:
 };
 
 export const fetchFarmUserEarnings = async (account: string, farmsToFetch: FarmConfig[]) => {
-  const masterChefAddress = getMasterChefAddress();
-
   const calls = farmsToFetch.map((farm) => {
     return {
-      address: masterChefAddress,
-      name: 'pendingCake',
+      address: farm.lpMasterChefes[chainId],
+      name: 'pendingAVAT',
       params: [farm.pid, account],
     };
   });

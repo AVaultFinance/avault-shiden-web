@@ -58,8 +58,10 @@ export interface FarmConfig {
   pid: number;
   lpSymbol: string;
   lpAddresses: Address;
+  lpMasterChefes: Address;
   token: Token;
   quoteToken: Token;
+  decimals: number;
   multiplier?: string;
   isCommunity?: boolean;
   dual?: {

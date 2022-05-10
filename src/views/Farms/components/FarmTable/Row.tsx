@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard';
+import { FarmWithStakedValue } from 'views/Farms/components/FarmTable/FarmTable';
 import { useMatchBreakpoints } from '@my/ui';
 import useDelayedUnmount from 'hooks/useDelayedUnmount';
 // import { useFarmUser } from 'state/farms/hooks';
@@ -93,7 +93,7 @@ const StyledTr = styled.tr<{ isLast: boolean }>`
 const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const { userDataReady } = props;
   // const hasStakedAmount = !!useFarmUser(details.pid).stakedBalance.toNumber();
-  const [actionPanelExpanded, setActionPanelExpanded] = useState(false);
+  const [actionPanelExpanded, setActionPanelExpanded] = useState(true);
   const shouldRenderChild = useDelayedUnmount(actionPanelExpanded, 300);
 
   const toggleActionPanel = () => {
@@ -126,8 +126,8 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
                     <Details actionPanelToggled={actionPanelExpanded} />
                   </td>
                 );
-              case 'multiplier':
-                return null;
+              // case 'multiplier':
+              //   return null;
               case 'apr':
                 return (
                   <td key={key}>

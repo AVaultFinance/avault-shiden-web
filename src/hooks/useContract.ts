@@ -101,9 +101,9 @@ export const useMasterchef = () => {
   const { library } = useActiveWeb3React();
   return useMemo(() => getMasterchefContract(library.getSigner()), [library]);
 };
-export const useSpecialMasterchef = (masterchef: string) => {
+export const useSpecialMasterchef = (abi: any, masterchef: string) => {
   const { library } = useActiveWeb3React();
-  return useMemo(() => getSpecialMasterchefContract(masterchef, library.getSigner()), [library, masterchef]);
+  return useMemo(() => getSpecialMasterchefContract(abi, masterchef, library.getSigner()), [library, abi, masterchef]);
 };
 
 export const useSousChef = (id) => {

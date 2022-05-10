@@ -62,7 +62,7 @@ const ButtonStyled = styled(Button)`
   font-weight: 600;
   color: #fff;
   height: 44px;
-  background-image: linear-gradient(90deg, #8c1ab5 0%, #17b38d 100%);
+  background-image: linear-gradient(90deg, #a428d0 0%, #20d4a9 100%);
   width: 200px;
   padding: 0;
   cursor: pointer;

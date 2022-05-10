@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text, Skeleton } from '@my/ui';
 // import { useTranslation } from 'contexts/Localization';
-import BigNumber from 'bignumber.js';
 
 // const ReferenceElement = styled.div`
 //   display: inline-block;
 // `;
 
 export interface LiquidityProps {
-  liquidity: BigNumber;
+  liquidity: string;
+  userDataReady: boolean;
 }
 
 const LiquidityWrapper = styled.div`
@@ -20,13 +20,12 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Liquidity: React.FunctionComponent<LiquidityProps> = ({ liquidity }) => {
-  const displayLiquidity =
-    liquidity && liquidity.gt(0) ? (
-      `$${Number(liquidity).toLocaleString(undefined, { maximumFractionDigits: 0 })}`
-    ) : (
-      <Skeleton width={60} />
-    );
+const Liquidity: React.FunctionComponent<LiquidityProps> = ({ liquidity, userDataReady }) => {
+  const displayLiquidity = userDataReady ? (
+    `$${Number(liquidity ?? '0').toLocaleString('en-US', { maximumFractionDigits: 8 })}`
+  ) : (
+    <Skeleton width={60} />
+  );
   return (
     <Container>
       <LiquidityWrapper>
