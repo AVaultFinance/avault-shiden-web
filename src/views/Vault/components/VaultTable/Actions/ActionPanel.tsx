@@ -19,7 +19,6 @@ import { useVault, useVaultFarmUser } from 'state/vault/hooks';
 import useAuth from 'hooks/useAuth';
 import { chainId } from 'config/constants/tokens';
 import { changeLoading, fetchVaultFarmUserDataAsync } from 'state/vault';
-import { BASE_BSC_SCAN_URL } from 'config';
 import { useSpecialApproveFarm } from 'views/Vault/hooks/useApproveFarm';
 import { getDisplayApy } from 'views/Farms/Farms';
 import useToast from 'hooks/useToast';
