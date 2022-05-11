@@ -7,8 +7,9 @@ import { Farm, SerializedBigNumber } from '../types';
 import { chainKey } from 'config';
 import { CHAINKEY } from '@my/sdk';
 import masterchefABI from 'config/abi/masterchef_aavt_shiden.json';
-import { getBalanceAmount } from 'utils/formatBalance';
 import { chainId } from 'config/constants/tokens';
+import { getAultPrice } from 'views/Zap/utils/utils';
+import { IVault } from 'state/vault/types';
 
 export type PublicFarmData = {
   tokenAmountMc: SerializedBigNumber;
@@ -23,8 +24,12 @@ export type PublicFarmData = {
   liquidity: string;
 };
 
-const fetchFarm = async (farm: Farm, priceVsBusdMap: Record<string, string>): Promise<PublicFarmData> => {
-  const { pid, lpAddresses, lpMasterChefes, token, quoteToken, decimals } = farm;
+const fetchFarm = async (
+  farm: Farm,
+  priceVsBusdMap: Record<string, string>,
+  vaultData: IVault[],
+): Promise<PublicFarmData> => {
+  const { pid, lpAddresses, lpMasterChefes, lpDetail, token, quoteToken, decimals } = farm;
   const lpAddress = getAddress(lpAddresses);
   const lpMasterChef = getAddress(lpMasterChefes);
   const calls = [
@@ -95,19 +100,35 @@ const fetchFarm = async (farm: Farm, priceVsBusdMap: Record<string, string>): Pr
       : [null, null];
   const allocPoint = info ? new BigNumber(info.allocPoint?._hex) : BIG_ZERO;
   const poolWeight = totalAllocPoint ? allocPoint.div(new BigNumber(totalAllocPoint)) : BIG_ZERO;
+  let lpTokenPrice = '0';
+  if (lpTotalSupply && priceVsBusdMap[token.address[chainId].toLowerCase()]) {
+    // const farmTokenPriceInUsd = priceVsBusdMap[token.address[chainId].toLowerCase()];
+    // console.log('farmTokenPriceInUsd: ', farmTokenPriceInUsd);
+    // const valueOfBaseTokenInFarm = new BigNumber(farmTokenPriceInUsd).times(tokenAmountTotal);
+    // const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
+    // const totalLpTokens = getBalanceAmount(new BigNumber(lpTotalSupply));
+    // lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens);
 
-  let lpTokenPrice = BIG_ZERO;
-  if (lpTotalSupply && priceVsBusdMap[token.address[chainId].toLocaleLowerCase()]) {
-    const farmTokenPriceInUsd = priceVsBusdMap[token.address[chainId].toLocaleLowerCase()];
-    const valueOfBaseTokenInFarm = new BigNumber(farmTokenPriceInUsd).times(tokenAmountTotal);
-    const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2);
-    const totalLpTokens = getBalanceAmount(new BigNumber(lpTotalSupply));
-    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens);
+    const _token = token.address[chainId].toLowerCase();
+    const _tokenDecimals = token.decimals;
+    const _lpAddress = lpDetail.address[chainId].toLowerCase();
+    lpTokenPrice = await getAultPrice(
+      _token,
+      _tokenDecimals,
+      priceVsBusdMap,
+      _lpAddress,
+      lpAddress.toLowerCase(),
+      vaultData,
+    );
   }
+
+  //  akks  0.24
+  //  lp  0.4
+  // akksprice = lpTokenPrice*1.234(比例)
   // 17829525466206354
   const liquidity = new BigNumber(lpTokenBalanceMC)
     .div(BIG_TEN.pow(new BigNumber(decimals)))
-    .times(lpTokenPrice)
+    .times(new BigNumber(lpTokenPrice))
     .toFixed(8);
   return {
     tokenAmountMc: tokenAmountMc.toJSON(),

@@ -26,11 +26,13 @@ const UserWidget = () => {
   const isMobile = isMd || isSm || isXs;
   const allVaultTotal = useVaultAllTotal();
   const allFarmsTotal = useFarmsAllTotal();
-  const [allTotal, setAllTotal] = useState('');
+  const [allTotal, setAllTotal] = useState('0');
   useEffect(() => {
     const _allVaultTotal = new BigNumber(allVaultTotal);
-    const _allFarmsTotal = new BigNumber(allFarmsTotal);
-    setAllTotal(_allVaultTotal.plus(_allFarmsTotal).toFixed(8));
+    if (_allVaultTotal.gt(0)) {
+      const _allFarmsTotal = new BigNumber(allFarmsTotal);
+      setAllTotal(_allVaultTotal.plus(_allFarmsTotal).toFixed(8));
+    }
     // setAllTotal(_allVaultTotal.toFixed(8));
   }, [allVaultTotal, allFarmsTotal]);
   return (
@@ -39,7 +41,13 @@ const UserWidget = () => {
       {/* <Flex alignItems="center" justifyContent="start"> */}
       <TextLinerStyle>
         <p>TVL: $</p>
-        <Balance color="none" fontSize="18px" fontWeight="600" decimals={6} value={Number(allTotal)} />
+        <Balance
+          color="none"
+          fontSize="18px"
+          fontWeight="600"
+          decimals={6}
+          value={Number(allTotal === 'NaN' ? '0' : allTotal)}
+        />
       </TextLinerStyle>
       {/* </Flex> */}
       {isMobile ? null : <WalletAccountInfo />}

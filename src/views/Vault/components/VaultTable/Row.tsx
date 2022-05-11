@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Flex, HelpIcon, Text, useMatchBreakpoints, useTooltip } from '@my/ui';
 import useDelayedUnmount from 'hooks/useDelayedUnmount';
@@ -141,7 +141,6 @@ const QuestionWrapper = styled.div`
 
 const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const { details, userDataReady, index } = props;
-  const hasStakedAmount = false;
   const [actionPanelExpanded, setActionPanelExpanded] = useState(false);
   const shouldRenderChild = useDelayedUnmount(actionPanelExpanded, 300);
   const userData = details?.farm?.userData ?? {};
@@ -184,10 +183,6 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const toggleActionPanel = () => {
     setActionPanelExpanded(!actionPanelExpanded);
   };
-
-  useEffect(() => {
-    setActionPanelExpanded(hasStakedAmount);
-  }, [hasStakedAmount]);
 
   const { isXl, isLg } = useMatchBreakpoints();
 

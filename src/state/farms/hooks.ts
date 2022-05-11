@@ -14,19 +14,21 @@ import { usePrice } from 'state/price/hooks';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import tokens from 'config/constants/tokens';
 import { chainKey } from 'config';
+import { useVaultData } from 'state/vault/hooks';
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch();
   const { slowRefresh } = useRefresh();
   const { account } = useWeb3React();
   const { priceVsBusdMap } = usePrice();
+  const vaultData = useVaultData();
   useEffect(() => {
     const farmsToFetch = includeArchive ? farmsConfig : nonArchivedFarms;
     const pids = farmsToFetch.map((farmToFetch) => farmToFetch.pid);
-    dispatch(fetchFarmsPublicDataAsync({ pids: pids, priceVsBusdMap: priceVsBusdMap }));
+    dispatch(fetchFarmsPublicDataAsync({ pids: pids, priceVsBusdMap: priceVsBusdMap, vaultData: vaultData }));
     if (account) {
       dispatch(fetchFarmUserDataAsync({ account, pids }));
     }
-  }, [includeArchive, dispatch, slowRefresh, account, priceVsBusdMap]);
+  }, [includeArchive, dispatch, vaultData, slowRefresh, account, priceVsBusdMap]);
 };
 export const useFarmsAllTotal = () => {
   const farms = useSelector((state: State) => state.farms);
@@ -43,9 +45,16 @@ export const usePollCoreFarmData = () => {
   const { fastRefresh } = useRefresh();
   const { priceVsBusdMap } = usePrice();
 
+  const vaultData = useVaultData();
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync({ pids: [KACO_BNB_LP_PID, BUSD_BNB_LP_PID], priceVsBusdMap: priceVsBusdMap }));
-  }, [dispatch, fastRefresh, priceVsBusdMap]);
+    dispatch(
+      fetchFarmsPublicDataAsync({
+        pids: [KACO_BNB_LP_PID, BUSD_BNB_LP_PID],
+        priceVsBusdMap: priceVsBusdMap,
+        vaultData,
+      }),
+    );
+  }, [dispatch, fastRefresh, vaultData, priceVsBusdMap]);
 };
 
 export const useFarms = (): FarmsState => {

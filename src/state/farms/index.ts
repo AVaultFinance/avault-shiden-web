@@ -13,6 +13,7 @@ import {
 import { FarmsState, Farm } from '../types';
 import { BIG_ZERO } from 'utils/bigNumber';
 import BigNumber from 'bignumber.js';
+import { IVault } from 'state/vault/types';
 
 const noAccountFarmConfig = farmsConfig.map((farm) => ({
   ...farm,
@@ -37,14 +38,14 @@ export const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(p
 export const fetchFarmsPublicDataAsync = createAsyncThunk<
   Farm[],
   // number[],
-  { pids: number[]; priceVsBusdMap: Record<string, string> }
->('farms/fetchFarmsPublicDataAsync', async ({ pids, priceVsBusdMap }) => {
+  { pids: number[]; priceVsBusdMap: Record<string, string>; vaultData: IVault[] }
+>('farms/fetchFarmsPublicDataAsync', async ({ pids, priceVsBusdMap, vaultData }) => {
   const farmsToFetch = farmsConfig.filter((farmConfig) => pids.includes(farmConfig.pid));
 
   // Add price helper farms
   const farmsWithPriceHelpers = farmsToFetch.concat([]);
 
-  const farms = await fetchFarms(farmsWithPriceHelpers, priceVsBusdMap);
+  const farms = await fetchFarms(farmsWithPriceHelpers, priceVsBusdMap, vaultData);
   const farmsWithPrices = await fetchFarmsPrices(farms, priceVsBusdMap);
   // Filter out price helper LP config farms
 

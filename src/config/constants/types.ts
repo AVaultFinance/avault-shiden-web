@@ -62,6 +62,11 @@ export interface FarmConfig {
   token: Token;
   quoteToken: Token;
   decimals: number;
+  lpDetail: {
+    symbol: string;
+    address: Address;
+    decimals: number;
+  };
   multiplier?: string;
   isCommunity?: boolean;
   dual?: {

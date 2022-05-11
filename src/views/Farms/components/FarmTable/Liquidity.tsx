@@ -22,7 +22,9 @@ const Container = styled.div`
 
 const Liquidity: React.FunctionComponent<LiquidityProps> = ({ liquidity, userDataReady }) => {
   const displayLiquidity = userDataReady ? (
-    `$${Number(liquidity ?? '0').toLocaleString('en-US', { maximumFractionDigits: 8 })}`
+    `$${Number(liquidity ? (liquidity === 'NaN' ? '0' : liquidity) : '0').toLocaleString('en-US', {
+      maximumFractionDigits: 8,
+    })}`
   ) : (
     <Skeleton width={60} />
   );

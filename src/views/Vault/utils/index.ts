@@ -21,7 +21,6 @@ export const depositVaultUtil = async (contract, account: string, amount, decima
 
 export const withdrawVaultUtil = async (contract, account: string, amount, decimal: number) => {
   const value = parseInt(new BigNumber(amount).times(BIG_TEN.pow(decimal)).toString());
-  console.log({ amount, account, value, options, decimal });
   const tx = await contract.withdraw(account, `${value}`, options);
   const receipt = await tx.wait();
   return receipt.status;

@@ -19,6 +19,7 @@ export const usePollVaultData = () => {
     // eslint-disable-next-line
   }, [dispatch, priceVsBusdMap]);
 };
+
 export const useVaultUserData = (vaults: IVault[]) => {
   // const { data: vaults } = useVault();
   const { account } = useWeb3React();
@@ -58,6 +59,17 @@ export const useVault = (): VaultState => {
 export const useVaultAllTotal = () => {
   const vault = useSelector((state: State) => state.vault);
   return vault.allLiquidity;
+};
+export const useVaultData = () => {
+  const vaultData = useSelector((state: State) => state.vault.data);
+  return vaultData;
+  // const vault = vaultData.filter((v) => v.contractAddress[chainId] === contractAddress);
+  // if (vault) {
+  //   const _valut = vault[0];
+  //   return _valut.vault.lpToCLpRate;
+  // } else {
+  //   return '1';
+  // }
 };
 export const useVaultFarmUser = (account: string, pid?: number) => {
   try {
