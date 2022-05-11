@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useModal, Text, Flex, connectorLocalStorageKey, ConnectorNames, MinusBtnIcon, AddBtnIcon } from '@my/ui';
+import { useModal, Text, Flex, MinusBtnIcon, AddBtnIcon, useWalletModal } from '@my/ui';
 import { useLocation } from 'react-router-dom';
 import { BigNumber } from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
@@ -93,7 +93,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
       addLiquidityUrl={addLiquidityUrl}
     />,
   );
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
+  const { onPresentConnectModal } = useWalletModal(login, logout);
   const [onPresentWithdraw] = useModal(
     <WithdrawModal farm={farm} max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
   );
@@ -103,8 +104,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
 
   const handleApprove = useCallback(async () => {
     if (!account) {
-      const connectorId = (window.localStorage.getItem(connectorLocalStorageKey) ?? 'injected') as ConnectorNames;
-      login(connectorId);
+      onPresentConnectModal();
       return;
     }
     try {
@@ -116,7 +116,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
     } catch (e) {
       console.error(e);
     }
-  }, [onApprove, dispatch, account, login, pid]);
+  }, [onApprove, dispatch, account, onPresentConnectModal, pid]);
   if (isApproved && stakedBalance.gt(0)) {
     return (
       <ActionContainer smallBorder={true}>
@@ -173,15 +173,12 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
           if (account) {
             onPresentDeposit();
           } else {
-            const connectorId = window.localStorage.getItem(connectorLocalStorageKey) as ConnectorNames;
-            if (connectorId) {
-              login(connectorId);
-            }
+            onPresentConnectModal();
           }
         }}
         disabled={!userDataReady || ['history', 'archived'].some((item) => location.pathname.includes(item))}
       >
-        Stake
+        {account ? 'Stake' : 'Connect Wallet'}
       </LongButton>
     </ActionContainer>
   );
