@@ -5,7 +5,7 @@ import { Address } from 'config/constants/types';
 import BigNumber from 'bignumber.js';
 // import { BASE_ADD_LIQUIDITY_URL } from 'config';
 // import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts';
-import { HelpIcon, Skeleton, useTooltip } from '@my/ui';
+import { Skeleton } from '@my/ui';
 
 export interface AprProps {
   apr: string;
@@ -35,10 +35,6 @@ const Container = styled.div`
     }
   }
 `;
-const ReferenceElement = styled.div`
-  display: inline-block;
-  padding-left: 5px;
-`;
 
 const AprWrapper = styled.div`
   min-width: 60px;
@@ -49,11 +45,11 @@ const AprWrapper = styled.div`
 `;
 
 const Apr: React.FC<AprProps> = ({ apr, originalValue }) => {
-  const tooltipContent = <div>APR: {apr}%</div>;
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, {
-    placement: 'top-end',
-    tooltipOffset: [20, 10],
-  });
+  // const tooltipContent = <div>APR: {apr}%</div>;
+  // const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, {
+  //   placement: 'top-end',
+  //   tooltipOffset: [20, 10],
+  // });
   // const liquidityUrlPathParts = getLiquidityUrlPathParts({ quoteTokenAddress, tokenAddress });
   // const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`;
   return originalValue !== 0 ? (
@@ -84,10 +80,10 @@ const Apr: React.FC<AprProps> = ({ apr, originalValue }) => {
   ) : (
     <Container>
       <AprWrapper>{originalValue}%</AprWrapper>
-      <ReferenceElement ref={targetRef}>
+      {/* <ReferenceElement ref={targetRef}>
         <HelpIcon color="textSubtle" />
-      </ReferenceElement>
-      {tooltipVisible && tooltip}
+      </ReferenceElement> */}
+      {/* {tooltipVisible && tooltip} */}
     </Container>
   );
 };
