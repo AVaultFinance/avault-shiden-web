@@ -123,7 +123,7 @@ const fetch = async (
       apr: `${kacRewardsApr}`,
       apy: kacRewardApy,
       userData: {
-        _userDataKey: {
+        [_userDataKey]: {
           account: _userData.account,
           allowance: _userData.allowance,
           stakingTokenBalance: _userData.stakingTokenBalance,
