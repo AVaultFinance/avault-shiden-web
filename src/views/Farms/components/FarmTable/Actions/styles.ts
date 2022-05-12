@@ -27,3 +27,13 @@ export const LongButton = styled(Button)<{ disabled: boolean }>`
     margin-top: 15px;
   }
 `;
+
+export const HelfButton = styled(Button)<{ disabled: boolean }>`
+  height: 36px;
+  width: 48%;
+  margin-top: 10px;
+  // background: ${({ disabled, theme }) => (disabled ? '#eee' : theme.colors.primary)};
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-top: 15px;
+  }
+`;

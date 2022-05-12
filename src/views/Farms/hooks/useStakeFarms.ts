@@ -11,6 +11,13 @@ const useStakeFarms = (abi: any, masterChefAddress: string, pid: number) => {
     },
     [masterChefContract, pid],
   );
+  // const handleStake = useCallback(
+  //   async (amount: string, deadline: number, v: number, r: string, s: string) => {
+  //     const txHash = await depositWithPermit(masterChefContract, pid, amount, deadline, v, r, s);
+  //     console.info(txHash);
+  //   },
+  //   [masterChefContract, pid],
+  // );
 
   return { onStake: handleStake };
 };
