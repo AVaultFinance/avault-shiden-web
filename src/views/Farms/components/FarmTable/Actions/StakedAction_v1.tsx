@@ -86,7 +86,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ farm, userDataRea
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`;
 
   const handleStake = async (amount: string) => {
-    await onStake(amount, signatureData.deadline, signatureData.v, signatureData.r, signatureData.s);
+    await onStake(amount);
+    // await onStake(amount, signatureData.deadline, signatureData.v, signatureData.r, signatureData.s);
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }));
   };
 
