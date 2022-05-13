@@ -70,6 +70,9 @@ const GlobalStyle = createGlobalStyle`
       display: flex;
       flex-direction: column;
     }
+    h1,h2,h3,h4,h5,h6,p{
+      color: #fff;
+    }
   }
   .w20{
     width: 20px;

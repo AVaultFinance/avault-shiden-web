@@ -54,6 +54,10 @@ const avaultMenuItems: IMenu[] = [
     text: 'Farm',
     link: '/farms',
   },
+  {
+    text: 'Governance',
+    link: '/governance',
+  },
   // {
   //   text: 'Stake',
   //   link: '/stake',

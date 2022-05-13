@@ -14,7 +14,6 @@ import { usePollCoreFarmData } from 'state/farms/hooks';
 // import { usePollVaultData } from 'state/vault/hooks';
 import { usePollBlockNumber } from 'state/block/hooks';
 import PageLoader from 'components/Loader/PageLoader';
-import Unbind from 'views/Stake/Unbind';
 import useEagerConnect from 'hooks/useEagerConnect';
 import { usePollVaultData } from 'state/vault/hooks';
 // import { useFetchProfile } from 'state/profile/hooks';
@@ -24,12 +23,14 @@ import { usePollVaultData } from 'state/vault/hooks';
 // Only pool is included in the main bundle because of it's the most visited page
 const Vault = lazy(() => import('./views/Vault/index'));
 const Zap = lazy(() => import('./views/Zap/index'));
-const Swap = lazy(() => import('./views/Swap'));
 
 const Home = lazy(() => import('./views/Home'));
 const Farms = lazy(() => import('./views/Farms'));
-const Stake = lazy(() => import('./views/Stake/Stake'));
-const UnStake = lazy(() => import('./views/Stake/Unstake'));
+const Governance = lazy(() => import('./views/Governance'));
+// const Stake = lazy(() => import('./views/Stake/Stake'));
+// const UnStake = lazy(() => import('./views/Stake/Unstake'));
+// const Unbind = lazy(() => import('./views/Stake/Unbind'));
+// const Swap = lazy(() => import('./views/Swap'));
 const NotFound = lazy(() => import('./views/NotFound'));
 
 // This config is required for number formatting
@@ -61,6 +62,14 @@ const App: React.FC = () => {
             <Route path="/zap">
               <Zap />
             </Route>
+            <Route path="/farms">
+              <Farms />
+            </Route>
+            <Route path="/governance">
+              <Governance />
+            </Route>
+
+            {/*             
             <Route path="/stake">
               <Stake />
             </Route>
@@ -70,10 +79,8 @@ const App: React.FC = () => {
             <Route path="/unstake">
               <UnStake />
             </Route>
-            <Route path="/farms">
-              <Farms />
-            </Route>
-            <Route path="/swap" component={Swap} />
+         
+            <Route path="/swap" component={Swap} /> */}
 
             {/* 404 */}
             <Route component={NotFound} />
