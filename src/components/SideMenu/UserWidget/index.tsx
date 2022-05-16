@@ -16,6 +16,9 @@ const TextLinerStyle = styled(Flex)`
   margin-top: 0;
   align-items: center;
   justify-content: start;
+  p {
+    color: transparent;
+  }
   ${({ theme }) => theme.mediaQueries.md} {
     margin-bottom: 10px;
     margin-top: 30px;

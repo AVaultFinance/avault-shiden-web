@@ -13,8 +13,8 @@ const FlexStyled = styled.div`
   // justify-content: space-between;
   // align-content: center;
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   div {
     width: 62%;
     height: 62%;

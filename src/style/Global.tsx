@@ -53,7 +53,12 @@ body {
 }
 `;
 const GlobalStyle = createGlobalStyle`
-
+  ul,li{
+    list-style: none;
+  }
+  i{
+    font-style:normal;
+  }
   body {
     height: 100%;
     background-color: ${({ theme }) => theme.colors.background02};

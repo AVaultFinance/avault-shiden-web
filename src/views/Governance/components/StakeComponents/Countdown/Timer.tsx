@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Heading } from '@my/ui';
+import { Flex } from '@my/ui';
 
 export interface TimerProps {
   minutes?: number;
@@ -9,54 +9,64 @@ export interface TimerProps {
   seconds?: number;
 }
 
-const StyledTimerText = styled(Heading)`
-  // color: ${({ theme }) => theme.colors.primary};
-  font-size: 12px;
-  font-weight: bolder;
-  margin: 0;
+const StyledTimerText = styled.div`
+  width: 23%;
+  padding: 16px 0;
+  background-image: radial-gradient(circle at 50% 0%, #3e255b 0%, #181733 100%);
+  border: 4px solid #2e2d5b;
+  box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 20px 0 18px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding: 30px 0 27px;
+  }
+  h2 {
+    font-size: 24px;
+    padding-bottom: 8px;
+    ${({ theme }) => theme.mediaQueries.md} {
+      font-size: 30px;
+    }
+    ${({ theme }) => theme.mediaQueries.lg} {
+      font-size: 36px;
+      padding-bottom: 20px;
+    }
+  }
+  h4 {
+    font-size: 12px;
+    color: #6a6991;
+    ${({ theme }) => theme.mediaQueries.lg} {
+      font-size: 15px;
+    }
+  }
 `;
 const FlexStyled = styled(Flex)`
-  justify-content: end;
-  background: linear-gradient(90deg, #303fff 0%, #c947d9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Timer: React.FC<TimerProps> = ({ minutes, hours, days, seconds }) => {
   return (
     <FlexStyled>
-      <StyledTimerText mb="-4px" scale="xl" mr="4px">
-        {days >= 10 ? days : `0${days}`}:
+      <StyledTimerText>
+        <h2>{days >= 10 ? days : `0${days}`}</h2>
+        <h4>Days</h4>
       </StyledTimerText>
-      <StyledTimerText mb="-4px" scale="xl" mr="4px">
-        {hours >= 10 ? hours : `0${hours}`}:
+      <StyledTimerText>
+        <h2>{hours >= 10 ? hours : `0${hours}`}</h2>
+        <h4>Hours</h4>
       </StyledTimerText>
-      <StyledTimerText mb="-4px" scale="xl" mr="4px">
-        {minutes >= 10 ? minutes : `0${minutes}`}:
+      <StyledTimerText>
+        <h2>{minutes >= 10 ? minutes : `0${minutes}`}</h2>
+        <h4>Min</h4>
       </StyledTimerText>
-      <StyledTimerText mb="-4px" scale="xl" mr="4px">
-        {seconds >= 10 ? seconds : `0${seconds}`}
+      <StyledTimerText>
+        <h2>{seconds >= 10 ? seconds : `0${seconds}`}</h2>
+        <h4>Sec</h4>
       </StyledTimerText>
     </FlexStyled>
   );
 };
-const TimerComponents = () => {
-  // const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
-  // minutes={minutes + 1} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
-  // hours={hours}
-  // days={days}
-  // seconds={seconds}
-  return (
-    <TimerComponentsStyled>
-      <Timer
-        minutes={0} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
-        hours={0}
-        days={0}
-        seconds={0}
-      />
-      <h3>Remaining Locked time</h3>
-    </TimerComponentsStyled>
-  );
-};
-const TimerComponentsStyled = styled.div``;
-export default TimerComponents;
+
+export default Timer;
