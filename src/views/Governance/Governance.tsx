@@ -34,11 +34,17 @@ const Governance = () => {
   );
 };
 const PageStyled = styled(Page)`
-  padding-top: 100px;
+  padding-top: 20px;
   background-image: url('./images/stake/bg_element.svg');
   background-size: 420px;
   background-repeat: no-repeat;
   background-position: 60px 45px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding-top: 50;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-top: 100px;
+  }
 `;
 const PageWrapFlex = styled(Flex)`
   align-items: center;
