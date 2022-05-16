@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, Button, Flex } from '@my/ui';
 
-interface CInputProps {
+interface InputBalanceProps {
   onSelectMax?: () => void;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   value: string;
@@ -40,7 +40,13 @@ const InputContainer = styled(Flex)`
   justify-content: space-between;
 `;
 
-const CInput: React.FC<CInputProps> = ({ onChange, onSelectMax, value, decimals = 18, autoFocus = false }) => {
+const InputBalance: React.FC<InputBalanceProps> = ({
+  onChange,
+  onSelectMax,
+  value,
+  decimals = 18,
+  autoFocus = false,
+}) => {
   return (
     <>
       <InputContainer>
@@ -62,4 +68,4 @@ const CInput: React.FC<CInputProps> = ({ onChange, onSelectMax, value, decimals 
   );
 };
 
-export default CInput;
+export default InputBalance;

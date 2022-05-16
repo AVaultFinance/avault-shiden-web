@@ -1,25 +1,30 @@
 import styled from 'styled-components';
+import CountUp from 'react-countup';
 
-const StakeingInfo = () => {
+interface IProps {
+  apy: string;
+  totalAVATLocked: string;
+  avarageLockTime: string;
+}
+const StakeingInfo = ({ apy, totalAVATLocked, avarageLockTime }: IProps) => {
   return (
     <StakeingInfoStyled>
       <div className="stakeingInfo_top">
         <h2>Governance</h2>
         <h3>Staking Info</h3>
         <div className="apy_btn">
-          682.11%
-          <i>APY</i>
+          <CountUp className="h4" duration={1} useEasing={true} decimals={1} end={apy ? Number(apy) : 0} />%<i>APY</i>
         </div>
       </div>
       <div className="stakeingInfo_bottom">
         <ul>
           <li>
             <p>Average lock time</p>
-            <h4>48.11Weeks</h4>
+            <h4>{avarageLockTime}Weeks</h4>
           </li>
           <li>
             <p>Total AVAT locked</p>
-            <h4>283M</h4>
+            <h4>{totalAVATLocked}</h4>
           </li>
         </ul>
       </div>

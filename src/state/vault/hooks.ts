@@ -58,7 +58,7 @@ export const useVault = (): VaultState => {
 // };
 export const useVaultAllTotal = () => {
   const vault = useSelector((state: State) => state.vault);
-  return vault.allLiquidity;
+  return vault.tvlTotal;
 };
 export const useVaultData = () => {
   const vaultData = useSelector((state: State) => state.vault.data);

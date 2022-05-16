@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import { CampaignType, FarmConfig, LotteryStatus, LotteryTicket, Nft, PoolConfig, Team } from 'config/constants/types';
 import { IVault } from './vault/types';
+import { GovernanceState } from './governance/types';
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>;
 
@@ -77,12 +78,12 @@ export interface FarmsState {
   data: Farm[];
   loadArchivedFarmsData: boolean;
   userDataLoaded: boolean;
-  allLiquidity: string;
+  tvlTotal: string;
 }
 
 export interface VaultState {
   data: IVault[];
-  allLiquidity: string;
+  tvlTotal: string;
   isUserLoaded: boolean;
   userDataLoaded: boolean;
 }
@@ -488,6 +489,7 @@ export interface State {
   price: PriceState;
   farms: FarmsState;
   vault: VaultState;
+  governance: GovernanceState;
   pools: PoolsState;
   predictions: PredictionsState;
   profile: ProfileState;

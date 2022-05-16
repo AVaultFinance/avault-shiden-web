@@ -22,6 +22,7 @@ import mint from './mint/reducer';
 import lists from './lists/reducer';
 import burn from './burn/reducer';
 import multicall from './multicall/reducer';
+import governance from './governance';
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'farms', 'lists', 'vault'];
 // const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];
@@ -34,6 +35,7 @@ const store = configureStore({
     price: priceReducer,
     farms: farmsReducer,
     vault: vault,
+    governance: governance,
     pools: poolsReducer,
     predictions: predictionsReducer,
     profile: profileReducer,

@@ -7,7 +7,6 @@ import { useAppDispatch } from 'state';
 import useToast from 'hooks/useToast';
 import { LongButton } from './styles';
 import styled from 'styled-components';
-import CInput from './C_Input';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import { useVault } from 'state/vault/hooks';
 import useVaultWithdraw from 'views/Vault/hooks/useVaultWithdraw';
@@ -15,6 +14,7 @@ import { changeLoading, changeVaultItemLoading, fetchVaultFarmUserDataAsync } fr
 import Loading from 'components/TransactionConfirmationModal/Loading';
 import { ActionContainerBg, ActionContainerSize } from 'style/TableStyled';
 import { showDecimals } from 'views/Vault/utils';
+import InputBalance from 'components/InputBalance';
 const _rate = 1;
 
 interface WithdrawActionProps {
@@ -137,7 +137,7 @@ const WithdrawAction: React.FunctionComponent<WithdrawActionProps> = ({
       </Text>
       <ActionContainerBg smallBorder={disabled ? false : true}>
         <FlexStyled>
-          <CInput value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
+          <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
           <LongButton variant="primary" isLoading={pendingTx} disabled={disabled} onClick={handleWithdraw}>
             Withdraw
             {/* {pendingTx ? 'Withdrawing' : ''} */}

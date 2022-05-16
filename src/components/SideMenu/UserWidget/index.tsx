@@ -6,6 +6,7 @@ import Balance from 'components/Balance';
 import { useFarmsAllTotal } from 'state/farms/hooks';
 import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
+import { useGovernanceAllTotal } from 'state/governance/hooks';
 const TextLinerStyle = styled(Flex)`
   font-size: 18px;
   background: linear-gradient(270deg, #00f4b9 0%, #ff4afb 100%);
@@ -29,15 +30,17 @@ const UserWidget = () => {
   const isMobile = isMd || isSm || isXs;
   const allVaultTotal = useVaultAllTotal();
   const allFarmsTotal = useFarmsAllTotal();
+  const allGovernanceTotal = useGovernanceAllTotal();
   const [allTotal, setAllTotal] = useState('0');
   useEffect(() => {
     const _allVaultTotal = new BigNumber(allVaultTotal);
     if (_allVaultTotal.gt(0)) {
       const _allFarmsTotal = new BigNumber(allFarmsTotal);
-      setAllTotal(_allVaultTotal.plus(_allFarmsTotal).toFixed(8));
+      const _allGovernanceTotal = new BigNumber(allGovernanceTotal);
+      setAllTotal(_allVaultTotal.plus(_allFarmsTotal).plus(_allGovernanceTotal).toFixed(8));
     }
     // setAllTotal(_allVaultTotal.toFixed(8));
-  }, [allVaultTotal, allFarmsTotal]);
+  }, [allVaultTotal, allFarmsTotal, allGovernanceTotal]);
   return (
     <User>
       {/* <SwitchChain /> */}
@@ -48,7 +51,7 @@ const UserWidget = () => {
           color="none"
           fontSize="18px"
           fontWeight="600"
-          decimals={6}
+          decimals={2}
           value={Number(allTotal === 'NaN' ? '0' : allTotal)}
         />
       </TextLinerStyle>

@@ -1,19 +1,27 @@
+import { IGovernanceUserData } from 'state/governance/types';
+import CountUp from 'react-countup';
 import styled from 'styled-components';
-
-const StakeBalance = () => {
+interface IProps extends IGovernanceUserData {}
+const StakeBalance = ({ xAVATBalance, AVATLocked, withdrawalDate }: IProps) => {
   return (
     <StakeBalanceStyled>
       <div className="x_title">
         <h3>xAVAT balance</h3>
         <h5>:</h5>
-        <h4>88728.11</h4>
+        <CountUp
+          className="h4"
+          duration={2}
+          useEasing={true}
+          decimals={4}
+          end={xAVATBalance ? Number(xAVATBalance) : 0}
+        />
       </div>
       <div className="list">
         <h4>
-          AVAT Locked<i>88728.11</i>
+          AVAT Locked<i>{AVATLocked}</i>
         </h4>
         <h4>
-          Withdrawal date<i>2023.12.08</i>
+          Withdrawal date<i>{withdrawalDate}</i>
         </h4>
       </div>
     </StakeBalanceStyled>
@@ -51,14 +59,14 @@ const StakeBalanceStyled = styled.div`
     flex-wrap: wrap;
     line-height: 22px;
     h3,
-    h4,
+    .h4,
     h5 {
       font-size: 16px;
       color: #cc64f2;
     }
     ${({ theme }) => theme.mediaQueries.sm} {
       h3,
-      h4,
+      .h4,
       h5 {
         color: #fff;
       }
@@ -87,7 +95,7 @@ const StakeBalanceStyled = styled.div`
         display: none;
       }
     }
-    h4 {
+    .h4 {
       font-size: 16px;
       color: #cc64f2;
       ${({ theme }) => theme.mediaQueries.md} {
@@ -100,6 +108,7 @@ const StakeBalanceStyled = styled.div`
   }
   .list {
     position: relative;
+    z-index: 2;
     border-top: 1px solid #2e2d5b;
     border: 1px solid #2e2d5b;
     background: #181733;

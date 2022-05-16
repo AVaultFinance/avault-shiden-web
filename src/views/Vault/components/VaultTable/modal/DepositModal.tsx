@@ -11,7 +11,7 @@ import { useVault } from 'state/vault/hooks';
 import useToast from 'hooks/useToast';
 import useVaultDeposit from 'views/Vault/hooks/useVaultDeposit';
 import { showDecimals } from 'views/Vault/utils';
-import CInput from '../Actions/C_Input';
+import InputBalance from 'components/InputBalance';
 
 interface DepositModalProps {
   lpSymbol?: string;
@@ -116,7 +116,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
         LP Balance: {displayBalance}
       </Text>
       <ModalInputStyled>
-        <CInput value={val} autoFocus={true} onSelectMax={handleSelectMax} onChange={handleChange} />
+        <InputBalance value={val} autoFocus={true} onSelectMax={handleSelectMax} onChange={handleChange} />
         <ButtonStyled
           variant="tertiary"
           height={isMobile ? '38px' : '48px'}

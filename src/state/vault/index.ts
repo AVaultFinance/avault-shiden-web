@@ -52,7 +52,7 @@ const initialState: VaultState = {
       isLoading: false,
     };
   }),
-  allLiquidity: '',
+  tvlTotal: '',
   isUserLoaded: false,
   userDataLoaded: false,
 };
@@ -131,7 +131,7 @@ export const vaultSlice = createSlice({
     builder.addCase(fetchVaultsPublicDataAsync.fulfilled, (state, action) => {
       state.userDataLoaded = true;
       state.data = action.payload[0];
-      state.allLiquidity = action.payload[1];
+      state.tvlTotal = action.payload[1];
     });
     builder.addCase(fetchVaultFarmUserDataAsync.fulfilled, (state, action) => {
       action.payload.forEach((userDataEl) => {

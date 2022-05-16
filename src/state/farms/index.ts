@@ -29,7 +29,7 @@ const initialState: FarmsState = {
   data: noAccountFarmConfig,
   loadArchivedFarmsData: false,
   userDataLoaded: false,
-  allLiquidity: '0',
+  tvlTotal: '0',
 };
 
 export const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid));
@@ -109,7 +109,7 @@ export const farmsSlice = createSlice({
         }
       }
       if (_total.toNumber() !== 0) {
-        state.allLiquidity = _total.toFixed(8);
+        state.tvlTotal = _total.toFixed(8);
       }
       // state.data = arr;
     });

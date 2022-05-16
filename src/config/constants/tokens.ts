@@ -142,6 +142,20 @@ export const main_tokens = {
     decimals: 18,
     projectLink: BASE_BSC_SCAN_URL,
   },
+  avat: {
+    name: 'avat Token',
+    symbol: 'AVAT',
+    address: {
+      [ChainId.ASTR_MAINNET]: '0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c',
+      [ChainId.ASTR_TESTNET]: '0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c',
+      [ChainId.SDN_MAINNET]: '0xb12c13e66ade1f72f71834f2fc5082db8c091358',
+      [ChainId.SDN_TESTNET]: '0xb12c13e66ade1f72f71834f2fc5082db8c091358',
+      [ChainId.BSC_MAINNET]: '0xf96429A7aE52dA7d07E60BE95A3ece8B042016fB',
+      [ChainId.BSC_TESTNET]: '0x0bA819e30016Cf682C7795b44859148C65e62292',
+    },
+    decimals: 18,
+    projectLink: BASE_BSC_SCAN_URL,
+  },
 };
 
 export const DEFAULT_Token = {
@@ -180,6 +194,10 @@ export const Base_Token: Token = new Token(
 
 export const Kaco: Token = CHAINKEY.SDN
   ? new Token(chainId, main_tokens.kaco.address[chainId], 18, main_tokens.kaco.symbol, main_tokens.kaco.name)
+  : null;
+
+export const AVAT: Token = CHAINKEY.SDN
+  ? new Token(chainId, main_tokens.avat.address[chainId], 18, main_tokens.avat.symbol, main_tokens.avat.name)
   : null;
 
 export const BUSD: { [chainId: number]: Token } = {

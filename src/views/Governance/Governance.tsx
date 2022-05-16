@@ -1,17 +1,34 @@
-import { Flex } from '@my/ui';
+import { Flex, useModal } from '@my/ui';
 import Page from 'components/Layout/Page';
+import { chainId } from 'config/constants/tokens';
+import useActiveWeb3React from 'hooks/useActiveWeb3React';
+import { useGovernanceData } from 'state/governance/hooks';
 import styled from 'styled-components';
+import LockAVATModal from './components/Modal/LockAVATModal';
 import Rewards from './components/Rewards';
-import StakeComponents from './components/StakeComponents';
+import Stake from './components/Stake';
 import StakeingInfo from './components/StakeingInfo';
 
 const Governance = () => {
+  const { account } = useActiveWeb3React();
+  const { rewards, hasLocked, apy, avarageLockTime, totalAVATLocked, userData, isUserLoaded } = useGovernanceData();
+  const _userDataKey = `${account}-${chainId}`;
+  const _userData = userData[_userDataKey];
+  const { AVATBalance = '0' } = _userData || {};
+  const [onPresentLockAVATModal] = useModal(
+    <LockAVATModal account={account} max={AVATBalance} isUserLoaded={isUserLoaded} />,
+  );
   return (
     <PageStyled>
       <PageWrapFlex>
-        <StakeingInfo />
-        <StakeComponents />
-        <Rewards />
+        <StakeingInfo apy={apy} totalAVATLocked={totalAVATLocked} avarageLockTime={avarageLockTime} />
+        <Stake
+          hasLocked={hasLocked}
+          userData={_userData}
+          account={account}
+          onPresentLockAVATModal={onPresentLockAVATModal}
+        />
+        <Rewards rewards={rewards} />
       </PageWrapFlex>
     </PageStyled>
   );
@@ -36,14 +53,15 @@ const PageWrapFlex = styled(Flex)`
     &:nth-child(1),
     &:nth-child(2) {
       width: 100%;
-      height: 410px;
+      height: 460px;
       margin-bottom: 20px;
-
+      ${({ theme }) => theme.mediaQueries.sm} {
+        height: 560px;
+      }
       ${({ theme }) => theme.mediaQueries.md} {
         margin-top: 0;
         width: 49%;
         max-width: 585px;
-        height: 520px;
       }
       ${({ theme }) => theme.mediaQueries.lg} {
         height: 638px;
@@ -57,11 +75,9 @@ const PageWrapFlex = styled(Flex)`
       margin-bottom: 20px;
       border: none;
       background-color: transparent;
-      ${({ theme }) => theme.mediaQueries.sm} {
+      ${({ theme }) => theme.mediaQueries.md} {
         background-color: #181733;
         border: 1px solid #2e2d5b;
-      }
-      ${({ theme }) => theme.mediaQueries.md} {
         margin-top: 40px;
         margin-bottom: 0;
       }

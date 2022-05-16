@@ -7,7 +7,6 @@ import { useAppDispatch } from 'state';
 import useToast from 'hooks/useToast';
 import { LongButton } from './styles';
 import styled from 'styled-components';
-import CInput from './C_Input';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import { useVault, useVaultFarmUser } from 'state/vault/hooks';
 import useVaultDeposit from 'views/Vault/hooks/useVaultDeposit';
@@ -15,6 +14,7 @@ import { changeLoading, changeVaultItemLoading, fetchVaultFarmUserDataAsync } fr
 import Loading from 'components/TransactionConfirmationModal/Loading';
 import { ActionContainerBg, ActionContainerSize } from 'style/TableStyled';
 import { showDecimals } from 'views/Vault/utils';
+import InputBalance from 'components/InputBalance';
 
 interface HarvestActionProps {
   userDataReady: boolean;
@@ -134,7 +134,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
       </Text>
       <ActionContainerBg smallBorder={disabled ? false : true}>
         <FlexStyled>
-          <CInput value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
+          <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
           {!isApproved ? (
             <LongButton
               disabled={requestedApproval || !userDataReady}

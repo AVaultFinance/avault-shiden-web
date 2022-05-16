@@ -443,7 +443,7 @@ const InnerStyled = styled.div<{ border: boolean }>`
   border-radius: 12px;
   position: relative;
   margin-bottom: 30px;
-  border: 1px solid ${({ theme, border }) => (border ? theme.colors.text : theme.colors.borderColor)};
+  border: 1px solid ${({ theme, border }) => (border ? theme.colors.text : theme.colors.cardBorder)};
   padding: 10px 20px;
 `;
 const TitleStyled = styled.p`

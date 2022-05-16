@@ -32,7 +32,7 @@ export const usePollFarmsData = (includeArchive = false) => {
 };
 export const useFarmsAllTotal = () => {
   const farms = useSelector((state: State) => state.farms);
-  return farms.allLiquidity;
+  return farms.tvlTotal;
 };
 /**
  * Fetches the "core" farm data used globally

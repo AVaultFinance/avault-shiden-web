@@ -11,7 +11,7 @@ import { useAppDispatch } from 'state';
 import useVaultWithdraw from 'views/Vault/hooks/useVaultWithdraw';
 import { changeLoading, changeVaultItemLoading, fetchVaultFarmUserDataAsync } from 'state/vault';
 import { showDecimals } from 'views/Vault/utils';
-import CInput from '../Actions/C_Input';
+import InputBalance from 'components/InputBalance';
 
 interface WithdrawModalProps {
   displayEarningsBalance: string;
@@ -112,7 +112,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
         {lpSymbol ? ` ${lpSymbol}` : ''}
       </Text>
       <ModalInputStyled>
-        <CInput autoFocus={true} onSelectMax={handleSelectMax} onChange={handleChange} value={val} />
+        <InputBalance autoFocus={true} onSelectMax={handleSelectMax} onChange={handleChange} value={val} />
         <Button
           variant="tertiary"
           disabled={pendingTx || !valNumber.isFinite() || valNumber.eq(0) || valNumber.gt(fullBalanceNumber)}
