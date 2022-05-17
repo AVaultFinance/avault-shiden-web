@@ -52,6 +52,36 @@ body {
   z-index: 3;
 }
 `;
+export const IDOGlobalStyle = createGlobalStyle`
+body{
+  padding: 0;
+}
+header{
+  padding: 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 0 20px;
+  }
+}
+.bg-holder{
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-image: url('/images/ido/h5_bg.png');
+  background-position: 0 center;
+
+  ${({ theme }) => theme.mediaQueries.xs} {
+    background-position: 0 660px;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    background-position: 0 800px;
+    background-image: url('/images/ido/pc_bg.png');
+  }
+  ${({ theme }) => theme.mediaQueries.xl} {
+    background-position: 0 560px;
+  }
+  ${({ theme }) => theme.mediaQueries.nav} {
+  }
+}
+`;
 const GlobalStyle = createGlobalStyle`
   ul,li{
     list-style: none;

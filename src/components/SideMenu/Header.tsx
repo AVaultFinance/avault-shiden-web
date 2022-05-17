@@ -13,7 +13,7 @@ const Header: FC<{ className?: string; setCollapsed: (collapsed: boolean) => voi
   const { pathname } = useLocation();
   const hasBorder = pathname.includes('governance');
   return (
-    <div className={className}>
+    <header className={className}>
       <InnerStyled hasBorder={hasBorder}>
         <FlFlex>
           <Logo collapsed={collapsed} />
@@ -23,7 +23,7 @@ const Header: FC<{ className?: string; setCollapsed: (collapsed: boolean) => voi
           <UserWidget />
         </div>
       </InnerStyled>
-    </div>
+    </header>
   );
 };
 const FlFlex = styled(Flex)`

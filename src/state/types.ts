@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import { CampaignType, FarmConfig, LotteryStatus, LotteryTicket, Nft, PoolConfig, Team } from 'config/constants/types';
 import { IVault } from './vault/types';
 import { GovernanceState } from './governance/types';
+import { IIdoState } from './ido/types';
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>;
 
@@ -497,4 +498,5 @@ export interface State {
   collectibles: CollectiblesState;
   voting: VotingState;
   lottery: LotteryState;
+  ido: IIdoState;
 }

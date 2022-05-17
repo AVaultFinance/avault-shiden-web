@@ -1,10 +1,10 @@
 import React from 'react';
 import getTimePeriods from 'utils/getTimePeriods';
-import Timer from './Timer';
 import { ILockAVATModalState } from 'state/governance/types';
-import useNextEventCountdown from './useNextEventCountdown';
 import styled from 'styled-components';
 import { Button } from '@my/ui';
+import Timer from 'components/CountdownTimer/Timer';
+import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
 
 interface IProps {
   nextEventTime: number;

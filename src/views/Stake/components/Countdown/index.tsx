@@ -1,7 +1,7 @@
+import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
 import React from 'react';
 import getTimePeriods from 'utils/getTimePeriods';
 import Timer from './Timer';
-import useNextEventCountdown from './useNextEventCountdown';
 
 interface CountdownProps {
   nextEventTime: number;

@@ -23,6 +23,7 @@ import lists from './lists/reducer';
 import burn from './burn/reducer';
 import multicall from './multicall/reducer';
 import governance from './governance';
+import ido from './ido';
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'farms', 'lists', 'vault'];
 // const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];
@@ -36,6 +37,7 @@ const store = configureStore({
     farms: farmsReducer,
     vault: vault,
     governance: governance,
+    ido: ido,
     pools: poolsReducer,
     predictions: predictionsReducer,
     profile: profileReducer,
