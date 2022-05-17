@@ -13,7 +13,7 @@ const LogoStyle = styled.a`
   margin-top: 0;
   height: 34px;
   ${({ theme }) => theme.mediaQueries.md} {
-    height: 26px;
+    width: 120px;
     margin-top: 0;
     margin-right: 48px;
   }

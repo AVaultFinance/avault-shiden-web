@@ -1,5 +1,6 @@
 // import getTimePeriods from 'utils/getTimePeriods';
 import { Button, Flex } from '@my/ui';
+import ConnectWalletButton from 'components/ConnectWalletButton';
 import { useMemo } from 'react';
 import { IGovernanceUserData, ILockAVATModalState } from 'state/governance/types';
 import styled from 'styled-components';
@@ -50,7 +51,7 @@ const Stake = ({ hasLocked, userData, account, onClickModal }: IProps) => {
                 Withdraw
               </Button>
             </FlexButton>
-          ) : (
+          ) : account ? (
             <LongButton
               onClick={() => {
                 onClickModal(ILockAVATModalState.INIT);
@@ -58,12 +59,15 @@ const Stake = ({ hasLocked, userData, account, onClickModal }: IProps) => {
             >
               Create Lock
             </LongButton>
+          ) : (
+            <ConnectWalletButtonStyle />
           )}
         </StakeStyled>
       </div>
     );
-  }, [hasLocked, userData, onClickModal]);
+  }, [hasLocked, userData, onClickModal, account]);
 };
+
 const StakeStyled = styled.div<{ hasLocked: boolean }>`
   position: relative;
   padding: 8% 5%;
@@ -74,6 +78,15 @@ const StakeStyled = styled.div<{ hasLocked: boolean }>`
   }
 `;
 const LongButton = styled(Button)`
+  width: 90%;
+  border-radius: 12px;
+  font-size: 18px;
+  height: 60px;
+  position: absolute;
+  bottom: 6%;
+  left: 5%;
+`;
+const ConnectWalletButtonStyle = styled(ConnectWalletButton)`
   width: 90%;
   border-radius: 12px;
   font-size: 18px;

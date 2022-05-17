@@ -27,6 +27,8 @@ const Zap = lazy(() => import('./views/Zap/index'));
 const Home = lazy(() => import('./views/Home'));
 const Farms = lazy(() => import('./views/Farms'));
 const Governance = lazy(() => import('./views/Governance'));
+const Ido = lazy(() => import('./views/Ido'));
+
 // const Stake = lazy(() => import('./views/Stake/Stake'));
 // const UnStake = lazy(() => import('./views/Stake/Unstake'));
 // const Unbind = lazy(() => import('./views/Stake/Unbind'));
@@ -55,6 +57,9 @@ const App: React.FC = () => {
           <Switch>
             <Route path="/" exact>
               <Home />
+            </Route>
+            <Route path="/ido">
+              <Ido />
             </Route>
             <Route path="/vault">
               <Vault />
