@@ -12,7 +12,6 @@ const Header: FC<{ className?: string; setCollapsed: (collapsed: boolean) => voi
 }) => {
   const { pathname } = useLocation();
   const hasBorder = pathname.includes('governance');
-  console.log({ pathname, hasBorder });
   return (
     <div className={className}>
       <InnerStyled hasBorder={hasBorder}>

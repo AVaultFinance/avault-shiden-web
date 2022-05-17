@@ -171,7 +171,7 @@ const Zap = () => {
                     inputMode="decimal"
                     step="any"
                     min="0"
-                    placeholder="0"
+                    placeholder="0.00"
                     value={val}
                     onChange={handleChange}
                   />

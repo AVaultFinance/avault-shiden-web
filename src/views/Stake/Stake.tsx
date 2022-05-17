@@ -68,7 +68,7 @@ const Stake = () => {
                 step="any"
                 min="0"
                 onChange={handleChange}
-                placeholder="0"
+                placeholder="0.00"
                 value={val}
               />
             </StyledTokenInputTop>
@@ -80,7 +80,7 @@ const Stake = () => {
                 step="any"
                 min="0"
                 onChange={handleChange}
-                placeholder="0"
+                placeholder="0.00"
                 value={val}
               />
             </StyledTokenInputTop>

@@ -26,7 +26,6 @@ const BalanceInput = ({
   handleChange,
   token,
 }: IProps) => {
-  console.log({ balance });
   return (
     <div>
       <Flex alignItems="center" justifyContent="end" paddingY="4px">
@@ -35,11 +34,12 @@ const BalanceInput = ({
           {balance || Number(balance) === 0 ? (
             Number(new BigNumber(balance).toFixed(decimals, BigNumber.ROUND_DOWN)).toLocaleString('en-US', {
               maximumFractionDigits: decimals,
+              minimumFractionDigits: 2,
             })
           ) : isUserLoaded ? (
             <SkeletonStyled />
           ) : (
-            '0'
+            '0.00'
           )}
         </BalanceStyled>
         <MaxButtonStyled variant="text" onClick={handleSelectMax}>
@@ -58,7 +58,7 @@ const BalanceInput = ({
               inputMode="decimal"
               step="any"
               min="0"
-              placeholder="0"
+              placeholder="0.00"
               value={val}
               onChange={handleChange}
             />
@@ -86,14 +86,13 @@ const InnerStyled = styled.div<{ border: boolean }>`
   transition: all 0.3s ease;
   border-radius: 12px;
   position: relative;
-  margin-bottom: 30px;
   border: 1px solid ${({ theme, border }) => (border ? theme.colors.text : theme.colors.cardBorder)};
   padding: 10px 20px;
 `;
 const BalanceStyled = styled(Flex)`
   font-size: 12px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.textSubtle};
+  color: ${({ theme }) => theme.colors.text};
   align-items: center;
   justify-content: space-between;
 `;

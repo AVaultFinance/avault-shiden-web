@@ -1,7 +1,7 @@
 // import getTimePeriods from 'utils/getTimePeriods';
 import { Button, Flex } from '@my/ui';
 import { useMemo } from 'react';
-import { IGovernanceUserData } from 'state/governance/types';
+import { IGovernanceUserData, ILockAVATModalState } from 'state/governance/types';
 import styled from 'styled-components';
 import StakeBalance from './StakeComponents/Balance';
 import Countdown from './StakeComponents/Countdown/Countdown';
@@ -9,9 +9,9 @@ interface IProps {
   hasLocked: boolean;
   userData: IGovernanceUserData;
   account: string;
-  onPresentLockAVATModal: any;
+  onClickModal: any;
 }
-const Stake = ({ hasLocked, userData, account, onPresentLockAVATModal }: IProps) => {
+const Stake = ({ hasLocked, userData, account, onClickModal }: IProps) => {
   return useMemo(() => {
     const {
       xAVATBalance = '0',
@@ -31,19 +31,38 @@ const Stake = ({ hasLocked, userData, account, onPresentLockAVATModal }: IProps)
             remainderBlock={remainderBlock}
           />
           {/* 12s  300block */}
-          <Countdown nextEventTime={12 * remainderBlock} hasLocked={hasLocked} />
+          <Countdown nextEventTime={12 * remainderBlock} hasLocked={hasLocked} onClickModal={onClickModal} />
           {hasLocked ? (
             <FlexButton>
-              <Button>Lock more</Button>
-              <Button variant="tertiary">Withdraw</Button>
+              <Button
+                onClick={() => {
+                  onClickModal(ILockAVATModalState.ADDAMOUNT);
+                }}
+              >
+                Lock more
+              </Button>
+              <Button
+                variant="tertiary"
+                onClick={() => {
+                  onClickModal(ILockAVATModalState.WITHDRAW);
+                }}
+              >
+                Withdraw
+              </Button>
             </FlexButton>
           ) : (
-            <LongButton onClick={onPresentLockAVATModal}>Create Lock</LongButton>
+            <LongButton
+              onClick={() => {
+                onClickModal(ILockAVATModalState.INIT);
+              }}
+            >
+              Create Lock
+            </LongButton>
           )}
         </StakeStyled>
       </div>
     );
-  }, [hasLocked, userData, onPresentLockAVATModal]);
+  }, [hasLocked, userData, onClickModal]);
 };
 const StakeStyled = styled.div<{ hasLocked: boolean }>`
   position: relative;

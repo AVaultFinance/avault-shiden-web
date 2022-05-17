@@ -2,7 +2,13 @@ import { Flex, useModal } from '@my/ui';
 import Page from 'components/Layout/Page';
 import { chainId } from 'config/constants/tokens';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
+import { delay } from 'lodash';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'state';
+import { changeLockAVATModalState } from 'state/governance';
 import { useGovernanceData } from 'state/governance/hooks';
+import { ILockAVATModalState } from 'state/governance/types';
 import styled from 'styled-components';
 import LockAVATModal from './components/Modal/LockAVATModal';
 import Rewards from './components/Rewards';
@@ -15,19 +21,23 @@ const Governance = () => {
   const _userDataKey = `${account}-${chainId}`;
   const _userData = userData[_userDataKey];
   const { AVATBalance = '0' } = _userData || {};
+  const dispatch = useDispatch<AppDispatch>();
+
   const [onPresentLockAVATModal] = useModal(
     <LockAVATModal account={account} max={AVATBalance} isUserLoaded={isUserLoaded} />,
+  );
+  const onClickModal = useCallback(
+    (state: ILockAVATModalState) => {
+      dispatch(changeLockAVATModalState({ lockAVATModalState: state }));
+      delay(onPresentLockAVATModal, 100);
+    },
+    [onPresentLockAVATModal, dispatch],
   );
   return (
     <PageStyled>
       <PageWrapFlex>
         <StakeingInfo apy={apy} totalAVATLocked={totalAVATLocked} avarageLockTime={avarageLockTime} />
-        <Stake
-          hasLocked={hasLocked}
-          userData={_userData}
-          account={account}
-          onPresentLockAVATModal={onPresentLockAVATModal}
-        />
+        <Stake hasLocked={hasLocked} userData={_userData} account={account} onClickModal={onClickModal} />
         <Rewards rewards={rewards} />
       </PageWrapFlex>
     </PageStyled>

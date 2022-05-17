@@ -254,7 +254,7 @@ const AddLiquidityModal: React.FC<AddLiquidityModalProps> = ({ vault, account, o
                 inputMode="decimal"
                 step="any"
                 min="0"
-                placeholder="0"
+                placeholder="0.00"
                 value={formattedAmounts[Field.CURRENCY_A]}
                 onChange={handleChangeA}
               />
@@ -284,7 +284,7 @@ const AddLiquidityModal: React.FC<AddLiquidityModalProps> = ({ vault, account, o
                 inputMode="decimal"
                 step="any"
                 min="0"
-                placeholder="0"
+                placeholder="0.00"
                 value={formattedAmounts[Field.CURRENCY_B]}
                 onChange={handleChangeB}
               />

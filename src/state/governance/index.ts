@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GovernanceState } from './types';
+import { GovernanceState, ILockAVATModalState } from './types';
 
 const initialState: GovernanceState = {
   rewards: [],
+  // 0: init;
+  // 1: add amount
+  // 2 change lock time
+  lockAVATModalState: ILockAVATModalState.INIT,
   hasLocked: false, //
   apy: '682.11',
   tvlTotal: '0',
@@ -14,6 +18,14 @@ const initialState: GovernanceState = {
 export const governanceSlice = createSlice({
   name: 'governance',
   initialState,
-  reducers: {},
+  reducers: {
+    changeLockAVATModalState: (state, action) => {
+      console.log('action.payload.lockAVATModalState: ', action.payload.lockAVATModalState);
+
+      state.lockAVATModalState = action.payload.lockAVATModalState as ILockAVATModalState;
+      console.log('state.lockAVATModalState: ', state.lockAVATModalState);
+    },
+  },
 });
+export const { changeLockAVATModalState } = governanceSlice.actions;
 export default governanceSlice.reducer;

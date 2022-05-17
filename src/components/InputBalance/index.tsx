@@ -56,7 +56,7 @@ const InputBalance: React.FC<InputBalanceProps> = ({
           step="any"
           min="0"
           onChange={onChange}
-          placeholder="0"
+          placeholder="0.00"
           value={value}
           autoFocus={autoFocus}
         />

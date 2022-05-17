@@ -1,6 +1,7 @@
 import React from 'react';
 import getTimePeriods from 'utils/getTimePeriods';
 import Timer from './Timer';
+import { ILockAVATModalState } from 'state/governance/types';
 import useNextEventCountdown from './useNextEventCountdown';
 import styled from 'styled-components';
 import { Button } from '@my/ui';
@@ -8,9 +9,10 @@ import { Button } from '@my/ui';
 interface IProps {
   nextEventTime: number;
   hasLocked: boolean;
+  onClickModal: any;
 }
 
-const Countdown: React.FC<IProps> = ({ nextEventTime, hasLocked }: IProps) => {
+const Countdown: React.FC<IProps> = ({ nextEventTime, hasLocked, onClickModal }: IProps) => {
   // 15000000000 s
   const secondsRemaining = useNextEventCountdown(nextEventTime);
   const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
@@ -32,7 +34,11 @@ const Countdown: React.FC<IProps> = ({ nextEventTime, hasLocked }: IProps) => {
         />
       )}
       <h3 className="TimerComponents_title">Remaining Locked time</h3>
-      {hasLocked ? <Button className="btn">Extend lock time</Button> : null}
+      {hasLocked ? (
+        <Button className="btn" onClick={() => onClickModal(ILockAVATModalState.CHANGELOCKTIME)}>
+          Extend lock time
+        </Button>
+      ) : null}
     </TimerComponentsStyled>
   );
 };

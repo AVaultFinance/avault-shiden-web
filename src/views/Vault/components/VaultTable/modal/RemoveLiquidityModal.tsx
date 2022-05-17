@@ -382,7 +382,7 @@ const RemoveLiquidityModal: React.FC<RemoveLiquidityModalProps> = ({ vault, acco
               inputMode="decimal"
               step="any"
               min="0"
-              placeholder="0"
+              placeholder="0.00"
               value={formattedAmounts[Field.LIQUIDITY]}
               onChange={handleChange}
             />

@@ -16,3 +16,8 @@ export const useGovernanceAllTotal = () => {
   const governance = useSelector((state: State) => state.governance);
   return governance.tvlTotal;
 };
+
+export const useLockAVATModalState = () => {
+  const governance = useSelector((state: State) => state.governance);
+  return governance.lockAVATModalState;
+};

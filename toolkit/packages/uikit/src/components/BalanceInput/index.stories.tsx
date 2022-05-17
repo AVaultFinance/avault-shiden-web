@@ -49,7 +49,7 @@ export const Default: React.FC = () => {
         onUserInput={handleNumericChange}
         inputProps={{ inputMode: "numeric" }}
         currencyValue={currencyValue(numericValue)}
-        placeholder="0"
+        placeholder="0.00"
         mb="32px"
       />
     </Box>

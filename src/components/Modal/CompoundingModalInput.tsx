@@ -48,7 +48,7 @@ const ModalInput: React.FC<ModalInputProps> = ({ onChange, onSelectMax, value, d
           step="any"
           min="0"
           onChange={onChange}
-          placeholder="0"
+          placeholder="0.00"
           value={value}
         />
         <MaxButton variant="text" onClick={onSelectMax}>
