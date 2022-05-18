@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Flex } from '@my/ui';
 
 export interface TimerProps {
+  showMonths?: boolean;
+  months?: number;
   minutes?: number;
   hours?: number;
   days?: number;
@@ -21,6 +23,7 @@ const StyledTimerText = styled.div<{ bgColor: string }>`
   border-radius: 20px;
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 20px 0 18px;
+    margin: 0 5px;
   }
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: 30px 0 27px;
@@ -50,29 +53,67 @@ const FlexStyled = styled(Flex)`
   justify-content: space-between;
 `;
 
-const Timer: React.FC<TimerProps> = ({ minutes, hours, days, seconds, bgColor }) => {
+const Timer: React.FC<TimerProps> = ({ showMonths = false, months, minutes, hours, days, seconds, bgColor }) => {
   return useMemo(() => {
     return (
       <FlexStyled>
-        <StyledTimerText bgColor={bgColor}>
-          <h2>{days >= 10 ? days : `0${days}`}</h2>
-          <h4>Days</h4>
-        </StyledTimerText>
-        <StyledTimerText bgColor={bgColor}>
-          <h2>{hours >= 10 ? hours : `0${hours}`}</h2>
-          <h4>Hours</h4>
-        </StyledTimerText>
-        <StyledTimerText bgColor={bgColor}>
-          <h2>{minutes >= 10 ? minutes : `0${minutes}`}</h2>
-          <h4>Min</h4>
-        </StyledTimerText>
-        <StyledTimerText bgColor={bgColor}>
-          <h2>{seconds >= 10 ? seconds : `0${seconds}`}</h2>
-          <h4>Sec</h4>
-        </StyledTimerText>
+        <MonthsComp showMonths={showMonths} months={months} bgColor={bgColor} />
+        <DaysComp days={days} bgColor={bgColor} />
+        <HoursComp hours={hours} bgColor={bgColor} />
+        <MinComp minutes={minutes} bgColor={bgColor} />
+        <SecComp seconds={seconds} bgColor={bgColor} />
       </FlexStyled>
     );
-  }, [days, hours, minutes, seconds, bgColor]);
+  }, [months, showMonths, days, hours, minutes, seconds, bgColor]);
 };
-
+const MonthsComp = ({ showMonths, months, bgColor }) => {
+  return useMemo(() => {
+    return showMonths ? (
+      <StyledTimerText bgColor={bgColor}>
+        <h2>{months >= 10 ? months : `0${months}`}</h2>
+        <h4>Months</h4>
+      </StyledTimerText>
+    ) : null;
+  }, [showMonths, months, bgColor]);
+};
+const DaysComp = ({ days, bgColor }) => {
+  return useMemo(() => {
+    return (
+      <StyledTimerText bgColor={bgColor}>
+        <h2>{days >= 10 ? days : `0${days}`}</h2>
+        <h4>Days</h4>
+      </StyledTimerText>
+    );
+  }, [days, bgColor]);
+};
+const HoursComp = ({ hours, bgColor }) => {
+  return useMemo(() => {
+    return (
+      <StyledTimerText bgColor={bgColor}>
+        <h2>{hours >= 10 ? hours : `0${hours}`}</h2>
+        <h4>Hours</h4>
+      </StyledTimerText>
+    );
+  }, [hours, bgColor]);
+};
+const MinComp = ({ minutes, bgColor }) => {
+  return useMemo(() => {
+    return (
+      <StyledTimerText bgColor={bgColor}>
+        <h2>{minutes >= 10 ? minutes : `0${minutes}`}</h2>
+        <h4>Min</h4>
+      </StyledTimerText>
+    );
+  }, [minutes, bgColor]);
+};
+const SecComp = ({ seconds, bgColor }) => {
+  return useMemo(() => {
+    return (
+      <StyledTimerText bgColor={bgColor}>
+        <h2>{seconds >= 10 ? seconds : `0${seconds}`}</h2>
+        <h4>Sec</h4>
+      </StyledTimerText>
+    );
+  }, [seconds, bgColor]);
+};
 export default Timer;

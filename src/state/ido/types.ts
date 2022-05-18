@@ -6,5 +6,13 @@ export enum IIdoStateEnum {
 export interface IIdoState {
   idoState: IIdoStateEnum;
   isUserLoaded: boolean;
-  maxASTRBalance: string;
+  avatEstimatedPrice: string;
+  network: string;
+  maxASTRBalance: Record<string, string>;
+  endTime: number;
+
+  apr: string;
+  amountInPool: string;
+  rewards: string;
+  lpBalance: Record<string, string>;
 }

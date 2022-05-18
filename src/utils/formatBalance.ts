@@ -33,6 +33,7 @@ export const getFullLocalDisplayBalance = (balance: BigNumber, decimals = 18, di
     'en-US',
     {
       maximumFractionDigits: displayDecimals,
+      minimumFractionDigits: 2,
     },
   );
 };

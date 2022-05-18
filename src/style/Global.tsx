@@ -66,7 +66,7 @@ header{
   background-size: 100%;
   background-repeat: no-repeat;
   background-image: url('/images/ido/h5_bg.png');
-  background-position: 0 center;
+  background-position: 0 110vh;
 
   ${({ theme }) => theme.mediaQueries.xs} {
     background-position: 0 660px;

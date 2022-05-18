@@ -12,8 +12,9 @@ interface IProps {
   nextEventTime: number;
   idoState: IIdoStateEnum;
   maxASTRBalance: string;
+  lpBalance: string;
 }
-const Contribution = ({ nextEventTime, idoState, maxASTRBalance }: IProps) => {
+const Contribution = ({ nextEventTime, idoState, maxASTRBalance, lpBalance }: IProps) => {
   return useMemo(() => {
     return (
       <ContributionStyled>
@@ -24,11 +25,12 @@ const Contribution = ({ nextEventTime, idoState, maxASTRBalance }: IProps) => {
             <img src="/images/ido/icon02.webp" alt="ASTR" />
           </div>
           {idoState === IIdoStateEnum.INIT ? <InitComponents nextEventTime={nextEventTime} /> : null}
-          {idoState === IIdoStateEnum.PROCING ? <PROCINGComponents max={maxASTRBalance} /> : null}
+          {idoState === IIdoStateEnum.PROCING ? <PROCINGComponents max={maxASTRBalance} idoState={idoState} /> : null}
+          {idoState === IIdoStateEnum.END ? <PROCINGComponents max={lpBalance} idoState={idoState} /> : null}
         </div>
       </ContributionStyled>
     );
-  }, [nextEventTime, idoState, maxASTRBalance]);
+  }, [nextEventTime, idoState, maxASTRBalance, lpBalance]);
 };
 const InitComponents = ({ nextEventTime }) => {
   // 15000000000 s
@@ -40,7 +42,7 @@ const InitComponents = ({ nextEventTime }) => {
         <h3>Coming Soon</h3>
         {secondsRemaining ? (
           <Timer
-            minutes={minutes + 1} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
+            minutes={minutes} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
             hours={hours}
             days={days}
             seconds={seconds}
@@ -60,16 +62,17 @@ const InitComponents = ({ nextEventTime }) => {
   }, [secondsRemaining, days, hours, minutes, seconds]);
 };
 interface IPROCINGComponents {
+  idoState: IIdoStateEnum;
   max: string;
 }
-const PROCINGComponents = ({ max }: IPROCINGComponents) => {
+const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
   const [val, setVal] = useState('');
 
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(new BigNumber(max));
   }, [max]);
   const fullLocalBalance = useMemo(() => {
-    return getFullLocalDisplayBalance(new BigNumber(max));
+    return getFullLocalDisplayBalance(new BigNumber(max), 18);
   }, [max]);
 
   const handleSelectMax = useCallback(() => {
@@ -83,17 +86,36 @@ const PROCINGComponents = ({ max }: IPROCINGComponents) => {
     },
     [setVal],
   );
+  const { title, btnTitle } = useMemo(() => {
+    switch (idoState) {
+      case IIdoStateEnum.PROCING:
+        return {
+          title: `Your Balance ${fullLocalBalance} ASTR`,
+          btnTitle: 'Create LP',
+        };
+      case IIdoStateEnum.END:
+        return {
+          title: `AVAT-ASTR LP Balance: ${fullLocalBalance}`,
+          btnTitle: 'Take LP',
+        };
+      default:
+        return {
+          title: '',
+          btnTitle: '',
+        };
+    }
+  }, [fullLocalBalance, idoState]);
   return useMemo(() => {
     return (
       <div className="bottom">
-        <h4>Your Balance {fullLocalBalance} ASTR</h4>
+        <h4 className="h4">{title}</h4>
         <div className="border">
           <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
         </div>
-        <Button className="btn">Create LP</Button>
+        <Button className="btn">{btnTitle}</Button>
       </div>
     );
-  }, [fullLocalBalance, handleChange, handleSelectMax, val]);
+  }, [handleChange, handleSelectMax, val, title, btnTitle]);
 };
 const ContributionStyled = styled.div`
   padding-bottom: 180px;
@@ -137,7 +159,8 @@ const ContributionStyled = styled.div`
       }
       ${({ theme }) => theme.mediaQueries.lg} {
         text-align: center;
-        padding-bottom: 100px;
+        padding-top: 20px;
+        padding-bottom: 120px;
       }
       img {
         display: inline-block;
@@ -177,9 +200,9 @@ const ContributionStyled = styled.div`
       box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
       border-radius: 20px;
       ${({ theme }) => theme.mediaQueries.lg} {
-        padding: 40px 44px 48px;
+        padding: 40px 44px 44px;
       }
-      h4 {
+      .h4 {
         font-size: 14px;
         padding-bottom: 20px;
         text-align: center;
@@ -199,7 +222,7 @@ const ContributionStyled = styled.div`
           height: 40px;
           ${({ theme }) => theme.mediaQueries.md} {
             font-size: 30px;
-            height: 80px;
+            height: 72px;
           }
         }
         button {

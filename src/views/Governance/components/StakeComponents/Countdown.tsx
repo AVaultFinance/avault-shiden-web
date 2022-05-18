@@ -20,7 +20,7 @@ const Countdown: React.FC<IProps> = ({ nextEventTime, hasLocked, onClickModal }:
     <TimerComponentsStyled>
       {secondsRemaining ? (
         <Timer
-          minutes={minutes + 1} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
+          minutes={minutes} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
           hours={hours}
           days={days}
           seconds={seconds}

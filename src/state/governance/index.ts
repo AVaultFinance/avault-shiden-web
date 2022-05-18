@@ -20,10 +20,7 @@ export const governanceSlice = createSlice({
   initialState,
   reducers: {
     changeLockAVATModalState: (state, action) => {
-      console.log('action.payload.lockAVATModalState: ', action.payload.lockAVATModalState);
-
       state.lockAVATModalState = action.payload.lockAVATModalState as ILockAVATModalState;
-      console.log('state.lockAVATModalState: ', state.lockAVATModalState);
     },
   },
 });

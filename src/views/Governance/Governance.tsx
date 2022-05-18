@@ -3,7 +3,7 @@ import Page from 'components/Layout/Page';
 import { chainId } from 'config/constants/tokens';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import { delay } from 'lodash';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'state';
 import { changeLockAVATModalState } from 'state/governance';
@@ -18,8 +18,10 @@ import StakeingInfo from './components/StakeingInfo';
 const Governance = () => {
   const { account } = useActiveWeb3React();
   const { rewards, hasLocked, apy, avarageLockTime, totalAVATLocked, userData, isUserLoaded } = useGovernanceData();
-  const _userDataKey = `${account}-${chainId}`;
-  const _userData = userData[_userDataKey];
+  const _userData = useMemo(() => {
+    const _userDataKey = `${account}-${chainId}`;
+    return userData[_userDataKey];
+  }, [userData, account]);
   const { AVATBalance = '0' } = _userData || {};
   const dispatch = useDispatch<AppDispatch>();
 
