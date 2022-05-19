@@ -171,7 +171,7 @@ const ContributionStyled = styled.div`
       font-size: 20px;
       font-weight: 800;
       line-height: 24px;
-      padding: 30px 30px 8px;
+      padding: 30px 30px 24px;
       ${({ theme }) => theme.mediaQueries.md} {
         padding: 0 40px 24px;
       }
@@ -195,8 +195,14 @@ const ContributionStyled = styled.div`
       }
       img:last-child {
         width: 58%;
-        margin-top: 80px;
+        margin-top: 60px;
         margin-right: 20%;
+        ${({ theme }) => theme.mediaQueries.md} {
+          margin-top: 40px;
+        }
+        ${({ theme }) => theme.mediaQueries.xl} {
+          margin-top: 80px;
+        }
       }
     }
     .banner_title {
@@ -207,9 +213,16 @@ const ContributionStyled = styled.div`
       padding: 16px 10% 13px 16px;
       width: 50%;
       margin-left: 30px;
-      margin-bottom: 300px;
+      margin-bottom: 200px;
+      ${({ theme }) => theme.mediaQueries.sm} {
+        margin-bottom: 300px;
+      }
       ${({ theme }) => theme.mediaQueries.md} {
+        margin-bottom: 200px;
         margin-left: 40px;
+      }
+      ${({ theme }) => theme.mediaQueries.xl} {
+        margin-bottom: 300px;
       }
     }
     .h2 {

@@ -163,7 +163,7 @@ const RewardsComponentsStyled = styled.div`
     background-image: linear-gradient(90deg, #a428d0 0%, #20d4a9 100%);
     border-radius: 8px;
     padding: 0 56px;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
   }
 `;
 const EndTimeComponentsStyled = styled.div`
