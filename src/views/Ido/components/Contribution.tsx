@@ -37,7 +37,7 @@ const LpBalanceComponents = ({ lpTotalBalance }) => {
   return useMemo(() => {
     return (
       <>
-        <h2 className="h2_title">5862.12</h2>
+        <h2 className="h2_title">{lpTotalBalance}</h2>
         <h3 className="h3_title">AVAT-ASTR LP Balance </h3>
         <h4 className="banner_title">Once extracted, it can not be stored in the pool</h4>
         <div className="img_absoult">
@@ -46,7 +46,7 @@ const LpBalanceComponents = ({ lpTotalBalance }) => {
         </div>
       </>
     );
-  }, []);
+  }, [lpTotalBalance]);
 };
 const ContributionComponents = () => {
   return useMemo(() => {
@@ -157,11 +157,13 @@ const ContributionStyled = styled.div`
       padding-bottom: 70px;
     }
     .h2_title {
-      font-size: 80px;
       font-weight: 800;
-      line-height: 90px;
       padding: 30px 30px 0;
+      font-size: 48px;
+      line-height: 60px;
       ${({ theme }) => theme.mediaQueries.md} {
+        font-size: 80px;
+        line-height: 90px;
         padding: 40px 36px 8px;
       }
     }

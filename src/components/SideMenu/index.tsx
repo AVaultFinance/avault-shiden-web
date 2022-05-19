@@ -13,6 +13,7 @@ const BodyContainer = styled.div<{ collapsed: boolean }>`
   flex-direction: column;
   flex: 1;
   transition: 0.15s padding;
+
   > .content {
     position: relative;
     flex: 1;

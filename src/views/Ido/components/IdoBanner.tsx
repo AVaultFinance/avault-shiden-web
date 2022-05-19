@@ -24,6 +24,9 @@ const IdoBannerStyled = styled.div`
   background-position: right 47px;
   position: relative;
   padding-bottom: 100px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding-bottom: 180px;
+  }
   ${({ theme }) => theme.mediaQueries.md} {
     padding-bottom: 240px;
     background-size: 420px;
@@ -38,12 +41,15 @@ const IdoBannerStyled = styled.div`
     }
   }
   .banner_bg_pc {
-    width: 80%;
-    right: -14%;
+    width: 100%;
+    right: -30%;
+    ${({ theme }) => theme.mediaQueries.md} {
+      right: -14%;
+      width: 80%;
+    }
   }
 
   h1 {
-    padding-top: 200px;
     padding-bottom: 40px;
     width: 60%;
     background: linear-gradient(90deg, #ffd8fe 0%, #c5fff1 100%);
@@ -51,13 +57,13 @@ const IdoBannerStyled = styled.div`
     color: transparent;
     font-size: 48px;
     line-height: 52px;
-
+    padding-top: 100px;
     ${({ theme }) => theme.mediaQueries.xs} {
-      padding-top: 300px;
+      padding-top: 120px;
     }
     ${({ theme }) => theme.mediaQueries.sm} {
       width: 50%;
-      padding-top: 418px;
+      padding-top: 208px;
       padding-bottom: 36px;
     }
 
@@ -68,9 +74,11 @@ const IdoBannerStyled = styled.div`
     }
   }
   h2 {
-    width: 90%;
+    width: 80%;
     font-size: 15px;
     line-height: 24px;
+    position: relative;
+    z-index: 8;
     ${({ theme }) => theme.mediaQueries.sm} {
       width: 60%;
     }

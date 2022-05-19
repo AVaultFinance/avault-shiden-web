@@ -12,8 +12,8 @@ const StyledPage = styled(Container)`
   // min-height: calc(100vh - 64px);
   padding-top: 0;
   padding-bottom: 100px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 0;
+  padding-right: 0;
   ${({ theme }) => theme.mediaQueries.md} {
     padding-left: 0;
     padding-right: 0;

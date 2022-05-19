@@ -20,7 +20,7 @@ body {
       background-color: transparent!important;
     }
     .content{
-      margin-bottom: 62px;
+      margin-bottom: 102px;
       min-height: 83vh;
     }
   }
@@ -72,7 +72,7 @@ header{
     background-position: 0 660px;
   }
   ${({ theme }) => theme.mediaQueries.md} {
-    background-position:0 400px;
+    background-position: 0 400px;
     background-image: url('/images/ido/pc_bg.png');
   }
   ${({ theme }) => theme.mediaQueries.xl} {
@@ -92,10 +92,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     background-color: ${({ theme }) => theme.colors.background02};
-    padding: 0;
-    ${({ theme }) => theme.mediaQueries.md} {
-      padding: 0 20px;
-    }
+    // padding: 0;
+    // ${({ theme }) => theme.mediaQueries.md} {
+    //   padding: 0 20px;
+    // }
     img {
       height: auto;
       max-width: 100%;
@@ -111,6 +111,9 @@ const GlobalStyle = createGlobalStyle`
   }
   .w20{
     width: 20px;
+  }
+  .bg-holder{
+    padding: 0 20px;
   }
 `;
 
