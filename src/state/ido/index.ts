@@ -9,6 +9,7 @@ const initialState: IIdoState = {
   apr: '261.22',
   amountInPool: '247138.91',
   rewards: '2137.92',
+  lpTotalBalance: '5862.12',
   lpBalance: {},
   maxASTRBalance: {},
 

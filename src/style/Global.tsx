@@ -72,11 +72,11 @@ header{
     background-position: 0 660px;
   }
   ${({ theme }) => theme.mediaQueries.md} {
-    background-position: 0 800px;
+    background-position:0 400px;
     background-image: url('/images/ido/pc_bg.png');
   }
   ${({ theme }) => theme.mediaQueries.xl} {
-    background-position: 0 560px;
+    background-position: 0 230px;
   }
   ${({ theme }) => theme.mediaQueries.nav} {
   }

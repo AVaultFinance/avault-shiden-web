@@ -13,24 +13,53 @@ interface IProps {
   idoState: IIdoStateEnum;
   maxASTRBalance: string;
   lpBalance: string;
+  lpTotalBalance: string;
 }
-const Contribution = ({ nextEventTime, idoState, maxASTRBalance, lpBalance }: IProps) => {
+const Contribution = ({ nextEventTime, lpTotalBalance, idoState, maxASTRBalance, lpBalance }: IProps) => {
   return useMemo(() => {
     return (
       <ContributionStyled>
         <div className="inner">
-          <h2 className="h2">Contribution Your ASTR</h2>
-          <div className="img">
-            <img src="/images/ido/icon01.webp" alt="ASTR" />
-            <img src="/images/ido/icon02.webp" alt="ASTR" />
-          </div>
+          {idoState === IIdoStateEnum.END ? (
+            <LpBalanceComponents lpTotalBalance={lpTotalBalance} />
+          ) : (
+            <ContributionComponents />
+          )}
           {idoState === IIdoStateEnum.INIT ? <InitComponents nextEventTime={nextEventTime} /> : null}
           {idoState === IIdoStateEnum.PROCING ? <PROCINGComponents max={maxASTRBalance} idoState={idoState} /> : null}
           {idoState === IIdoStateEnum.END ? <PROCINGComponents max={lpBalance} idoState={idoState} /> : null}
         </div>
       </ContributionStyled>
     );
-  }, [nextEventTime, idoState, maxASTRBalance, lpBalance]);
+  }, [nextEventTime, idoState, maxASTRBalance, lpTotalBalance, lpBalance]);
+};
+const LpBalanceComponents = ({ lpTotalBalance }) => {
+  return useMemo(() => {
+    return (
+      <>
+        <h2 className="h2_title">5862.12</h2>
+        <h3 className="h3_title">AVAT-ASTR LP Balance </h3>
+        <h4 className="banner_title">Once extracted, it can not be stored in the pool</h4>
+        <div className="img_absoult">
+          <img src="/images/ido/icon03.webp" alt="ASTR" />
+          <img src="/images/ido/icon03.webp" alt="ASTR" />
+        </div>
+      </>
+    );
+  }, []);
+};
+const ContributionComponents = () => {
+  return useMemo(() => {
+    return (
+      <>
+        <h2 className="h2">Contribution Your ASTR</h2>
+        <div className="img">
+          <img src="/images/ido/icon01.webp" alt="ASTR" />
+          <img src="/images/ido/icon02.webp" alt="ASTR" />
+        </div>
+      </>
+    );
+  }, []);
 };
 const InitComponents = ({ nextEventTime }) => {
   // 15000000000 s
@@ -39,7 +68,7 @@ const InitComponents = ({ nextEventTime }) => {
   return useMemo(() => {
     return (
       <div className="bottom">
-        <h3>Coming Soon</h3>
+        <h3 className="h3">Coming Soon</h3>
         {secondsRemaining ? (
           <Timer
             minutes={minutes} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
@@ -127,6 +156,60 @@ const ContributionStyled = styled.div`
     ${({ theme }) => theme.mediaQueries.sm} {
       padding-bottom: 70px;
     }
+    .h2_title {
+      font-size: 80px;
+      font-weight: 800;
+      line-height: 90px;
+      padding: 30px 30px 0;
+      ${({ theme }) => theme.mediaQueries.md} {
+        padding: 40px 36px 8px;
+      }
+    }
+    .h3_title {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 24px;
+      padding: 30px 30px 8px;
+      ${({ theme }) => theme.mediaQueries.md} {
+        padding: 0 40px 24px;
+      }
+    }
+    .img_absoult {
+      position: absolute;
+      top: 180px;
+      right: 25px;
+      ${({ theme }) => theme.mediaQueries.md} {
+        top: 120px;
+      }
+      ${({ theme }) => theme.mediaQueries.md} {
+        top: 180px;
+      }
+      img {
+        float: right;
+      }
+      img:first-child {
+        width: 30%;
+        opacity: 0.4;
+      }
+      img:last-child {
+        width: 58%;
+        margin-top: 80px;
+        margin-right: 20%;
+      }
+    }
+    .banner_title {
+      background-image: linear-gradient(90deg, #a428d0 0%, #20d4a9 100%);
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 18px;
+      padding: 16px 10% 13px 16px;
+      width: 50%;
+      margin-left: 30px;
+      margin-bottom: 300px;
+      ${({ theme }) => theme.mediaQueries.md} {
+        margin-left: 40px;
+      }
+    }
     .h2 {
       font-size: 36px;
       font-weight: 800;
@@ -141,7 +224,7 @@ const ContributionStyled = styled.div`
         font-size: 48px;
       }
     }
-    h3 {
+    .h3 {
       font-size: 30px;
       font-weight: 800;
       text-align: center;

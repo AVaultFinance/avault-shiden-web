@@ -14,5 +14,6 @@ export interface IIdoState {
   apr: string;
   amountInPool: string;
   rewards: string;
+  lpTotalBalance: string;
   lpBalance: Record<string, string>;
 }

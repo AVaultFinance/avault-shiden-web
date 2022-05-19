@@ -1,4 +1,4 @@
-import { Flex, useMatchBreakpoints } from '@my/ui';
+import { Flex } from '@my/ui';
 import Page from 'components/Layout/Page';
 import { chainId } from 'config/constants/tokens';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
@@ -14,10 +14,18 @@ import IdoBanner from './components/IdoBanner';
 import InfoContribution from './components/InfoContribution';
 import PositionAbsoult from './components/PositionAbsoult';
 const Ido = () => {
-  const { isXl, isLg } = useMatchBreakpoints();
-  const isMobile = !(isXl || isLg);
-  const { idoState, maxASTRBalance, endTime, avatEstimatedPrice, network, apr, amountInPool, rewards, lpBalance } =
-    useIdoData();
+  const {
+    idoState,
+    maxASTRBalance,
+    endTime,
+    avatEstimatedPrice,
+    network,
+    apr,
+    amountInPool,
+    rewards,
+    lpTotalBalance,
+    lpBalance,
+  } = useIdoData();
   const { account } = useActiveWeb3React();
   const _key = useMemo(() => {
     return `${account}-${chainId}`;
@@ -47,11 +55,12 @@ const Ido = () => {
     <PageStyled>
       <PositionAbsoult changeIdoState={changeIdoState} />
       <IDOGlobalStyle />
-      <IdoBanner isMobile={isMobile} />
+      <IdoBanner />
       <FlexStyled>
         {/* 12s  300block */}
         <Contribution
           nextEventTime={12 * 300}
+          lpTotalBalance={lpTotalBalance}
           lpBalance={_lpBalance}
           maxASTRBalance={_maxASTRBalance}
           idoState={idoState}
@@ -73,7 +82,6 @@ const PageStyled = styled(Page)`
   padding: 0 0 130px;
 `;
 const FlexStyled = styled(Flex)`
-  padding: 0 5%;
   align-items: start;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -96,7 +104,7 @@ const FlexStyled = styled(Flex)`
       width: 48%;
     }
     ${({ theme }) => theme.mediaQueries.lg} {
-      width: 45%;
+      width: 47%;
     }
   }
 `;

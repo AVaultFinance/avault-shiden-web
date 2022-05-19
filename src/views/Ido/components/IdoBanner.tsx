@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-interface IProps {
-  isMobile: boolean;
-}
-const IdoBanner = ({ isMobile }: IProps) => {
+const IdoBanner = () => {
   return useMemo(() => {
     return (
       <IdoBannerStyled>
@@ -14,14 +11,11 @@ const IdoBanner = ({ isMobile }: IProps) => {
           of the total amount of astar invested by the user and AVA, and release it to the user.The other half of the
           ASTR will be released within half a year by the LPs of participating IDO users.
         </h2>
-        {isMobile ? (
-          <img className="banner_bg_h5" src="/images/ido/h5_banner.webp" alt="Avault Public Sale" />
-        ) : (
-          <img className="banner_bg_pc" src="/images/ido/pc_banner.webp" alt="Avault Public Sale" />
-        )}
+
+        <img className="banner_bg_pc" src="/images/ido/pc_banner.webp" alt="Avault Public Sale" />
       </IdoBannerStyled>
     );
-  }, [isMobile]);
+  }, []);
 };
 const IdoBannerStyled = styled.div`
   background-image: url('./images/stake/bg_element.svg');
@@ -29,34 +23,25 @@ const IdoBannerStyled = styled.div`
   background-repeat: no-repeat;
   background-position: right 47px;
   position: relative;
-  padding-left: 8%;
   padding-bottom: 100px;
-  overflow: hidden;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    padding-left: 12%;
-  }
   ${({ theme }) => theme.mediaQueries.md} {
     padding-bottom: 240px;
-    padding-left: 5%;
     background-size: 420px;
     background-position: right 246px;
   }
   img {
     display: block;
     position: absolute;
-    top: 65px;
+    top: 0;
     ${({ theme }) => theme.mediaQueries.md} {
-      top: 117px;
+      top: -40px;
     }
   }
   .banner_bg_pc {
-    min-width: 1204px;
-    left: 2%;
+    width: 80%;
+    right: -14%;
   }
-  .banner_bg_h5 {
-    width: 100%;
-    left: 5.2%;
-  }
+
   h1 {
     padding-top: 200px;
     padding-bottom: 40px;
@@ -79,7 +64,7 @@ const IdoBannerStyled = styled.div`
     ${({ theme }) => theme.mediaQueries.md} {
       font-size: 96px;
       line-height: 100px;
-      padding-top: 518px;
+      padding-top: 177px;
     }
   }
   h2 {
@@ -90,7 +75,7 @@ const IdoBannerStyled = styled.div`
       width: 60%;
     }
     ${({ theme }) => theme.mediaQueries.md} {
-      width: 446px;
+      width: 417px;
     }
   }
 `;
