@@ -29,24 +29,10 @@ to {
 }
 `;
 
-const floatingAnimLeft = (x: string, y: string) => keyframes`
-  // from {
-  //   transform: translate(0,  0px);
-  //   left: 0px
-  // }
-  // 50% {
-  //   transform: translate(${x}, ${y});
-  //   left: 10px
-  // }
-  // to {
-  //   transform: translate(0, 0px);
-  //   left: 0px
-  // }
-`;
-
 const FarmBannerStyled = styled.div`
   position: relative;
-  background-image: radial-gradient(circle at 50% 0%, #3e255b 0%, #030222 100%);
+  background-image: linear-gradient(90deg, rgb(32 212 169 / 30%) 0%, rgb(164 40 208 / 30%) 100%);
+  // background-image: radial-gradient(circle at 50% 0%, #3e255b 0%, #030222 100%);
   border: 1px solid #2e2d5b;
   box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
   border-radius: 12px;
@@ -61,6 +47,8 @@ const FarmBannerStyled = styled.div`
     -webkit-background-clip: text;
     color: transparent;
     padding-bottom: 20px;
+    font-weight: 800;
+
     ${({ theme }) => theme.mediaQueries.md} {
       font-size: 58px;
     }
@@ -76,12 +64,12 @@ const FarmBannerStyled = styled.div`
     z-index: 3;
     ${({ theme }) => theme.mediaQueries.md} {
       font-size: 15px;
-      width: 70%;
+      width: 50%;
     }
   }
   .bg_image {
     position: absolute;
-    top: 20%;
+    top: 0;
     right: 2%;
     width: 32%;
     height: 70%;

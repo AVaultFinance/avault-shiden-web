@@ -226,7 +226,9 @@ const Zap = () => {
               <Loading isLoading={pendingTx} success={pendingTxSuccess} />
             </Button>
           </TableContent>
-          <ZapBgStyled />
+          <ZapBgStyled>
+            <ZapBg />
+          </ZapBgStyled>
         </W480BorderPageLayout>
       </PageContainerWrap>
     </PageLayout>
@@ -239,11 +241,11 @@ const HeadingStyled = styled(Heading)<{ isSmall: boolean; isLong: boolean }>`
   word-break: break-all;
   text-align: end;
 `;
-const ZapBgStyled = styled(ZapBg)`
+const ZapBgStyled = styled.div`
   position: absolute;
-  width: 210px;
-  top: 0;
-  right: 8px;
+  width: 152px;
+  top: 15px;
+  right: 3px;
 `;
 
 const MaxButtonStyled = styled(MaxButton)`
@@ -276,7 +278,7 @@ const TextCol = styled(Flex)`
   height: 40px;
 `;
 const PaddingStyled = styled.div`
-  padding: 10px 20px 20px;
+  padding: 14px 20px 24px;
   border-bottom: 2px solid ${({ theme }) => theme.colors.cardBackground};
   &:last-child {
     border-bottom: none;
@@ -284,7 +286,11 @@ const PaddingStyled = styled.div`
 `;
 
 const TitleStyled = styled(Heading)`
-  font-size: 20px;
+  display: inline-block;
+  background: linear-gradient(90deg, #ffd8fe 0%, #c5fff1 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 36px;
   padding-bottom: 12px;
 `;
 const TextStyled = styled(Text)`
