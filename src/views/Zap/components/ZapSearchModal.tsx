@@ -25,7 +25,7 @@ import ZapCurrencyList from './ZapCurrencyList';
 const ModalContainerStyled = styled(ModalContainer)`
   min-width: 380;
   max-width: 400px;
-  padding-bottom: 43px;
+  padding-bottom: 30px;
   position: relative;
   &:after {
     content: '';
@@ -116,7 +116,7 @@ const ZapSearchModal = ({
         </ModalTitle>
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
-      <ModalBody bodyPadding="14px 0 30px">
+      <ModalBody bodyPadding="14px 0 0">
         <InputWrapStyled>
           <Input
             id="token-search-input_22"
@@ -137,7 +137,7 @@ const ZapSearchModal = ({
           </div>
         ) : null}
         <ZapCurrencyList
-          height={isMobile ? 220 : itemData.length > 6 ? 380 : 250}
+          height={isMobile ? 280 : itemData.length > 6 ? 380 : 250}
           currencies={itemData}
           fixedListRef={fixedList}
           selectedCurrency={selectedCurrency}
@@ -150,7 +150,10 @@ const ZapSearchModal = ({
   );
 };
 const InputWrapStyled = styled.div`
-  margin: 0 30px 24px;
+  margin: 0 16px 12px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 0 30px 24px;
+  }
   input {
     &:focus {
       border: 1px solid ${({ theme }) => theme.colors.text};

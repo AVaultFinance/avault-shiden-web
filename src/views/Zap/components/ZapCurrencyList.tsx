@@ -125,7 +125,7 @@ const FlexCol = styled(Flex)`
   justify-content: space-between;
 `;
 const MenuItem = styled(Flex)<{ disabled: boolean; selected: boolean }>`
-  padding: 4px 30px;
+  padding: 0 16px;
   transition: all 0.3s ease;
   align-items: center;
   justify-content: space-between;
@@ -133,6 +133,9 @@ const MenuItem = styled(Flex)<{ disabled: boolean; selected: boolean }>`
   pointer-events: ${({ disabled }) => disabled && 'none'};
   cursor: ${({ disabled, selected }) => (disabled || selected ? '' : 'pointer')};
   opacity: ${({ selected }) => (selected ? 0.5 : 1)};
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 4px 30px;
+  }
   :hover {
     background-color: ${({ theme, disabled }) => !disabled && theme.colors.secondary};
   }

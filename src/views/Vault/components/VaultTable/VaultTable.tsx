@@ -20,17 +20,17 @@ export interface ITableProps {
 
 const Container = styled.div`
   // filter: ${({ theme }) => theme.card.dropShadow};
-  width: 100%;
+    margin:  0px;
+    width: 100%;
 
   ${({ theme }) => theme.mediaQueries.md} {
     overflow: hidden;
     background: ${({ theme }) => theme.card.background};
     border-radius: 12px;
-    margin: 16px 0px;
+    margin: 40px 0px 120px;
     // padding-bottom: 20px;
     border: 1px solid ${({ theme }) => theme.colors.cardBorder};
     // border: 1px solid #2e2d5b;
-  }
 `;
 
 const TableWrapper = styled.div`
@@ -74,6 +74,7 @@ const TableBody = styled.tbody`
     td {
       font-size: 16px;
       vertical-align: middle;
+      width: 100vw;
     }
   }
 `;

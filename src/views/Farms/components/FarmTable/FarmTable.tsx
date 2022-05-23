@@ -27,12 +27,14 @@ export interface FarmWithStakedValue extends Farm {
 const Container = styled.div`
   // filter: ${({ theme }) => theme.card.dropShadow};
   width: 100%;
-
+  margin: 16px 0 0;
   ${({ theme }) => theme.mediaQueries.sm} {
     background: ${({ theme }) => theme.card.background};
     border-radius: 12px;
-    margin: 16px 0px;
     border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 40px 0px 120px;
   }
 `;
 

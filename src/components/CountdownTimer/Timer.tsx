@@ -14,7 +14,7 @@ export interface TimerProps {
 
 const StyledTimerText = styled.div<{ bgColor: string }>`
   width: 23%;
-  padding: 16px 0;
+  padding: 20px 0;
   background-image: ${({ bgColor }) =>
     bgColor ? 'none' : 'radial-gradient(circle at 50% 0%, #3e255b 0%, #181733 100%)'};
   background-color: ${({ bgColor }) => (bgColor ? bgColor : 'transparent')};
@@ -31,6 +31,7 @@ const StyledTimerText = styled.div<{ bgColor: string }>`
   h2 {
     font-size: 24px;
     padding-bottom: 8px;
+    font-weight: 600;
     ${({ theme }) => theme.mediaQueries.md} {
       font-size: 30px;
     }

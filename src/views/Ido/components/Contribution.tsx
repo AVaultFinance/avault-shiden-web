@@ -69,23 +69,25 @@ const InitComponents = ({ nextEventTime }) => {
     return (
       <div className="bottom">
         <h3 className="h3">Coming Soon</h3>
-        {secondsRemaining ? (
-          <Timer
-            minutes={minutes} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
-            hours={hours}
-            days={days}
-            seconds={seconds}
-            bgColor="#030222"
-          />
-        ) : (
-          <Timer
-            minutes={0} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
-            hours={0}
-            days={0}
-            seconds={0}
-            bgColor="#030222"
-          />
-        )}
+        <div className="timer_wrap">
+          {secondsRemaining ? (
+            <Timer
+              minutes={minutes} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
+              hours={hours}
+              days={days}
+              seconds={seconds}
+              bgColor="#030222"
+            />
+          ) : (
+            <Timer
+              minutes={0} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
+              hours={0}
+              days={0}
+              seconds={0}
+              bgColor="#030222"
+            />
+          )}
+        </div>
       </div>
     );
   }, [secondsRemaining, days, hours, minutes, seconds]);
@@ -147,12 +149,12 @@ const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
   }, [handleChange, handleSelectMax, val, title, btnTitle]);
 };
 const ContributionStyled = styled.div`
-  padding-bottom: 180px;
+  padding-bottom: 220px;
   position: relative;
   .inner {
     background-image: linear-gradient(140deg, #20d4a9 0%, #a428d0 79%);
     border-radius: 20px 20px 0 0;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
     ${({ theme }) => theme.mediaQueries.sm} {
       padding-bottom: 70px;
     }
@@ -178,7 +180,7 @@ const ContributionStyled = styled.div`
     }
     .img_absoult {
       position: absolute;
-      top: 180px;
+      bottom: 290px;
       right: 25px;
       ${({ theme }) => theme.mediaQueries.md} {
         top: 120px;
@@ -191,14 +193,20 @@ const ContributionStyled = styled.div`
       }
       img:first-child {
         width: 30%;
+        margin-right: 8%;
         opacity: 0.4;
+        ${({ theme }) => theme.mediaQueries.md} {
+          margin-right: 0;
+          margin-top: 0;
+        }
       }
       img:last-child {
         width: 58%;
-        margin-top: 60px;
-        margin-right: 20%;
+        margin-top: 5px;
+        margin-right: 30%;
         ${({ theme }) => theme.mediaQueries.md} {
           margin-top: 40px;
+          margin-right: 20%;
         }
         ${({ theme }) => theme.mediaQueries.xl} {
           margin-top: 80px;
@@ -211,10 +219,13 @@ const ContributionStyled = styled.div`
       font-size: 12px;
       line-height: 18px;
       padding: 16px 10% 13px 16px;
-      width: 50%;
+      width: 70%;
       margin-left: 30px;
       margin-bottom: 200px;
+      position: relative;
+      z-index: 9;
       ${({ theme }) => theme.mediaQueries.sm} {
+        width: 50%;
         margin-bottom: 300px;
       }
       ${({ theme }) => theme.mediaQueries.md} {
@@ -227,7 +238,7 @@ const ContributionStyled = styled.div`
     }
     .h2 {
       font-size: 36px;
-      font-weight: 800;
+      font-weight: 600;
       line-height: 40px;
       padding: 30px 30px 0;
       ${({ theme }) => theme.mediaQueries.md} {
@@ -241,7 +252,7 @@ const ContributionStyled = styled.div`
     }
     .h3 {
       font-size: 30px;
-      font-weight: 800;
+      font-weight: 600;
       text-align: center;
       padding-bottom: 20px;
       ${({ theme }) => theme.mediaQueries.md} {
@@ -297,6 +308,10 @@ const ContributionStyled = styled.div`
       background-image: radial-gradient(circle at 50% 0%, #3e255b 0%, #181733 100%);
       box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
       border-radius: 20px;
+      .timer_wrap {
+        max-width: 402px;
+        margin: 0 auto;
+      }
       ${({ theme }) => theme.mediaQueries.lg} {
         padding: 40px 44px 44px;
       }
@@ -317,7 +332,7 @@ const ContributionStyled = styled.div`
         padding: 0 20px;
         input {
           font-size: 20px;
-          height: 40px;
+          height: 70px;
           ${({ theme }) => theme.mediaQueries.md} {
             font-size: 30px;
             height: 72px;
@@ -328,14 +343,13 @@ const ContributionStyled = styled.div`
         }
       }
       .btn {
-        height: 40px;
+        height: 60px;
         border-radius: 12px;
         margin-top: 20px;
         width: 100%;
         font-size: 16px;
         ${({ theme }) => theme.mediaQueries.md} {
           margin-top: 30px;
-          height: 60px;
           font-size: 18px;
         }
       }

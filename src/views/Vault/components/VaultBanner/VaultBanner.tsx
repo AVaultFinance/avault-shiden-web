@@ -7,8 +7,8 @@ const VaultBanner = () => {
       <VaultBannerStyled>
         <h2 className="vaultBanner_title">Vault</h2>
         <p className="vaultBanner_subtext">
-          Providing the interest-bearing asset token to the users by deposited their LP from other DEX. Then the vault
-          will automation to continually invest and reinvest deposited funds
+          Providing the aLP/aToken to the users by deposited their LP or token from other dapp. Then, the vault will
+          automation to continually reinvest deposited funds
         </p>
         <div className="bg_image">
           <img className="one" src="/images/vault/bg_image_01.svg" alt="Vault" />
@@ -53,7 +53,9 @@ const VaultBannerStyled = styled.div`
   box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
   border-radius: 12px;
   padding: 18px;
+  margin-top: 10px;
   ${({ theme }) => theme.mediaQueries.md} {
+    margin-top: 0;
     padding: 40px;
   }
   .vaultBanner_title {
@@ -62,8 +64,10 @@ const VaultBannerStyled = styled.div`
     background: linear-gradient(90deg, #ffd8fe 0%, #c5fff1 100%);
     -webkit-background-clip: text;
     color: transparent;
+    padding-top: 20px;
     padding-bottom: 20px;
     ${({ theme }) => theme.mediaQueries.md} {
+      padding-top: 0;
       font-size: 58px;
     }
     ${({ theme }) => theme.mediaQueries.xl} {
@@ -73,21 +77,24 @@ const VaultBannerStyled = styled.div`
   .vaultBanner_subtext {
     font-size: 15px;
     line-height: 22px;
-    width: 90%;
+    width: 100%;
     position: relative;
     z-index: 3;
+    ${({ theme }) => theme.mediaQueries.sm} {
+      width: 80%;
+    }
     ${({ theme }) => theme.mediaQueries.md} {
-      font-size: 15px;
       width: 70%;
     }
   }
   .bg_image {
     position: absolute;
-    top: 10%;
+    top: 4%;
     right: 2%;
-    width: 32%;
+    width: 30%;
     height: 70%;
     ${({ theme }) => theme.mediaQueries.sm} {
+      top: 10%;
       width: 22%;
     }
     ${({ theme }) => theme.mediaQueries.md} {

@@ -19,31 +19,31 @@ const InfoContribution = ({ idoState, endTime, avatEstimatedPrice, network, apr,
   return (
     <InfoContributionStyled>
       {idoState === IIdoStateEnum.END ? (
-        <AprComponents apr={apr} idoState={idoState} />
+        <AprComponents apr={apr} />
       ) : (
         <AVATPriceComponents avatEstimatedPrice={avatEstimatedPrice} idoState={idoState} />
       )}
       {idoState === IIdoStateEnum.END ? (
-        <AmountComponents amountInPool={amountInPool} idoState={idoState} />
+        <AmountComponents amountInPool={amountInPool} />
       ) : (
-        <NetworkComponents network={network} idoState={idoState} />
+        <NetworkComponents network={network} />
       )}
       <BottomComponents endTime={endTime} idoState={idoState} rewards={rewards} />
     </InfoContributionStyled>
   );
 };
 
-const AprComponents = ({ idoState, apr }) => {
+const AprComponents = ({ apr }) => {
   return useMemo(() => {
     return (
       <>
         <h2 className="h2 fl_dot">
-          {apr}%{idoState !== IIdoStateEnum.INIT ? <i></i> : null}
+          {apr}%{/* {idoState !== IIdoStateEnum.INIT ? <i></i> : null} */}
         </h2>
         <h3 className="h3">Somthing APR</h3>
       </>
     );
-  }, [idoState, apr]);
+  }, [apr]);
 };
 
 const AVATPriceComponents = ({ avatEstimatedPrice, idoState }) => {
@@ -59,33 +59,33 @@ const AVATPriceComponents = ({ avatEstimatedPrice, idoState }) => {
     );
   }, [avatEstimatedPrice, idoState]);
 };
-const AmountComponents = ({ idoState, amountInPool }) => {
+const AmountComponents = ({ amountInPool }) => {
   return useMemo(() => {
     return (
       <>
         <h2 className="h2 fr fr_dot">
-          {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null}
+          {/* {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null} */}
           {amountInPool}
-          {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null}
+          {/* {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
         <h3 className="h3 fr">ASTR Amount In Pool</h3>
       </>
     );
-  }, [idoState, amountInPool]);
+  }, [amountInPool]);
 };
-const NetworkComponents = ({ network, idoState }) => {
+const NetworkComponents = ({ network }) => {
   return useMemo(() => {
     return (
       <>
         <h2 className="h2 fr fr_dot">
-          {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null}
+          {/* {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null} */}
           {network}
-          {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null}
+          {/* {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
         <h3 className="h3 fr">The network is in Astar</h3>
       </>
     );
-  }, [network, idoState]);
+  }, [network]);
 };
 const BottomComponents = ({ endTime, idoState, rewards }) => {
   return useMemo(() => {

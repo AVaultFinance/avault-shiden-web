@@ -46,23 +46,27 @@ const Governance = () => {
   );
 };
 const PageStyled = styled(Page)`
-  padding-top: 20px;
+  // padding-top: 20px;
   background-image: url('./images/stake/bg_element.svg');
   background-size: 420px;
   background-repeat: no-repeat;
-  background-position: 60px 45px;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    padding-top: 50;
-  }
-  ${({ theme }) => theme.mediaQueries.md} {
-    padding-top: 100px;
-  }
+  background-position: 60px 30px;
+  padding-bottom: 120px;
+  // ${({ theme }) => theme.mediaQueries.sm} {
+  //   padding-top: 60px;
+  // }
+  // ${({ theme }) => theme.mediaQueries.md} {
+  //   padding-top: 100px;
+  // }
 `;
 const PageWrapFlex = styled(Flex)`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-
+  padding-top: 10px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-top: 0;
+  }
   & > div {
     background-color: #181733;
     border: 1px solid #2e2d5b;
@@ -71,13 +75,13 @@ const PageWrapFlex = styled(Flex)`
     &:nth-child(1),
     &:nth-child(2) {
       width: 100%;
-      height: 460px;
+      height: 420px;
       margin-bottom: 20px;
       ${({ theme }) => theme.mediaQueries.sm} {
         height: 560px;
       }
       ${({ theme }) => theme.mediaQueries.md} {
-        margin-top: 0;
+        margin-bottom: 0;
         width: 49%;
         max-width: 585px;
       }

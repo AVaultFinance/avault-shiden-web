@@ -15,7 +15,7 @@ const PositionAbsoult = ({ changeIdoState }: IProps) => {
 };
 const PositionAbsoultStyled = styled.div`
   position: fixed;
-  bottom: 20px;
+  bottom: 0px;
   left: 20px;
   z-index: 9999;
   button {

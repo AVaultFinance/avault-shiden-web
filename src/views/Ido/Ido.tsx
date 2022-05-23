@@ -7,7 +7,7 @@ import { useAppDispatch } from 'state';
 import { updateEndTime, updateIdoState } from 'state/ido';
 import { useIdoData } from 'state/ido/hooks';
 import { IIdoStateEnum } from 'state/ido/types';
-import { IDOGlobalStyle } from 'style/Global';
+// import { IDOGlobalStyle } from 'style/Global';
 import styled from 'styled-components';
 import Contribution from './components/Contribution';
 import IdoBanner from './components/IdoBanner';
@@ -54,7 +54,7 @@ const Ido = () => {
   return (
     <PageStyled>
       <PositionAbsoult changeIdoState={changeIdoState} />
-      <IDOGlobalStyle />
+      {/* <IDOGlobalStyle /> */}
       <IdoBanner />
       <FlexStyled>
         {/* 12s  300block */}

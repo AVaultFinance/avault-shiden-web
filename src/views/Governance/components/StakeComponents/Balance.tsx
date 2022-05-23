@@ -139,6 +139,7 @@ const StakeBalanceStyled = styled.div`
       i {
         color: #fff;
         float: right;
+        font-size: 14px;
       }
     }
   }

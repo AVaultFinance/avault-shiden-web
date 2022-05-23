@@ -54,6 +54,7 @@ const StyledDetailTr = styled.tr`
   border-top: none;
   // display: block;
   width: 100%;
+  display: inline-block;
   ${({ theme }) => theme.mediaQueries.md} {
     box-shadow: none;
     border: none;
@@ -124,7 +125,8 @@ const StyledTr = styled.tr<{ isLast: boolean }>`
     padding-left: 18px;
 
     ${({ theme }) => theme.mediaQueries.md} {
-      padding-bottom: 20px;
+      padding-top: 30px;
+      padding-bottom: 30px;
       white-space: nowrap;
     }
   }

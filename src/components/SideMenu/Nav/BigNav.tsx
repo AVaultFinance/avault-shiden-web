@@ -129,7 +129,7 @@ const NavLink = styled(Link)<{ active: 't' | 'f' }>`
   color: ${({ theme, active }) => (active === 't' ? theme.colors.text : theme.colors.textSubtle)};
   height: 40px;
   transition: all 0.3s ease;
-  font-weight: 600;
+  // font-weight: 600;
   margin-right: 34px;
   svg {
     width: 20px;
@@ -145,7 +145,7 @@ const NavLinkA = styled.a`
   color: ${({ theme }) => theme.colors.textSubtle};
   height: 40px;
   transition: all 0.3s ease;
-  font-weight: 600;
+  // font-weight: 600;
   margin-right: 34px;
   img {
     width: 20px;

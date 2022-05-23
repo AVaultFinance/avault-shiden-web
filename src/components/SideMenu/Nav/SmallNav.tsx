@@ -143,7 +143,7 @@ const FlexStyled = styled(Flex)`
 const MenuBtn = styled.div`
   cursor: pointer;
   // box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
-  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.text};
   border-radius: 6px;
   margin-left: 12px;
   // width: 30px;

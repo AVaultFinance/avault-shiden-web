@@ -2,7 +2,7 @@ import React from 'react';
 import { SvgProps } from '@my/ui';
 import styled from 'styled-components';
 const IconMenuStyled = styled.div`
-  --color: ${({ theme }) => theme.colors.primary};
+  --color: ${({ theme }) => theme.colors.text};
   width: 24px;
   height: 24px;
   padding: 0;
@@ -19,7 +19,7 @@ const IconMenuStyled = styled.div`
     height: 36px;
     top: -6px;
     left: -14px;
-    stroke: ${({ theme }) => theme.colors.primary};
+    stroke: ${({ theme }) => theme.colors.text};
     stroke-width: 2px;
     stroke-linecap: round;
     stroke-linejoin: round;

@@ -55,7 +55,6 @@ const StyledDetailTr = styled.tr`
 const StyledTr = styled.tr<{ isLast: boolean }>`
   background: ${({ theme }) => theme.card.background};
   border-radius: 12px 12px 0 0;
-  margin-top: 16px;
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
   border-bottom: none;

@@ -39,7 +39,8 @@ const InnerStyled = styled.div<{ hasBorder: boolean }>`
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  border-bottom: 1px solid ${({ theme, hasBorder }) => (hasBorder ? theme.colors.background : theme.colors.borderColor)};
+  // border-bottom: 1px solid ${({ theme, hasBorder }) =>
+    hasBorder ? theme.colors.background : theme.colors.borderColor};
   ${({ theme }) => theme.mediaQueries.md} {
     border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
     height: 82px;
@@ -52,13 +53,14 @@ const InnerStyled = styled.div<{ hasBorder: boolean }>`
   }
 
   > .right {
-    background-color: ${({ theme }) => theme.colors.background};
+    // background-color: ${({ theme }) => theme.colors.background};
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 40px;
     // display: flex;
     // align-items: center;
     ${({ theme }) => theme.mediaQueries.md} {
+      background-color: ${({ theme }) => theme.colors.background};
       padding-top: 30px;
       padding-bottom: 30px;
     }

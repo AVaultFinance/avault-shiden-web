@@ -37,7 +37,9 @@ const FarmBannerStyled = styled.div`
   box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
   border-radius: 12px;
   padding: 18px;
+  margin-top: 10px;
   ${({ theme }) => theme.mediaQueries.md} {
+    margin-top: 0;
     padding: 40px;
   }
   .farmBanner_title {
@@ -87,13 +89,13 @@ const FarmBannerStyled = styled.div`
     }
     .one {
       width: 50%;
-      top: 0%;
+      top: 10%;
       right: 10%;
       animation: ${floatingAnim('3px', '15px')} 16s linear infinite;
     }
     .two {
       width: 24%;
-      top: 20%;
+      top: 30%;
       right: 80%;
       animation: ${floatingAnim('3px', '15px')} 13s linear infinite;
       animation-delay: 0.3s;
