@@ -99,7 +99,7 @@ const StyledTr = styled.tr<{ isLast: boolean }>`
     }
     ${({ theme }) => theme.mediaQueries.md} {
       padding-left: 40px;
-      width: 180px;
+      width: 220px;
     }
   }
   td: nth-child(3) {
@@ -108,7 +108,7 @@ const StyledTr = styled.tr<{ isLast: boolean }>`
       width: 200px;
     }
     ${({ theme }) => theme.mediaQueries.sm} {
-      width: 100px;
+      width: 140px;
     }
   }
   td: last-child {

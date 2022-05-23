@@ -15,7 +15,7 @@ const FirstTh = styled(TextStyled)`
   padding-left: 20px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    padding-top: 20px;
+    // padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 40px;
   }
