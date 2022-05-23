@@ -94,9 +94,9 @@ const StakeingInfoStyled = styled.div`
     border-radius: 20px;
     padding: 8% 5%;
     position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
+    width: calc(100% + 2px);
+    bottom: -1px;
+    left: -1px;
     ul {
       display: flex;
       justify-content: space-between;
