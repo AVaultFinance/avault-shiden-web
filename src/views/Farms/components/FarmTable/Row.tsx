@@ -92,7 +92,7 @@ const StyledTr = styled.tr<{ isLast: boolean }>`
 const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
   const { userDataReady } = props;
   // const hasStakedAmount = !!useFarmUser(details.pid).stakedBalance.toNumber();
-  const [actionPanelExpanded, setActionPanelExpanded] = useState(true);
+  const [actionPanelExpanded, setActionPanelExpanded] = useState(false);
   const shouldRenderChild = useDelayedUnmount(actionPanelExpanded, 300);
 
   const toggleActionPanel = () => {

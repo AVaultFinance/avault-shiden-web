@@ -64,6 +64,9 @@ export const TableHeaderStyled = styled.thead`
       vertical-align: middle;
     }
   }
+  p {
+    color: #6a6991;
+  }
 `;
 const TableBody = styled.tbody`
   & tr {
