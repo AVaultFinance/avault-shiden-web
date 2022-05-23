@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <HomeInner>
       <HomeInnerInner>
-        <img src="./images/home/logo.svg" alt="Avault" />
+        <img src="/images/home/logo.svg" alt="Avault" />
         <h1>The First Native Yield Aggregator</h1>
         <h1>on Astar Network</h1>
         <div className="icon">

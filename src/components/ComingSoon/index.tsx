@@ -7,7 +7,7 @@ const ComingSoon = ({ onDismiss = () => null }) => {
     <Modal title="" onDismiss={onDismiss}>
       <ComingSoonStyled>
         {/* <CloseIcon color="#9DA6A6" height="30px" width="30px" onClick={onDismiss} /> */}
-        <img src="./images/ComingSoon.svg" alt="" />
+        <img src="/images/ComingSoon.svg" alt="" />
         <h2>This feature is coming soon</h2>
       </ComingSoonStyled>
     </Modal>

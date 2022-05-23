@@ -89,7 +89,7 @@ const UnbindListStyled = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   box-shadow: 2px 4px 7px 1px rgba(9, 2, 18, 0.3);
   margin-top: 12px;
-  width: 480px;
+  width: 600px;
   padding: 30px;
   @media screen and (min-width: 1200px) {
     margin-left: 12px;

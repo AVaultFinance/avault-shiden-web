@@ -19,6 +19,7 @@ import useKacPerBlock from './hooks/useAvaultPerBlock';
 import { chainId } from 'config/constants/tokens';
 import { OptionProps } from 'components/Select/Select';
 import { ISortDir } from 'components/SortIcon';
+import FarmBanner from './components/FarmBanner/FarmBanner';
 
 export const getDisplayApr = (cakeRewardsApr?: number, lpRewardsApr?: number): string => {
   if (cakeRewardsApr && lpRewardsApr) {
@@ -253,6 +254,7 @@ const Farms: React.FC = () => {
 
   return (
     <Page>
+      <FarmBanner />
       {renderContent()}
       {/* {account && !userDataLoaded && (
         <Flex justifyContent="center">

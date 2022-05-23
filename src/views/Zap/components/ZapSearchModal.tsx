@@ -116,7 +116,7 @@ const ZapSearchModal = ({
         </ModalTitle>
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
-      <ModalBody>
+      <ModalBody bodyPadding="14px 0 30px">
         <InputWrapStyled>
           <Input
             id="token-search-input_22"

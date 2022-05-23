@@ -17,6 +17,7 @@ import { IVault } from 'state/vault/types';
 import { usePrice } from 'state/price/hooks';
 import PageLoader from 'components/Loader/PageLoader';
 import { chainId } from 'config/constants/tokens';
+import VaultBanner from './components/VaultBanner/VaultBanner';
 // const StyledImage = styled(Image)`
 //   margin-left: auto;
 //   margin-right: auto;
@@ -221,6 +222,7 @@ const Vaults: React.FC = () => {
 
   return (
     <Page>
+      <VaultBanner />
       {renderContent()}
       {/* <PageLoader /> */}
       {!rowData.length ? <PageLoader /> : null}

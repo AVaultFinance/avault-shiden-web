@@ -16,7 +16,7 @@ export const ArrowIcon = styled(ChevronDownIcon)<{ toggled: boolean }>`
 export const W480BorderPageLayout = styled.div`
   position: relative;
   min-height: 0px;
-  width: 480px;
+  width: 600px;
   // background-image: linear-gradient(270deg, #fc00ff 0%, #7d49ff 100%);
   // box-shadow: 2px 4px 7px 1px rgba(9, 2, 18, 0.3);
   border-radius: 23px;
@@ -27,7 +27,7 @@ export const W480BorderPageLayout = styled.div`
   background: ${({ theme }) => theme.colors.cardBackground};
   &.single {
     @media screen and (max-width: 852px) {
-      max-width: 480px;
+      max-width: 600px;
       position: absolute;
       width: 90%;
       top: 50%;

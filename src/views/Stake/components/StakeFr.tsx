@@ -27,7 +27,7 @@ const UnbindListStyled = styled.div`
   margin-top: 12px;
   border: 1px solid #2e2d5b;
   overflow: hidden;
-  width: 480px;
+  width: 600px;
   padding: 30px 30px 80px;
   background-size: 150% 200%;
   position: relative;

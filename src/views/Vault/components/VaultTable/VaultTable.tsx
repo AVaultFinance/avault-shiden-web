@@ -23,6 +23,7 @@ const Container = styled.div`
   width: 100%;
 
   ${({ theme }) => theme.mediaQueries.md} {
+    overflow: hidden;
     background: ${({ theme }) => theme.card.background};
     border-radius: 12px;
     margin: 16px 0px;
