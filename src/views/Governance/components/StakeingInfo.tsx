@@ -67,7 +67,7 @@ const StakeingInfoStyled = styled.div`
       display: inline-block;
       padding: 17px 30px 17px 16px;
       font-size: 36px;
-      font-weight: 800;
+      font-weight: 600;
       ${({ theme }) => theme.mediaQueries.md} {
         padding: 24px 30px;
         font-size: 48px;

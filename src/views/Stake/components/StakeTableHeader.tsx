@@ -23,13 +23,13 @@ const HeaderLi = styled.div`
 const Title = styled.h2`
   text-align: center;
   color: ${({ theme }) => theme.colors.cardBackground};
-  font-weight: bold;
+  font-weight: 600;
   font-size: 20px;
   padding-bottom: 12px;
 `;
 const HeaderTitleH3 = styled.h3`
   color: ${({ theme }) => theme.colors.cardBackground};
-  font-weight: bold;
+  font-weight: 600;
   font-size: 14px;
   line-height: 20px;
   ${({ theme }) => theme.mediaQueries.md} {

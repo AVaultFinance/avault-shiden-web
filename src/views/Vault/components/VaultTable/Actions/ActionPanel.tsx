@@ -139,7 +139,7 @@ const DetailContainer = styled.div`
     color: ${({ theme }) => theme.colors.text};
     &.green {
       font-size: 15px;
-      font-weight: bold;
+      font-weight: 600;
       color: ${({ theme }) => theme.colors.success};
       margin-bottom: 3px;
     }

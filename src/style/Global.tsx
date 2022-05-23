@@ -112,6 +112,9 @@ const GlobalStyle = createGlobalStyle`
   .w20{
     width: 20px;
   }
+  h3,h4,h5,h6 {
+    font-weight: 600;
+  }
   .bg-holder{
     padding: 0 20px;
   }

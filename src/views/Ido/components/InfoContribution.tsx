@@ -152,6 +152,7 @@ const RewardsComponentsStyled = styled.div`
     background: linear-gradient(270deg, #00f4b9 0%, #ff4afb 100%);
     -webkit-background-clip: text;
     color: transparent;
+    font-weight: 600;
     ${({ theme }) => theme.mediaQueries.md} {
       font-size: 80px;
     }
@@ -200,6 +201,7 @@ const InfoContributionStyled = styled.div`
   .h2 {
     font-size: 48px;
     line-height: 52px;
+    font-weight: 600;
     ${({ theme }) => theme.mediaQueries.md} {
       font-size: 60px;
       line-height: 80px;
@@ -216,6 +218,7 @@ const InfoContributionStyled = styled.div`
       border-radius: 50%;
       background-image: conic-gradient(from 1.5708rad at 50% 50%, #ce55f9 0%, #65fdd8 100%);
       vertical-align: top;
+      font-weight: 600;
       ${({ theme }) => theme.mediaQueries.md} {
         width: 20px;
         height: 20px;

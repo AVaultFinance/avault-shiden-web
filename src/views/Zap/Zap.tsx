@@ -292,6 +292,7 @@ const TitleStyled = styled(Heading)`
   color: transparent;
   font-size: 36px;
   padding-bottom: 12px;
+  font-weight: 800;
 `;
 const TextStyled = styled(Text)`
   font-size: 14px;
