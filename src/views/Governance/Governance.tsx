@@ -6,14 +6,14 @@ import { delay } from 'lodash';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'state';
-import { changeLockAVATModalState } from 'state/governance';
-import { useGovernanceData } from 'state/governance/hooks';
-import { ILockAVATModalState } from 'state/governance/types';
+import { ILockAVATModalState } from 'views/Governance/state/governance/types';
 import styled from 'styled-components';
 import LockAVATModal from './components/Modal/LockAVATModal';
 import Rewards from './components/Rewards';
 import Stake from './components/Stake';
 import StakeingInfo from './components/StakeingInfo';
+import { changeLockAVATModalState } from './state/governance';
+import { useGovernanceData } from './state/governance/hooks';
 
 const Governance = () => {
   const { account } = useActiveWeb3React();

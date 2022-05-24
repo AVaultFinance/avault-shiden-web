@@ -1,6 +1,6 @@
 import React from 'react';
 import getTimePeriods from 'utils/getTimePeriods';
-import { ILockAVATModalState } from 'state/governance/types';
+import { ILockAVATModalState } from 'views/Governance/state/governance/types';
 import styled from 'styled-components';
 import { Button } from '@my/ui';
 import Timer from 'components/CountdownTimer/Timer';

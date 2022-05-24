@@ -22,8 +22,8 @@ import mint from './mint/reducer';
 import lists from './lists/reducer';
 import burn from './burn/reducer';
 import multicall from './multicall/reducer';
-import governance from './governance';
 import ido from './ido';
+import governance from 'views/Governance/state/governance';
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'farms', 'lists', 'vault'];
 // const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];

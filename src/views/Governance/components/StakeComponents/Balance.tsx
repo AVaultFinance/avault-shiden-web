@@ -1,4 +1,4 @@
-import { IGovernanceUserData } from 'state/governance/types';
+import { IGovernanceUserData } from 'views/Governance/state/governance/types';
 import CountUp from 'react-countup';
 import styled from 'styled-components';
 interface IProps extends IGovernanceUserData {}

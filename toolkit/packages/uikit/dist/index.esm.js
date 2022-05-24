@@ -1788,9 +1788,12 @@ var style = (_a$4 = {},
         fontSizeLg: "64px",
     },
     _a$4);
-var Heading = styled(Text).attrs({ bold: true })(templateObject_1$O || (templateObject_1$O = __makeTemplateObject(["\n  font-size: ", ";\n  font-weight: 600;\n  line-height: 1.1;\n  font-size: 16px;\n  font-weight: 600;\n"], ["\n  font-size: ", ";\n  font-weight: 600;\n  line-height: 1.1;\n  font-size: 16px;\n  font-weight: 600;\n"])), function (_a) {
+var Heading = styled(Text).attrs({ bold: true })(templateObject_1$O || (templateObject_1$O = __makeTemplateObject(["\n  font-size: ", ";\n  font-weight: 600;\n  line-height: 1.1;\n  font-size: 18px;\n  font-weight: 600;\n  ", " {\n    font-size: 16px;\n  }\n"], ["\n  font-size: ", ";\n  font-weight: 600;\n  line-height: 1.1;\n  font-size: 18px;\n  font-weight: 600;\n  ", " {\n    font-size: 16px;\n  }\n"])), function (_a) {
     var scale = _a.scale;
     return style[scale || scales$5.MD].fontSize;
+}, function (_a) {
+    var theme = _a.theme;
+    return theme.mediaQueries.md;
 });
 Heading.defaultProps = {
     as: tags.H2,
@@ -4802,7 +4805,7 @@ var WalletCard = function (_a) {
 };
 var templateObject_1$3;
 
-var WalletWrapper = styled(Box)(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  /* border-bottom: 1px solid ", "; */\n"], ["\n  /* border-bottom: 1px solid ", "; */\n"])), function (_a) {
+var WalletWrapper = styled(Box)(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  max-height: 453px;\n  overflow-y: auto;\n  padding-bottom: 4px;\n  /* border-bottom: 1px solid ", "; */\n"], ["\n  max-height: 453px;\n  overflow-y: auto;\n  padding-bottom: 4px;\n  /* border-bottom: 1px solid ", "; */\n"])), function (_a) {
     var theme = _a.theme;
     return theme.colors.cardBorder;
 });
@@ -4827,21 +4830,18 @@ var getPreferredConfig = function (walletConfig) {
     ], sortedConfig.filter(function (sortedWalletConfig) { return sortedWalletConfig.title !== preferredWalletName; }));
 };
 var ConnectModal = function (_a) {
-    var login = _a.login, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b, _c = _a.displayCount, displayCount = _c === void 0 ? 3 : _c;
-    var _d = useState(false), showMore = _d[0]; _d[1];
-    useTheme();
+    var login = _a.login, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b; _a.displayCount;
     var sortedConfig = getPreferredConfig(connectors).filter(function (c) { return c.title === "Metamask"; });
-    var displayListConfig = showMore ? sortedConfig : sortedConfig.slice(0, displayCount);
     return (React.createElement(ModalContainer, { minWidth: "340px" },
         React.createElement(ModalHeaderStyled, null,
             React.createElement(ModalTitle, null,
                 React.createElement(Heading, null, "Connect Wallet")),
             React.createElement(ModalCloseButton, { onDismiss: onDismiss })),
         React.createElement(ModalBody, { width: ["340px", null, "480px"] },
-            React.createElement(WalletWrapper, { paddingBottom: "24px", maxHeight: "453px", overflowY: "auto" }, displayListConfig.map(function (wallet) { return (React.createElement(Box, { key: wallet.title },
+            React.createElement(WalletWrapper, null, sortedConfig.map(function (wallet) { return (React.createElement(Box, { key: wallet.title },
                 React.createElement(WalletCard, { walletConfig: wallet, login: login, onDismiss: onDismiss }))); })))));
 };
-var ModalHeaderStyled = styled(ModalHeader)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  padding: 30px 16px 14px;\n  ", " {\n    padding: 20px 30px 14px;\n  }\n"], ["\n  padding: 30px 16px 14px;\n  ", " {\n    padding: 20px 30px 14px;\n  }\n"])), function (_a) {
+var ModalHeaderStyled = styled(ModalHeader)(templateObject_2$1 || (templateObject_2$1 = __makeTemplateObject(["\n  padding: 23px 16px 22px;\n  ", " {\n    padding: 20px 30px 0;\n  }\n"], ["\n  padding: 23px 16px 22px;\n  ", " {\n    padding: 20px 30px 0;\n  }\n"])), function (_a) {
     var theme = _a.theme;
     return theme.mediaQueries.sm;
 });

@@ -2,7 +2,7 @@
 import { Button, Flex } from '@my/ui';
 import ConnectWalletButton from 'components/ConnectWalletButton';
 import { useMemo } from 'react';
-import { IGovernanceUserData, ILockAVATModalState } from 'state/governance/types';
+import { IGovernanceUserData, ILockAVATModalState } from 'views/Governance/state/governance/types';
 import styled from 'styled-components';
 import Countdown from './StakeComponents/Countdown';
 import StakeBalance from './StakeComponents/Balance';

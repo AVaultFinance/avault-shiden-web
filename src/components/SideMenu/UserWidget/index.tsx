@@ -6,7 +6,7 @@ import Balance from 'components/Balance';
 import { useFarmsAllTotal } from 'state/farms/hooks';
 import { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { useGovernanceAllTotal } from 'state/governance/hooks';
+import { useGovernanceAllTotal } from 'views/Governance/state/governance/hooks';
 const TextLinerStyle = styled(Flex)`
   font-size: 18px;
   background: linear-gradient(270deg, #00f4b9 0%, #ff4afb 100%);
