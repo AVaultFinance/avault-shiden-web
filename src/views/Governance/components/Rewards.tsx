@@ -204,7 +204,6 @@ const RewardsStyled = styled.div`
             text-align: left;
             i {
               display: inline-block;
-              vertical-align: middle;
             }
           }
         }
@@ -214,8 +213,9 @@ const RewardsStyled = styled.div`
         i {
           font-size: 12px;
           color: #6a6991;
-          padding-top: 6px;
           padding-left: 6px;
+          display: inline;
+          vertical-align: middle;
         }
       }
       .small {
