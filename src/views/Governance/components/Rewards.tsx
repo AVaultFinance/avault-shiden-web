@@ -158,7 +158,7 @@ const RewardsStyled = styled.div`
       justify-content: space-between;
       border: 1px solid #2e2d5b;
       border-radius: 12px;
-      padding: 10px 16px 20px;
+      padding: 20px 16px;
       margin-bottom: 20px;
       flex-wrap: wrap;
       background-color: #181733;
@@ -231,7 +231,7 @@ const RewardsStyled = styled.div`
         border-radius: 12px;
         width: 100%;
         padding: 20px 16px;
-        margin-top: 6px;
+        margin-top: 10px;
         h3 {
           color: #cc64f2;
           i {

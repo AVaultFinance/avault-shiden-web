@@ -91,10 +91,10 @@ const Stake = ({ lockedState, userData, account, onClickModal, handleApprove, re
 
 const StakeStyled = styled.div<{ lockedState: ILockedState }>`
   position: relative;
-  padding: 8% 5%;
+  padding: 8% 5% 0;
   width: 100%;
   height: 100%;
-  ${({ theme }) => theme.mediaQueries.lg} {
+  ${({ theme }) => theme.mediaQueries.sm} {
     padding: 6% 5% 8%;
   }
 `;
@@ -128,8 +128,8 @@ const FlexButton = styled(Flex)<{ bottom: string }>`
   button {
     border-radius: 12px;
     font-size: 15px;
-    height: 48px;
     width: 48%;
+    height: 48px;
     &.last-child {
       &.pancake-button--disabled {
         background-color: #201f43;

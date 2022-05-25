@@ -186,13 +186,19 @@ const PageWrapFlex = styled(Flex)`
     border: 1px solid #2e2d5b;
     box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
     border-radius: 20px;
+
+    &:nth-child(1) {
+      height: 420px;
+    }
+    &:nth-child(2) {
+      height: 460px;
+    }
     &:nth-child(1),
     &:nth-child(2) {
       width: 100%;
-      height: 420px;
       margin-bottom: 20px;
       ${({ theme }) => theme.mediaQueries.sm} {
-        height: 560px;
+        height: 500px;
       }
       ${({ theme }) => theme.mediaQueries.md} {
         margin-bottom: 0;

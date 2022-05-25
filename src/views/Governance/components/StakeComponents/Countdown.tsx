@@ -46,6 +46,12 @@ const Countdown: React.FC<IProps> = ({ nextEventTime, lockedState, onClickModal 
 const TimerComponentsStyled = styled.div`
   border-radius: 20px;
   text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    max-width: 100%;
+  }
   ${({ theme }) => theme.mediaQueries.lg} {
     border: 1px solid #2e2d5b;
     padding: 30px 60px;
