@@ -129,6 +129,9 @@ const FlexButton = styled(Flex)`
     height: 48px;
     width: 48%;
     &.last-child {
+      &.pancake-button--disabled {
+        background-color: #201f43;
+      }
       background-color: transparent;
     }
   }

@@ -107,14 +107,11 @@ const LockAVATModal = ({
   }, [fullBalance, setBalanceVal]);
   const aimTimestampCallback = useCallback(() => {
     const weekValue = Number(weekVal || weekLiVal);
-    if (weekValue <= 0 || weekValue > 52) {
-      toastWarning('Warn', 'Select between 1 to 52 weeks');
+    if (weekValue <= 0 || weekValue > 156) {
+      toastWarning('Warn', 'Select between 1 to 156 weeks');
       return;
     }
-    if (weekValue <= 0 || weekValue > 52) {
-      toastWarning('Warn', 'Select between 1 to 52 weeks');
-      return;
-    }
+
     // 24*60*60  1day/s
     const timestamp = 24 * 60 * 60 * weekValue * 7;
     const nowTimestamp = lockAVATModalState === ILockAVATModalState.INIT ? getTimeStamp() : Number(withdrawalDate);

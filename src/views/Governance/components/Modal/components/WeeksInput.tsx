@@ -15,22 +15,15 @@ interface IProps {
 // block 6s
 // 1day
 
-const WeeksInput = ({
-  val,
-  handleChange,
-  setWeekVal,
-  weekLiVal,
-  setWeekLiVal,
-  withdrawalDate,
-  lockAVATModalState,
-}: IProps) => {
+const WeeksInput = ({ val, handleChange, setWeekVal, weekLiVal, setWeekLiVal }: IProps) => {
   return useMemo(() => {
     return (
       <WeeksInputStyled>
         <h2>How long would you like to lock for?</h2>
-        <p className="grey">Select between 1 to 208 weeks</p>
+        <p className="grey">Select between 1 to 156 weeks</p>
         <ul>
-          {(lockAVATModalState === ILockAVATModalState.INIT ? weeksArrBig : weeksArrSmall).map((v) => {
+          {weeksArrBig.map((v) => {
+            // {(lockAVATModalState === ILockAVATModalState.INIT ? weeksArrBig : weeksArrSmall).map((v) => {
             const classname = weekLiVal === v.value && !val ? 'on' : '';
             // weekLiVal === v.value && !val
             //   ? 'on'
@@ -65,7 +58,7 @@ const WeeksInput = ({
         />
       </WeeksInputStyled>
     );
-  }, [handleChange, setWeekLiVal, setWeekVal, val, weekLiVal, lockAVATModalState]);
+  }, [handleChange, setWeekLiVal, setWeekVal, val, weekLiVal]);
 };
 
 const weeksArrBig = [
@@ -74,44 +67,44 @@ const weeksArrBig = [
     value: '5',
   },
   {
-    text: '10Week',
-    value: '10',
-  },
-  {
     text: '20Week',
     value: '20',
-  },
-  {
-    text: '30Week',
-    value: '30',
   },
   {
     text: '1year',
     value: '52',
   },
-];
-const weeksArrSmall = [
   {
-    text: '1Week',
-    value: '1',
+    text: '2year',
+    value: '104',
   },
   {
-    text: '2Week',
-    value: '2',
-  },
-  {
-    text: '4Week',
-    value: '4',
-  },
-  {
-    text: '8Week',
-    value: '8',
-  },
-  {
-    text: '10Week',
-    value: '10',
+    text: '3year',
+    value: '156',
   },
 ];
+// const weeksArrSmall = [
+//   {
+//     text: '1Week',
+//     value: '1',
+//   },
+//   {
+//     text: '2Week',
+//     value: '2',
+//   },
+//   {
+//     text: '4Week',
+//     value: '4',
+//   },
+//   {
+//     text: '8Week',
+//     value: '8',
+//   },
+//   {
+//     text: '20Week',
+//     value: '20',
+//   },
+// ];
 const WeeksInputStyled = styled.div`
   margin-top: 30px;
   h2 {
