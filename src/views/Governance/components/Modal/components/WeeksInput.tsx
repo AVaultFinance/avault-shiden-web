@@ -71,7 +71,7 @@ const weeksArrBig = [
     value: '4',
   },
   {
-    text: '16year',
+    text: '16week',
     value: '16',
   },
   {
