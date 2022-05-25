@@ -63,12 +63,16 @@ const WeeksInput = ({ val, handleChange, setWeekVal, weekLiVal, setWeekLiVal }: 
 
 const weeksArrBig = [
   {
-    text: '5Week',
-    value: '5',
+    text: '1week',
+    value: '1',
   },
   {
-    text: '20Week',
-    value: '20',
+    text: '4week',
+    value: '4',
+  },
+  {
+    text: '16year',
+    value: '16',
   },
   {
     text: '1year',
