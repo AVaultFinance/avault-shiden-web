@@ -1,11 +1,13 @@
-import { Button, Modal } from '@my/ui';
+import { AutoRenewIcon, Button, Modal } from '@my/ui';
 import BigNumber from 'bignumber.js';
-import { AVAT, main_tokens } from 'config/constants/tokens';
+import { AVAT, chainId, main_tokens } from 'config/constants/tokens';
 import useToast from 'hooks/useToast';
 import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance';
-import { useLockAVATModalState } from 'views/Governance/state/governance/hooks';
+import { getTimeStamp, timestampToDate } from 'utils';
+import { getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance';
+import { veAVAT } from 'views/Governance/constants/constants';
+import { useGovernanceData, useLockAVATModalState } from 'views/Governance/state/governance/hooks';
 import { ILockAVATModalState } from 'views/Governance/state/governance/types';
 import { ITokenType } from 'views/Zap/utils/types';
 import BalanceInput from './components/BalanceInput';
@@ -17,13 +19,68 @@ interface IProps {
   max: string;
   onDismiss?: () => void;
   isUserLoaded: boolean;
+  handleCreateLock: any;
+  handleIncreaseLockAmount: any;
+  handleIncreaseUnlockTime: any;
+  handleWithdraw: any;
 }
-const LockAVATModal = ({ account, max, isUserLoaded, onDismiss }: IProps) => {
+const LockAVATModal = ({
+  account,
+  max,
+  isUserLoaded,
+  onDismiss,
+  handleCreateLock,
+  handleIncreaseLockAmount,
+  handleIncreaseUnlockTime,
+  handleWithdraw,
+}: IProps) => {
   const lockAVATModalState: ILockAVATModalState = useLockAVATModalState();
-  // console.log({ lockAVATModalState });
   const [balanceVal, setBalanceVal] = useState('');
   const [weekVal, setWeekVal] = useState('');
-  const [weekLiVal, setWeekLiVal] = useState('');
+  const [weekLiVal, setWeekLiVal] = useState('52');
+  const [pendingTx, setPendingTx] = useState(false);
+  const { userData: _userData = {} } = useGovernanceData();
+
+  const { veAVATBalance, AVATLocked, withdrawalDate, _withdrawalDateDisplay } = useMemo(() => {
+    const _userDataKey = `${account}-${chainId}`;
+    const userData = _userData[_userDataKey];
+    const { veAVATBalance = '0', AVATLocked = '0', withdrawalDate = '0', withdrawalDateDisplay = '0' } = userData || {};
+    return {
+      veAVATBalance,
+      AVATLocked,
+      withdrawalDate,
+      _withdrawalDateDisplay: withdrawalDateDisplay,
+    };
+  }, [account, _userData]);
+
+  const { veAVATBalanceDisplay, AVATLockedDisplay, withdrawalDateDisplay } = useMemo(() => {
+    const veAVATBalanceDisplay = getFullDisplayBalance(new BigNumber(veAVATBalance), veAVAT.decimals, 4);
+
+    const balanceBigVal = getDecimalAmount(balanceVal || '0');
+    const __AVATBalance = balanceVal ? new BigNumber(AVATLocked).plus(balanceBigVal) : new BigNumber(AVATLocked);
+    const AVATLockedDisplay = getFullDisplayBalance(__AVATBalance, AVAT.decimals, 4);
+
+    const weekValue = Number(weekVal || weekLiVal);
+    const timestamp = 24 * 60 * 60 * weekValue * 7;
+    const withdrawalDateDisplay =
+      lockAVATModalState === ILockAVATModalState.INIT || lockAVATModalState === ILockAVATModalState.CHANGELOCKTIME
+        ? timestampToDate(new BigNumber(withdrawalDate).plus(timestamp).times(1000).toNumber())
+        : _withdrawalDateDisplay;
+    return {
+      veAVATBalanceDisplay,
+      AVATLockedDisplay,
+      withdrawalDateDisplay,
+    };
+  }, [
+    veAVATBalance,
+    AVATLocked,
+    withdrawalDate,
+    balanceVal,
+    weekLiVal,
+    weekVal,
+    _withdrawalDateDisplay,
+    lockAVATModalState,
+  ]);
   const { toastWarning } = useToast();
 
   const handleBalanceChange = useCallback(
@@ -43,30 +100,96 @@ const LockAVATModal = ({ account, max, isUserLoaded, onDismiss }: IProps) => {
     [setWeekVal],
   );
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(new BigNumber(max));
+    return getFullDisplayBalance(new BigNumber(max), AVAT.decimals, 8);
   }, [max]);
   const handleSelectMax = useCallback(() => {
     setBalanceVal(fullBalance);
   }, [fullBalance, setBalanceVal]);
-  const onPressHandle = useCallback(() => {
-    console.log(1111);
+  const aimTimestampCallback = useCallback(() => {
     const weekValue = Number(weekVal || weekLiVal);
-    const balanceValue = Number(balanceVal);
-    if (weekValue <= 0 || weekValue > 208) {
-      toastWarning('Warn', 'Select between 1 to 208 weeks');
+    if (weekValue <= 0 || weekValue > 52) {
+      toastWarning('Warn', 'Select between 1 to 52 weeks');
       return;
     }
-    const maxBalance = getBalanceNumber(new BigNumber(max));
-    if (balanceValue <= 0 || balanceValue > maxBalance) {
-      toastWarning('Warn', 'Insufficient Balance');
+    if (weekValue <= 0 || weekValue > 52) {
+      toastWarning('Warn', 'Select between 1 to 52 weeks');
       return;
     }
     // 24*60*60  1day/s
     const timestamp = 24 * 60 * 60 * weekValue * 7;
-    const nowTimestamp = Number((new Date().valueOf() / 1000).toFixed(0));
+    const nowTimestamp = lockAVATModalState === ILockAVATModalState.INIT ? getTimeStamp() : Number(withdrawalDate);
     const aimTimestamp = timestamp + nowTimestamp;
-    console.log('aimTimestamp: ', aimTimestamp);
-  }, [balanceVal, weekVal, weekLiVal, max, toastWarning]);
+    // if (aimTimestamp < Number(withdrawalDate)) {
+    //   toastWarning('Warn', `Time lower than ${withdrawalDateDisplay} cannot be filled in`);
+    //   return;
+    // }
+    return aimTimestamp;
+  }, [toastWarning, weekLiVal, weekVal, withdrawalDate, lockAVATModalState]);
+  const balanceValueCallback = useCallback(() => {
+    if (!balanceVal) {
+      toastWarning('Warn', 'Please input amount!');
+      return;
+    }
+    const balanceValue = getDecimalAmount(new BigNumber(balanceVal)).toNumber();
+    const maxBalance = Number(max);
+    if (balanceValue <= 0 || balanceValue > maxBalance) {
+      toastWarning('Warn', 'Insufficient allowance');
+      return;
+    }
+    return balanceValue;
+  }, [balanceVal, max, toastWarning]);
+  const onPressHandle = useCallback(async () => {
+    if (lockAVATModalState === ILockAVATModalState.INIT) {
+      const balanceValue = balanceValueCallback();
+      if (!balanceValue) {
+        return;
+      }
+      const aimTimestamp = aimTimestampCallback();
+      if (!aimTimestamp) {
+        return;
+      }
+      setPendingTx(true);
+      await handleCreateLock({
+        amount: `${balanceValue}`,
+        unlockTime: `${aimTimestamp}`,
+      });
+    } else if (lockAVATModalState === ILockAVATModalState.ADDAMOUNT) {
+      const balanceValue = balanceValueCallback();
+      if (!balanceValue) {
+        return;
+      }
+      setPendingTx(true);
+      await handleIncreaseLockAmount({
+        amount: `${balanceValue}`,
+      });
+    } else if (lockAVATModalState === ILockAVATModalState.CHANGELOCKTIME) {
+      const aimTimestamp = aimTimestampCallback();
+      if (!aimTimestamp) {
+        return;
+      }
+      setPendingTx(true);
+      await handleIncreaseUnlockTime({
+        newUnlockTime: `${aimTimestamp}`,
+      });
+    } else if (lockAVATModalState === ILockAVATModalState.WITHDRAW) {
+      setPendingTx(true);
+      await handleWithdraw();
+    }
+
+    setPendingTx(false);
+    onDismiss();
+    // console.log('aimTimestamp: ', aimTimestamp);
+  }, [
+    handleCreateLock,
+    handleIncreaseLockAmount,
+    handleIncreaseUnlockTime,
+    handleWithdraw,
+    lockAVATModalState,
+    aimTimestampCallback,
+    balanceValueCallback,
+    onDismiss,
+  ]);
+
   const title = useCallback(() => {
     switch (lockAVATModalState) {
       case ILockAVATModalState.INIT:
@@ -89,10 +212,11 @@ const LockAVATModal = ({ account, max, isUserLoaded, onDismiss }: IProps) => {
             <BalanceInput
               isUserLoaded={isUserLoaded}
               account={account}
-              balance={max}
+              balance={fullBalance}
               handleSelectMax={handleSelectMax}
               val={balanceVal}
               handleChange={handleBalanceChange}
+              decimals={2}
               token={{
                 type: ITokenType.TOKEN,
                 symbol: AVAT.symbol,
@@ -105,19 +229,35 @@ const LockAVATModal = ({ account, max, isUserLoaded, onDismiss }: IProps) => {
           {lockAVATModalState !== ILockAVATModalState.ADDAMOUNT &&
           lockAVATModalState !== ILockAVATModalState.WITHDRAW ? (
             <WeeksInput
+              lockAVATModalState={lockAVATModalState}
               val={weekVal}
               setWeekVal={setWeekVal}
               handleChange={handleWeekChange}
               weekLiVal={weekLiVal}
               setWeekLiVal={setWeekLiVal}
+              withdrawalDate={withdrawalDate}
             />
           ) : null}
-          {lockAVATModalState !== ILockAVATModalState.WITHDRAW ? <LockInfo /> : null}
-          <ButtonStyled onClick={onPressHandle}>Confirm</ButtonStyled>
+          {lockAVATModalState !== ILockAVATModalState.WITHDRAW ? (
+            <LockInfo
+              veAVATBalanceDisplay={veAVATBalanceDisplay}
+              AVATLockedDisplay={AVATLockedDisplay}
+              withdrawalDateDisplay={withdrawalDateDisplay}
+            />
+          ) : null}
+          <ButtonStyled
+            isLoading={pendingTx}
+            endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
+            onClick={onPressHandle}
+          >
+            Confirm
+          </ButtonStyled>
         </div>
       </LockAVATModalStyled>
     );
   }, [
+    fullBalance,
+    withdrawalDate,
     account,
     balanceVal,
     handleBalanceChange,
@@ -125,12 +265,15 @@ const LockAVATModal = ({ account, max, isUserLoaded, onDismiss }: IProps) => {
     handleWeekChange,
     isUserLoaded,
     lockAVATModalState,
-    max,
     onDismiss,
     onPressHandle,
     title,
     weekLiVal,
     weekVal,
+    pendingTx,
+    AVATLockedDisplay,
+    veAVATBalanceDisplay,
+    withdrawalDateDisplay,
   ]);
 };
 const LockAVATModalStyled = styled(Modal)`
@@ -146,7 +289,7 @@ const LockAVATModalStyled = styled(Modal)`
     max-height: 400px;
     overflow-y: auto;
     ${({ theme }) => theme.mediaQueries.md} {
-      max-height: 600px;
+      max-height: 55vh;
     }
   }
 `;

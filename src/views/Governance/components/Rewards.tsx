@@ -1,28 +1,80 @@
 import { Button } from '@my/ui';
 import DefaultImg from 'components/DefaultImg';
+import { Dispatch, useCallback } from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
+import { getImageUrlFromToken } from 'utils';
+import { fetchGrassHouseDataAsync } from '../state/governance';
+import { useGrassHouseContractFun } from '../state/governance/hooks';
+import { IGrassHouse } from '../state/governance/types';
 interface IProps {
-  rewards: any[];
+  grassHouseList: IGrassHouse[];
+  account: string;
+  toastSuccess: any;
+  toastError: any;
+  dispatch: Dispatch<any>;
 }
-const Rewards = ({ rewards }: IProps) => {
+const Rewards = ({ grassHouseList, account, toastSuccess, toastError, dispatch }: IProps) => {
   return (
     <RewardsStyled>
       <h2 className="rewards_title">Rewards</h2>
       <ul>
-        {[1, 2, 3, 4].map((v) => (
-          <Row key={v} v={v} />
+        {grassHouseList.map((v: IGrassHouse, index: number) => (
+          <Row
+            key={index}
+            v={v}
+            account={account}
+            toastSuccess={toastSuccess}
+            toastError={toastError}
+            dispatch={dispatch}
+          />
         ))}
+        {/* {[1, 2, 3, 4].map((v) => (
+          <Row key={v} v={v} />
+        ))} */}
       </ul>
     </RewardsStyled>
   );
 };
 
-const Row = ({ v }: { v: number }) => {
-  return (
-    <li>
-      <div className="row_title">
-        <TokenWrapper>
-          {/* {isSingle ? (
+const Row = ({
+  v,
+  account,
+  toastSuccess,
+  toastError,
+  dispatch,
+}: {
+  v: IGrassHouse;
+  account: string;
+  toastSuccess: any;
+  toastError: any;
+  dispatch: Dispatch<any>;
+}) => {
+  const { apr = '0', rewards = '0', token } = v;
+  const { symbol, address, name } = token || {};
+  const rewardsNumber = Number(rewards);
+  console.log(rewards, rewardsNumber, rewardsNumber > 0);
+  const { claim } = useGrassHouseContractFun(v?.token?.address ?? '');
+  const handleClaim = useCallback(async () => {
+    if (!account) {
+      return;
+    }
+    const res = await claim();
+    if (typeof res === 'boolean') {
+      toastSuccess('Congratulations!', 'Withdraw Compounded!');
+      dispatch(fetchGrassHouseDataAsync({ grassHouse: v, account }));
+      return true;
+    } else {
+      toastError('Ops! Error', res);
+      return false;
+    }
+  }, [account, claim, dispatch, toastError, toastSuccess, v]);
+  return useMemo(() => {
+    return (
+      <li>
+        <div className="row_title">
+          <TokenWrapper>
+            {/* {isSingle ? (
           token0Address ? (
             <img src={getImageUrlFromToken(token0Address)} className="img" alt="" />
           ) : (
@@ -37,31 +89,36 @@ const Row = ({ v }: { v: number }) => {
             height={60}
           />
         ) : ( */}
-          <DefaultImg />
-          {/* )} */}
-        </TokenWrapper>
-        <h2>label</h2>
-      </div>
-      <h3 className="apr">
-        18%
-        <i>APR</i>
-      </h3>
-      <div className="small">
-        <h3>
-          <i>Rewards</i>
-          89.18
+            {address ? <img src={getImageUrlFromToken(address)} className="img" alt="" /> : <DefaultImg />}
+            {/* )} */}
+          </TokenWrapper>
+          <h2>
+            {symbol}
+            <i>{name}</i>
+          </h2>
+        </div>
+        <h3 className="apr">
+          {apr}%<i>APR</i>
         </h3>
-        <Button disabled={v === 1 ? false : true}>Claim</Button>
-      </div>
-      <h3 className="big">
-        89.18
-        <i>Rewards</i>
-      </h3>
-      <Button className="big" disabled={v === 1 ? false : true}>
-        Claim
-      </Button>
-    </li>
-  );
+        <div className="small">
+          <h3>
+            <i>Rewards</i>
+            {rewards}
+          </h3>
+          <Button disabled={rewardsNumber <= 0} onClick={handleClaim}>
+            Claim
+          </Button>
+        </div>
+        <h3 className="big">
+          {rewards}
+          <i>Rewards</i>
+        </h3>
+        <Button className="big" disabled={rewardsNumber <= 0} onClick={handleClaim}>
+          Claim
+        </Button>
+      </li>
+    );
+  }, [address, apr, name, rewards, rewardsNumber, symbol, handleClaim]);
 };
 const TokenWrapper = styled.div`
   padding-right: 8px;
@@ -69,7 +126,14 @@ const TokenWrapper = styled.div`
   .img {
     display: block;
     width: 62%;
+    height: 40px;
     margin: 0 auto;
+    background-color: #eee;
+    border-radius: 50%;
+    ${({ theme }) => theme.mediaQueries.sm} {
+      width: 40px;
+      height: 40px;
+    }
   }
   ${({ theme }) => theme.mediaQueries.sm} {
     padding-right: 20px;
@@ -120,6 +184,11 @@ const RewardsStyled = styled.div`
       }
       h2 {
         font-size: 18px;
+        i {
+          font-size: 12px;
+          padding-left: 6px;
+          color: ${({ theme }) => theme.colors.textSubtle};
+        }
       }
       h3 {
         font-size: 20px;

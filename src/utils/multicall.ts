@@ -56,5 +56,24 @@ export const multicallv2 = async <T = any>(
 
   return res;
 };
+export const multicallv3 = async <T = any>(abi: any[], calls: Call[]): Promise<T> => {
+  try {
+    const multi = getMulticallContract();
+    const itf = new ethers.utils.Interface(abi);
+
+    const calldata = calls.map((call) => [call.address.toLowerCase(), itf.encodeFunctionData(call.name, call.params)]);
+    // console.log('multi calls', calls, abi);
+    const { returnData } = await multi.callStatic.aggregate(calldata);
+
+    // console.log('after multi calls', calls, returnData);
+    const res = returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call));
+
+    return res;
+  } catch (error: any) {
+    console.log(error, abi || [], calls);
+    throw new Error(error);
+    // return Promise.reject();
+  }
+};
 
 export default multicall;

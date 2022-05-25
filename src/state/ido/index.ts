@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getTimeStamp } from 'utils';
 import { IIdoState, IIdoStateEnum } from './types';
 
 const initialState: IIdoState = {
@@ -26,7 +27,7 @@ export const idoSlice = createSlice({
     updateEndTime: (state) => {
       const endDate = '2023-01-18 23:59:59';
       const endTime = Number((new Date(endDate).valueOf() / 1000).toFixed(0));
-      const nowTimestamp = Number((new Date().valueOf() / 1000).toFixed(0));
+      const nowTimestamp = getTimeStamp();
       const nextTimes = endTime - nowTimestamp;
       state.endTime = nextTimes;
     },

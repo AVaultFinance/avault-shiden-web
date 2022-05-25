@@ -45,6 +45,7 @@ import multiCallAbi from '../config/abi/Multicall.json';
 import { getContract } from '../utils';
 
 import AVaultPCS_ABI from 'config/abi/AVaultPCS_ABI.json';
+import { AVAT } from 'config/constants/tokens';
 /**
  * Helper hooks to get specific contracts (by ABI)
  */
@@ -256,4 +257,8 @@ export function useMulticallContract(): Contract | null {
 
 export function useAVaultPCSContract(avaultAddress: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(avaultAddress, AVaultPCS_ABI, withSignerIfPossible);
+}
+
+export function useAAVTContract(withSignerIfPossible?: boolean): Contract | null {
+  return useContract(AVAT.address, ERC20_ABI, withSignerIfPossible);
 }

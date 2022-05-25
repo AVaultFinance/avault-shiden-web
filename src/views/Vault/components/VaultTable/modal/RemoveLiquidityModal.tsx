@@ -4,7 +4,7 @@ import { splitSignature } from '@ethersproject/bytes';
 import { Contract } from '@ethersproject/contracts';
 import { TransactionResponse } from '@ethersproject/providers';
 import { ETHER, Percent } from '@my/sdk';
-import { Button, Flex, Input, Heading, useMatchBreakpoints, Modal } from '@my/ui';
+import { Button, Flex, Input, Heading, useMatchBreakpoints, Modal, AutoRenewIcon } from '@my/ui';
 import { useTranslation } from 'contexts/Localization';
 import { RowBetween } from 'components/Layout/Row';
 import { ROUTER_ADDRESS } from 'config/constants';
@@ -30,7 +30,6 @@ import { MaxButton } from 'style/SmallBorderPageLayout';
 import ZapBalance from 'views/Zap/components/ZapBalance';
 import ZapCurrencyLogo from 'views/Zap/components/ZapCurrencyLogo';
 import BigNumber from 'bignumber.js';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import vaultConfig from 'config/constants/vault';
 
 interface RemoveLiquidityModalProps {
@@ -396,18 +395,18 @@ const RemoveLiquidityModal: React.FC<RemoveLiquidityModalProps> = ({ vault, acco
           onClick={onAttemptToApprove}
           disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
           width="48%"
+          endIcon={approval === ApprovalState.PENDING ? <AutoRenewIcon spin color="currentColor" /> : null}
         >
           {approval === ApprovalState.APPROVED || signatureData !== null ? t('Approved') : t('Approve')}
-          <Loading isLoading={approval === ApprovalState.PENDING} success={true} />
         </Button>
         <Button
           isLoading={attemptingTxn}
           width="48%"
           disabled={attemptingTxn || !(approval === ApprovalState.APPROVED || signatureData !== null)}
           onClick={onRemove}
+          endIcon={attemptingTxn ? <AutoRenewIcon spin color="currentColor" /> : null}
         >
           {t('Confirm')}
-          <Loading isLoading={attemptingTxn} success={true} />
         </Button>
       </RowBetween>
     </Modal>

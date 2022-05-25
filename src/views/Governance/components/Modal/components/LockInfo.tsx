@@ -1,22 +1,31 @@
+import { useMemo } from 'react';
 import styled from 'styled-components';
 
-const LockInfo = () => {
-  return (
-    <LockInfoStyled>
-      <h4>
-        AVAT to be locked<i>218387.11</i>
-      </h4>
-      <h4>
-        xAVAT balance<i>3848</i>
-      </h4>
-      <h4>
-        APR<i className="green">281.11%</i>
-      </h4>
-      <h4>
-        Unlock date<i>2025.10.12</i>
-      </h4>
-    </LockInfoStyled>
-  );
+interface IProps {
+  veAVATBalanceDisplay: string;
+  AVATLockedDisplay: string;
+  withdrawalDateDisplay: string;
+}
+
+const LockInfo = ({ veAVATBalanceDisplay, AVATLockedDisplay, withdrawalDateDisplay }: IProps) => {
+  return useMemo(() => {
+    return (
+      <LockInfoStyled>
+        <h4>
+          AVAT to be locked<i>{AVATLockedDisplay}</i>
+        </h4>
+        <h4>
+          veAVAT balance<i>{veAVATBalanceDisplay}</i>
+        </h4>
+        <h4>
+          APR<i className="green">0.00%</i>
+        </h4>
+        <h4>
+          Unlock date<i>{withdrawalDateDisplay}</i>
+        </h4>
+      </LockInfoStyled>
+    );
+  }, [veAVATBalanceDisplay, AVATLockedDisplay, withdrawalDateDisplay]);
 };
 const LockInfoStyled = styled.div`
   background-color: #181733;

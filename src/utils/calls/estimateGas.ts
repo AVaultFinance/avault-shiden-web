@@ -48,7 +48,7 @@ export const callWithEstimateGas = async (
     // console.log(111, methodArgs, overrides);
     const tx = await contract[methodName](...methodArgs, {
       gasLimit: gasEstimation,
-      // gasLimit: DEFAULT_GAS_LIMIT_40w,
+      // gasLimit: DEFAULT_GAS_LIMIT,
       gasPrice: DEFAULT_GAS_PRICE,
       ...overrides,
     });
@@ -60,6 +60,12 @@ export const callWithEstimateGas = async (
         receipt: receipt,
         isOk: true,
       };
+    } else {
+      console.log(receipt);
+      return {
+        isOk: false,
+        message: receipt,
+      };
     }
   } catch (e: any) {
     console.log(e);
@@ -68,4 +74,15 @@ export const callWithEstimateGas = async (
       message: e?.message,
     };
   }
+};
+export const callWithStatic = ({
+  contract,
+  methodName,
+  methodArgs = [],
+}: {
+  contract: Contract;
+  methodName: string;
+  methodArgs?: any[];
+}) => {
+  return contract.callStatic[methodName](...methodArgs);
 };

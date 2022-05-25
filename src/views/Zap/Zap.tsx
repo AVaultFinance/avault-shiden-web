@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Input, Button, useWalletModal } from '@my/ui';
+import { Heading, Text, Flex, Input, Button, useWalletModal, AutoRenewIcon } from '@my/ui';
 import PageLayout from 'components/Layout/Page';
 import { BgGlobalStyle } from 'style/Global';
 import styled from 'styled-components';
@@ -18,7 +18,6 @@ import BigNumber from 'bignumber.js';
 import useToast from 'hooks/useToast';
 import { useEstimatedPrice } from './utils/utils';
 import useZapContract, { useApprove, useHandleApproved, zapAddress } from './constants/contract';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import { DEFAULT_GAS_LIMIT } from 'config';
 import useDebounce from 'hooks/useDebounce';
@@ -32,7 +31,6 @@ const Zap = () => {
   const [val, setVal] = useState('');
   const { handleZapClick } = useZapContract(zapAddress, fromCurrency, toCurrency);
   const [pendingTx, setPendingTx] = useState(false);
-  const [pendingTxSuccess, setPendingTxSuccess] = useState(true);
   const valNumber = useDebounce(new BigNumber(val ?? '0'), 100);
   const { toastSuccess, toastError, toastWarning } = useToast();
 
@@ -80,23 +78,12 @@ const Zap = () => {
           'Successfully claimed!',
           `Your ${fromCurrency.symbol} to ${toCurrency.symbol} Zap Successfully claimed!`,
         );
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 10000);
       } else {
         const message = result ? result : `Your ${fromCurrency.symbol} to ${toCurrency.symbol} Zap failed!`;
         toastError('Error', message);
-        setPendingTxSuccess(false);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 1500);
       }
     } catch (e: any) {
       toastError('Error', e.message ? e.message : `Your ${fromCurrency.symbol} to ${toCurrency.symbol} Zap failed!`);
-      setPendingTxSuccess(false);
-      setTimeout(() => {
-        setPendingTxSuccess(true);
-      }, 1500);
     } finally {
       setVal('');
 
@@ -118,16 +105,9 @@ const Zap = () => {
         setIsLoaded(true);
         toastSuccess('Approve!', 'Your are Approved');
         setIsLoaded(false);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 10000);
       } else {
         const message = result ? result : 'Your approved failed';
         toastError('Approve!', message);
-        setPendingTxSuccess(false);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 1500);
       }
     } catch (e) {
       console.error(e);
@@ -221,9 +201,9 @@ const Zap = () => {
                   zapApprove();
                 }
               }}
+              endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
             >
               {!account ? 'Connect Wallet' : isApprove ? 'Confirm' : 'Approve'}
-              <Loading isLoading={pendingTx} success={pendingTxSuccess} />
             </Button>
           </TableContent>
           <ZapBgStyled>

@@ -25,7 +25,7 @@ import multicall from './multicall/reducer';
 import ido from './ido';
 import governance from 'views/Governance/state/governance';
 
-const PERSISTED_KEYS: string[] = ['user', 'transactions', 'farms', 'lists', 'vault'];
+const PERSISTED_KEYS: string[] = ['user', 'transactions', 'farms', 'governance', 'lists', 'vault'];
 // const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];
 
 const store = configureStore({

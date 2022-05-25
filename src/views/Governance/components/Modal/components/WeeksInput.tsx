@@ -1,48 +1,87 @@
 import styled from 'styled-components';
 import { Input } from '@my/ui';
+import { useMemo } from 'react';
+import { getTimeStamp } from 'utils';
+import { ILockAVATModalState } from 'views/Governance/state/governance/types';
 interface IProps {
   val: string;
   handleChange: any;
   setWeekVal: any;
   weekLiVal: string;
   setWeekLiVal: any;
+  withdrawalDate: string;
+  lockAVATModalState: ILockAVATModalState;
 }
 // timestamp s
 // block 6s
 // 1day
 
-const WeeksInput = ({ val, handleChange, setWeekVal, weekLiVal, setWeekLiVal }: IProps) => {
-  return (
-    <WeeksInputStyled>
-      <h2>How long would you like to lock for?</h2>
-      <p className="grey">Select between 1 to 208 weeks</p>
-      <ul>
-        {weeksArr.map((v) => (
-          <li
-            key={v.text}
-            className={weekLiVal === v.value ? 'on' : ''}
-            onClick={() => {
-              setWeekLiVal(v.value);
-              setWeekVal('');
-            }}
-          >
-            {v.text}
-          </li>
-        ))}
-      </ul>
-      <InputStyled
-        pattern={`^[0-9]*`}
-        inputMode="decimal"
-        value={val}
-        step="any"
-        min="0"
-        onChange={handleChange}
-        placeholder="Number OF WEEK"
-      />
-    </WeeksInputStyled>
-  );
+const WeeksInput = ({
+  val,
+  handleChange,
+  setWeekVal,
+  weekLiVal,
+  setWeekLiVal,
+  withdrawalDate,
+  lockAVATModalState,
+}: IProps) => {
+  return useMemo(() => {
+    return (
+      <WeeksInputStyled>
+        <h2>How long would you like to lock for?</h2>
+        <p className="grey">Select between 1 to 208 weeks</p>
+        <ul>
+          {(lockAVATModalState === ILockAVATModalState.INIT ? weeksArrBig : weeksArrSmall).map((v) => {
+            const classname =
+              weekLiVal === v.value && !val
+                ? 'on'
+                : Number(withdrawalDate) > 24 * 60 * 60 * Number(v.value) * 7 + getTimeStamp()
+                ? 'disable'
+                : '';
+            return (
+              <li
+                key={v.text}
+                className={classname}
+                onClick={() => {
+                  if (classname === 'disable') {
+                    return;
+                  }
+                  setWeekLiVal(v.value);
+                  setWeekVal('');
+                }}
+              >
+                {v.text}
+              </li>
+            );
+          })}
+        </ul>
+        <InputStyled
+          pattern={`^[0-9]*`}
+          inputMode="decimal"
+          value={val}
+          step="any"
+          min="0"
+          onChange={handleChange}
+          placeholder="Number OF WEEK"
+        />
+      </WeeksInputStyled>
+    );
+  }, [handleChange, setWeekLiVal, setWeekVal, val, weekLiVal, withdrawalDate, lockAVATModalState]);
 };
-const weeksArr = [
+
+const weeksArrBig = [
+  {
+    text: '5Week',
+    value: '5',
+  },
+  {
+    text: '10Week',
+    value: '10',
+  },
+  {
+    text: '20Week',
+    value: '20',
+  },
   {
     text: '30Week',
     value: '30',
@@ -51,17 +90,27 @@ const weeksArr = [
     text: '1year',
     value: '52',
   },
+];
+const weeksArrSmall = [
   {
-    text: '2year',
-    value: '104',
+    text: '1Week',
+    value: '1',
   },
   {
-    text: '3year',
-    value: '156',
+    text: '2Week',
+    value: '2',
   },
   {
-    text: '4year',
-    value: '208',
+    text: '4Week',
+    value: '4',
+  },
+  {
+    text: '8Week',
+    value: '8',
+  },
+  {
+    text: '10Week',
+    value: '10',
   },
 ];
 const WeeksInputStyled = styled.div`
@@ -98,6 +147,17 @@ const WeeksInputStyled = styled.div`
         color: #ffffff;
         background-color: #1476ff;
       }
+      &.disable {
+        color: #6a6991;
+        background-color: #25234c;
+        opacity: 0.4;
+        cursor: not-allowed;
+        &:hover {
+          color: #6a6991;
+          background-color: #25234c;
+          opacity: 0.4;
+        }
+      }
       &:hover {
         color: #ffffff;
         background-color: #1476ff;
@@ -107,7 +167,7 @@ const WeeksInputStyled = styled.div`
   }
 `;
 const InputStyled = styled(Input)`
-  margin-top: 2px;
+  margin-top: 6px;
   width: 180px;
 `;
 export default WeeksInput;

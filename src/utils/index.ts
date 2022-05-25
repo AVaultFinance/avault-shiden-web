@@ -131,3 +131,19 @@ export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currenc
 export const haveNumber = (num: number) => {
   return num || num === 0;
 };
+
+export const getTimeStamp = (time?: any) => {
+  if (time) {
+    return Math.ceil(new Date(time).valueOf() / 1000);
+  }
+  return Math.ceil(new Date().valueOf() / 1000);
+};
+
+export function timestampToDate(timestamp: number) {
+  const date1 = new Date(timestamp);
+  const str = date1.toLocaleDateString().replace(/\//g, '-') + ' ' + date1.toTimeString().substring(0, 8);
+  if (str === 'Invalid Date Invalid ') {
+    return '';
+  }
+  return str;
+}

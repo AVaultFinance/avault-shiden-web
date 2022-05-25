@@ -114,7 +114,7 @@ const RewardsComponents = ({ rewards }) => {
 };
 const EndTimeComponents = ({ endTime }) => {
   const secondsRemaining = useNextEventCountdown(endTime);
-  const { months, days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
+  const { days, hours, minutes, seconds } = getTimePeriods(secondsRemaining);
   return useMemo(() => {
     return (
       <EndTimeComponentsStyled>
@@ -125,8 +125,8 @@ const EndTimeComponents = ({ endTime }) => {
         <div className="timer">
           {secondsRemaining ? (
             <Timer
-              showMonths={true}
-              months={months}
+              // showMonths={true}
+              // months={months}
               minutes={minutes} // We don't show seconds - so values from 0 - 59s should be shown as 1 min
               hours={hours}
               days={days}
@@ -143,7 +143,7 @@ const EndTimeComponents = ({ endTime }) => {
         </div>
       </EndTimeComponentsStyled>
     );
-  }, [secondsRemaining, months, days, hours, minutes, seconds]);
+  }, [secondsRemaining, days, hours, minutes, seconds]);
 };
 const RewardsComponentsStyled = styled.div`
   .reward_h2 {

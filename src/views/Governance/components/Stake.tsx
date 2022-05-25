@@ -1,41 +1,42 @@
 // import getTimePeriods from 'utils/getTimePeriods';
-import { Button, Flex } from '@my/ui';
+import { AutoRenewIcon, Button, Flex } from '@my/ui';
 import ConnectWalletButton from 'components/ConnectWalletButton';
 import { useMemo } from 'react';
-import { IGovernanceUserData, ILockAVATModalState } from 'views/Governance/state/governance/types';
+import { IGovernanceUserData, ILockAVATModalState, ILockedState } from 'views/Governance/state/governance/types';
 import styled from 'styled-components';
 import Countdown from './StakeComponents/Countdown';
 import StakeBalance from './StakeComponents/Balance';
 interface IProps {
-  hasLocked: boolean;
+  lockedState: ILockedState;
   userData: IGovernanceUserData;
   account: string;
   onClickModal: any;
+  handleApprove: any;
+  requestedApprovalPendingTx: boolean;
 }
-const Stake = ({ hasLocked, userData, account, onClickModal }: IProps) => {
+const Stake = ({ lockedState, userData, account, onClickModal, handleApprove, requestedApprovalPendingTx }: IProps) => {
   return useMemo(() => {
     const {
-      xAVATBalance = '0',
-      AVATLocked = '0',
-      withdrawalDate = '0',
-      remainderBlock = 1,
-      AVATBalance,
+      veAVATBalanceDisplay = '0',
+      AVATLockedDisplay = '-',
+      withdrawalDateDisplay = '-',
+      remainderBlock = 0,
+      isApproved = false,
     } = userData || {};
     return (
       <div>
-        <StakeStyled hasLocked={hasLocked}>
+        <StakeStyled lockedState={lockedState}>
           <StakeBalance
-            AVATBalance={AVATBalance}
-            xAVATBalance={xAVATBalance}
-            AVATLocked={AVATLocked}
-            withdrawalDate={withdrawalDate}
-            remainderBlock={remainderBlock}
+            veAVATBalanceDisplay={veAVATBalanceDisplay}
+            AVATLockedDisplay={AVATLockedDisplay}
+            withdrawalDateDisplay={withdrawalDateDisplay}
           />
           {/* 12s  300block */}
-          <Countdown nextEventTime={12 * remainderBlock} hasLocked={hasLocked} onClickModal={onClickModal} />
-          {hasLocked ? (
+          <Countdown nextEventTime={12 * remainderBlock} lockedState={lockedState} onClickModal={onClickModal} />
+          {lockedState !== ILockedState.init ? (
             <FlexButton>
               <Button
+                disabled={lockedState === ILockedState.locked ? false : true}
                 onClick={() => {
                   onClickModal(ILockAVATModalState.ADDAMOUNT);
                 }}
@@ -43,6 +44,8 @@ const Stake = ({ hasLocked, userData, account, onClickModal }: IProps) => {
                 Lock more
               </Button>
               <Button
+                className="last-child"
+                disabled={lockedState === ILockedState.withdraw ? false : true}
                 variant="tertiary"
                 onClick={() => {
                   onClickModal(ILockAVATModalState.WITHDRAW);
@@ -52,29 +55,47 @@ const Stake = ({ hasLocked, userData, account, onClickModal }: IProps) => {
               </Button>
             </FlexButton>
           ) : account ? (
-            <LongButton
-              onClick={() => {
-                onClickModal(ILockAVATModalState.INIT);
-              }}
-            >
-              Create Lock
-            </LongButton>
+            isApproved ? (
+              <LongButton
+                onClick={() => {
+                  onClickModal(ILockAVATModalState.INIT);
+                }}
+              >
+                Create Lock
+              </LongButton>
+            ) : (
+              <FlexButton>
+                <Button
+                  isLoading={requestedApprovalPendingTx}
+                  // endIcon={<AutoRenewIcon spin color="currentColor" /> }
+                  endIcon={requestedApprovalPendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
+                  onClick={() => {
+                    handleApprove();
+                  }}
+                >
+                  Approve
+                </Button>
+                <Button variant="secondary" disabled={true}>
+                  Create Lock
+                </Button>
+              </FlexButton>
+            )
           ) : (
             <ConnectWalletButtonStyle />
           )}
         </StakeStyled>
       </div>
     );
-  }, [hasLocked, userData, onClickModal, account]);
+  }, [lockedState, handleApprove, userData, onClickModal, account, requestedApprovalPendingTx]);
 };
 
-const StakeStyled = styled.div<{ hasLocked: boolean }>`
+const StakeStyled = styled.div<{ lockedState: ILockedState }>`
   position: relative;
   padding: 8% 5%;
   width: 100%;
   height: 100%;
   ${({ theme }) => theme.mediaQueries.lg} {
-    padding: ${({ hasLocked }) => (hasLocked ? '6' : '9')}% 5% 8%;
+    padding: ${({ lockedState }) => (lockedState !== ILockedState.init ? '6' : '9')}% 5% 8%;
   }
 `;
 const LongButton = styled(Button)`
@@ -107,7 +128,7 @@ const FlexButton = styled(Flex)`
     font-size: 15px;
     height: 48px;
     width: 48%;
-    &:last-child {
+    &.last-child {
       background-color: transparent;
     }
   }

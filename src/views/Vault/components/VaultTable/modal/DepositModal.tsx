@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Modal, Text, useMatchBreakpoints } from '@my/ui';
+import { AutoRenewIcon, Button, Modal, Text, useMatchBreakpoints } from '@my/ui';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import styled from 'styled-components';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import { changeLoading, changeVaultItemLoading, fetchVaultFarmUserDataAsync } from 'state/vault';
 import { useAppDispatch } from 'state';
 import { useWeb3React } from '@web3-react/core';
@@ -124,9 +123,9 @@ const DepositModal: React.FC<DepositModalProps> = ({
           isMobile={isMobile}
           disabled={pendingTx || !valNumber.isFinite() || valNumber.eq(0) || valNumber.gt(fullBalanceNumber)}
           onClick={handleDeposit}
+          endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         >
           Deposit
-          <Loading isLoading={pendingTx} success={pendingTxSuccess} />
         </ButtonStyled>
       </ModalInputStyled>
     </Modal>

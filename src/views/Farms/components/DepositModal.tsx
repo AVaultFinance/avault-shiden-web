@@ -1,11 +1,10 @@
 import BigNumber from 'bignumber.js';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Modal, useMatchBreakpoints } from '@my/ui';
+import { AutoRenewIcon, Button, Modal, useMatchBreakpoints } from '@my/ui';
 import { FarmModalInput } from 'components/Modal';
 import { useTranslation } from 'contexts/Localization';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import useToast from 'hooks/useToast';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import { FarmWithStakedValue } from './FarmTable/FarmTable';
 
 interface DepositModalProps {
@@ -72,6 +71,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
         width="100%"
         disabled={disabled}
         isLoading={pendingTx}
+        endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         onClick={async () => {
           setPendingTx(true);
           try {
@@ -87,7 +87,6 @@ const DepositModal: React.FC<DepositModalProps> = ({
         }}
       >
         Deposit
-        <Loading isLoading={pendingTx} success={true} />
       </Button>
     </Modal>
   );

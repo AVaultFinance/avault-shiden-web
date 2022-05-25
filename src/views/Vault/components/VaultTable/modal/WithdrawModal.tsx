@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Button, Modal, Text, useMatchBreakpoints } from '@my/ui';
+import { AutoRenewIcon, Button, Modal, Text, useMatchBreakpoints } from '@my/ui';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import styled from 'styled-components';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import { useWeb3React } from '@web3-react/core';
 import { useVault } from 'state/vault/hooks';
 import useToast from 'hooks/useToast';
@@ -120,9 +119,9 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
           isLoading={pendingTx}
           onClick={handleWithdraw}
           width="100%"
+          endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         >
           Withdraw
-          <Loading isLoading={pendingTx} success={pendingTxSuccess} />
         </Button>
       </ModalInputStyled>
     </Modal>

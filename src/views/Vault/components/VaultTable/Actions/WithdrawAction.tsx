@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Flex, Text } from '@my/ui';
+import { AutoRenewIcon, Flex, Text } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { BIG_ZERO } from 'utils/bigNumber';
@@ -11,7 +11,6 @@ import { getFullDisplayBalance } from 'utils/formatBalance';
 import { useVault } from 'state/vault/hooks';
 import useVaultWithdraw from 'views/Vault/hooks/useVaultWithdraw';
 import { changeLoading, changeVaultItemLoading, fetchVaultFarmUserDataAsync } from 'state/vault';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import { ActionContainerBg, ActionContainerSize } from 'style/TableStyled';
 import { showDecimals } from 'views/Vault/utils';
 import InputBalance from 'components/InputBalance';
@@ -138,10 +137,15 @@ const WithdrawAction: React.FunctionComponent<WithdrawActionProps> = ({
       <ActionContainerBg smallBorder={disabled ? false : true}>
         <FlexStyled>
           <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
-          <LongButton variant="primary" isLoading={pendingTx} disabled={disabled} onClick={handleWithdraw}>
+          <LongButton
+            variant="primary"
+            endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
+            isLoading={pendingTx}
+            disabled={disabled}
+            onClick={handleWithdraw}
+          >
             Withdraw
             {/* {pendingTx ? 'Withdrawing' : ''} */}
-            <Loading isLoading={pendingTx} success={pendingTxSuccess} />
           </LongButton>
         </FlexStyled>
       </ActionContainerBg>

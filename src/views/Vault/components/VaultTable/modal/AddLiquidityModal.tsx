@@ -3,7 +3,7 @@ import vaultConfig from 'config/constants/vault';
 import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
 import { Currency, ETHER, TokenAmount } from '@my/sdk';
-import { Button, Flex, useMatchBreakpoints, Modal, Input, Heading } from '@my/ui';
+import { Button, Flex, useMatchBreakpoints, Modal, Input, Heading, AutoRenewIcon } from '@my/ui';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import { RowBetween } from 'components/Layout/Row';
 import { ROUTER_ADDRESS } from 'config/constants';
@@ -24,7 +24,6 @@ import { IVault, IVaultConfigItem } from 'state/vault/types';
 import styled from 'styled-components';
 import { MaxButton } from 'style/SmallBorderPageLayout';
 import { tokenIndex } from 'views/Zap/constants/data';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import ZapCurrencyLogo from 'views/Zap/components/ZapCurrencyLogo';
 import ZapBalance from 'views/Zap/components/ZapBalance';
 import IconAdd from 'components/svg/IconAdd';
@@ -296,6 +295,7 @@ const AddLiquidityModal: React.FC<AddLiquidityModalProps> = ({ vault, account, o
       <RowBetween>
         <SubtleBtnStyled
           variant="subtle"
+          endIcon={approvalA === ApprovalState.PENDING ? <AutoRenewIcon spin color="currentColor" /> : null}
           isLoading={approvalA === ApprovalState.PENDING}
           onClick={approveACallback}
           disabled={
@@ -306,12 +306,12 @@ const AddLiquidityModal: React.FC<AddLiquidityModalProps> = ({ vault, account, o
           width="48%"
         >
           {approvalA === ApprovalState.APPROVED ? 'Approved' : 'Approve'} {currencies[Field.CURRENCY_A]?.symbol}
-          <Loading isLoading={approvalA === ApprovalState.PENDING} success={true} />
         </SubtleBtnStyled>
         <SubtleBtnStyled
           variant="subtle"
           isLoading={approvalB === ApprovalState.PENDING}
           onClick={approveBCallback}
+          endIcon={approvalB === ApprovalState.PENDING ? <AutoRenewIcon spin color="currentColor" /> : null}
           disabled={
             approvalB === ApprovalState.UNKNOWN ||
             approvalB === ApprovalState.PENDING ||
@@ -320,7 +320,6 @@ const AddLiquidityModal: React.FC<AddLiquidityModalProps> = ({ vault, account, o
           width="48%"
         >
           {approvalB === ApprovalState.APPROVED ? 'Approved' : 'Approve'} {currencies[Field.CURRENCY_B]?.symbol}
-          <Loading isLoading={approvalB === ApprovalState.PENDING} success={true} />
         </SubtleBtnStyled>
       </RowBetween>
       <Button
@@ -329,13 +328,13 @@ const AddLiquidityModal: React.FC<AddLiquidityModalProps> = ({ vault, account, o
         variant={
           !isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B] ? 'danger' : 'primary'
         }
+        endIcon={attemptingTxn ? <AutoRenewIcon spin color="currentColor" /> : null}
         onClick={onAdd}
         disabled={
           attemptingTxn || !isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED
         }
       >
         Add Liquidity
-        <Loading isLoading={attemptingTxn} success={true} />
       </Button>
     </Modal>
   );

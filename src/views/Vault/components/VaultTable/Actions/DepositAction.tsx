@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Flex, Text } from '@my/ui';
+import { AutoRenewIcon, Flex, Text } from '@my/ui';
 import BigNumber from 'bignumber.js';
 import { useWeb3React } from '@web3-react/core';
 import { BIG_ZERO } from 'utils/bigNumber';
@@ -11,7 +11,6 @@ import { getFullDisplayBalance } from 'utils/formatBalance';
 import { useVault, useVaultFarmUser } from 'state/vault/hooks';
 import useVaultDeposit from 'views/Vault/hooks/useVaultDeposit';
 import { changeLoading, changeVaultItemLoading, fetchVaultFarmUserDataAsync } from 'state/vault';
-import Loading from 'components/TransactionConfirmationModal/Loading';
 import { ActionContainerBg, ActionContainerSize } from 'style/TableStyled';
 import { showDecimals } from 'views/Vault/utils';
 import InputBalance from 'components/InputBalance';
@@ -139,21 +138,21 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({
             <LongButton
               disabled={requestedApproval || !userDataReady}
               isLoading={requestedApproval}
+              endIcon={requestedApproval ? <AutoRenewIcon spin color="currentColor" /> : null}
               onClick={handleApprove}
               variant="secondary"
             >
               {account ? 'Approve' : 'Connect Wallet'}
-              <Loading isLoading={requestedApproval} success={requestedApprovalSuccess} />
             </LongButton>
           ) : (
             <LongButton
               variant="primary"
               className={pendingTx ? 'loading' : ''}
+              endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
               disabled={disabled}
               onClick={handleDeposit}
             >
               Deposit
-              <Loading isLoading={pendingTx} success={pendingTxSuccess} />
             </LongButton>
           )}
         </FlexStyled>

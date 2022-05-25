@@ -1,31 +1,31 @@
-import { IGovernanceUserData } from 'views/Governance/state/governance/types';
+import { useMemo } from 'react';
 import CountUp from 'react-countup';
 import styled from 'styled-components';
-interface IProps extends IGovernanceUserData {}
-const StakeBalance = ({ xAVATBalance, AVATLocked, withdrawalDate }: IProps) => {
-  return (
-    <StakeBalanceStyled>
-      <div className="x_title">
-        <h3>xAVAT balance</h3>
-        <h5>:</h5>
-        <CountUp
-          className="h4"
-          duration={2}
-          useEasing={true}
-          decimals={4}
-          end={xAVATBalance ? Number(xAVATBalance) : 0}
-        />
-      </div>
-      <div className="list">
-        <h4>
-          AVAT Locked<i>{AVATLocked}</i>
-        </h4>
-        <h4>
-          Withdrawal date<i>{withdrawalDate}</i>
-        </h4>
-      </div>
-    </StakeBalanceStyled>
-  );
+interface IProps {
+  veAVATBalanceDisplay: string;
+  AVATLockedDisplay: string;
+  withdrawalDateDisplay: string;
+}
+const StakeBalance = ({ veAVATBalanceDisplay, AVATLockedDisplay, withdrawalDateDisplay }: IProps) => {
+  return useMemo(() => {
+    return (
+      <StakeBalanceStyled>
+        <div className="x_title">
+          <h3>veAVAT balance</h3>
+          <h5>:</h5>
+          <CountUp className="h4" duration={1} useEasing={true} decimals={4} end={Number(veAVATBalanceDisplay)} />
+        </div>
+        <div className="list">
+          <h4>
+            AVAT Locked<i>{AVATLockedDisplay}</i>
+          </h4>
+          <h4>
+            Unlock Date<i>{withdrawalDateDisplay}</i>
+          </h4>
+        </div>
+      </StakeBalanceStyled>
+    );
+  }, [veAVATBalanceDisplay, AVATLockedDisplay, withdrawalDateDisplay]);
 };
 const StakeBalanceStyled = styled.div`
   position: relative;

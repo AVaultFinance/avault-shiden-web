@@ -54,29 +54,29 @@ const FlexStyled = styled(Flex)`
   justify-content: space-between;
 `;
 
-const Timer: React.FC<TimerProps> = ({ showMonths = false, months, minutes, hours, days, seconds, bgColor }) => {
+const Timer: React.FC<TimerProps> = ({ minutes, hours, days, seconds, bgColor }) => {
   return useMemo(() => {
     return (
       <FlexStyled>
-        <MonthsComp showMonths={showMonths} months={months} bgColor={bgColor} />
+        {/* <MonthsComp showMonths={showMonths} months={months} bgColor={bgColor} /> */}
         <DaysComp days={days} bgColor={bgColor} />
         <HoursComp hours={hours} bgColor={bgColor} />
         <MinComp minutes={minutes} bgColor={bgColor} />
         <SecComp seconds={seconds} bgColor={bgColor} />
       </FlexStyled>
     );
-  }, [months, showMonths, days, hours, minutes, seconds, bgColor]);
+  }, [days, hours, minutes, seconds, bgColor]);
 };
-const MonthsComp = ({ showMonths, months, bgColor }) => {
-  return useMemo(() => {
-    return showMonths ? (
-      <StyledTimerText bgColor={bgColor}>
-        <h2>{months >= 10 ? months : `0${months}`}</h2>
-        <h4>Months</h4>
-      </StyledTimerText>
-    ) : null;
-  }, [showMonths, months, bgColor]);
-};
+// const MonthsComp = ({ showMonths, months, bgColor }) => {
+//   return useMemo(() => {
+//     return showMonths ? (
+//       <StyledTimerText bgColor={bgColor}>
+//         <h2>{months >= 10 ? months : `0${months}`}</h2>
+//         <h4>Months</h4>
+//       </StyledTimerText>
+//     ) : null;
+//   }, [showMonths, months, bgColor]);
+// };
 const DaysComp = ({ days, bgColor }) => {
   return useMemo(() => {
     return (
