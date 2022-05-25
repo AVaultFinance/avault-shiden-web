@@ -9,6 +9,7 @@ import { ROUTER_ADDRESS } from '../config/constants';
 import { BASE_BSC_SCAN_URL, chainKey } from '../config';
 import { TokenAddressMap } from '../state/lists/hooks';
 import { chainId as myChainId } from 'config/constants/tokens';
+import { WEEKTimeStamp } from 'views/Governance/constants/constants';
 export function sortName(name: string) {
   if (name && name.length > 5) {
     return `${name.slice(0, 5)}...${name.slice(name.length - 4, name.length)}`;
@@ -137,6 +138,11 @@ export const getTimeStamp = (time?: any) => {
     return Math.ceil(new Date(time).valueOf() / 1000);
   }
   return Math.ceil(new Date().valueOf() / 1000);
+};
+
+export const getWeekTimeStamp = (time: number) => {
+  // 2022-5-26 08:00:00
+  return Math.floor(time / WEEKTimeStamp) * WEEKTimeStamp;
 };
 
 export function timestampToDate(timestamp: number) {

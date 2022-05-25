@@ -38,7 +38,6 @@ export const useVeAVATFun = () => {
   const createLock = useCallback(
     async ({ amount, unlockTime }: { amount: string; unlockTime: string }) => {
       const res = await callWithEstimateGas(veAVATAddressContract, 'createLock', [amount, unlockTime]);
-      console.log('createLock: ', res);
       if (res.isOk) {
         return true;
       } else {

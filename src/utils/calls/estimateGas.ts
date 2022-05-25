@@ -64,7 +64,7 @@ export const callWithEstimateGas = async (
       console.log(receipt);
       return {
         isOk: false,
-        message: receipt,
+        message: 'Some Error',
       };
     }
   } catch (e: any) {

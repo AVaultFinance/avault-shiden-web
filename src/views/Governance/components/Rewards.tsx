@@ -184,9 +184,13 @@ const RewardsStyled = styled.div`
       h2 {
         font-size: 18px;
         i {
-          font-size: 12px;
-          padding-left: 6px;
-          color: ${({ theme }) => theme.colors.textSubtle};
+          display: none;
+          ${({ theme }) => theme.mediaQueries.md} {
+            font-size: 12px;
+            display: inline;
+            padding-left: 6px;
+            color: ${({ theme }) => theme.colors.textSubtle};
+          }
         }
       }
       h3 {

@@ -4,9 +4,9 @@ import { AVAT, chainId, main_tokens } from 'config/constants/tokens';
 import useToast from 'hooks/useToast';
 import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { getTimeStamp, timestampToDate } from 'utils';
+import { getTimeStamp, getWeekTimeStamp, timestampToDate } from 'utils';
 import { getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance';
-import { veAVAT } from 'views/Governance/constants/constants';
+import { veAVAT, WEEKTimeStamp } from 'views/Governance/constants/constants';
 import { useGovernanceData, useLockAVATModalState } from 'views/Governance/state/governance/hooks';
 import { ILockAVATModalState } from 'views/Governance/state/governance/types';
 import { ITokenType } from 'views/Zap/utils/types';
@@ -61,8 +61,9 @@ const LockAVATModal = ({
     const AVATLockedDisplay = getFullDisplayBalance(__AVATBalance, AVAT.decimals, 4);
 
     const weekValue = Number(weekVal || weekLiVal);
-    const timestamp = 24 * 60 * 60 * weekValue * 7;
-    const nowTimestamp = lockAVATModalState === ILockAVATModalState.INIT ? getTimeStamp() : withdrawalDate;
+    const timestamp = WEEKTimeStamp * weekValue;
+    const nowTimestamp =
+      lockAVATModalState === ILockAVATModalState.INIT ? getWeekTimeStamp(getTimeStamp()) : withdrawalDate;
     const withdrawalDateDisplay =
       lockAVATModalState === ILockAVATModalState.INIT || lockAVATModalState === ILockAVATModalState.CHANGELOCKTIME
         ? timestampToDate(new BigNumber(nowTimestamp).plus(timestamp).times(1000).toNumber())
@@ -114,8 +115,9 @@ const LockAVATModal = ({
     }
 
     // 24*60*60  1day/s
-    const timestamp = 24 * 60 * 60 * weekValue * 7;
-    const nowTimestamp = lockAVATModalState === ILockAVATModalState.INIT ? getTimeStamp() : Number(withdrawalDate);
+    const timestamp = WEEKTimeStamp * weekValue;
+    const nowTimestamp =
+      lockAVATModalState === ILockAVATModalState.INIT ? getWeekTimeStamp(getTimeStamp()) : Number(withdrawalDate);
     const aimTimestamp = timestamp + nowTimestamp;
     // if (aimTimestamp < Number(withdrawalDate)) {
     //   toastWarning('Warn', `Time lower than ${withdrawalDateDisplay} cannot be filled in`);

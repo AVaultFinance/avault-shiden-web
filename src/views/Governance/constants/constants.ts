@@ -4,10 +4,7 @@ import { ChainId, Token } from '@my/sdk';
 import { chainId } from 'config/constants/tokens';
 import { IGrassHouse } from '../state/governance/types';
 
-// createLock  创建新锁仓
-// increaseLockAmount 增加锁仓金额
-// increaseUnlockTime 增加锁仓时间
-// withdraw 到期提现
+export const WEEKTimeStamp = 604800; // 24 * 60 * 60 * 7s
 const _veAVAT: { [chainId: number]: Token } = {
   [ChainId.SDN_MAINNET]: new Token(
     ChainId.SDN_MAINNET as any,
@@ -26,4 +23,3 @@ const grassHouse01: IGrassHouse = {
 };
 export const veAVAT = _veAVAT[chainId];
 export const grassHouseListConfig: IGrassHouse[] = [grassHouse01];
-// claim 获取奖励

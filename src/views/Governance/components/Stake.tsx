@@ -115,6 +115,8 @@ const ConnectWalletButtonStyle = styled(ConnectWalletButton)`
   position: absolute;
   bottom: 7%;
   left: 5%;
+  background-image: none;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 const FlexButton = styled(Flex)<{ bottom: string }>`
   width: 90%;
