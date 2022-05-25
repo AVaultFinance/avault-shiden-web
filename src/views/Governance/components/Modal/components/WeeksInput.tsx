@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Input } from '@my/ui';
 import { useMemo } from 'react';
-import { getTimeStamp } from 'utils';
 import { ILockAVATModalState } from 'views/Governance/state/governance/types';
 interface IProps {
   val: string;
@@ -66,7 +65,7 @@ const WeeksInput = ({
         />
       </WeeksInputStyled>
     );
-  }, [handleChange, setWeekLiVal, setWeekVal, val, weekLiVal, withdrawalDate, lockAVATModalState]);
+  }, [handleChange, setWeekLiVal, setWeekVal, val, weekLiVal, lockAVATModalState]);
 };
 
 const weeksArrBig = [
