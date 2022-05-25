@@ -32,20 +32,20 @@ const WeeksInput = ({
         <p className="grey">Select between 1 to 208 weeks</p>
         <ul>
           {(lockAVATModalState === ILockAVATModalState.INIT ? weeksArrBig : weeksArrSmall).map((v) => {
-            const classname =
-              weekLiVal === v.value && !val
-                ? 'on'
-                : Number(withdrawalDate) > 24 * 60 * 60 * Number(v.value) * 7 + getTimeStamp()
-                ? 'disable'
-                : '';
+            const classname = weekLiVal === v.value && !val ? 'on' : '';
+            // weekLiVal === v.value && !val
+            //   ? 'on'
+            //   : Number(withdrawalDate) > 24 * 60 * 60 * Number(v.value) * 7 + getTimeStamp()
+            //   ? 'disable'
+            //   : '';
             return (
               <li
                 key={v.text}
                 className={classname}
                 onClick={() => {
-                  if (classname === 'disable') {
-                    return;
-                  }
+                  // if (classname === 'disable') {
+                  //   return;
+                  // }
                   setWeekLiVal(v.value);
                   setWeekVal('');
                 }}
