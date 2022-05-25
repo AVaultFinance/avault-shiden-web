@@ -53,7 +53,6 @@ const Row = ({
   const { apr = '0', rewards = '0', token } = v;
   const { symbol, address, name } = token || {};
   const rewardsNumber = Number(rewards);
-  console.log(rewards, rewardsNumber, rewardsNumber > 0);
   const { claim } = useGrassHouseContractFun(v?.token?.address ?? '');
   const handleClaim = useCallback(async () => {
     if (!account) {

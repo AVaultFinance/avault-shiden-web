@@ -34,7 +34,7 @@ const Stake = ({ lockedState, userData, account, onClickModal, handleApprove, re
           {/* 12s  300block */}
           <Countdown nextEventTime={12 * remainderBlock} lockedState={lockedState} onClickModal={onClickModal} />
           {lockedState !== ILockedState.init ? (
-            <FlexButton>
+            <FlexButton bottom="5">
               <Button
                 disabled={lockedState === ILockedState.locked ? false : true}
                 onClick={() => {
@@ -64,7 +64,7 @@ const Stake = ({ lockedState, userData, account, onClickModal, handleApprove, re
                 Create Lock
               </LongButton>
             ) : (
-              <FlexButton>
+              <FlexButton bottom="8">
                 <Button
                   isLoading={requestedApprovalPendingTx}
                   // endIcon={<AutoRenewIcon spin color="currentColor" /> }
@@ -95,7 +95,7 @@ const StakeStyled = styled.div<{ lockedState: ILockedState }>`
   width: 100%;
   height: 100%;
   ${({ theme }) => theme.mediaQueries.lg} {
-    padding: ${({ lockedState }) => (lockedState !== ILockedState.init ? '6' : '9')}% 5% 8%;
+    padding: 6% 5% 8%;
   }
 `;
 const LongButton = styled(Button)`
@@ -104,7 +104,7 @@ const LongButton = styled(Button)`
   font-size: 18px;
   height: 60px;
   position: absolute;
-  bottom: 6%;
+  bottom: 7%;
   left: 5%;
 `;
 const ConnectWalletButtonStyle = styled(ConnectWalletButton)`
@@ -113,13 +113,13 @@ const ConnectWalletButtonStyle = styled(ConnectWalletButton)`
   font-size: 18px;
   height: 60px;
   position: absolute;
-  bottom: 6%;
+  bottom: 7%;
   left: 5%;
 `;
-const FlexButton = styled(Flex)`
+const FlexButton = styled(Flex)<{ bottom: string }>`
   width: 90%;
   position: absolute;
-  bottom: 5%;
+  bottom: ${({ bottom }) => bottom}%;
   left: 5%;
   align-items: center;
   justify-content: space-between;

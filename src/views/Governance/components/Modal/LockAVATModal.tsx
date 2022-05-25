@@ -62,9 +62,10 @@ const LockAVATModal = ({
 
     const weekValue = Number(weekVal || weekLiVal);
     const timestamp = 24 * 60 * 60 * weekValue * 7;
+    const nowTimestamp = lockAVATModalState === ILockAVATModalState.INIT ? getTimeStamp() : withdrawalDate;
     const withdrawalDateDisplay =
       lockAVATModalState === ILockAVATModalState.INIT || lockAVATModalState === ILockAVATModalState.CHANGELOCKTIME
-        ? timestampToDate(new BigNumber(withdrawalDate).plus(timestamp).times(1000).toNumber())
+        ? timestampToDate(new BigNumber(nowTimestamp).plus(timestamp).times(1000).toNumber())
         : _withdrawalDateDisplay;
     return {
       veAVATBalanceDisplay,
