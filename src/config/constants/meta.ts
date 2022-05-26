@@ -18,17 +18,25 @@ export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
       return {
         title: `Vault | Avault`,
       };
+    case '/zap':
+      return {
+        title: `Zap | Avault`,
+      };
     case '/farms':
       return {
         title: `Farms | Avault`,
       };
+    case '/governance':
+      return {
+        title: `Governance | Avault`,
+      };
+    case '/ido':
+      return {
+        title: `IDO | Avault`,
+      };
     case '/stake':
       return {
         title: `Stake | Avault`,
-      };
-    case '/zap':
-      return {
-        title: `Zap | Avault`,
       };
     default:
       return null;
