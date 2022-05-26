@@ -26,9 +26,6 @@ export const getFullDisplayBalance = (balance: BigNumber, decimals = 18, display
 };
 
 export const getFullLocalDisplayBalance = (balance: BigNumber, decimals = 18, displayDecimals?: number) => {
-  //  ).toLocaleString('en-US', {
-  //   maximumFractionDigits: displayDecimals,
-  // })
   return Number(getBalanceAmount(balance, decimals).toFixed(displayDecimals, BigNumber.ROUND_DOWN)).toLocaleString(
     'en-US',
     {

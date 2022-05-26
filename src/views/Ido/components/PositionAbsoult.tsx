@@ -1,5 +1,5 @@
 import { Button } from '@my/ui';
-import { IIdoStateEnum } from 'state/ido/types';
+import { IIdoStateEnum } from 'views/Ido/state/ido/types';
 import styled from 'styled-components';
 interface IProps {
   changeIdoState: any;

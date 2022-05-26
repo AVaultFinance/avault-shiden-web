@@ -2,35 +2,47 @@ import { Button } from '@my/ui';
 import Timer from 'components/CountdownTimer/Timer';
 import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
 import { useMemo } from 'react';
-import { IIdoStateEnum } from 'state/ido/types';
+import { IIdoStateEnum } from 'views/Ido/state/ido/types';
 import styled from 'styled-components';
 import getTimePeriods from 'utils/getTimePeriods';
+import BigNumber from 'bignumber.js';
+import { getFullLocalDisplayBalance } from 'utils/formatBalance';
 interface IProps {
+  mainTokenPrice: string;
   idoState: IIdoStateEnum;
   endTime: number;
   avatEstimatedPrice: string;
-  network: string;
-
+  idoInAstrBalance: string;
   apr: string;
   amountInPool: string;
   rewards: string;
 }
-const InfoContribution = ({ idoState, endTime, avatEstimatedPrice, network, apr, amountInPool, rewards }: IProps) => {
-  return (
-    <InfoContributionStyled>
-      {idoState === IIdoStateEnum.END ? (
-        <AprComponents apr={apr} />
-      ) : (
-        <AVATPriceComponents avatEstimatedPrice={avatEstimatedPrice} idoState={idoState} />
-      )}
-      {idoState === IIdoStateEnum.END ? (
-        <AmountComponents amountInPool={amountInPool} />
-      ) : (
-        <NetworkComponents network={network} />
-      )}
-      <BottomComponents endTime={endTime} idoState={idoState} rewards={rewards} />
-    </InfoContributionStyled>
-  );
+const InfoContribution = ({
+  idoInAstrBalance,
+  idoState,
+  endTime,
+  avatEstimatedPrice,
+  apr,
+  amountInPool,
+  rewards,
+}: IProps) => {
+  return useMemo(() => {
+    return (
+      <InfoContributionStyled>
+        {idoState === IIdoStateEnum.END ? (
+          <AprComponents apr={apr} />
+        ) : (
+          <AVATPriceComponents avatEstimatedPrice={avatEstimatedPrice} />
+        )}
+        {idoState === IIdoStateEnum.END ? (
+          <AmountComponents amountInPool={amountInPool} />
+        ) : (
+          <NetworkComponents idoInAstrBalance={idoInAstrBalance} />
+        )}
+        <BottomComponents endTime={endTime} idoState={idoState} rewards={rewards} />
+      </InfoContributionStyled>
+    );
+  }, [amountInPool, apr, idoInAstrBalance, avatEstimatedPrice, endTime, idoState, rewards]);
 };
 
 const AprComponents = ({ apr }) => {
@@ -46,18 +58,18 @@ const AprComponents = ({ apr }) => {
   }, [apr]);
 };
 
-const AVATPriceComponents = ({ avatEstimatedPrice, idoState }) => {
+const AVATPriceComponents = ({ avatEstimatedPrice }) => {
   return useMemo(() => {
     return (
       <>
         <h2 className="h2 fl_dot">
           ${avatEstimatedPrice}
-          {idoState !== IIdoStateEnum.INIT ? <i></i> : null}
+          {/* {idoState !== IIdoStateEnum.INIT ? <i></i> : null} */}
         </h2>
         <h3 className="h3">AVAT Estimated price</h3>
       </>
     );
-  }, [avatEstimatedPrice, idoState]);
+  }, [avatEstimatedPrice]);
 };
 const AmountComponents = ({ amountInPool }) => {
   return useMemo(() => {
@@ -73,19 +85,19 @@ const AmountComponents = ({ amountInPool }) => {
     );
   }, [amountInPool]);
 };
-const NetworkComponents = ({ network }) => {
+const NetworkComponents = ({ idoInAstrBalance }) => {
   return useMemo(() => {
     return (
       <>
         <h2 className="h2 fr fr_dot">
           {/* {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null} */}
-          {network}
+          {getFullLocalDisplayBalance(new BigNumber(idoInAstrBalance), 18, 4)}
           {/* {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
         <h3 className="h3 fr">The network is in Astar</h3>
       </>
     );
-  }, [network]);
+  }, [idoInAstrBalance]);
 };
 const BottomComponents = ({ endTime, idoState, rewards }) => {
   return useMemo(() => {
@@ -185,6 +197,7 @@ const EndTimeComponentsStyled = styled.div`
   }
   .timer {
     width: 100%;
+    max-width: 400px;
   }
 `;
 const InfoContributionStyled = styled.div`

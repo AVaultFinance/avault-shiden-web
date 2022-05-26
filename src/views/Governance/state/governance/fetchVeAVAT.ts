@@ -7,7 +7,7 @@ import { getTimeStamp, timestampToDate } from 'utils';
 import { BIG_ZERO } from 'utils/bigNumber';
 import multicall from 'utils/multicall';
 import veAVATAbi from '../../constants/abi/veAVATAbi.json';
-import AVATAbi from '../../constants/abi/AVATAbi.json';
+import AVATAbi from 'config/abi/AVATAbi.json';
 import { veAVAT } from '../../constants/constants';
 import { IGovernanceUserData, ILockedState } from './types';
 import { getFullDisplayBalance } from 'utils/formatBalance';
@@ -29,12 +29,12 @@ export const fetchUserData = async (account: string): Promise<[Record<string, IG
   };
   const veAVATAddress = veAVAT.address;
   const AVATAddress = AVAT.address;
-  const calls01 = [
+  const calls = [
     { address: veAVATAddress, name: 'locks', params: [account] },
     { address: veAVATAddress, name: 'balanceOf', params: [account] },
     { address: AVATAddress, name: 'balanceOf', params: [account] },
   ];
-  const [lockData, [veAVATBalance], [AVATBalance]] = await multicall(veAVATAbi, calls01);
+  const [lockData, [veAVATBalance], [AVATBalance]] = await multicall(veAVATAbi, calls);
   const { amount, end } = lockData || {
     amount: BIG_ZERO,
     end: BIG_ZERO,

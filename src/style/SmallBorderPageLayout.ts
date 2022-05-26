@@ -11,7 +11,10 @@ export const PageContainerWrap = styled(Flex)`
 `;
 export const ArrowIcon = styled(ChevronDownIcon)<{ toggled: boolean }>`
   transform: ${({ toggled }) => (toggled ? 'rotate(180deg)' : 'rotate(0)')};
-  width: 16px;
+  width: 18px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 26px;
+  }
 `;
 export const W480BorderPageLayout = styled.div`
   position: relative;

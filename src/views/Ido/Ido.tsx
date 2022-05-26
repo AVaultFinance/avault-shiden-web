@@ -2,12 +2,11 @@ import { Flex } from '@my/ui';
 import Page from 'components/Layout/Page';
 import { chainId } from 'config/constants/tokens';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { useCallback, useEffect, useMemo } from 'react';
+import { Dispatch, useCallback, useEffect, useMemo } from 'react';
 import { useAppDispatch } from 'state';
-import { updateEndTime, updateIdoState } from 'state/ido';
-import { useIdoData } from 'state/ido/hooks';
-import { IIdoStateEnum } from 'state/ido/types';
-// import { IDOGlobalStyle } from 'style/Global';
+import { updateEndTime, updateStartTime, updateState } from 'views/Ido/state/ido/state';
+import { useIdoData, useInitIdo } from 'views/Ido/state/ido/hooks';
+import { IIdoStateEnum } from 'views/Ido/state/ido/types';
 import styled from 'styled-components';
 import Contribution from './components/Contribution';
 import IdoBanner from './components/IdoBanner';
@@ -19,13 +18,18 @@ const Ido = () => {
     maxASTRBalance,
     endTime,
     avatEstimatedPrice,
-    network,
     apr,
     amountInPool,
     rewards,
     lpTotalBalance,
     lpBalance,
+    idoInAstrBalance,
+    mainTokenPrice,
   } = useIdoData();
+  const dispatch: Dispatch<any> = useAppDispatch();
+
+  useInitIdo(dispatch);
+
   const { account } = useActiveWeb3React();
   const _key = useMemo(() => {
     return `${account}-${chainId}`;
@@ -37,14 +41,20 @@ const Ido = () => {
     return lpBalance[_key] || '0.00';
   }, [lpBalance, _key]);
 
-  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(updateEndTime());
-  }, [dispatch]);
+    if (dispatch && idoState) {
+      // @ts-ignore
+      if (idoState === IIdoStateEnum.INIT) {
+        dispatch(updateStartTime());
+      } else if (idoState === IIdoStateEnum.PROCING) {
+        dispatch(updateEndTime());
+      }
+    }
+  }, [dispatch, idoState]);
   const changeIdoState = useCallback(
     (params: IIdoStateEnum) => {
       dispatch(
-        updateIdoState({
+        updateState({
           idoState: params,
         }),
       );
@@ -66,10 +76,11 @@ const Ido = () => {
           idoState={idoState}
         />
         <InfoContribution
+          idoInAstrBalance={idoInAstrBalance}
+          mainTokenPrice={mainTokenPrice}
           idoState={idoState}
           endTime={endTime}
           avatEstimatedPrice={avatEstimatedPrice}
-          network={network}
           apr={apr}
           amountInPool={amountInPool}
           rewards={rewards}

@@ -10,6 +10,19 @@ import { useVeAVATAddressContract } from './fetchVeAVAT';
 import { fetchGrassHouseListDataAsync, fetchUserDataAsync } from './index';
 import { GovernanceState, IGrassHouse, ILockedState } from './types';
 
+export const useInit = (account: string, dispatch: Dispatch<any>, grassHouseList: IGrassHouse[]) => {
+  useEffect(() => {
+    if (dispatch && grassHouseList) {
+      dispatch(fetchGrassHouseListDataAsync({ grassHouseList, account }));
+    }
+    if (!dispatch || !account) {
+      return;
+    }
+    dispatch(fetchUserDataAsync({ account }));
+    // eslint-disable-next-line
+  }, [dispatch, account]);
+};
+
 export const useVeAVATFun = () => {
   const veAVATAddressContract = useVeAVATAddressContract();
   const AVATAddressContract = useAAVTContract();
@@ -109,19 +122,6 @@ export const useGrassHouseContractFun = (grassHouseAddress: string) => {
   return {
     claim,
   };
-};
-
-export const useInit = (account: string, dispatch: Dispatch<any>, grassHouseList: IGrassHouse[]) => {
-  useEffect(() => {
-    if (dispatch && grassHouseList) {
-      dispatch(fetchGrassHouseListDataAsync({ grassHouseList, account }));
-    }
-    if (!dispatch || !account) {
-      return;
-    }
-    dispatch(fetchUserDataAsync({ account }));
-    // eslint-disable-next-line
-  }, [dispatch, account]);
 };
 
 // get data

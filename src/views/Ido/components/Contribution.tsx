@@ -4,10 +4,10 @@ import Timer from 'components/CountdownTimer/Timer';
 import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
 import InputBalance from 'components/InputBalance';
 import { useCallback, useMemo, useState } from 'react';
-import { IIdoStateEnum } from 'state/ido/types';
 import styled from 'styled-components';
 import { getFullDisplayBalance, getFullLocalDisplayBalance } from 'utils/formatBalance';
 import getTimePeriods from 'utils/getTimePeriods';
+import { IIdoStateEnum } from 'views/Ido/state/ido/types';
 interface IProps {
   nextEventTime: number;
   idoState: IIdoStateEnum;
@@ -136,6 +136,7 @@ const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
         };
     }
   }, [fullLocalBalance, idoState]);
+  const handlePressCreateLp = useCallback(() => {}, []);
   return useMemo(() => {
     return (
       <div className="bottom">
@@ -143,10 +144,12 @@ const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
         <div className="border">
           <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
         </div>
-        <Button className="btn">{btnTitle}</Button>
+        <Button className="btn" onClick={handlePressCreateLp}>
+          {btnTitle}
+        </Button>
       </div>
     );
-  }, [handleChange, handleSelectMax, val, title, btnTitle]);
+  }, [handleChange, handleSelectMax, handlePressCreateLp, val, title, btnTitle]);
 };
 const ContributionStyled = styled.div`
   padding-bottom: 220px;
