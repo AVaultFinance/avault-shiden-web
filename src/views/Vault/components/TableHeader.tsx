@@ -11,6 +11,9 @@ const TextStyled = styled(Flex)`
   color: ${({ theme }) => theme.colors.textSubtle};
   text-align: left;
 `;
+const TextStyledCursor = styled(TextStyled)`
+  cursor: pointer;
+`;
 const FirstTh = styled(TextStyled)`
   padding-left: 20px;
 
@@ -61,16 +64,16 @@ const TableHeader: FC<Iprops> = ({ sortKey, sortDir, onOptionChange }) => {
             <TextStyled>Net Value</TextStyled>
           </TrStyled>
           <TrStyled>
-            <TextStyled onClick={() => HandleClick('TVL', 'liquidity')}>
+            <TextStyledCursor onClick={() => HandleClick('TVL', 'liquidity')}>
               <p>TVL</p>
               <SortIconStyled sortDir={sortKey === 'liquidity' ? sortDir : ISortDir.default} />
-            </TextStyled>
+            </TextStyledCursor>
           </TrStyled>
           <TrStyled>
-            <TextStyled onClick={() => HandleClick('APY', 'apy')}>
+            <TextStyledCursor onClick={() => HandleClick('APY', 'apy')}>
               <p>APR</p>
               <SortIconStyled sortDir={sortKey === 'apy' ? sortDir : ISortDir.default} />
-            </TextStyled>
+            </TextStyledCursor>
           </TrStyled>
           <TrStyled>
             <TextStyled>wallet balance</TextStyled>

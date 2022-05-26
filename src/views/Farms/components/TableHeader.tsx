@@ -11,6 +11,9 @@ const TextStyled = styled(Flex)`
   color: ${({ theme }) => theme.colors.textSubtle};
   text-align: left;
 `;
+const TextStyledCursor = styled(TextStyled)`
+  cursor: pointer;
+`;
 const FirstTh = styled(TextStyled)`
   padding-left: 20px;
 
@@ -57,16 +60,16 @@ const TableHeader: FC<Iprops> = ({ sortKey, sortDir, onOptionChange }) => {
             <FirstTh>Pool</FirstTh>
           </th>
           <th>
-            <TextStyled onClick={() => HandleClick('TVL', 'liquidity')}>
+            <TextStyledCursor onClick={() => HandleClick('TVL', 'liquidity')}>
               <p>TVL</p>
               <SortIconStyled sortDir={sortKey === 'liquidity' ? sortDir : ISortDir.default} />
-            </TextStyled>
+            </TextStyledCursor>
           </th>
           <th>
-            <TextStyled onClick={() => HandleClick('APR', 'apr')}>
+            <TextStyledCursor onClick={() => HandleClick('APR', 'apr')}>
               <p>APR</p>
               <SortIconStyled sortDir={sortKey === 'apr' ? sortDir : ISortDir.default} />
-            </TextStyled>
+            </TextStyledCursor>
           </th>
           <th>
             <TextStyled>Rewards</TextStyled>
