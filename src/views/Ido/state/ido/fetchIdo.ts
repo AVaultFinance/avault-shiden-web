@@ -39,11 +39,27 @@ export const fetchIdo = async (
   }
 
   const stateNumber = Number(state.toString());
-
+  // startTime
+  // idoState
+  if (stateNumber === 0) {
+    const blockNumberCallback = await library.getBlockNumber();
+    const depositStartBlockNumber = Number(depositStartBlock.toString());
+    const depositEndBlockNumber = Number(depositEndBlock.toString());
+    if (blockNumberCallback < depositStartBlockNumber) {
+      obj.idoState = IIdoStateEnum.INIT;
+      obj.startTime = (depositStartBlockNumber - blockNumberCallback) * BSC_BLOCK_TIME;
+    } else if (blockNumberCallback < depositEndBlockNumber) {
+      obj.idoState = IIdoStateEnum.PROCING;
+      obj.endTime = (depositEndBlockNumber - blockNumberCallback) * BSC_BLOCK_TIME;
+    }
+  } else if (stateNumber === 3) {
+    obj.idoState = IIdoStateEnum.END;
+  } else {
+    obj.idoState = IIdoStateEnum.WAITINGGETLP;
+  }
   // lpTotalBalance
   if (lpAddress !== '0x0000000000000000000000000000000000000000') {
     const lpTotalBalance = await getERC20Balance(lpAddress, library, idoContractAddress);
-    console.log('lpTotalBalance: ', lpAddress, lpTotalBalance.toString());
     if (lpTotalBalance) {
       obj.lpTotalBalance = lpTotalBalance.toString();
     }
@@ -59,29 +75,12 @@ export const fetchIdo = async (
     if (idoInAstrBalance) {
       obj.idoInAstrBalance = idoInAstrBalance.toString();
     }
-
-    // startTime
-    // idoState
-    if (stateNumber === 0) {
-      const blockNumberCallback = await library.getBlockNumber();
-      const depositStartBlockNumber = Number(depositStartBlock.toString());
-      const depositEndBlockNumber = Number(depositEndBlock.toString());
-      if (blockNumberCallback < depositStartBlockNumber) {
-        obj.idoState = IIdoStateEnum.INIT;
-        obj.startTime = (depositStartBlockNumber - blockNumberCallback) * BSC_BLOCK_TIME;
-      } else if (blockNumberCallback < depositEndBlockNumber) {
-        obj.idoState = IIdoStateEnum.PROCING;
-        obj.endTime = (depositEndBlockNumber - blockNumberCallback) * BSC_BLOCK_TIME;
-      }
-    } else if (stateNumber === 3) {
-      obj.idoState = IIdoStateEnum.END;
+    if (stateNumber === 3) {
       const calls03 = [{ address: idoContractAddress, name: 'claim', params: [account] }];
       const [[rewards]] = await multicallv3(idoAbi, calls03);
       if (rewards) {
         obj.rewards = getFullLocalDisplayBalance(new BigNumber(rewards.toString()), 18);
       }
-    } else {
-      obj.idoState = IIdoStateEnum.WAITINGGETLP;
     }
   }
   return obj;
