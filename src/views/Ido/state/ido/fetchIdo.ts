@@ -1,4 +1,4 @@
-import { AVAT } from 'config/constants/tokens';
+// import { AVAT } from 'config/constants/tokens';
 import { Contract } from 'ethers';
 import { useContract } from 'hooks/useContract';
 import { idoContractAddress } from 'views/Ido/constants/constants';
@@ -16,7 +16,7 @@ export const fetchIdo = async (
   accountkey: string,
 ): Promise<IFetchIdoCallback> => {
   const obj: any = {};
-  const AVATAddress = AVAT.address;
+  // const AVATAddress = AVAT.address;
   // // avatInIdoBalance
   // const calls01 = [{ address: AVATAddress, name: 'balanceOf', params: [idoContractAddress] }];
   // const [[avatInIdoBalance]] = await multicall(AVATAbi, calls01);

@@ -1,7 +1,5 @@
 import { ChainId } from '@my/sdk';
-import BigNumber from 'bignumber.js';
 import { chainId } from 'config/constants/tokens';
-import { BIG_TEN } from 'utils/bigNumber';
 
 // export const idoStartTime = '2023-01-18 23:59:59';
 // export const idoEndDate = '2023-01-18 23:59:59';
