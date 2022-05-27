@@ -45,7 +45,7 @@ const useUpdateAvatEstimatedPrice = (dispatch: Dispatch<any>) => {
           avatEstimatedPrice: (((countedAstrAmountNumber * 0.5) / AVATdonation) * mainTokenPriceNumber).toLocaleString(
             'en-US',
             {
-              maximumFractionDigits: 8,
+              maximumFractionDigits: 6,
               minimumFractionDigits: 2,
             },
           ),
