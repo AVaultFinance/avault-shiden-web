@@ -162,7 +162,7 @@ const PROCINGComponents = ({
 }: IPROCINGComponents) => {
   const [val, setVal] = useState('');
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(new BigNumber(max));
+    return getFullDisplayBalance(new BigNumber(max), 18, 8);
   }, [max]);
   const fullLocalBalance = useMemo(() => {
     return getFullLocalDisplayBalance(new BigNumber(max), 18);

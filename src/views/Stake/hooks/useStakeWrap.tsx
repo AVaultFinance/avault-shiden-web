@@ -11,7 +11,7 @@ const useStakeWrap = () => {
   const max = balance.toString();
   const isBalanceZero = max === '0' || !max;
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(balance);
+    return getFullDisplayBalance(balance, decimals, 8);
   }, [balance]);
   const { account } = useActiveWeb3React();
 
