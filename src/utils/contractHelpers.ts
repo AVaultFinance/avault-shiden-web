@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { simpleRpcProvider } from 'utils/providers';
 import { poolsConfig } from 'config/constants';
 import { PoolCategory } from 'config/constants/types';
-
+import { Web3Provider } from '@ethersproject/providers';
 // Addresses
 import {
   getAddress,
@@ -67,6 +67,9 @@ import {
   IMerkleDistributorInterface,
   IDappStakingInterface,
 } from './types';
+import { calculateGasMargin, getSigner } from 'utils';
+import { parseEther } from 'ethers/lib/utils';
+import { ERC20_ABI } from 'config/abi/erc20';
 
 const getContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
   const signerOrProvider = signer ?? simpleRpcProvider;
@@ -174,3 +177,67 @@ export const getDappStakingContract = (signer?: ethers.Signer | ethers.providers
   const _merkle = getContract(dAppStakingAbi, getDappStakingAddress(), signer) as IDappStakingInterface;
   return _merkle;
 };
+
+export const getETHBalance = async (account: string, library: Web3Provider) => {
+  return library.getBalance(account);
+};
+
+export const getERC20Balance = async (contractAddress: string, library: Web3Provider, account?: string) => {
+  const contract = getContract(ERC20_ABI, contractAddress, library);
+  return contract.balanceOf(account);
+};
+
+export const sendTransaction = async (
+  library: Web3Provider,
+  account: string,
+  amount: string,
+  to: string,
+): Promise<ethers.providers.TransactionResponse | any> => {
+  try {
+    const signer = getSigner(library, account);
+    const estimatedGas = await signer.estimateGas({
+      value: parseEther(amount),
+      to: to,
+    });
+    const tx = await signer.sendTransaction({
+      gasLimit: calculateGasMargin(estimatedGas),
+      value: parseEther(amount),
+      to: to,
+    });
+    const receipt = await tx.wait();
+    if (receipt.status) {
+      // console.log(receipt);
+      return {
+        receipt: receipt,
+        isOk: true,
+      };
+    } else {
+      console.log(receipt);
+      return {
+        isOk: false,
+        message: 'Some Error',
+      };
+    }
+  } catch (e: any) {
+    console.log(3333, e);
+    return {
+      isOk: false,
+      message: e?.message,
+    };
+  }
+};
+// export const sendERC20Token = async (contractAddress: string,account:string, sendAddress: string, amount: BigNumber, library: Web3Provider):Promise<TransactionResponse> => {
+// 	return getContract(contractAddress,ERC20ABI,library,account).transfer(sendAddress, amount)
+// }
+
+// export const doApprove = async (contractAddress: string,account:string, sendAddress: string, library: Web3Provider):Promise<TransactionResponse> => {
+// 	return getContract(contractAddress,ERC20ABI,library,account).approve(sendAddress,ethers.constants.MaxUint256)
+// }
+
+// export const getAllowance = async (contractAddress: string, library: Web3Provider, targetAddress:string,account: string) => {
+// 	return getContract(contractAddress, ERC20ABI, library).allowance(account,targetAddress)
+// }
+
+// export const signMessage = async (account: string, library: Web3Provider, message:string,):Promise<string> => {
+// 	return library.getSigner(account).signMessage(message)
+// }

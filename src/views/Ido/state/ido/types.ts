@@ -1,8 +1,8 @@
 export enum IIdoStateEnum {
-  INIT,
-  PROCING,
-  WAITINGGETLP,
-  END,
+  INIT = 'INIT',
+  PROCING = 'PROCING',
+  WAITINGGETLP = 'WAITINGGETLP',
+  END = 'END',
 }
 export interface IIdoState {
   idoState: IIdoStateEnum;
@@ -23,4 +23,12 @@ export interface IIdoState {
 
 export interface IFetchIdoCallback {
   avatInIdoBalance: string;
+  maxASTRBalance?: Record<string, string>;
+  idoInAstrBalance?: string;
+  lpTotalBalance?: string;
+  idoState?: string;
+  endTime?: string;
+  startTime?: string;
+  amountInPool?: string;
+  rewards?: string;
 }

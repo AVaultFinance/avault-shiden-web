@@ -3,35 +3,91 @@ import BigNumber from 'bignumber.js';
 import Timer from 'components/CountdownTimer/Timer';
 import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
 import InputBalance from 'components/InputBalance';
-import { useCallback, useMemo, useState } from 'react';
+import { Dispatch, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { getFullDisplayBalance, getFullLocalDisplayBalance } from 'utils/formatBalance';
 import getTimePeriods from 'utils/getTimePeriods';
 import { IIdoStateEnum } from 'views/Ido/state/ido/types';
-interface IProps {
+import { useIdoFun } from '../state/ido/hooks';
+import { Web3Provider } from '@ethersproject/providers';
+import ConnectWalletButton from 'components/ConnectWalletButton';
+import { ToastSignature } from 'contexts/ToastsContext/types';
+import { fetchIdoAsync } from '../state/ido/state';
+interface IProps extends IPROCINGComponents {
   nextEventTime: number;
-  idoState: IIdoStateEnum;
   maxASTRBalance: string;
   lpBalance: string;
   lpTotalBalance: string;
 }
-const Contribution = ({ nextEventTime, lpTotalBalance, idoState, maxASTRBalance, lpBalance }: IProps) => {
+interface IPROCINGComponents {
+  dispatch: Dispatch<any>;
+  idoState: IIdoStateEnum;
+  max?: string;
+  account: string;
+  library: Web3Provider;
+  toastSuccess: ToastSignature;
+  toastWarning: ToastSignature;
+  toastError: ToastSignature;
+  accountkey: string;
+}
+const Contribution = ({
+  dispatch,
+  account,
+  nextEventTime,
+  lpTotalBalance,
+  idoState,
+  maxASTRBalance,
+  lpBalance,
+  library,
+  toastSuccess,
+  toastWarning,
+  toastError,
+  accountkey,
+}: IProps) => {
   return useMemo(() => {
     return (
-      <ContributionStyled>
+      <ContributionStyled
+        paddingBottom={idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? '100' : '220'}
+      >
         <div className="inner">
-          {idoState === IIdoStateEnum.END ? (
+          {idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? (
             <LpBalanceComponents lpTotalBalance={lpTotalBalance} />
           ) : (
             <ContributionComponents />
           )}
           {idoState === IIdoStateEnum.INIT ? <InitComponents nextEventTime={nextEventTime} /> : null}
-          {idoState === IIdoStateEnum.PROCING ? <PROCINGComponents max={maxASTRBalance} idoState={idoState} /> : null}
-          {idoState === IIdoStateEnum.END ? <PROCINGComponents max={lpBalance} idoState={idoState} /> : null}
+          {idoState === IIdoStateEnum.PROCING ||
+          idoState === IIdoStateEnum.END ||
+          idoState === IIdoStateEnum.WAITINGGETLP ? (
+            <PROCINGComponents
+              accountkey={accountkey}
+              dispatch={dispatch}
+              max={idoState === IIdoStateEnum.PROCING ? maxASTRBalance : lpBalance}
+              library={library}
+              account={account}
+              idoState={idoState}
+              toastError={toastError}
+              toastWarning={toastWarning}
+              toastSuccess={toastSuccess}
+            />
+          ) : null}
         </div>
       </ContributionStyled>
     );
-  }, [nextEventTime, idoState, maxASTRBalance, lpTotalBalance, lpBalance]);
+  }, [
+    dispatch,
+    accountkey,
+    nextEventTime,
+    library,
+    idoState,
+    maxASTRBalance,
+    account,
+    lpTotalBalance,
+    lpBalance,
+    toastError,
+    toastWarning,
+    toastSuccess,
+  ]);
 };
 const LpBalanceComponents = ({ lpTotalBalance }) => {
   return useMemo(() => {
@@ -92,13 +148,19 @@ const InitComponents = ({ nextEventTime }) => {
     );
   }, [secondsRemaining, days, hours, minutes, seconds]);
 };
-interface IPROCINGComponents {
-  idoState: IIdoStateEnum;
-  max: string;
-}
-const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
-  const [val, setVal] = useState('');
 
+const PROCINGComponents = ({
+  idoState,
+  max,
+  dispatch,
+  account,
+  library,
+  toastSuccess,
+  toastError,
+  toastWarning,
+  accountkey,
+}: IPROCINGComponents) => {
+  const [val, setVal] = useState('');
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(new BigNumber(max));
   }, [max]);
@@ -124,6 +186,11 @@ const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
           title: `Your Balance ${fullLocalBalance} ASTR`,
           btnTitle: 'Create LP',
         };
+      case IIdoStateEnum.WAITINGGETLP:
+        return {
+          title: `AVAT-ASTR LP Balance: ${fullLocalBalance}`,
+          btnTitle: 'Coming Soon',
+        };
       case IIdoStateEnum.END:
         return {
           title: `AVAT-ASTR LP Balance: ${fullLocalBalance}`,
@@ -136,23 +203,78 @@ const PROCINGComponents = ({ idoState, max }: IPROCINGComponents) => {
         };
     }
   }, [fullLocalBalance, idoState]);
-  const handlePressCreateLp = useCallback(() => {}, []);
+  const { transfer, abort } = useIdoFun(account, library);
+  const handlePresss = useCallback(async () => {
+    if (idoState === IIdoStateEnum.END) {
+      const res = await abort();
+      if (typeof res === 'boolean') {
+        toastSuccess('Congratulations!', 'Take LP Compounded!');
+        setVal('');
+        dispatch(
+          fetchIdoAsync({
+            account,
+            library,
+            accountkey,
+          }),
+        );
+        return true;
+      } else {
+        toastError('Ops! Error', res);
+        return false;
+      }
+    }
+    if (idoState === IIdoStateEnum.PROCING) {
+      if (!library || !account) {
+        toastWarning('Warn', 'Some error happened!');
+        return;
+      }
+      if (!val) {
+        toastWarning('Warn', 'Please input amount!');
+        return;
+      }
+      const res = await transfer(val);
+      if (typeof res === 'boolean') {
+        toastSuccess('Congratulations!', 'Create LP Compounded!');
+        dispatch(
+          fetchIdoAsync({
+            account,
+            library,
+            accountkey,
+          }),
+        );
+        return true;
+      } else {
+        toastError('Ops! Error', res);
+        return false;
+      }
+    }
+  }, [idoState, abort, transfer, val, toastError, toastSuccess, toastWarning, accountkey, account, dispatch, library]);
   return useMemo(() => {
     return (
       <div className="bottom">
         <h4 className="h4">{title}</h4>
-        <div className="border">
-          <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
-        </div>
-        <Button className="btn" onClick={handlePressCreateLp}>
-          {btnTitle}
-        </Button>
+        {idoState === IIdoStateEnum.PROCING ? (
+          <div className="border">
+            <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
+          </div>
+        ) : null}
+        {account ? (
+          <Button
+            className="btn"
+            disabled={idoState === IIdoStateEnum.WAITINGGETLP ? true : false}
+            onClick={handlePresss}
+          >
+            {btnTitle}
+          </Button>
+        ) : (
+          <ConnectWalletButton className="btn" />
+        )}
       </div>
     );
-  }, [handleChange, handleSelectMax, handlePressCreateLp, val, title, btnTitle]);
+  }, [idoState, handleChange, handleSelectMax, handlePresss, val, title, btnTitle, account]);
 };
-const ContributionStyled = styled.div`
-  padding-bottom: 220px;
+const ContributionStyled = styled.div<{ paddingBottom: string }>`
+  padding-bottom: ${({ paddingBottom }) => paddingBottom}px;
   position: relative;
   .inner {
     background-image: linear-gradient(140deg, #20d4a9 0%, #a428d0 79%);
@@ -351,6 +473,13 @@ const ContributionStyled = styled.div`
         margin-top: 20px;
         width: 100%;
         font-size: 16px;
+        background-image: none;
+        background-color: #1476ff;
+        &:disabled,
+        &.pancake-button--disabled {
+          color: #fff;
+          opacity: 0.6;
+        }
         ${({ theme }) => theme.mediaQueries.md} {
           margin-top: 30px;
           font-size: 18px;

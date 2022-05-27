@@ -1,12 +1,16 @@
 import { Button } from '@my/ui';
 import Timer from 'components/CountdownTimer/Timer';
 import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
-import { useMemo } from 'react';
+import { Dispatch, useCallback, useMemo } from 'react';
 import { IIdoStateEnum } from 'views/Ido/state/ido/types';
 import styled from 'styled-components';
 import getTimePeriods from 'utils/getTimePeriods';
 import BigNumber from 'bignumber.js';
 import { getFullLocalDisplayBalance } from 'utils/formatBalance';
+import { useIdoFun } from '../state/ido/hooks';
+import { fetchIdoAsync } from '../state/ido/state';
+import { Web3Provider } from '@ethersproject/providers';
+import { ToastSignature } from 'contexts/ToastsContext/types';
 interface IProps {
   mainTokenPrice: string;
   idoState: IIdoStateEnum;
@@ -16,6 +20,14 @@ interface IProps {
   apr: string;
   amountInPool: string;
   rewards: string;
+
+  account: string;
+  library: Web3Provider;
+  toastSuccess: ToastSignature;
+  toastWarning: ToastSignature;
+  toastError: ToastSignature;
+  accountkey: string;
+  dispatch: Dispatch<any>;
 }
 const InfoContribution = ({
   idoInAstrBalance,
@@ -25,6 +37,14 @@ const InfoContribution = ({
   apr,
   amountInPool,
   rewards,
+
+  account,
+  library,
+  toastSuccess,
+  toastError,
+
+  accountkey,
+  dispatch,
 }: IProps) => {
   return useMemo(() => {
     return (
@@ -39,10 +59,34 @@ const InfoContribution = ({
         ) : (
           <NetworkComponents idoInAstrBalance={idoInAstrBalance} />
         )}
-        <BottomComponents endTime={endTime} idoState={idoState} rewards={rewards} />
+        <BottomComponents
+          endTime={endTime}
+          idoState={idoState}
+          rewards={rewards}
+          account={account}
+          library={library}
+          toastSuccess={toastSuccess}
+          toastError={toastError}
+          accountkey={accountkey}
+          dispatch={dispatch}
+        />
       </InfoContributionStyled>
     );
-  }, [amountInPool, apr, idoInAstrBalance, avatEstimatedPrice, endTime, idoState, rewards]);
+  }, [
+    amountInPool,
+    apr,
+    idoInAstrBalance,
+    avatEstimatedPrice,
+    endTime,
+    idoState,
+    rewards,
+    account,
+    accountkey,
+    dispatch,
+    library,
+    toastError,
+    toastSuccess,
+  ]);
 };
 
 const AprComponents = ({ apr }) => {
@@ -99,30 +143,72 @@ const NetworkComponents = ({ idoInAstrBalance }) => {
     );
   }, [idoInAstrBalance]);
 };
-const BottomComponents = ({ endTime, idoState, rewards }) => {
+const BottomComponents = ({
+  endTime,
+  idoState,
+  rewards,
+  account,
+  library,
+  toastSuccess,
+  toastError,
+  accountkey,
+  dispatch,
+}) => {
   return useMemo(() => {
     switch (idoState) {
       case IIdoStateEnum.INIT:
         return null;
       case IIdoStateEnum.PROCING:
         return <EndTimeComponents endTime={endTime} />;
+      case IIdoStateEnum.WAITINGGETLP:
       case IIdoStateEnum.END:
-        return <RewardsComponents rewards={rewards} />;
+        return (
+          <RewardsComponents
+            library={library}
+            account={account}
+            toastError={toastError}
+            toastSuccess={toastSuccess}
+            rewards={rewards}
+            accountkey={accountkey}
+            dispatch={dispatch}
+            idoState={idoState}
+          />
+        );
       default:
         return null;
     }
-  }, [endTime, idoState, rewards]);
+  }, [endTime, idoState, rewards, account, accountkey, dispatch, library, toastError, toastSuccess]);
 };
-const RewardsComponents = ({ rewards }) => {
+const RewardsComponents = ({ rewards, account, idoState, library, toastSuccess, toastError, accountkey, dispatch }) => {
+  const { withrawUncountedAstr } = useIdoFun(account, library);
+  const handlePresss = useCallback(async () => {
+    const res = await withrawUncountedAstr();
+    if (typeof res === 'boolean') {
+      toastSuccess('Congratulations!', 'Take LP Compounded!');
+      dispatch(
+        fetchIdoAsync({
+          account,
+          library,
+          accountkey,
+        }),
+      );
+      return true;
+    } else {
+      toastError('Ops! Error', res);
+      return false;
+    }
+  }, [withrawUncountedAstr, account, accountkey, dispatch, library, toastError, toastSuccess]);
   return useMemo(() => {
     return (
       <RewardsComponentsStyled>
         <h2 className="reward_h2">{rewards}</h2>
         <h3 className="h3 reward_h3">ASTR Rewards</h3>
-        <Button>Claim</Button>
+        <Button disabled={idoState !== IIdoStateEnum.END} onClick={handlePresss}>
+          Claim
+        </Button>
       </RewardsComponentsStyled>
     );
-  }, [rewards]);
+  }, [rewards, idoState, handlePresss]);
 };
 const EndTimeComponents = ({ endTime }) => {
   const secondsRemaining = useNextEventCountdown(endTime);
@@ -177,6 +263,11 @@ const RewardsComponentsStyled = styled.div`
     border-radius: 8px;
     padding: 0 56px;
     margin-bottom: 100px;
+    &:disabled,
+    &.pancake-button--disabled {
+      color: #fff;
+      opacity: 0.6;
+    }
   }
 `;
 const EndTimeComponentsStyled = styled.div`

@@ -2,9 +2,9 @@ import { Flex } from '@my/ui';
 import Page from 'components/Layout/Page';
 import { chainId } from 'config/constants/tokens';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
-import { Dispatch, useCallback, useEffect, useMemo } from 'react';
+import { Dispatch, useCallback, useMemo } from 'react';
 import { useAppDispatch } from 'state';
-import { updateEndTime, updateStartTime, updateState } from 'views/Ido/state/ido/state';
+import { updateState } from 'views/Ido/state/ido/state';
 import { useIdoData, useInitIdo } from 'views/Ido/state/ido/hooks';
 import { IIdoStateEnum } from 'views/Ido/state/ido/types';
 import styled from 'styled-components';
@@ -12,6 +12,7 @@ import Contribution from './components/Contribution';
 import IdoBanner from './components/IdoBanner';
 import InfoContribution from './components/InfoContribution';
 import PositionAbsoult from './components/PositionAbsoult';
+import useToast from 'hooks/useToast';
 const Ido = () => {
   const {
     idoState,
@@ -25,32 +26,34 @@ const Ido = () => {
     lpBalance,
     idoInAstrBalance,
     mainTokenPrice,
+    startTime,
   } = useIdoData();
   const dispatch: Dispatch<any> = useAppDispatch();
 
-  useInitIdo(dispatch);
-
-  const { account } = useActiveWeb3React();
-  const _key = useMemo(() => {
+  const { account, library } = useActiveWeb3React();
+  const accountkey = useMemo(() => {
     return `${account}-${chainId}`;
   }, [account]);
-  const _maxASTRBalance = useMemo(() => {
-    return maxASTRBalance[_key] || '0.00';
-  }, [maxASTRBalance, _key]);
-  const _lpBalance = useMemo(() => {
-    return lpBalance[_key] || '0.00';
-  }, [lpBalance, _key]);
 
-  useEffect(() => {
-    if (dispatch && idoState) {
-      // @ts-ignore
-      if (idoState === IIdoStateEnum.INIT) {
-        dispatch(updateStartTime());
-      } else if (idoState === IIdoStateEnum.PROCING) {
-        dispatch(updateEndTime());
-      }
-    }
-  }, [dispatch, idoState]);
+  useInitIdo(account, library, dispatch, accountkey);
+  const { toastSuccess, toastWarning, toastError } = useToast();
+
+  const _maxASTRBalance = useMemo(() => {
+    return maxASTRBalance[accountkey] || '0.00';
+  }, [maxASTRBalance, accountkey]);
+  const _lpBalance = useMemo(() => {
+    return lpBalance[accountkey] || '0.00';
+  }, [lpBalance, accountkey]);
+
+  // useEffect(() => {
+  //   if (dispatch && idoState) {
+  //     if (idoState === IIdoStateEnum.INIT) {
+  //       dispatch(updateStartTime());
+  //     } else if (idoState === IIdoStateEnum.PROCING) {
+  //       dispatch(updateEndTime());
+  //     }
+  //   }
+  // }, [dispatch, idoState]);
   const changeIdoState = useCallback(
     (params: IIdoStateEnum) => {
       dispatch(
@@ -69,11 +72,18 @@ const Ido = () => {
       <FlexStyled>
         {/* 12s  300block */}
         <Contribution
-          nextEventTime={12 * 300}
+          accountkey={accountkey}
+          dispatch={dispatch}
+          nextEventTime={startTime}
           lpTotalBalance={lpTotalBalance}
           lpBalance={_lpBalance}
           maxASTRBalance={_maxASTRBalance}
           idoState={idoState}
+          account={account}
+          library={library}
+          toastSuccess={toastSuccess}
+          toastWarning={toastWarning}
+          toastError={toastError}
         />
         <InfoContribution
           idoInAstrBalance={idoInAstrBalance}
@@ -84,6 +94,13 @@ const Ido = () => {
           apr={apr}
           amountInPool={amountInPool}
           rewards={rewards}
+          dispatch={dispatch}
+          account={account}
+          library={library}
+          toastSuccess={toastSuccess}
+          toastWarning={toastWarning}
+          toastError={toastError}
+          accountkey={accountkey}
         />
       </FlexStyled>
     </PageStyled>

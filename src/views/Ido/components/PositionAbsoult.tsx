@@ -9,6 +9,7 @@ const PositionAbsoult = ({ changeIdoState }: IProps) => {
     <PositionAbsoultStyled>
       <Button onClick={() => changeIdoState(IIdoStateEnum.INIT)}>change to init</Button>
       <Button onClick={() => changeIdoState(IIdoStateEnum.PROCING)}>change to process</Button>
+      <Button onClick={() => changeIdoState(IIdoStateEnum.WAITINGGETLP)}>change to WAITINGGETLP</Button>
       <Button onClick={() => changeIdoState(IIdoStateEnum.END)}>change to end</Button>
     </PositionAbsoultStyled>
   );

@@ -27,21 +27,14 @@ export const useVeAVATFun = () => {
   const veAVATAddressContract = useVeAVATAddressContract();
   const AVATAddressContract = useAAVTContract();
   const approve = useCallback(async () => {
-    try {
-      const res = await callWithEstimateGas(AVATAddressContract, 'approve', [
-        veAVAT.address,
-        ethers.constants.MaxUint256,
-      ]);
-      if (res.isOk) {
-        return true;
-      } else {
-        return res.message;
-      }
-      //         const tx = await lpContract.approve(contractAddressContract.address, ethers.constants.MaxUint256);
-      // const receipt = await tx.wait();
-      // return receipt.status;
-    } catch (e) {
-      return false;
+    const res = await callWithEstimateGas(AVATAddressContract, 'approve', [
+      veAVAT.address,
+      ethers.constants.MaxUint256,
+    ]);
+    if (res.isOk) {
+      return true;
+    } else {
+      return res.message;
     }
   }, [AVATAddressContract]);
   // createLock  创建新锁仓
@@ -104,18 +97,11 @@ export const useVeAVATFun = () => {
 export const useGrassHouseContractFun = (grassHouseAddress: string) => {
   const grassHouseContract = useGrassHouseContract(grassHouseAddress);
   const claim = useCallback(async () => {
-    try {
-      const res = await callWithEstimateGas(grassHouseContract, 'claim');
-      if (res.isOk) {
-        return true;
-      } else {
-        return res.message;
-      }
-      //         const tx = await lpContract.approve(contractAddressContract.address, ethers.constants.MaxUint256);
-      // const receipt = await tx.wait();
-      // return receipt.status;
-    } catch (e) {
-      return false;
+    const res = await callWithEstimateGas(grassHouseContract, 'claim');
+    if (res.isOk) {
+      return true;
+    } else {
+      return res.message;
     }
   }, [grassHouseContract]);
 
