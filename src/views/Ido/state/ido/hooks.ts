@@ -5,7 +5,7 @@ import { Dispatch, useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { usePrice } from 'state/price/hooks';
 import { State } from 'state/types';
-import { idoContractAddress } from 'views/Ido/constants/constants';
+import { AVATdonation, idoContractAddress } from 'views/Ido/constants/constants';
 import { fetchIdoAsync, updateState } from './state';
 import { IIdoState } from './types';
 import { Web3Provider } from '@ethersproject/providers';
@@ -34,18 +34,25 @@ const useMainTokenPrice = (dispatch: Dispatch<any>) => {
   }, [priceVsBusdMap, dispatch]);
 };
 const useUpdateAvatEstimatedPrice = (dispatch: Dispatch<any>) => {
-  const { idoInAstrBalance, avatInIdoBalance } = useIdoData();
+  const { countedAstrAmount, mainTokenPrice } = useIdoData();
   useMemo(() => {
-    const idoInAstrBalanceNumber = Number(idoInAstrBalance);
-    const avatInIdoBalanceNumber = Number(avatInIdoBalance);
-    if (idoInAstrBalanceNumber && avatInIdoBalanceNumber) {
+    const countedAstrAmountNumber = Number(countedAstrAmount);
+    const mainTokenPriceNumber = Number(mainTokenPrice);
+
+    if (countedAstrAmountNumber) {
       dispatch(
         updateState({
-          avatEstimatedPrice: (idoInAstrBalanceNumber / avatInIdoBalanceNumber).toFixed(2),
+          avatEstimatedPrice: (((countedAstrAmountNumber * 0.5) / AVATdonation) * mainTokenPriceNumber).toLocaleString(
+            'en-US',
+            {
+              maximumFractionDigits: 8,
+              minimumFractionDigits: 2,
+            },
+          ),
         }),
       );
     }
-  }, [dispatch, idoInAstrBalance, avatInIdoBalance]);
+  }, [dispatch, countedAstrAmount, mainTokenPrice]);
 };
 export const useIdoFun = (account: string, library: Web3Provider) => {
   const idoContract = useIdoContract();

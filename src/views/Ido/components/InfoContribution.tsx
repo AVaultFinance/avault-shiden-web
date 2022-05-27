@@ -18,7 +18,7 @@ interface IProps {
   avatEstimatedPrice: string;
   idoInAstrBalance: string;
   apr: string;
-  amountInPool: string;
+  countedAstrAmount: string;
   rewards: string;
 
   account: string;
@@ -35,7 +35,7 @@ const InfoContribution = ({
   endTime,
   avatEstimatedPrice,
   apr,
-  amountInPool,
+  countedAstrAmount,
   rewards,
 
   account,
@@ -55,7 +55,7 @@ const InfoContribution = ({
           <AVATPriceComponents avatEstimatedPrice={avatEstimatedPrice} />
         )}
         {idoState === IIdoStateEnum.END ? (
-          <AmountComponents amountInPool={amountInPool} />
+          <AmountComponents countedAstrAmount={countedAstrAmount} />
         ) : (
           <NetworkComponents idoInAstrBalance={idoInAstrBalance} />
         )}
@@ -73,7 +73,7 @@ const InfoContribution = ({
       </InfoContributionStyled>
     );
   }, [
-    amountInPool,
+    countedAstrAmount,
     apr,
     idoInAstrBalance,
     avatEstimatedPrice,
@@ -115,19 +115,19 @@ const AVATPriceComponents = ({ avatEstimatedPrice }) => {
     );
   }, [avatEstimatedPrice]);
 };
-const AmountComponents = ({ amountInPool }) => {
+const AmountComponents = ({ countedAstrAmount }) => {
   return useMemo(() => {
     return (
       <>
         <h2 className="h2 fr fr_dot">
           {/* {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null} */}
-          {amountInPool}
+          {countedAstrAmount}
           {/* {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
         <h3 className="h3 fr">ASTR Amount In Pool</h3>
       </>
     );
-  }, [amountInPool]);
+  }, [countedAstrAmount]);
 };
 const NetworkComponents = ({ idoInAstrBalance }) => {
   return useMemo(() => {

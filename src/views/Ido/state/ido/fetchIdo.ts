@@ -2,7 +2,6 @@ import { AVAT } from 'config/constants/tokens';
 import { Contract } from 'ethers';
 import { useContract } from 'hooks/useContract';
 import { idoContractAddress } from 'views/Ido/constants/constants';
-import AVATAbi from 'config/abi/AVATAbi.json';
 import idoAbi from '../../constants/abi/idoAbi.json';
 import multicall, { multicallv3 } from 'utils/multicall';
 import { IFetchIdoCallback, IIdoStateEnum } from './types';
@@ -18,10 +17,10 @@ export const fetchIdo = async (
 ): Promise<IFetchIdoCallback> => {
   const obj: any = {};
   const AVATAddress = AVAT.address;
-  // avatInIdoBalance
-  const calls01 = [{ address: AVATAddress, name: 'balanceOf', params: [idoContractAddress] }];
-  const [[avatInIdoBalance]] = await multicall(AVATAbi, calls01);
-  obj.avatInIdoBalance = avatInIdoBalance.toString();
+  // // avatInIdoBalance
+  // const calls01 = [{ address: AVATAddress, name: 'balanceOf', params: [idoContractAddress] }];
+  // const [[avatInIdoBalance]] = await multicall(AVATAbi, calls01);
+  // obj.avatInIdoBalance = avatInIdoBalance.toString();
 
   const calls02 = [
     { address: idoContractAddress, name: 'countedAstrAmount' },
@@ -35,7 +34,7 @@ export const fetchIdo = async (
     calls02,
   );
   if (countedAstrAmount) {
-    obj.amountInPool = getFullLocalDisplayBalance(new BigNumber(countedAstrAmount.toString()), 18);
+    obj.countedAstrAmount = getFullLocalDisplayBalance(new BigNumber(countedAstrAmount.toString()), 18);
   }
 
   const stateNumber = Number(state.toString());
@@ -64,17 +63,18 @@ export const fetchIdo = async (
       obj.lpTotalBalance = lpTotalBalance.toString();
     }
   }
+  const idoInAstrBalance = await getETHBalance(idoContractAddress, library);
+  if (idoInAstrBalance) {
+    obj.idoInAstrBalance = idoInAstrBalance.toString();
+  }
   if (account && library) {
     const maxASTRBalance = await getETHBalance(account, library);
-    const idoInAstrBalance = await getETHBalance(idoContractAddress, library);
     if (maxASTRBalance) {
       obj.maxASTRBalance = {
         [accountkey]: maxASTRBalance.toString(),
       };
     }
-    if (idoInAstrBalance) {
-      obj.idoInAstrBalance = idoInAstrBalance.toString();
-    }
+
     if (stateNumber === 3) {
       const calls03 = [{ address: idoContractAddress, name: 'claim', params: [account] }];
       const [[rewards]] = await multicallv3(idoAbi, calls03);

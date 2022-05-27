@@ -13,22 +13,20 @@ export interface IIdoState {
   startTime: number;
   endTime: number;
   idoInAstrBalance: string;
-  avatInIdoBalance: string;
   apr: string;
-  amountInPool: string;
+  countedAstrAmount: string;
   rewards: string;
   lpTotalBalance: string;
   lpBalance: Record<string, string>;
 }
 
 export interface IFetchIdoCallback {
-  avatInIdoBalance: string;
   maxASTRBalance?: Record<string, string>;
   idoInAstrBalance?: string;
   lpTotalBalance?: string;
   idoState?: string;
   endTime?: string;
   startTime?: string;
-  amountInPool?: string;
+  countedAstrAmount?: string;
   rewards?: string;
 }

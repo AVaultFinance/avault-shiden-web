@@ -8,10 +8,9 @@ const initialState: IIdoState = {
   endTime: 0, //2023-05-18 23:59:59
   mainTokenPrice: '0',
   idoInAstrBalance: '0',
-  avatInIdoBalance: '0',
   avatEstimatedPrice: '0.00',
   apr: '0.00',
-  amountInPool: '0.00',
+  countedAstrAmount: '0.00',
   rewards: '0.00',
   lpTotalBalance: '0.00',
   lpBalance: {},

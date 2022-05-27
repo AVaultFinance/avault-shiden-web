@@ -20,7 +20,7 @@ const Ido = () => {
     endTime,
     avatEstimatedPrice,
     apr,
-    amountInPool,
+    countedAstrAmount,
     rewards,
     lpTotalBalance,
     lpBalance,
@@ -92,7 +92,7 @@ const Ido = () => {
           endTime={endTime}
           avatEstimatedPrice={avatEstimatedPrice}
           apr={apr}
-          amountInPool={amountInPool}
+          countedAstrAmount={countedAstrAmount}
           rewards={rewards}
           dispatch={dispatch}
           account={account}
