@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 const Logo: FC<{ collapsed: boolean }> = ({ collapsed }) => {
   return (
-    <LogoStyle href="/">
+    <LogoStyle href="https://www.avault.network/">
       <img src={collapsed ? '/images/logo_small_beta.svg' : '/images/logo_beta.svg'} alt="" />
     </LogoStyle>
   );
