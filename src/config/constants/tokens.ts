@@ -100,7 +100,7 @@ export const tokens = {
 export const main_tokens = {
   astr: {
     symbol: 'ASTR',
-    name: 'ASTR Token',
+    name: 'Astar',
     decimals: 18,
     address: {
       [ChainId.ASTR_MAINNET]: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
@@ -110,7 +110,7 @@ export const main_tokens = {
   },
   sdn: {
     symbol: 'WSDN',
-    name: 'Wrapped SDN',
+    name: 'Shiden',
     decimals: 18,
     address: {
       [ChainId.SDN_MAINNET]: '0x0f933Dc137D21cA519ae4C7E93f87a4C8EF365Ef',

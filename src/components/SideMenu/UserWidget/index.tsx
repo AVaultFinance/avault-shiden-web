@@ -51,6 +51,7 @@ const UserWidget = () => {
           color="none"
           fontSize="18px"
           fontWeight="600"
+          fontFamily="Poppins-SemiBold"
           decimals={2}
           value={Number(allTotal === 'NaN' ? '0' : allTotal)}
         />
@@ -63,6 +64,9 @@ const UserWidget = () => {
 const User = styled(Flex)`
   flex-direction: column;
   align-items: end;
+  p {
+    font-family: 'Poppins-SemiBold';
+  }
 `;
 
 export default UserWidget;

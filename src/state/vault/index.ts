@@ -13,45 +13,46 @@ import {
 import { haveNumber } from 'utils';
 import { chainId } from 'config/constants/tokens';
 import BigNumber from 'bignumber.js';
+const initData = vaultsConfig.map((v: IVaultConfigItem) => {
+  return {
+    ...v,
+    vault: {
+      symbol: '',
+      name: '',
+      masterChef: '',
+      AVAAddress: '',
+      token0Address: '',
+      token1Address: '',
+      fromSource: v.fromSource,
+      wantAddress: '',
+      earnedAddress: '',
+      wantLockedTotal: '',
+      totalSupply: '',
+      decimals: 18,
+    },
+    farm: {
+      pid: 0,
+      lpSymbol: '',
+      lpAddresses: '',
+      tokenAmountMc: '',
+      token: '',
+      quoteToken: '',
+      quoteTokenAmountMc: '',
+      tokenAmountTotal: '',
+      quoteTokenAmountTotal: '',
+      lpTotalInQuoteToken: '',
+      lpTotalSupply: '',
+      tokenPriceVsQuote: '',
+      poolWeight: '',
+      multiplier: '',
+      quoteTokenDecimals: 18,
+      lpAddressDecimals: 18,
+    },
+    isLoading: false,
+  };
+});
 const initialState: VaultState = {
-  data: vaultsConfig.map((v: IVaultConfigItem) => {
-    return {
-      ...v,
-      vault: {
-        symbol: '',
-        name: '',
-        masterChef: '',
-        AVAAddress: '',
-        token0Address: '',
-        token1Address: '',
-        fromSource: v.fromSource,
-        wantAddress: '',
-        earnedAddress: '',
-        wantLockedTotal: '',
-        totalSupply: '',
-        decimals: 18,
-      },
-      farm: {
-        pid: 0,
-        lpSymbol: '',
-        lpAddresses: '',
-        tokenAmountMc: '',
-        token: '',
-        quoteToken: '',
-        quoteTokenAmountMc: '',
-        tokenAmountTotal: '',
-        quoteTokenAmountTotal: '',
-        lpTotalInQuoteToken: '',
-        lpTotalSupply: '',
-        tokenPriceVsQuote: '',
-        poolWeight: '',
-        multiplier: '',
-        quoteTokenDecimals: 18,
-        lpAddressDecimals: 18,
-      },
-      isLoading: false,
-    };
-  }),
+  data: initData,
   tvlTotal: '',
   isUserLoaded: false,
   userDataLoaded: false,
@@ -64,7 +65,8 @@ export const fetchVaultsPublicDataAsync = createAsyncThunk<
     vaultsData: IVault[];
   }
 >('vault/fetchVaultsPublicDataAsync', async ({ account, priceVsBusdMap, vaultsData }) => {
-  const vaults = await fetchVaults(account, vaultsConfig, priceVsBusdMap, vaultsData);
+  const data = (vaultsData ?? []).length ? vaultsData : initData;
+  const vaults = await fetchVaults(account, vaultsConfig, priceVsBusdMap, data);
   return vaults;
 });
 export const fetchVaultFarmUserDataAsync = createAsyncThunk<

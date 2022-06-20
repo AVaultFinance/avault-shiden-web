@@ -67,8 +67,6 @@ const DepositModal: React.FC<DepositModalProps> = ({
   const { isMd, isXl, isLg } = useMatchBreakpoints();
   const isMobile = !(isMd || isXl || isLg);
   const [pendingTx, setPendingTx] = useState(false);
-  const [pendingTxSuccess, setPendingTxSuccess] = useState(true);
-
   const { account } = useWeb3React();
   const { data: vaults } = useVault();
   const { toastSuccess, toastError } = useToast();
@@ -84,24 +82,12 @@ const DepositModal: React.FC<DepositModalProps> = ({
         dispatch(changeVaultItemLoading({ index }));
         dispatch(fetchVaultFarmUserDataAsync({ account, vaults, index }));
         toastSuccess(`Deposit!`, `Your ${lpSymbol} deposit!`);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 10000);
       } else {
         const message = result ? result : `Your ${lpSymbol} deposit failed!`;
         toastError('Error', message);
-        setPendingTxSuccess(false);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 1500);
       }
     } catch (e: any) {
       toastError('Error', e.message ? e.message : `Your ${lpSymbol} deposit failed!`);
-      setPendingTxSuccess(false);
-      setTimeout(() => {
-        setPendingTxSuccess(true);
-      }, 1500);
-      // toastError('Error', `Your ${lpSymbol} deposit failed!`);
     } finally {
       setVal('');
       setPendingTx(false);

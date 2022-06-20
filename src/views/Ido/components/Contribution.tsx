@@ -47,7 +47,7 @@ const Contribution = ({
   return useMemo(() => {
     return (
       <ContributionStyled
-        paddingBottom={idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? '100' : '220'}
+        paddingBottom={idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? '100' : '180'}
       >
         <div className="inner">
           {idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? (

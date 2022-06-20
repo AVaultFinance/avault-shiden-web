@@ -58,8 +58,6 @@ const WithdrawAction: React.FunctionComponent<WithdrawActionProps> = ({
   const { toastSuccess, toastError } = useToast();
 
   const [pendingTx, setPendingTx] = useState(false);
-  const [pendingTxSuccess, setPendingTxSuccess] = useState(true);
-
   const dispatch = useAppDispatch();
   const { account } = useWeb3React();
   const { onWithdraw } = useVaultWithdraw(account, contractAddress, lpAddressDecimals);
@@ -96,23 +94,12 @@ const WithdrawAction: React.FunctionComponent<WithdrawActionProps> = ({
         dispatch(changeVaultItemLoading({ index }));
         dispatch(fetchVaultFarmUserDataAsync({ account, vaults, index }));
         toastSuccess(`Withdraw!`, `'Your ${lpSymbol} earnings have been sent to your wallet!'`);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 10000);
       } else {
         const message = result ? result : `Your ${lpSymbol} withdraw failed!`;
         toastError('Error', message);
-        setPendingTxSuccess(false);
-        setTimeout(() => {
-          setPendingTxSuccess(true);
-        }, 1500);
       }
     } catch (e: any) {
       toastError('Error', e.message ? e.message : `Your ${lpSymbol} withdraw failed! `);
-      setPendingTxSuccess(false);
-      setTimeout(() => {
-        setPendingTxSuccess(true);
-      }, 1500);
     } finally {
       setVal('');
       setPendingTx(false);

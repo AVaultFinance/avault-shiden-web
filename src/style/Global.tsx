@@ -83,41 +83,11 @@ header{
 }
 `;
 const GlobalStyle = createGlobalStyle`
-  ul,li{
-    list-style: none;
-  }
-  i{
-    font-style:normal;
-  }
+  
   body {
-    height: 100%;
     background-color: ${({ theme }) => theme.colors.background02};
-    // padding: 0;
-    // ${({ theme }) => theme.mediaQueries.md} {
-    //   padding: 0 20px;
-    // }
-    img {
-      height: auto;
-      max-width: 100%;
-    }
-    #root {
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    h1,h2,h3,h4,h5,h6,p{
-      color: #fff;
-    }
   }
-  .w20{
-    width: 20px;
-  }
-  h3,h4,h5,h6 {
-    font-weight: 600;
-  }
-  .bg-holder{
-    padding: 0 20px;
-  }
+
 `;
 
 export default GlobalStyle;

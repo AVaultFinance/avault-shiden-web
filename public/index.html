@@ -3,12 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <!-- Links -->
+    <link rel="preload" as="font" crossorigin href="/fonts/poppins/Poppins-Bold.ttf" />
+    <link rel="preload" as="font" crossorigin href="/fonts/poppins/Poppins-SemiBold.ttf" />
+    <link rel="preload" as="font" crossorigin href="/fonts/poppins/Poppins-Medium.ttf" />
+    <link rel="preload" as="font" crossorigin href="/fonts/poppins/Poppins-Regular.ttf" />
+
     <link rel="preconnect" href="%REACT_APP_NODE_1%" />
-    <link rel="preconnect" href="%REACT_APP_NODE_2%" />
-    <link rel="preconnect" href="%REACT_APP_NODE_3%" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon_beta.svg" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="/css/init.css" />
     <!-- Meta -->
     <title>Avault Finance - First Native Yield Aggregator on Astar</title>
     <meta name="description" content="Providing best stragtegies, highest APY on Astar Network!!!" />
@@ -18,59 +22,6 @@
     <meta name="twitter:description" content="Providing best stragtegies, highest APY on Astar Network!!!" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="%PUBLIC_URL%/logo.png" />
-    <style>
-      ::-webkit-scrollbar {
-        display: none;
-      }
-
-      /* poppins-500 - latin */
-      @font-face {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 500;
-        src: url('/fonts/poppins/poppins-v5-latin-500.eot'); /* IE9 Compat Modes */
-        src: local('Poppins Medium'), local('Poppins-Medium'),
-          url('/fonts/poppins/poppins-v5-latin-500.eot?#iefix') format('embedded-opentype'),
-          /* IE6-IE8 */ url('/fonts/poppins/poppins-v5-latin-500.woff2') format('woff2'),
-          /* Super Modern Browsers */ url('/fonts/poppins/poppins-v5-latin-500.woff') format('woff'),
-          /* Modern Browsers */ url('/fonts/poppins/poppins-v5-latin-500.ttf') format('truetype'),
-          /* Safari, Android, iOS */ url('/fonts/poppins/poppins-v5-latin-500.svg#Poppins') format('svg'); /* Legacy iOS */
-      }
-
-      /* poppins-600 - latin */
-      @font-face {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 600;
-        src: url('/fonts/poppins/poppins-v5-latin-600.eot'); /* IE9 Compat Modes */
-        src: local('Poppins SemiBold'), local('Poppins-SemiBold'),
-          url('/fonts/poppins/poppins-v5-latin-600.eot?#iefix') format('embedded-opentype'),
-          /* IE6-IE8 */ url('/fonts/poppins/poppins-v5-latin-600.woff2') format('woff2'),
-          /* Super Modern Browsers */ url('/fonts/poppins/poppins-v5-latin-600.woff') format('woff'),
-          /* Modern Browsers */ url('/fonts/poppins/poppins-v5-latin-600.ttf') format('truetype'),
-          /* Safari, Android, iOS */ url('/fonts/poppins/poppins-v5-latin-600.svg#Poppins') format('svg'); /* Legacy iOS */
-      }
-
-      @font-face {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 800;
-        src: url('/fonts/poppins/poppins-v5-latin-800.eot'); /* IE9 Compat Modes */
-        src: local('Poppins SemiBold'), local('Poppins-SemiBold'),
-          url('/fonts/poppins/poppins-v5-latin-800.eot?#iefix') format('embedded-opentype'),
-          /* IE6-IE8 */ url('/fonts/poppins/poppins-v5-latin-800.woff2') format('woff2'),
-          /* Super Modern Browsers */ url('/fonts/poppins/poppins-v5-latin-800.woff') format('woff'),
-          /* Modern Browsers */ url('/fonts/poppins/poppins-v5-latin-800.ttf') format('truetype'),
-          /* Safari, Android, iOS */ url('/fonts/poppins/poppins-v5-latin-800.svg#Poppins') format('svg'); /* Legacy iOS */
-      }
-
-      * {
-        font-family: 'Poppins', sans-serif;
-      }
-      html {
-        height: 100%;
-      }
-    </style>
   </head>
   <body>
     <!-- GTAG (noscript) -->
