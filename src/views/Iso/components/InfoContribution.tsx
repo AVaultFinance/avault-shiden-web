@@ -11,7 +11,6 @@ import { useIsoFun } from '../state/ido/hooks';
 import { fetchIsoAsync } from '../state/ido/state';
 import { Web3Provider } from '@ethersproject/providers';
 import { ToastSignature } from 'contexts/ToastsContext/types';
-import { chainId, DEFAULT_Token } from 'config/constants/tokens';
 interface IProps {
   mainTokenPrice: string;
   idoState: IIsoStateEnum;
@@ -143,7 +142,9 @@ const NetworkComponents = ({ idoInAstrBalance }) => {
           {getFullLocalDisplayBalance(new BigNumber(idoInAstrBalance), 18, 4)}
           {/* {idoState !== IIsoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
-        <h3 className="h3 fr">The network is in {DEFAULT_Token[chainId].name}</h3>
+
+        <h3 className="h3 fr">Token Contributed</h3>
+        {/* <h3 className="h3 fr">The network is in {DEFAULT_Token[chainId].name}</h3> */}
       </>
     );
   }, [idoInAstrBalance]);

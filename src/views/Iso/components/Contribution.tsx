@@ -184,7 +184,7 @@ const PROCINGComponents = ({
       case IIsoStateEnum.PROCING:
         return {
           title: `Your Balance ${fullLocalBalance} ASTR`,
-          btnTitle: 'Create LP',
+          btnTitle: 'Contribute',
         };
       case IIsoStateEnum.WAITINGGETLP:
         return {
@@ -194,7 +194,7 @@ const PROCINGComponents = ({
       case IIsoStateEnum.END:
         return {
           title: `AVAT-ASTR LP Balance: ${fullLocalBalance}`,
-          btnTitle: 'Take LP',
+          btnTitle: 'Withdraw LP',
         };
       default:
         return {
@@ -234,7 +234,7 @@ const PROCINGComponents = ({
       }
       const res = await transfer(val);
       if (typeof res === 'boolean') {
-        toastSuccess('Congratulations!', 'Create LP Compounded!');
+        toastSuccess('Congratulations!', 'Contribute Compounded!');
         dispatch(
           fetchIsoAsync({
             account,
