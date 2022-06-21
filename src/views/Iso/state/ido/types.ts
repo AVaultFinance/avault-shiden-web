@@ -1,11 +1,11 @@
-export enum IIdoStateEnum {
+export enum IIsoStateEnum {
   INIT = 'INIT',
   PROCING = 'PROCING',
   WAITINGGETLP = 'WAITINGGETLP',
   END = 'END',
 }
-export interface IIdoState {
-  idoState: IIdoStateEnum;
+export interface IIsoState {
+  idoState: IIsoStateEnum;
   isUserLoaded: boolean;
   avatEstimatedPrice: string;
   maxASTRBalance: Record<string, string>;
@@ -20,7 +20,7 @@ export interface IIdoState {
   lpBalance: Record<string, string>;
 }
 
-export interface IFetchIdoCallback {
+export interface IFetchIsoCallback {
   maxASTRBalance?: Record<string, string>;
   idoInAstrBalance?: string;
   lpTotalBalance?: string;

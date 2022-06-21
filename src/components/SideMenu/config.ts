@@ -59,8 +59,8 @@ const avaultMenuItems: IMenu[] = [
     link: '/governance',
   },
   {
-    text: 'Ido',
-    link: '/ido',
+    text: 'ISO',
+    link: '/iso',
   },
   // {
   //   text: 'Stake',

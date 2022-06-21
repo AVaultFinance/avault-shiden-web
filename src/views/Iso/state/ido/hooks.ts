@@ -5,19 +5,19 @@ import { Dispatch, useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { usePrice } from 'state/price/hooks';
 import { State } from 'state/types';
-import { AVATdonation, idoContractAddress } from 'views/Ido/constants/constants';
-import { fetchIdoAsync, updateState } from './state';
-import { IIdoState } from './types';
+import { AVATdonation, idoContractAddress } from 'views/Iso/constants/constants';
+import { fetchIsoAsync, updateState } from './state';
+import { IIsoState } from './types';
 import { Web3Provider } from '@ethersproject/providers';
 import { sendTransaction } from 'utils/contractHelpers';
-import { useIdoContract } from './fetchIdo';
+import { useIsoContract } from './fetchIso';
 import { callWithEstimateGas } from 'utils/calls';
-export const useInitIdo = (account: string, library: Web3Provider, dispatch: Dispatch<any>, accountkey: string) => {
+export const useInitIso = (account: string, library: Web3Provider, dispatch: Dispatch<any>, accountkey: string) => {
   useMainTokenPrice(dispatch);
   useUpdateAvatEstimatedPrice(dispatch);
   useEffect(() => {
     if (dispatch) {
-      dispatch(fetchIdoAsync({ account, library, accountkey }));
+      dispatch(fetchIsoAsync({ account, library, accountkey }));
     }
   }, [dispatch, account, accountkey, library]);
 };
@@ -34,7 +34,7 @@ const useMainTokenPrice = (dispatch: Dispatch<any>) => {
   }, [priceVsBusdMap, dispatch]);
 };
 const useUpdateAvatEstimatedPrice = (dispatch: Dispatch<any>) => {
-  const { countedAstrAmount, mainTokenPrice } = useIdoData();
+  const { countedAstrAmount, mainTokenPrice } = useIsoData();
   useMemo(() => {
     const countedAstrAmountNumber = Number(countedAstrAmount);
     const mainTokenPriceNumber = Number(mainTokenPrice);
@@ -54,8 +54,8 @@ const useUpdateAvatEstimatedPrice = (dispatch: Dispatch<any>) => {
     }
   }, [dispatch, countedAstrAmount, mainTokenPrice]);
 };
-export const useIdoFun = (account: string, library: Web3Provider) => {
-  const idoContract = useIdoContract();
+export const useIsoFun = (account: string, library: Web3Provider) => {
+  const idoContract = useIsoContract();
   const transfer = useCallback(
     async (amount: string) => {
       // 0x98F579252b517BAeA1eF2317cee6287652A5F07B
@@ -93,7 +93,7 @@ export const useIdoFun = (account: string, library: Web3Provider) => {
   };
 };
 
-export const useIdoData = (): IIdoState => {
+export const useIsoData = (): IIsoState => {
   const idoData = useSelector((state: State) => state.ido);
   return idoData;
 };

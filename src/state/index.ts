@@ -22,7 +22,7 @@ import mint from './mint/reducer';
 import lists from './lists/reducer';
 import burn from './burn/reducer';
 import multicall from './multicall/reducer';
-import ido from 'views/Ido/state/ido/state';
+import ido from 'views/Iso/state/ido/state';
 import governance from 'views/Governance/state/governance';
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'farms', 'ido', 'governance', 'lists', 'vault'];

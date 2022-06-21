@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-const IdoBanner = () => {
+const IsoBanner = () => {
   return useMemo(() => {
     return (
-      <IdoBannerStyled>
+      <IsoBannerStyled>
         <h1>Avault Public Sale</h1>
         <h2>
           We will sell a total of 2,000,000 AVA. The price of AVA is determined by the user. We will form LP with half
@@ -13,11 +13,11 @@ const IdoBanner = () => {
         </h2>
 
         <img className="banner_bg_pc" src="/images/ido/pc_banner.webp" alt="Avault Public Sale" />
-      </IdoBannerStyled>
+      </IsoBannerStyled>
     );
   }, []);
 };
-const IdoBannerStyled = styled.div`
+const IsoBannerStyled = styled.div`
   background-image: url('./images/stake/bg_element.svg');
   background-size: 60%;
   background-repeat: no-repeat;
@@ -87,4 +87,4 @@ const IdoBannerStyled = styled.div`
     }
   }
 `;
-export default IdoBanner;
+export default IsoBanner;

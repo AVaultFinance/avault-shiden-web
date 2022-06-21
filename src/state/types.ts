@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import { CampaignType, FarmConfig, LotteryStatus, LotteryTicket, Nft, PoolConfig, Team } from 'config/constants/types';
 import { IVault } from './vault/types';
-import { IIdoState } from 'views/Ido/state/ido/types';
+import { IIsoState } from 'views/Iso/state/ido/types';
 import { GovernanceState } from 'views/Governance/state/governance/types';
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, State, unknown, AnyAction>;
@@ -498,5 +498,5 @@ export interface State {
   collectibles: CollectiblesState;
   voting: VotingState;
   lottery: LotteryState;
-  ido: IIdoState;
+  ido: IIsoState;
 }

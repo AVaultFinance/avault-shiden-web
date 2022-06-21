@@ -2,19 +2,19 @@ import { Button } from '@my/ui';
 import Timer from 'components/CountdownTimer/Timer';
 import useNextEventCountdown from 'components/CountdownTimer/useNextEventCountdown';
 import { Dispatch, useCallback, useMemo } from 'react';
-import { IIdoStateEnum } from 'views/Ido/state/ido/types';
+import { IIsoStateEnum } from 'views/Iso/state/ido/types';
 import styled from 'styled-components';
 import getTimePeriods from 'utils/getTimePeriods';
 import BigNumber from 'bignumber.js';
 import { getFullLocalDisplayBalance } from 'utils/formatBalance';
-import { useIdoFun } from '../state/ido/hooks';
-import { fetchIdoAsync } from '../state/ido/state';
+import { useIsoFun } from '../state/ido/hooks';
+import { fetchIsoAsync } from '../state/ido/state';
 import { Web3Provider } from '@ethersproject/providers';
 import { ToastSignature } from 'contexts/ToastsContext/types';
 import { chainId, DEFAULT_Token } from 'config/constants/tokens';
 interface IProps {
   mainTokenPrice: string;
-  idoState: IIdoStateEnum;
+  idoState: IIsoStateEnum;
   endTime: number;
   avatEstimatedPrice: string;
   idoInAstrBalance: string;
@@ -50,13 +50,17 @@ const InfoContribution = ({
   return useMemo(() => {
     return (
       <InfoContributionStyled>
-        {idoState === IIdoStateEnum.END ? (
+        {idoState === IIsoStateEnum.END ? (
           <AprComponents apr={apr} />
+        ) : idoState === IIsoStateEnum.INIT ? (
+          <AVATPriceComponents avatEstimatedPrice={'0.00'} />
         ) : (
           <AVATPriceComponents avatEstimatedPrice={avatEstimatedPrice} />
         )}
-        {idoState === IIdoStateEnum.END ? (
+        {idoState === IIsoStateEnum.END ? (
           <AmountComponents countedAstrAmount={countedAstrAmount} />
+        ) : idoState === IIsoStateEnum.INIT ? (
+          <NetworkComponents idoInAstrBalance={0} />
         ) : (
           <NetworkComponents idoInAstrBalance={idoInAstrBalance} />
         )}
@@ -95,7 +99,7 @@ const AprComponents = ({ apr }) => {
     return (
       <>
         <h2 className="h2 fl_dot">
-          {apr}%{/* {idoState !== IIdoStateEnum.INIT ? <i></i> : null} */}
+          {apr}%{/* {idoState !== IIsoStateEnum.INIT ? <i></i> : null} */}
         </h2>
         <h3 className="h3">Somthing APR</h3>
       </>
@@ -109,7 +113,7 @@ const AVATPriceComponents = ({ avatEstimatedPrice }) => {
       <>
         <h2 className="h2 fl_dot">
           ${avatEstimatedPrice}
-          {/* {idoState !== IIdoStateEnum.INIT ? <i></i> : null} */}
+          {/* {idoState !== IIsoStateEnum.INIT ? <i></i> : null} */}
         </h2>
         <h3 className="h3">AVAT Estimated price</h3>
       </>
@@ -121,9 +125,9 @@ const AmountComponents = ({ countedAstrAmount }) => {
     return (
       <>
         <h2 className="h2 fr fr_dot">
-          {/* {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null} */}
+          {/* {idoState !== IIsoStateEnum.INIT ? <i className="h5"></i> : null} */}
           {countedAstrAmount}
-          {/* {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null} */}
+          {/* {idoState !== IIsoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
         <h3 className="h3 fr">ASTR Amount In Pool</h3>
       </>
@@ -135,9 +139,9 @@ const NetworkComponents = ({ idoInAstrBalance }) => {
     return (
       <>
         <h2 className="h2 fr fr_dot">
-          {/* {idoState !== IIdoStateEnum.INIT ? <i className="h5"></i> : null} */}
+          {/* {idoState !== IIsoStateEnum.INIT ? <i className="h5"></i> : null} */}
           {getFullLocalDisplayBalance(new BigNumber(idoInAstrBalance), 18, 4)}
-          {/* {idoState !== IIdoStateEnum.INIT ? <i className="pc"></i> : null} */}
+          {/* {idoState !== IIsoStateEnum.INIT ? <i className="pc"></i> : null} */}
         </h2>
         <h3 className="h3 fr">The network is in {DEFAULT_Token[chainId].name}</h3>
       </>
@@ -157,12 +161,12 @@ const BottomComponents = ({
 }) => {
   return useMemo(() => {
     switch (idoState) {
-      case IIdoStateEnum.INIT:
+      case IIsoStateEnum.INIT:
         return null;
-      case IIdoStateEnum.PROCING:
+      case IIsoStateEnum.PROCING:
         return <EndTimeComponents endTime={endTime} />;
-      case IIdoStateEnum.WAITINGGETLP:
-      case IIdoStateEnum.END:
+      case IIsoStateEnum.WAITINGGETLP:
+      case IIsoStateEnum.END:
         return (
           <RewardsComponents
             library={library}
@@ -181,13 +185,13 @@ const BottomComponents = ({
   }, [endTime, idoState, rewards, account, accountkey, dispatch, library, toastError, toastSuccess]);
 };
 const RewardsComponents = ({ rewards, account, idoState, library, toastSuccess, toastError, accountkey, dispatch }) => {
-  const { withrawUncountedAstr } = useIdoFun(account, library);
+  const { withrawUncountedAstr } = useIsoFun(account, library);
   const handlePresss = useCallback(async () => {
     const res = await withrawUncountedAstr();
     if (typeof res === 'boolean') {
       toastSuccess('Congratulations!', 'Take LP Compounded!');
       dispatch(
-        fetchIdoAsync({
+        fetchIsoAsync({
           account,
           library,
           accountkey,
@@ -204,7 +208,7 @@ const RewardsComponents = ({ rewards, account, idoState, library, toastSuccess, 
       <RewardsComponentsStyled>
         <h2 className="reward_h2">{rewards}</h2>
         <h3 className="h3 reward_h3">ASTR Rewards</h3>
-        <Button disabled={idoState !== IIdoStateEnum.END} onClick={handlePresss}>
+        <Button disabled={idoState !== IIsoStateEnum.END} onClick={handlePresss}>
           Claim
         </Button>
       </RewardsComponentsStyled>

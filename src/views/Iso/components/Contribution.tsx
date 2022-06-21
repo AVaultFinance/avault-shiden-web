@@ -7,12 +7,12 @@ import { Dispatch, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { getFullDisplayBalance, getFullLocalDisplayBalance } from 'utils/formatBalance';
 import getTimePeriods from 'utils/getTimePeriods';
-import { IIdoStateEnum } from 'views/Ido/state/ido/types';
-import { useIdoFun } from '../state/ido/hooks';
+import { IIsoStateEnum } from 'views/Iso/state/ido/types';
+import { useIsoFun } from '../state/ido/hooks';
 import { Web3Provider } from '@ethersproject/providers';
 import ConnectWalletButton from 'components/ConnectWalletButton';
 import { ToastSignature } from 'contexts/ToastsContext/types';
-import { fetchIdoAsync } from '../state/ido/state';
+import { fetchIsoAsync } from '../state/ido/state';
 interface IProps extends IPROCINGComponents {
   nextEventTime: number;
   maxASTRBalance: string;
@@ -21,7 +21,7 @@ interface IProps extends IPROCINGComponents {
 }
 interface IPROCINGComponents {
   dispatch: Dispatch<any>;
-  idoState: IIdoStateEnum;
+  idoState: IIsoStateEnum;
   max?: string;
   account: string;
   library: Web3Provider;
@@ -47,22 +47,22 @@ const Contribution = ({
   return useMemo(() => {
     return (
       <ContributionStyled
-        paddingBottom={idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? '100' : '180'}
+        paddingBottom={idoState === IIsoStateEnum.END || idoState === IIsoStateEnum.WAITINGGETLP ? '100' : '180'}
       >
         <div className="inner">
-          {idoState === IIdoStateEnum.END || idoState === IIdoStateEnum.WAITINGGETLP ? (
+          {idoState === IIsoStateEnum.END || idoState === IIsoStateEnum.WAITINGGETLP ? (
             <LpBalanceComponents lpTotalBalance={lpTotalBalance} />
           ) : (
             <ContributionComponents />
           )}
-          {idoState === IIdoStateEnum.INIT ? <InitComponents nextEventTime={nextEventTime} /> : null}
-          {idoState === IIdoStateEnum.PROCING ||
-          idoState === IIdoStateEnum.END ||
-          idoState === IIdoStateEnum.WAITINGGETLP ? (
+          {idoState === IIsoStateEnum.INIT ? <InitComponents nextEventTime={nextEventTime} /> : null}
+          {idoState === IIsoStateEnum.PROCING ||
+          idoState === IIsoStateEnum.END ||
+          idoState === IIsoStateEnum.WAITINGGETLP ? (
             <PROCINGComponents
               accountkey={accountkey}
               dispatch={dispatch}
-              max={idoState === IIdoStateEnum.PROCING ? maxASTRBalance : lpBalance}
+              max={idoState === IIsoStateEnum.PROCING ? maxASTRBalance : lpBalance}
               library={library}
               account={account}
               idoState={idoState}
@@ -181,17 +181,17 @@ const PROCINGComponents = ({
   );
   const { title, btnTitle } = useMemo(() => {
     switch (idoState) {
-      case IIdoStateEnum.PROCING:
+      case IIsoStateEnum.PROCING:
         return {
           title: `Your Balance ${fullLocalBalance} ASTR`,
           btnTitle: 'Create LP',
         };
-      case IIdoStateEnum.WAITINGGETLP:
+      case IIsoStateEnum.WAITINGGETLP:
         return {
           title: `AVAT-ASTR LP Balance: ${fullLocalBalance}`,
           btnTitle: 'Coming Soon',
         };
-      case IIdoStateEnum.END:
+      case IIsoStateEnum.END:
         return {
           title: `AVAT-ASTR LP Balance: ${fullLocalBalance}`,
           btnTitle: 'Take LP',
@@ -203,15 +203,15 @@ const PROCINGComponents = ({
         };
     }
   }, [fullLocalBalance, idoState]);
-  const { transfer, abort } = useIdoFun(account, library);
+  const { transfer, abort } = useIsoFun(account, library);
   const handlePresss = useCallback(async () => {
-    if (idoState === IIdoStateEnum.END) {
+    if (idoState === IIsoStateEnum.END) {
       const res = await abort();
       if (typeof res === 'boolean') {
         toastSuccess('Congratulations!', 'Take LP Compounded!');
         setVal('');
         dispatch(
-          fetchIdoAsync({
+          fetchIsoAsync({
             account,
             library,
             accountkey,
@@ -223,7 +223,7 @@ const PROCINGComponents = ({
         return false;
       }
     }
-    if (idoState === IIdoStateEnum.PROCING) {
+    if (idoState === IIsoStateEnum.PROCING) {
       if (!library || !account) {
         toastWarning('Warn', 'Some error happened!');
         return;
@@ -236,7 +236,7 @@ const PROCINGComponents = ({
       if (typeof res === 'boolean') {
         toastSuccess('Congratulations!', 'Create LP Compounded!');
         dispatch(
-          fetchIdoAsync({
+          fetchIsoAsync({
             account,
             library,
             accountkey,
@@ -253,7 +253,7 @@ const PROCINGComponents = ({
     return (
       <div className="bottom">
         <h4 className="h4">{title}</h4>
-        {idoState === IIdoStateEnum.PROCING ? (
+        {idoState === IIsoStateEnum.PROCING ? (
           <div className="border">
             <InputBalance value={val} onSelectMax={handleSelectMax} onChange={handleChange} />
           </div>
@@ -261,7 +261,7 @@ const PROCINGComponents = ({
         {account ? (
           <Button
             className="btn"
-            disabled={idoState === IIdoStateEnum.WAITINGGETLP ? true : false}
+            disabled={idoState === IIsoStateEnum.WAITINGGETLP ? true : false}
             onClick={handlePresss}
           >
             {btnTitle}

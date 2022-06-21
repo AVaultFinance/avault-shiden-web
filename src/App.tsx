@@ -27,7 +27,7 @@ const Zap = lazy(() => import('./views/Zap/index'));
 const Home = lazy(() => import('./views/Home'));
 const Farms = lazy(() => import('./views/Farms'));
 const Governance = lazy(() => import('./views/Governance'));
-const Ido = lazy(() => import('./views/Ido'));
+const Iso = lazy(() => import('./views/Iso'));
 
 // const Stake = lazy(() => import('./views/Stake/Stake'));
 // const UnStake = lazy(() => import('./views/Stake/Unstake'));
@@ -58,8 +58,8 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/ido">
-              <Ido />
+            <Route path="/iso">
+              <Iso />
             </Route>
             <Route path="/vault">
               <Vault />

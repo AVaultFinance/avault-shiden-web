@@ -4,16 +4,16 @@ import { chainId } from 'config/constants/tokens';
 import useActiveWeb3React from 'hooks/useActiveWeb3React';
 import { Dispatch, useCallback, useMemo } from 'react';
 import { useAppDispatch } from 'state';
-import { updateState } from 'views/Ido/state/ido/state';
-import { useIdoData, useInitIdo } from 'views/Ido/state/ido/hooks';
-import { IIdoStateEnum } from 'views/Ido/state/ido/types';
+import { updateState } from 'views/Iso/state/ido/state';
+import { useIsoData, useInitIso } from 'views/Iso/state/ido/hooks';
+import { IIsoStateEnum } from 'views/Iso/state/ido/types';
 import styled from 'styled-components';
 import Contribution from './components/Contribution';
-import IdoBanner from './components/IdoBanner';
+import IsoBanner from './components/IsoBanner';
 import InfoContribution from './components/InfoContribution';
 import PositionAbsoult from './components/PositionAbsoult';
 import useToast from 'hooks/useToast';
-const Ido = () => {
+const Iso = () => {
   const {
     idoState,
     maxASTRBalance,
@@ -27,7 +27,7 @@ const Ido = () => {
     idoInAstrBalance,
     mainTokenPrice,
     startTime,
-  } = useIdoData();
+  } = useIsoData();
   const dispatch: Dispatch<any> = useAppDispatch();
 
   const { account, library } = useActiveWeb3React();
@@ -35,7 +35,7 @@ const Ido = () => {
     return `${account}-${chainId}`;
   }, [account]);
 
-  useInitIdo(account, library, dispatch, accountkey);
+  useInitIso(account, library, dispatch, accountkey);
   const { toastSuccess, toastWarning, toastError } = useToast();
 
   const _maxASTRBalance = useMemo(() => {
@@ -47,15 +47,15 @@ const Ido = () => {
 
   // useEffect(() => {
   //   if (dispatch && idoState) {
-  //     if (idoState === IIdoStateEnum.INIT) {
+  //     if (idoState === IIsoStateEnum.INIT) {
   //       dispatch(updateStartTime());
-  //     } else if (idoState === IIdoStateEnum.PROCING) {
+  //     } else if (idoState === IIsoStateEnum.PROCING) {
   //       dispatch(updateEndTime());
   //     }
   //   }
   // }, [dispatch, idoState]);
-  const changeIdoState = useCallback(
-    (params: IIdoStateEnum) => {
+  const changeIsoState = useCallback(
+    (params: IIsoStateEnum) => {
       dispatch(
         updateState({
           idoState: params,
@@ -66,9 +66,9 @@ const Ido = () => {
   );
   return (
     <PageStyled>
-      <PositionAbsoult changeIdoState={changeIdoState} />
+      <PositionAbsoult changeIsoState={changeIsoState} />
       {/* <IDOGlobalStyle /> */}
-      <IdoBanner />
+      <IsoBanner />
       <FlexStyled>
         {/* 12s  300block */}
         <Contribution
@@ -136,4 +136,4 @@ const FlexStyled = styled(Flex)`
     }
   }
 `;
-export default Ido;
+export default Iso;

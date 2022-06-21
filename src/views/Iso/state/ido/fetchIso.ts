@@ -1,26 +1,26 @@
 // import { AVAT } from 'config/constants/tokens';
 import { Contract } from 'ethers';
 import { useContract } from 'hooks/useContract';
-import { idoContractAddress } from 'views/Ido/constants/constants';
+import { idoContractAddress } from 'views/Iso/constants/constants';
 import idoAbi from '../../constants/abi/idoAbi.json';
 import multicall, { multicallv3 } from 'utils/multicall';
-import { IFetchIdoCallback, IIdoStateEnum } from './types';
+import { IFetchIsoCallback, IIsoStateEnum } from './types';
 import { getERC20Balance, getETHBalance } from 'utils/contractHelpers';
 import { Web3Provider } from '@ethersproject/providers';
 import { BSC_BLOCK_TIME } from 'config';
 import { getFullLocalDisplayBalance } from 'utils/formatBalance';
 import BigNumber from 'bignumber.js';
-export const fetchIdo = async (
+export const fetchIso = async (
   account: string,
   library: Web3Provider,
   accountkey: string,
-): Promise<IFetchIdoCallback> => {
+): Promise<IFetchIsoCallback> => {
   const obj: any = {};
   // const AVATAddress = AVAT.address;
-  // // avatInIdoBalance
+  // // avatInIsoBalance
   // const calls01 = [{ address: AVATAddress, name: 'balanceOf', params: [idoContractAddress] }];
-  // const [[avatInIdoBalance]] = await multicall(AVATAbi, calls01);
-  // obj.avatInIdoBalance = avatInIdoBalance.toString();
+  // const [[avatInIsoBalance]] = await multicall(AVATAbi, calls01);
+  // obj.avatInIsoBalance = avatInIsoBalance.toString();
 
   const calls02 = [
     { address: idoContractAddress, name: 'countedAstrAmount' },
@@ -45,16 +45,16 @@ export const fetchIdo = async (
     const depositStartBlockNumber = Number(depositStartBlock.toString());
     const depositEndBlockNumber = Number(depositEndBlock.toString());
     if (blockNumberCallback < depositStartBlockNumber) {
-      obj.idoState = IIdoStateEnum.INIT;
+      obj.idoState = IIsoStateEnum.INIT;
       obj.startTime = (depositStartBlockNumber - blockNumberCallback) * BSC_BLOCK_TIME;
     } else if (blockNumberCallback < depositEndBlockNumber) {
-      obj.idoState = IIdoStateEnum.PROCING;
+      obj.idoState = IIsoStateEnum.PROCING;
       obj.endTime = (depositEndBlockNumber - blockNumberCallback) * BSC_BLOCK_TIME;
     }
   } else if (stateNumber === 3) {
-    obj.idoState = IIdoStateEnum.END;
+    obj.idoState = IIsoStateEnum.END;
   } else {
-    obj.idoState = IIdoStateEnum.WAITINGGETLP;
+    obj.idoState = IIsoStateEnum.WAITINGGETLP;
   }
   // lpTotalBalance
   if (lpAddress !== '0x0000000000000000000000000000000000000000') {
@@ -85,6 +85,6 @@ export const fetchIdo = async (
   }
   return obj;
 };
-export const useIdoContract = (withSignerIfPossible?: boolean): Contract | null => {
+export const useIsoContract = (withSignerIfPossible?: boolean): Contract | null => {
   return useContract(idoContractAddress, idoAbi, withSignerIfPossible);
 };

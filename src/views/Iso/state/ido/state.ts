@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IFetchIdoCallback, IIdoState, IIdoStateEnum } from './types';
-import { fetchIdo } from './fetchIdo';
+import { IFetchIsoCallback, IIsoState, IIsoStateEnum } from './types';
+import { fetchIso } from './fetchIso';
 import { Web3Provider } from '@ethersproject/providers';
-const initialState: IIdoState = {
-  idoState: IIdoStateEnum.INIT,
+const initialState: IIsoState = {
+  idoState: IIsoStateEnum.INIT,
   startTime: 0, //2023-05-18 23:59:59
   endTime: 0, //2023-05-18 23:59:59
   mainTokenPrice: '0',
@@ -18,15 +18,15 @@ const initialState: IIdoState = {
   isUserLoaded: false,
 };
 
-export const fetchIdoAsync = createAsyncThunk<
-  IFetchIdoCallback,
+export const fetchIsoAsync = createAsyncThunk<
+  IFetchIsoCallback,
   {
     account: string;
     library: Web3Provider;
     accountkey: string;
   }
->('ido/fetchIdoAsync', async ({ account, library, accountkey }) => {
-  const data = await fetchIdo(account, library, accountkey);
+>('ido/fetchIsoAsync', async ({ account, library, accountkey }) => {
+  const data = await fetchIso(account, library, accountkey);
   return data;
 });
 // 31536000
@@ -62,7 +62,7 @@ export const idoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchIdoAsync.fulfilled, (state, action) => {
+    builder.addCase(fetchIsoAsync.fulfilled, (state, action) => {
       for (const key in action.payload) {
         state[key] = action.payload[key];
       }
