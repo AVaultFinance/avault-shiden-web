@@ -44,7 +44,7 @@ const SmallNavTooltip: FC<{
                     setShowMore(!showMore);
                   }}
                 >
-                  More <CollapseSvg />
+                  {item.text} <CollapseSvg />
                 </h3>
                 {showMore ? <IsoContentIn setTooltipVisible={setTooltipVisible} /> : null}
               </NavLinkStyle>
@@ -167,7 +167,9 @@ const MenuBtn = styled.div`
   border-radius: 6px;
   margin-left: 12px;
   // width: 30px;
+  position: relative;
   padding: 2px 2px 2px 6px;
+  z-index: 999;
 `;
 const NavWrap = styled.div`
   padding-left: 0;
@@ -196,8 +198,9 @@ const expandAnimation = keyframes`
 const NavWrapInner = styled.div`
   position: absolute;
   width: 100vw;
+  height: 100vh;
   padding: 40px 30px 40px;
-  border-radius: 24px 24px 0 0;
+  // border-radius: 24px 24px 0 0;
   bottom: 0;
   background: ${({ theme }) => theme.colors.backgroundAlt};
   animation: ${() =>
