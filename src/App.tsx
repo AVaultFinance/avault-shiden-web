@@ -58,7 +58,7 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/iso">
+            <Route path="/iso/avault">
               <Iso />
             </Route>
             <Route path="/vault">

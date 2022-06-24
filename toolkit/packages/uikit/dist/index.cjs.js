@@ -3495,7 +3495,7 @@ var isTouchDevice = function () {
     return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 };
 
-var Arrow = styled__default['default'].div(templateObject_1$k || (templateObject_1$k = __makeTemplateObject(["\n  top: -8px;\n  &,\n  &::before {\n    position: absolute;\n    width: 12px;\n    height: 12px;\n    border-radius: 2px;\n    z-index: -1;\n  }\n\n  &::before {\n    content: \"\";\n    transform: rotate(45deg);\n    background: ", ";\n    border-left: ", ";\n    border-top: ", ";\n  }\n"], ["\n  top: -8px;\n  &,\n  &::before {\n    position: absolute;\n    width: 12px;\n    height: 12px;\n    border-radius: 2px;\n    z-index: -1;\n  }\n\n  &::before {\n    content: \"\";\n    transform: rotate(45deg);\n    background: ", ";\n    border-left: ", ";\n    border-top: ", ";\n  }\n"])), function (_a) {
+var Arrow = styled__default['default'].div(templateObject_1$k || (templateObject_1$k = __makeTemplateObject(["\n  top: -8px;\n  &,\n  &::before {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    border-radius: 2px;\n    z-index: -1;\n  }\n\n  &::before {\n    content: \"\";\n    transform: rotate(45deg);\n    background: ", ";\n    border-left: ", ";\n    border-top: ", ";\n  }\n"], ["\n  top: -8px;\n  &,\n  &::before {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    border-radius: 2px;\n    z-index: -1;\n  }\n\n  &::before {\n    content: \"\";\n    transform: rotate(45deg);\n    background: ", ";\n    border-left: ", ";\n    border-top: ", ";\n  }\n"])), function (_a) {
     var theme = _a.theme;
     return theme.tooltip.background;
 }, function (_a) {

@@ -1,4 +1,3 @@
-import IconMarkets from './imgs/iconMarkets';
 import IconMyWallet from './imgs/iconMyWallet';
 
 export interface IMenu {
@@ -13,27 +12,15 @@ export interface IMenuDetail {
   img: any;
   detail: string;
 }
-export const NFTPathConfig: IMenuDetail[] = [
+export const ISOPathConfig: IMenuDetail[] = [
   {
-    text: 'Markets',
-    img: IconMarkets,
-    link: '/nft/pools',
-    detail: 'You can buy and sell your NFT at our KACO platform',
-  },
-  {
-    text: 'My Wallet',
-    img: IconMyWallet,
-    link: '/nft/wallet',
-    detail: 'All of your NFT assets are in your KACO wallet',
+    text: 'AVault',
+    img: '/images/logo_small_beta.svg',
+    link: '/iso/avault',
+    detail: 'The Best Yield Aggregator on Astar Network',
   },
 ];
 export const MorePathConfig: IMenuDetail[] = [
-  {
-    text: 'Audited By Certik',
-    img: IconMarkets,
-    link: 'https://www.certik.com/projects/kaco',
-    detail: 'The KACO platform has been officially audited by Certik',
-  },
   {
     text: 'Receive NFT in Galaxy',
     img: IconMyWallet,
@@ -60,8 +47,14 @@ const avaultMenuItems: IMenu[] = [
   },
   {
     text: 'ISO',
-    link: '/iso',
+    collapsed: true,
+    link: '#',
+    children: ISOPathConfig,
   },
+  // {
+  //   text: 'ISO',
+  //   link: '/iso',
+  // },
   // {
   //   text: 'Stake',
   //   link: '/stake',

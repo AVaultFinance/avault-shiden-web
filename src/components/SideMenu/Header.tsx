@@ -39,13 +39,15 @@ const InnerStyled = styled.div<{ hasBorder: boolean }>`
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  // border-bottom: 1px solid ${({ theme, hasBorder }) =>
-    hasBorder ? theme.colors.background : theme.colors.borderColor};
   ${({ theme }) => theme.mediaQueries.md} {
     border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
     height: 82px;
-    padding-left: 0;
+    padding-left: 20px;
     padding-right: 0;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    // padding-left: 0;
+    // padding: 0;
   }
   > img {
     width: 25px;
@@ -61,8 +63,8 @@ const InnerStyled = styled.div<{ hasBorder: boolean }>`
     // align-items: center;
     ${({ theme }) => theme.mediaQueries.md} {
       background-color: ${({ theme }) => theme.colors.background};
-      padding-top: 30px;
-      padding-bottom: 30px;
+      padding-top: 20px;
+      // padding-bottom: 30px;
     }
   }
 `;

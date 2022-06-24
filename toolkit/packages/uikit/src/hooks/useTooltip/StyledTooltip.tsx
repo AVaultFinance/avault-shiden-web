@@ -5,8 +5,8 @@ export const Arrow = styled.div`
   &,
   &::before {
     position: absolute;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 2px;
     z-index: -1;
   }

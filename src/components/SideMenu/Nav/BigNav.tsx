@@ -1,21 +1,21 @@
-import React, { FC, useRef, useEffect } from 'react';
+import React, { FC, useRef, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { IMenu } from '../config';
 import { Flex, useTooltip } from '@my/ui';
 import CollapseSvg from '../imgs/collapse';
-import NftContent from './NftContent';
+import IsoContent from './IsoContent';
 import MoreContent from './MoreContent';
 import IconLink from 'components/svg/IconLink';
 const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
   const { pathname } = useLocation();
   const {
-    targetRef: NftTargetRef,
-    tooltip: NftTooltip,
-    tooltipVisible: NftTooltipVisible,
-  } = useTooltip(NftContent, {
+    targetRef: IsoTargetRef,
+    tooltip: IsoTooltip,
+    tooltipVisible: IsoTooltipVisible,
+  } = useTooltip(IsoContent, {
     trigger: 'hover',
-    tootipStyle: { padding: '10px 20px 20px' },
+    tootipStyle: { padding: '30px 30px 20px', maxWidth: '748px' },
     placement: 'top-end',
     hideArrow: false,
     tooltipOffset: [20, 10],
@@ -54,60 +54,74 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
   useEffect(() => {
     setMoreTooltipVisible.current = setTooltipVisible;
   }, [setTooltipVisible]);
-  return (
-    <>
-      {NftTooltipVisible && NftTooltip}
-      {MoreTooltipVisible && MoreTooltip}
-      {BorrowTooltipVisible && BorrowTooltip}
-      <NavWrap>
-        {menuItems.map((item: IMenu, index) => (
-          <NavLink
-            to={item.link}
-            key={index}
-            ref={item.text === 'NFT' ? NftTargetRef : undefined}
-            onClick={() => {
-              if (item.link.indexOf('https://') > -1) {
-                window.open(item.link);
-                return;
+  return useMemo(
+    () => (
+      <>
+        {/* {IsoTooltip} */}
+        {IsoTooltipVisible && IsoTooltip}
+        {MoreTooltipVisible && MoreTooltip}
+        {BorrowTooltipVisible && BorrowTooltip}
+        <NavWrap>
+          {menuItems.map((item: IMenu, index) => (
+            <NavLink
+              to={item.link}
+              key={index}
+              ref={item.text === 'ISO' ? IsoTargetRef : undefined}
+              onClick={() => {
+                if (item.link.indexOf('https://') > -1) {
+                  window.open(item.link);
+                  return;
+                }
+              }}
+              active={
+                (
+                  item.link === '/'
+                    ? pathname === item.link
+                    : ['/add', '/remove', '/liquidity'].find((p) => pathname.startsWith(p))
+                    ? item.link === '/swap'
+                    : ['/nft/pools', '/nft/wallet/mint', '/nft/wallet/burn'].find((p) => pathname.startsWith(p))
+                    ? item.link === '/nft/pools/'
+                    : ['/stake', '/unbind', '/unstake'].find((p) => pathname.startsWith(p))
+                    ? item.link === '/stake'
+                    : pathname.startsWith(item.link)
+                )
+                  ? 't'
+                  : 'f'
               }
-            }}
-            active={
-              (
-                item.link === '/'
-                  ? pathname === item.link
-                  : ['/add', '/remove', '/liquidity'].find((p) => pathname.startsWith(p))
-                  ? item.link === '/swap'
-                  : ['/nft/pools', '/nft/wallet/mint', '/nft/wallet/burn'].find((p) => pathname.startsWith(p))
-                  ? item.link === '/nft/pools/'
-                  : ['/stake', '/unbind', '/unstake'].find((p) => pathname.startsWith(p))
-                  ? item.link === '/stake'
-                  : pathname.startsWith(item.link)
-              )
-                ? 't'
-                : 'f'
-            }
-          >
-            {item.text}
-            {item.children?.length && <CollapseSvg />}
-          </NavLink>
-        ))}
-        {/* <IconMoreStyle ref={MoreTargetRef}>
+            >
+              {item.text}
+              {item.children?.length && <CollapseSvg />}
+            </NavLink>
+          ))}
+          {/* <IconMoreStyle ref={MoreTargetRef}>
           <IconMore />
         </IconMoreStyle> */}
-        {/* <NavLinkA href="https://cbridge.celer.network/#/transfer" target="_blank" rel="noreferrer" title="">
+          {/* <NavLinkA href="https://cbridge.celer.network/#/transfer" target="_blank" rel="noreferrer" title="">
           Bridge
           <IconLink />
         </NavLinkA> */}
-        <NavLinkA href="https://portal.astar.network/#/balance/wallet" target="_blank" rel="noreferrer" title="">
-          Faucet
-          <IconLink />
-        </NavLinkA>
-        <NavLinkA href="https://co-go.gitbook.io/avault/" target="_blank" rel="noreferrer" title="">
-          Doc
-          <IconLink />
-        </NavLinkA>
-      </NavWrap>
-    </>
+          <NavLinkA href="https://portal.astar.network/#/balance/wallet" target="_blank" rel="noreferrer" title="">
+            Faucet
+            <IconLink />
+          </NavLinkA>
+          <NavLinkA href="https://co-go.gitbook.io/avault/" target="_blank" rel="noreferrer" title="">
+            Doc
+            <IconLink />
+          </NavLinkA>
+        </NavWrap>
+      </>
+    ),
+    [
+      IsoTooltipVisible,
+      BorrowTooltip,
+      BorrowTooltipVisible,
+      IsoTargetRef,
+      IsoTooltip,
+      MoreTooltip,
+      MoreTooltipVisible,
+      menuItems,
+      pathname,
+    ],
   );
 };
 
@@ -116,10 +130,10 @@ const NavWrap = styled(Flex)`
   justify-content: flex-start;
   a:hover {
     color: ${({ theme }) => theme.colors.text};
-    // svg {
-    //   fill: ${({ theme }) => theme.colors.text};
-    //   transform: scaleY(-1);
-    // }
+    svg {
+      fill: ${({ theme }) => theme.colors.text};
+      transform: rotateZ(180deg);
+    }
   }
 `;
 const NavLink = styled(Link)<{ active: 't' | 'f' }>`
@@ -132,9 +146,9 @@ const NavLink = styled(Link)<{ active: 't' | 'f' }>`
   // font-weight: 600;
   margin-right: 34px;
   svg {
-    width: 20px;
+    width: 24px;
     fill: ${({ theme, active }) => (active === 't' ? theme.colors.text : theme.colors.textSubtle)};
-    transform: ${({ active }) => (active === 't' ? '' : 'scaleY(-1)')};
+    transform: ${({ active }) => (active === 't' ? 'rotateZ(180deg)' : '')};
   }
 `;
 
@@ -155,7 +169,7 @@ const NavLinkA = styled.a`
     color: ${({ theme }) => theme.colors.text};
     svg {
       fill: ${({ theme }) => theme.colors.text};
-      transform: scaleY(1);
+      transform: rotateZ(180deg);
       path {
         stroke: #fff;
       }
