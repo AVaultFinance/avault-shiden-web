@@ -135,8 +135,8 @@ const SmallNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
 
   return (
     <MenuFooter>
+      {MenuTooltipVisible && MenuTooltip}
       <FlexStyled>
-        {MenuTooltipVisible && MenuTooltip}
         <WalletAccountInfo />
         <MenuBtn ref={MenuTargetRef}>
           <IconMenu active={MenuTooltipVisible} />
@@ -155,10 +155,16 @@ const MenuFooter = styled.div`
   box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.03);
   padding: 12px 24px;
   border-top: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  .position {
+    position: relative;
+    z-index: 1000;
+  }
 `;
 const FlexStyled = styled(Flex)`
   align-items: center;
   justify-content: flex-end;
+  position: relative;
+  z-index: 999;
 `;
 const MenuBtn = styled.div`
   cursor: pointer;
@@ -167,9 +173,7 @@ const MenuBtn = styled.div`
   border-radius: 6px;
   margin-left: 12px;
   // width: 30px;
-  position: relative;
   padding: 2px 2px 2px 6px;
-  z-index: 999;
 `;
 const NavWrap = styled.div`
   padding-left: 0;

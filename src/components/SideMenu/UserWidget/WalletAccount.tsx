@@ -45,7 +45,7 @@ const WalletAccount = styled(Flex)`
   border-radius: 8px;
   padding: 0 12px;
   cursor: pointer;
-  z-index: 999;
+
   .head_icon {
     display: block;
     width: 24px;
