@@ -15,10 +15,11 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
     tooltipVisible: IsoTooltipVisible,
   } = useTooltip(IsoContent, {
     trigger: 'hover',
-    tootipStyle: { padding: '30px 30px 20px', maxWidth: '748px' },
+    tootipStyle: { padding: '30px 30px 20px', backgroundColor: '#030222', maxWidth: '748px' },
     placement: 'top-end',
     hideArrow: false,
     tooltipOffset: [20, 10],
+    arrowBackground: '#030222',
   });
   const setMoreTooltipVisible = useRef<React.Dispatch<React.SetStateAction<boolean>>>();
   const {

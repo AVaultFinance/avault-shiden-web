@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Arrow = styled.div`
+export const Arrow = styled.div<{ arrowBackground?: string }>`
   top: -8px;
   &,
   &::before {
@@ -14,7 +14,7 @@ export const Arrow = styled.div`
   &::before {
     content: "";
     transform: rotate(45deg);
-    background: ${({ theme }) => theme.tooltip.background};
+    background: ${({ arrowBackground, theme }) => arrowBackground ?? theme.tooltip.background};
     border-left: ${({ theme }) => theme.tooltip.border};
     border-top: ${({ theme }) => theme.tooltip.border};
   }

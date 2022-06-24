@@ -3482,8 +3482,8 @@ var isTouchDevice = function () {
 };
 
 var Arrow = styled.div(templateObject_1$k || (templateObject_1$k = __makeTemplateObject(["\n  top: -8px;\n  &,\n  &::before {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    border-radius: 2px;\n    z-index: -1;\n  }\n\n  &::before {\n    content: \"\";\n    transform: rotate(45deg);\n    background: ", ";\n    border-left: ", ";\n    border-top: ", ";\n  }\n"], ["\n  top: -8px;\n  &,\n  &::before {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    border-radius: 2px;\n    z-index: -1;\n  }\n\n  &::before {\n    content: \"\";\n    transform: rotate(45deg);\n    background: ", ";\n    border-left: ", ";\n    border-top: ", ";\n  }\n"])), function (_a) {
-    var theme = _a.theme;
-    return theme.tooltip.background;
+    var arrowBackground = _a.arrowBackground, theme = _a.theme;
+    return arrowBackground !== null && arrowBackground !== void 0 ? arrowBackground : theme.tooltip.background;
 }, function (_a) {
     var theme = _a.theme;
     return theme.tooltip.border;
@@ -3517,7 +3517,7 @@ var invertTheme = function (currentTheme) {
 };
 var portalRoot = document.getElementById("portal-root");
 var useTooltip = function (content, options) {
-    var _a = options.placement, placement = _a === void 0 ? "auto" : _a, _b = options.trigger, trigger = _b === void 0 ? "hover" : _b, _c = options.arrowPadding, arrowPadding = _c === void 0 ? 16 : _c, _d = options.tooltipPadding, tooltipPadding = _d === void 0 ? { left: 16, right: 16 } : _d, _e = options.tooltipOffset, tooltipOffset = _e === void 0 ? [0, 10] : _e;
+    var _a = options.placement, placement = _a === void 0 ? "auto" : _a, _b = options.trigger, trigger = _b === void 0 ? "hover" : _b, _c = options.arrowPadding, arrowPadding = _c === void 0 ? 16 : _c, _d = options.tooltipPadding, tooltipPadding = _d === void 0 ? { left: 16, right: 16 } : _d, _e = options.tooltipOffset, tooltipOffset = _e === void 0 ? [0, 10] : _e, arrowBackground = options.arrowBackground;
     var _f = useState(null), targetElement = _f[0], setTargetElement = _f[1];
     var _g = useState(null), tooltipElement = _g[0], setTooltipElement = _g[1];
     var _h = useState(null), arrowElement = _h[0], setArrowElement = _h[1];
@@ -3657,7 +3657,7 @@ var useTooltip = function (content, options) {
     }), styles = _k.styles, attributes = _k.attributes;
     var tooltip = (React.createElement(StyledTooltip, __assign({ ref: setTooltipElement, style: __assign(__assign({}, styles.popper), options.tootipStyle) }, attributes.popper),
         React.createElement(ThemeProvider, { theme: invertTheme }, content),
-        !options.hideArrow && React.createElement(Arrow, { ref: setArrowElement, style: styles.arrow })));
+        !options.hideArrow && React.createElement(Arrow, { arrowBackground: arrowBackground, ref: setArrowElement, style: styles.arrow })));
     var tooltipInPortal = portalRoot ? createPortal(tooltip, portalRoot) : null;
     return {
         targetRef: setTargetElement,

@@ -16,6 +16,7 @@ export interface TooltipOptions {
   tooltipOffset?: [number, number];
   tootipStyle?: CSSProperties;
   hideArrow?: boolean;
+  arrowBackground?: string;
 }
 
 export type TriggerType = "click" | "hover" | "focus";
