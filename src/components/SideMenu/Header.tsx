@@ -46,7 +46,7 @@ const InnerStyled = styled.div<{ hasBorder: boolean }>`
     padding-right: 0;
   }
   ${({ theme }) => theme.mediaQueries.lg} {
-    // padding-left: 0;
+    padding-left: 0;
     // padding: 0;
   }
   > img {
