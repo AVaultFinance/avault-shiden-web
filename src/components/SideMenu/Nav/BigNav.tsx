@@ -13,6 +13,7 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
     targetRef: IsoTargetRef,
     tooltip: IsoTooltip,
     tooltipVisible: IsoTooltipVisible,
+    setTooltipVisible: IsoSetTooltipVisible,
   } = useTooltip(IsoContent, {
     trigger: 'hover',
     tootipStyle: { padding: '30px 30px 20px', backgroundColor: '#030222', maxWidth: '748px' },
@@ -57,7 +58,13 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
   }, [setTooltipVisible]);
   return useMemo(
     () => (
-      <>
+      <div
+        onClick={() => {
+          if (IsoTooltipVisible) {
+            IsoSetTooltipVisible(false);
+          }
+        }}
+      >
         {/* {IsoTooltip} */}
         {IsoTooltipVisible && IsoTooltip}
         {MoreTooltipVisible && MoreTooltip}
@@ -110,9 +117,10 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
             <IconLink />
           </NavLinkA>
         </NavWrap>
-      </>
+      </div>
     ),
     [
+      IsoSetTooltipVisible,
       IsoTooltipVisible,
       BorrowTooltip,
       BorrowTooltipVisible,
