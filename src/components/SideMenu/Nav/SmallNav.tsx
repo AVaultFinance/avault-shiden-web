@@ -243,8 +243,8 @@ const NavLinkStyle = styled.div<{ active: boolean }>`
     line-height: 48px;
     svg {
       width: 36px;
-      fill: ${({ theme }) => theme.colors.textSubtle};
-      transform: ${({ active }) => (active ? '' : 'scaleY(-1)')};
+      fill: ${({ theme, active }) => (active ? theme.colors.text : theme.colors.textSubtle)};
+      transform: ${({ active }) => (active ? 'scaleY(-1)' : '')};
     }
   }
 `;
@@ -265,7 +265,7 @@ const NavLink = styled(Link)<{ active: 't' | 'f' }>`
   svg {
     width: 36px;
     fill: ${({ theme, active }) => (active === 't' ? theme.colors.text : theme.colors.textSubtle)};
-    transform: ${({ active }) => (active === 't' ? 'none' : 'scaleY(-1)')};
+    transform: ${({ active }) => (active === 't' ? 'scaleY(-1)' : '')};
   }
 `;
 

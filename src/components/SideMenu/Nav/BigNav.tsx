@@ -58,17 +58,19 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
   }, [setTooltipVisible]);
   return useMemo(
     () => (
-      <div
-        onClick={() => {
-          if (IsoTooltipVisible) {
-            IsoSetTooltipVisible(false);
-          }
-        }}
-      >
+      <>
         {/* {IsoTooltip} */}
-        {IsoTooltipVisible && IsoTooltip}
-        {MoreTooltipVisible && MoreTooltip}
-        {BorrowTooltipVisible && BorrowTooltip}
+        <div
+          onClick={() => {
+            if (IsoTooltipVisible) {
+              IsoSetTooltipVisible(false);
+            }
+          }}
+        >
+          {IsoTooltipVisible && IsoTooltip}
+          {MoreTooltipVisible && MoreTooltip}
+          {BorrowTooltipVisible && BorrowTooltip}
+        </div>
         <NavWrap>
           {menuItems.map((item: IMenu, index) => (
             <NavLink
@@ -82,17 +84,16 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
                 }
               }}
               active={
-                (
-                  item.link === '/'
-                    ? pathname === item.link
-                    : ['/add', '/remove', '/liquidity'].find((p) => pathname.startsWith(p))
-                    ? item.link === '/swap'
-                    : ['/nft/pools', '/nft/wallet/mint', '/nft/wallet/burn'].find((p) => pathname.startsWith(p))
-                    ? item.link === '/nft/pools/'
-                    : ['/stake', '/unbind', '/unstake'].find((p) => pathname.startsWith(p))
-                    ? item.link === '/stake'
-                    : pathname.startsWith(item.link)
-                )
+                (item.link === '/'
+                  ? pathname === item.link
+                  : ['/add', '/remove', '/liquidity'].find((p) => pathname.startsWith(p))
+                  ? item.link === '/swap'
+                  : ['/nft/pools', '/nft/wallet/mint', '/nft/wallet/burn'].find((p) => pathname.startsWith(p))
+                  ? item.link === '/nft/pools/'
+                  : ['/stake', '/unbind', '/unstake'].find((p) => pathname.startsWith(p))
+                  ? item.link === '/stake'
+                  : pathname.startsWith(item.link)) ||
+                (IsoTooltipVisible && item.text === 'ISO')
                   ? 't'
                   : 'f'
               }
@@ -117,7 +118,7 @@ const BigNav: FC<{ menuItems: IMenu[] }> = ({ menuItems }) => {
             <IconLink />
           </NavLinkA>
         </NavWrap>
-      </div>
+      </>
     ),
     [
       IsoSetTooltipVisible,

@@ -36,7 +36,14 @@ const HomeTvl = () => {
           <ul>
             {vaultsLP.map((v: IVault, index: number) => {
               return (
-                <li key={index} className="animate animate__animated" data-animate="animate__fadeInUp">
+                <li
+                  key={index}
+                  className="animate animate__animated"
+                  data-animate="animate__fadeInUp"
+                  onClick={() => {
+                    window.location.href = '/vault';
+                  }}
+                >
                   <TokenPairImage
                     variant="inverted"
                     primaryToken={v.vault.token0Address}
@@ -77,6 +84,7 @@ const HomeTvlStyled = styled.div`
   &.animate__show {
     ul {
       li {
+        cursor: pointer;
         &:nth-child(1) {
           animation: slide-up 1s ease-in-out;
           animation-fill-mode: forwards;
