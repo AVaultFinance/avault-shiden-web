@@ -30,9 +30,9 @@ export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
       return {
         title: `Governance | Avault`,
       };
-    case '/ido':
+    case '/iso/avault':
       return {
-        title: `IDO | Avault`,
+        title: `Avault-The Best Yield Aggregator on Astar Network | Avault`,
       };
     case '/stake':
       return {
