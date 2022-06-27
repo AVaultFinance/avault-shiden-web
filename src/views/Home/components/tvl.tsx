@@ -34,33 +34,39 @@ const HomeTvl = () => {
         </div>
         <div className="scroll">
           <ul>
-            {vaultsLP.map((v: IVault, index: number) => {
-              return (
-                <li
-                  key={index}
-                  className="animate animate__animated"
-                  data-animate="animate__fadeInUp"
-                  onClick={() => {
-                    window.location.href = '/vault';
-                  }}
-                >
-                  <TokenPairImage
-                    variant="inverted"
-                    primaryToken={v.vault.token0Address}
-                    secondaryToken={v.vault.token1Address}
-                    width={60}
-                    height={60}
-                  />
-                  <div className="flex-middle">
-                    <h3>{v.lpDetail.symbol}</h3>
-                    <h4>{v.fromSource}</h4>
-                  </div>
-                  <ButtonStyled>
-                    {getDisplayApy(Number(v.farm.apy))}%<i>APY</i>
-                  </ButtonStyled>
-                </li>
-              );
-            })}
+            {vaultsLP && vaultsLP.length
+              ? vaultsLP.map((v: IVault, index: number) => {
+                  if (index <= 2) {
+                    return (
+                      <li
+                        key={index}
+                        className="animate animate__animated"
+                        data-animate="animate__fadeInUp"
+                        onClick={() => {
+                          window.location.href = '/vault';
+                        }}
+                      >
+                        <TokenPairImage
+                          variant="inverted"
+                          primaryToken={v.vault.token0Address}
+                          secondaryToken={v.vault.token1Address}
+                          width={60}
+                          height={60}
+                        />
+                        <div className="flex-middle">
+                          <h3>{v.lpDetail.symbol}</h3>
+                          <h4>{v.fromSource}</h4>
+                        </div>
+                        <ButtonStyled>
+                          {getDisplayApy(Number(v.farm.apy))}%<i>APY</i>
+                        </ButtonStyled>
+                      </li>
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              : null}
           </ul>
         </div>
       </HomeTvlStyled>
@@ -132,12 +138,15 @@ const HomeTvlStyled = styled.div`
     height: 180px;
     margin-top: 40px;
     margin-bottom: 60px;
-    width: 770px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 780px;
     ${({ theme }) => theme.mediaQueries.md} {
       width: 100%;
       height: 108px;
       margin-top: 110px;
       margin-bottom: 200px;
+      padding: 0;
     }
     li {
       opacity: 0;
